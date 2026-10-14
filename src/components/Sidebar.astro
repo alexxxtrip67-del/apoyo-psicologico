@@ -1,0 +1,65 @@
+---
+// src/components/Sidebar.astro
+---
+<aside id="sidebar" class="w-64 bg-[#1c2541] border-r border-slate-700/50 flex flex-col justify-between hidden md:flex min-h-screen">
+  <div>
+    <!-- Logo de la Plataforma -->
+    <div class="p-5 flex items-center space-x-3 border-b border-slate-700/50">
+      <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30">
+        <i class="fa-solid fa-heart-pulse text-xl"></i>
+      </div>
+      <div>
+        <h1 class="font-bold text-base tracking-wide leading-tight text-white">Apoyo Psicológico</h1>
+        <p class="text-xs text-indigo-300">Tu bienestar también importa</p>
+      </div>
+    </div>
+
+    <!-- Enlaces de Navegación del Estudiante -->
+    <nav id="nav-student" class="p-4 space-y-1">
+      <button onclick="switchView('student-dashboard')" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition text-white bg-indigo-600/80 hover:bg-indigo-600">
+        <i class="fa-solid fa-house w-5 text-center"></i>
+        <span>Inicio</span>
+      </button>
+      <button onclick="switchView('student-quiz')" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
+        <i class="fa-solid fa-clipboard-list w-5 text-center"></i>
+        <span>Cuestionario</span>
+      </button>
+      <button onclick="switchView('student-chat')" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
+        <i class="fa-solid fa-comments w-5 text-center"></i>
+        <span>Chat con IA</span>
+      </button>
+      <button onclick="switchView('student-reports')" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
+        <i class="fa-solid fa-chart-pie w-5 text-center"></i>
+        <span>Mis reportes</span>
+      </button>
+      <button onclick="switchView('student-profile')" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
+        <i class="fa-solid fa-user w-5 text-center"></i>
+        <span>Perfil</span>
+      </button>
+    </nav>
+
+    <!-- Enlaces de Navegación del Psicólogo -->
+    <nav id="nav-psychologist" class="p-4 space-y-1 hidden">
+      <button onclick="switchView('psych-dashboard')" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition text-white bg-indigo-600/80 hover:bg-indigo-600">
+        <i class="fa-solid fa-gauge-high w-5 text-center"></i>
+        <span>Panel de control</span>
+      </button>
+      <button onclick="switchView('psych-detail')" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
+        <i class="fa-solid fa-users w-5 text-center"></i>
+        <span>Estudiantes</span>
+      </button>
+      <button onclick="switchView('psych-alerts')" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
+        <i class="fa-solid fa-bell w-5 text-center"></i>
+        <span>Alertas</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Botón de Cerrar Sesión -->
+  <div class="p-4 border-t border-slate-700/50">
+    <button onclick="logout()" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-red-400 hover:bg-red-500/10 transition">
+      <i class="fa-solid fa-right-from-bracket w-5 text-center"></i>
+      <span>Cerrar sesión</span>
+    </button>
+  </div>
+</aside>

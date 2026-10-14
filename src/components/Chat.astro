@@ -1,0 +1,27 @@
+---
+// src/components/Chat.astro
+---
+<div class="flex flex-col h-[calc(100vh-8rem)]">
+  <div class="mb-4">
+    <h2 class="text-2xl font-bold text-white">Chat con IA</h2>
+    <p class="text-xs text-slate-400">Aquí puedes hablar libremente. Estoy para escucharte.</p>
+  </div>
+
+  <div class="flex-1 bg-[#1c2541]/40 border border-slate-800 rounded-2xl flex flex-col overflow-hidden">
+    <div id="chat-box" class="flex-1 p-4 overflow-y-auto space-y-4">
+      <div class="flex items-start space-x-3">
+        <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs font-bold">IA</div>
+        <div class="bg-[#1c2541] p-3.5 rounded-2xl max-w-md text-xs text-slate-200 border border-slate-700/50">
+          Hola, soy tu asistente virtual. Estoy aquí para escucharte y apoyarte. Puedes contarme cómo te sientes o preguntarme lo que necesites.
+        </div>
+      </div>
+    </div>
+
+    <div class="p-3 border-t border-slate-800 bg-[#0b132b]/80 flex items-center space-x-2">
+      <input id="chat-input" type="text" placeholder="Escribe tu mensaje..." onkeypress="if(event.key === 'Enter') sendMessage()" class="flex-1 bg-[#1c2541] border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500" />
+      <button onclick="sendMessage()" class="p-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl transition">
+        <i class="fa-solid fa-paper-plane text-sm"></i>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+---
+// src/components/Reports.astro
+---
+<div class="space-y-6">
+  <div>
+    <h2 class="text-2xl font-bold text-white">Resultados de tu cuestionario</h2>
+    <p class="text-xs text-slate-400">Aquí puedes ver un resumen de tus respuestas y tu estado emocional.</p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="lg:col-span-2 bg-[#1c2541]/50 p-6 rounded-2xl border border-slate-800 flex items-center space-x-6">
+      <div class="w-20 h-20 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-3xl">
+        <i class="fa-regular fa-face-smile"></i>
+      </div>
+      <div class="space-y-2">
+        <h3 class="text-base font-bold text-white">Tu estado emocional se encuentra en un rango estable.</h3>
+        <p class="text-xs text-slate-400">Continúa con tus hábitos de autocuidado y no dudes en pedir ayuda si lo necesitas.</p>
+      </div>
+    </div>
+
+    <div class="bg-[#1c2541]/50 p-6 rounded-2xl border border-slate-800 space-y-3">
+      <h4 class="text-xs font-bold text-white">Recomendaciones</h4>
+      <ul class="text-xs text-slate-300 space-y-2 list-disc pl-4">
+        <li>Mantén una buena rutina de sueño.</li>
+        <li>Realiza actividades que disfrutes.</li>
+        <li>Habla con alguien de confianza cuando lo necesites.</li>
+      </ul>
+    </div>
+  </div>
+</div>

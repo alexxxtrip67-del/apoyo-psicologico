@@ -1,0 +1,64 @@
+---
+// src/components/StudentDashboard.astro
+---
+<div class="space-y-6">
+  <div>
+    <h2 class="text-2xl font-bold text-white">Hola, Juan 👋</h2>
+    <p class="text-xs text-slate-400">Tu bienestar emocional es importante. Aquí tienes un resumen de tu progreso.</p>
+  </div>
+
+  <!-- Banner Principal -->
+  <div class="bg-gradient-to-r from-indigo-900/60 to-purple-900/40 p-6 rounded-3xl border border-indigo-500/30 flex items-center justify-between">
+    <div class="space-y-3 max-w-lg">
+      <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 text-[10px] font-semibold rounded-full border border-indigo-500/30">Asistencia Emocional</span>
+      <h3 class="text-xl font-bold text-white">No estás solo</h3>
+      <p class="text-xs text-slate-300 leading-relaxed">Si necesitas hablar, puedes hacerlo con nuestro asistente de IA o directamente con la psicóloga de la institución.</p>
+      <button onclick="switchView('student-chat')" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-xl transition inline-flex items-center space-x-2">
+        <span>Ir al chat con IA</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+    <div class="hidden md:block text-indigo-400 opacity-80 text-7xl">
+      <i class="fa-solid fa-brain"></i>
+    </div>
+  </div>
+
+  <!-- Tarjetas de Acceso -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="bg-[#1c2541]/50 p-5 rounded-2xl border border-slate-800 space-y-3">
+      <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+        <i class="fa-solid fa-heart-pulse"></i>
+      </div>
+      <h4 class="font-bold text-white text-sm">Cuestionario emocional</h4>
+      <p class="text-[11px] text-slate-400">Completa tu evaluación periódica.</p>
+      <button onclick="switchView('student-quiz')" class="w-full py-2 bg-indigo-600/30 hover:bg-indigo-600 text-indigo-200 hover:text-white text-xs font-semibold rounded-lg transition">Ir al cuestionario</button>
+    </div>
+
+    <div class="bg-[#1c2541]/50 p-5 rounded-2xl border border-slate-800 space-y-3">
+      <div class="w-9 h-9 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center">
+        <i class="fa-solid fa-robot"></i>
+      </div>
+      <h4 class="font-bold text-white text-sm">Chat con IA</h4>
+      <p class="text-[11px] text-slate-400">Habla con nuestro asistente cuando lo necesites.</p>
+      <button onclick="switchView('student-chat')" class="w-full py-2 bg-indigo-600/30 hover:bg-indigo-600 text-indigo-200 hover:text-white text-xs font-semibold rounded-lg transition">Abrir chat</button>
+    </div>
+
+    <div class="bg-[#1c2541]/50 p-5 rounded-2xl border border-slate-800 space-y-3">
+      <div class="w-9 h-9 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center">
+        <i class="fa-solid fa-folder-open"></i>
+      </div>
+      <h4 class="font-bold text-white text-sm">Mis reportes</h4>
+      <p class="text-[11px] text-slate-400">Revisa tu historial de respuestas.</p>
+      <button onclick="switchView('student-reports')" class="w-full py-2 bg-indigo-600/30 hover:bg-indigo-600 text-indigo-200 hover:text-white text-xs font-semibold rounded-lg transition">Ver reportes</button>
+    </div>
+
+    <div class="bg-[#1c2541]/50 p-5 rounded-2xl border border-slate-800 space-y-3">
+      <div class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center">
+        <i class="fa-solid fa-book-bookmark"></i>
+      </div>
+      <h4 class="font-bold text-white text-sm">Recursos</h4>
+      <p class="text-[11px] text-slate-400">Consejos, guías y material de apoyo.</p>
+      <button class="w-full py-2 bg-indigo-600/30 hover:bg-indigo-600 text-indigo-200 hover:text-white text-xs font-semibold rounded-lg transition">Ver recursos</button>
+    </div>
+  </div>
+</div>
