@@ -1,16 +1,461 @@
 ---
+// src/pages/index.astro
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apoyo Psicológico - Tu bienestar también importa</title>
+    <!-- FontAwesome para los íconos exactos del prototipo -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  </head>
+  <body class="bg-[#0b132b] text-slate-100 font-sans min-h-screen">
+    
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div id="app" class="flex min-h-screen">
+      
+      <!-- NAVEGACIÓN LATERAL (SIDEBAR) -->
+      <aside id="sidebar" class="w-64 bg-[#1c2541] border-r border-slate-700/50 flex flex-col justify-between hidden md:flex">
+        <div>
+          <!-- Logo de la Plataforma -->
+          <div class="p-5 flex items-center space-x-3 border-b border-slate-700/50">
+            <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30">
+              <i class="fa-solid fa-heart-pulse text-xl"></i>
+            </div>
+            <div>
+              <h1 class="font-bold text-base tracking-wide leading-tight text-white">Apoyo Psicológico</h1>
+              <p class="text-xs text-indigo-300">Tu bienestar también importa</p>
+            </div>
+          </div>
+
+          <!-- Enlaces de Navegación del Estudiante -->
+          <nav id="nav-student" class="p-4 space-y-1">
+            <button onclick="switchView('student-dashboard')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition text-white bg-indigo-600/80 hover:bg-indigo-600">
+              <i class="fa-solid fa-house w-5 text-center"></i>
+              <span>Inicio</span>
+            </button>
+            <button onclick="switchView('student-quiz')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
+              <i class="fa-solid fa-clipboard-list w-5 text-center"></i>
+              <span>Cuestionario</span>
+            </button>
+            <button onclick="switchView('student-chat')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
+              <i class="fa-solid fa-comments w-5 text-center"></i>
+              <span>Chat con IA</span>
+            </button>
+            <button onclick="switchView('student-reports')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
+              <i class="fa-solid fa-chart-pie w-5 text-center"></i>
+              <span>Mis reportes</span>
+            </button>
+            <button onclick="switchView('student-profile')" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
+              <i class="fa-solid fa-user w-5 text-center"></i>
+              <span>Perfil</span>
+            </button>
+          </nav>
+
+          <!-- Enlaces de Navegación del Psicólogo -->
+          <nav id="nav-psychologist" class="p-4 space-y-1 hidden">
+            <button onclick="switchView('psych-dashboard')" class="nav-btn-psych w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium transition text-white bg-indigo-600/80 hover:bg-indigo-600">
+              <i class="fa-solid fa-gauge-high w-5 text-center"></i>
+              <span>Panel de control</span>
+            </button>
+            <button onclick="switchView('psych-detail')" class="nav-btn-psych w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
+              <i class="fa-solid fa-users w-5 text-center"></i>
+              <span>Estudiantes</span>
+            </button>
+            <button onclick="switchView('psych-alerts')" class="nav-btn-psych w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
+              <i class="fa-solid fa-bell w-5 text-center"></i>
+              <span>Alertas</span>
+            </button>
+            <button onclick="switchView('psych-chat')" class="nav-btn-psych w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/50 transition">
+              <i class="fa-solid fa-robot w-5 text-center"></i>
+              <span>Asistente IA</span>
+            </button>
+          </nav>
+        </div>
+
+        <div class="p-4 border-t border-slate-700/50">
+          <button onclick="logout()" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-medium text-red-400 hover:bg-red-500/10 transition">
+            <i class="fa-solid fa-right-from-bracket w-5 text-center"></i>
+            <span>Cerrar sesión</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- ÁREA DE CONTENIDO -->
+      <main class="flex-1 flex flex-col min-w-0 bg-[#0b132b] overflow-y-auto">
+        
+        <!-- HEADER ENCABEZADO -->
+        <header id="main-header" class="h-16 border-b border-slate-800 px-6 flex items-center justify-between bg-[#1c2541]/40 backdrop-blur-md sticky top-0 z-10">
+          <div class="flex items-center space-x-3">
+            <i class="fa-solid fa-magnifying-glass text-slate-400 text-sm"></i>
+            <input type="text" placeholder="Buscar..." class="bg-transparent text-sm focus:outline-none text-slate-200 placeholder-slate-500 w-48 md:w-64" />
+          </div>
+          <div class="flex items-center space-x-4">
+            <button class="text-slate-400 hover:text-white relative">
+              <i class="fa-regular fa-bell text-lg"></i>
+              <span class="absolute -top-1 -right-1 w-2 h-2 bg-indigo-500 rounded-full"></span>
+            </button>
+            <div class="flex items-center space-x-3 pl-4 border-l border-slate-800">
+              <div id="user-avatar" class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center font-bold text-xs text-white">JP</div>
+              <div class="hidden sm:block">
+                <p id="user-name" class="text-xs font-semibold text-white leading-tight">Juan Pérez</p>
+                <p id="user-role" class="text-[10px] text-indigo-300">Estudiante</p>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- VISTA: LOGIN -->
+        <section id="view-login" class="flex-1 flex items-center justify-center p-6 bg-gradient-to-br from-[#0b132b] via-[#1c2541] to-[#0b132b]">
+          <div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-[#1c2541]/60 p-8 rounded-3xl border border-slate-700/50 backdrop-blur-xl shadow-2xl">
+            <div class="space-y-6">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white">
+                  <i class="fa-solid fa-heart-pulse text-xl"></i>
+                </div>
+                <span class="font-bold text-white text-lg">Apoyo Psicológico</span>
+              </div>
+              <h2 class="text-3xl font-extrabold text-white leading-tight">Hablar también es cuidarte</h2>
+              <p class="text-slate-400 text-sm">Aquí puedes encontrar apoyo, resolver tus dudas y recibir orientación de forma segura y confidencial.</p>
+              <div class="p-4 rounded-2xl bg-indigo-900/20 border border-indigo-500/30 flex items-center space-x-4">
+                <i class="fa-solid fa-user-shield text-2xl text-indigo-400"></i>
+                <p class="text-xs text-indigo-200">Plataforma totalmente confidencial y supervisada por profesionales de la salud mental.</p>
+              </div>
+            </div>
+
+            <div class="bg-[#0b132b]/80 p-6 rounded-2xl border border-slate-800 space-y-5">
+              <div class="text-center">
+                <h3 class="text-xl font-bold text-white">Iniciar sesión</h3>
+                <p class="text-xs text-slate-400 mt-1">Accede a tu cuenta para continuar</p>
+              </div>
+
+              <!-- Selector de Rol -->
+              <div class="grid grid-cols-2 gap-2 bg-[#1c2541] p-1 rounded-xl text-xs font-semibold">
+                <button id="role-student-btn" onclick="setRole('student')" class="py-2 rounded-lg bg-indigo-600 text-white transition">Estudiante</button>
+                <button id="role-psych-btn" onclick="setRole('psychologist')" class="py-2 rounded-lg text-slate-400 hover:text-white transition">Psicólogo/a</button>
+              </div>
+
+              <form onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                  <label class="block text-xs text-slate-400 mb-1">Usuario o correo</label>
+                  <input type="text" required value="juanperez" class="w-full bg-[#1c2541] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500" />
+                </div>
+                <div>
+                  <label class="block text-xs text-slate-400 mb-1">Contraseña</label>
+                  <input type="password" required value="123456" class="w-full bg-[#1c2541] border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-indigo-500" />
+                </div>
+                <button type="submit" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm rounded-xl transition shadow-lg shadow-indigo-600/30">
+                  Entrar
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- VISTA: DASHBOARD ESTUDIANTE -->
+        <section id="view-student-dashboard" class="p-6 space-y-6 hidden">
+          <div>
+            <h2 class="text-2xl font-bold text-white">Hola, Juan 👋</h2>
+            <p class="text-xs text-slate-400">Tu bienestar emocional es importante. Aquí tienes un resumen de tu progreso.</p>
+          </div>
+
+          <!-- Banner Principal -->
+          <div class="bg-gradient-to-r from-indigo-900/60 to-purple-900/40 p-6 rounded-3xl border border-indigo-500/30 flex items-center justify-between">
+            <div class="space-y-3 max-w-lg">
+              <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 text-[10px] font-semibold rounded-full border border-indigo-500/30">Asistencia Emocional</span>
+              <h3 class="text-xl font-bold text-white">No estás solo</h3>
+              <p class="text-xs text-slate-300 leading-relaxed">Si necesitas hablar, puedes hacerlo con nuestro asistente de IA o directamente con la psicóloga de la institución.</p>
+              <button onclick="switchView('student-chat')" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-xl transition inline-flex items-center space-x-2">
+                <span>Ir al chat con IA</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+            <div class="hidden md:block text-indigo-400 opacity-80 text-7xl">
+              <i class="fa-solid fa-brain"></i>
+            </div>
+          </div>
+
+          <!-- Tarjetas Accesos Rápidos -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-[#1c2541]/50 p-5 rounded-2xl border border-slate-800 space-y-3">
+              <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                <i class="fa-solid fa-heart-pulse"></i>
+              </div>
+              <h4 class="font-bold text-white text-sm">Cuestionario emocional</h4>
+              <p class="text-[11px] text-slate-400">Completa tu evaluación periódica.</p>
+              <button onclick="switchView('student-quiz')" class="w-full py-2 bg-indigo-600/30 hover:bg-indigo-600 text-indigo-200 hover:text-white text-xs font-semibold rounded-lg transition">Ir al cuestionario</button>
+            </div>
+
+            <div class="bg-[#1c2541]/50 p-5 rounded-2xl border border-slate-800 space-y-3">
+              <div class="w-9 h-9 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center">
+                <i class="fa-solid fa-robot"></i>
+              </div>
+              <h4 class="font-bold text-white text-sm">Chat con IA</h4>
+              <p class="text-[11px] text-slate-400">Habla con nuestro asistente cuando lo necesites.</p>
+              <button onclick="switchView('student-chat')" class="w-full py-2 bg-indigo-600/30 hover:bg-indigo-600 text-indigo-200 hover:text-white text-xs font-semibold rounded-lg transition">Abrir chat</button>
+            </div>
+
+            <div class="bg-[#1c2541]/50 p-5 rounded-2xl border border-slate-800 space-y-3">
+              <div class="w-9 h-9 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center">
+                <i class="fa-solid fa-folder-open"></i>
+              </div>
+              <h4 class="font-bold text-white text-sm">Mis reportes</h4>
+              <p class="text-[11px] text-slate-400">Revisa tu historial de respuestas.</p>
+              <button onclick="switchView('student-reports')" class="w-full py-2 bg-indigo-600/30 hover:bg-indigo-600 text-indigo-200 hover:text-white text-xs font-semibold rounded-lg transition">Ver reportes</button>
+            </div>
+
+            <div class="bg-[#1c2541]/50 p-5 rounded-2xl border border-slate-800 space-y-3">
+              <div class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center">
+                <i class="fa-solid fa-book-bookmark"></i>
+              </div>
+              <h4 class="font-bold text-white text-sm">Recursos</h4>
+              <p class="text-[11px] text-slate-400">Consejos, guías y material de apoyo.</p>
+              <button class="w-full py-2 bg-indigo-600/30 hover:bg-indigo-600 text-indigo-200 hover:text-white text-xs font-semibold rounded-lg transition">Ver recursos</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- VISTA: CHAT CON IA -->
+        <section id="view-student-chat" class="p-6 flex flex-col h-[calc(100vh-4rem)] hidden">
+          <div class="mb-4">
+            <h2 class="text-2xl font-bold text-white">Chat con IA</h2>
+            <p class="text-xs text-slate-400">Aquí puedes hablar libremente. Estoy para escucharte.</p>
+          </div>
+
+          <div class="flex-1 bg-[#1c2541]/40 border border-slate-800 rounded-2xl flex flex-col overflow-hidden">
+            <div id="chat-box" class="flex-1 p-4 overflow-y-auto space-y-4">
+              <div class="flex items-start space-x-3">
+                <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs font-bold">IA</div>
+                <div class="bg-[#1c2541] p-3.5 rounded-2xl max-w-md text-xs text-slate-200 border border-slate-700/50">
+                  Hola, soy tu asistente virtual. Estoy aquí para escucharte y apoyarte. Puedes contarme cómo te sientes o preguntarme lo que necesites.
+                </div>
+              </div>
+            </div>
+
+            <div class="p-3 border-t border-slate-800 bg-[#0b132b]/80 flex items-center space-x-2">
+              <input id="chat-input" type="text" placeholder="Escribe tu mensaje..." onkeypress="if(event.key === 'Enter') sendMessage()" class="flex-1 bg-[#1c2541] border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-indigo-500" />
+              <button onclick="sendMessage()" class="p-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl transition">
+                <i class="fa-solid fa-paper-plane text-sm"></i>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- VISTA: CUESTIONARIO -->
+        <section id="view-student-quiz" class="p-6 max-w-3xl mx-auto space-y-6 hidden">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-xl font-bold text-white">Cuestionario de bienestar emocional</h2>
+              <p class="text-xs text-slate-400">Responde con sinceridad. No hay respuestas correctas o incorrectas.</p>
+            </div>
+            <span class="text-xs text-indigo-400 font-semibold bg-indigo-500/10 px-3 py-1 rounded-full border border-indigo-500/20">Pregunta 3 de 10</span>
+          </div>
+
+          <!-- Barra de Progreso -->
+          <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+            <div class="bg-indigo-500 h-full w-1/3 rounded-full"></div>
+          </div>
+
+          <div class="bg-[#1c2541]/50 p-6 rounded-2xl border border-slate-800 space-y-6">
+            <h3 class="text-sm font-semibold text-white">¿Con qué frecuencia te sientes ansioso/a o preocupado/a?</h3>
+            
+            <div class="space-y-3">
+              <label class="flex items-center space-x-3 p-3.5 rounded-xl bg-[#0b132b] border border-slate-700 cursor-pointer hover:border-indigo-500 transition">
+                <input type="radio" name="quiz" class="accent-indigo-500" />
+                <span class="text-xs text-slate-300">Nunca</span>
+              </label>
+              <label class="flex items-center space-x-3 p-3.5 rounded-xl bg-[#0b132b] border border-slate-700 cursor-pointer hover:border-indigo-500 transition">
+                <input type="radio" name="quiz" class="accent-indigo-500" />
+                <span class="text-xs text-slate-300">Rara vez</span>
+              </label>
+              <label class="flex items-center space-x-3 p-3.5 rounded-xl bg-[#0b132b] border border-indigo-500 bg-indigo-950/20 cursor-pointer transition">
+                <input type="radio" name="quiz" checked class="accent-indigo-500" />
+                <span class="text-xs text-white font-medium">A veces</span>
+              </label>
+              <label class="flex items-center space-x-3 p-3.5 rounded-xl bg-[#0b132b] border border-slate-700 cursor-pointer hover:border-indigo-500 transition">
+                <input type="radio" name="quiz" class="accent-indigo-500" />
+                <span class="text-xs text-slate-300">Frecuentemente</span>
+              </label>
+              <label class="flex items-center space-x-3 p-3.5 rounded-xl bg-[#0b132b] border border-slate-700 cursor-pointer hover:border-indigo-500 transition">
+                <input type="radio" name="quiz" class="accent-indigo-500" />
+                <span class="text-xs text-slate-300">Siempre</span>
+              </label>
+            </div>
+
+            <div class="flex justify-between pt-4 border-t border-slate-800">
+              <button class="px-4 py-2 border border-slate-700 text-slate-300 text-xs rounded-xl hover:bg-slate-800 transition">Anterior</button>
+              <button onclick="switchView('student-reports')" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-xl transition">Siguiente</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- VISTA: MIS REPORTES -->
+        <section id="view-student-reports" class="p-6 space-y-6 hidden">
+          <div>
+            <h2 class="text-2xl font-bold text-white">Resultados de tu cuestionario</h2>
+            <p class="text-xs text-slate-400">Aquí puedes ver un resumen de tus respuestas y tu estado emocional.</p>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 bg-[#1c2541]/50 p-6 rounded-2xl border border-slate-800 flex items-center space-x-6">
+              <div class="w-20 h-20 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-3xl">
+                <i class="fa-regular fa-face-smile"></i>
+              </div>
+              <div class="space-y-2">
+                <h3 class="text-base font-bold text-white">Tu estado emocional se encuentra en un rango estable.</h3>
+                <p class="text-xs text-slate-400">Continúa con tus hábitos de autocuidado y no dudes en pedir ayuda si lo necesitas.</p>
+              </div>
+            </div>
+
+            <div class="bg-[#1c2541]/50 p-6 rounded-2xl border border-slate-800 space-y-3">
+              <h4 class="text-xs font-bold text-white">Recomendaciones</h4>
+              <ul class="text-xs text-slate-300 space-y-2 list-disc pl-4">
+                <li>Mantén una buena rutina de sueño.</li>
+                <li>Realiza actividades que disfrutes.</li>
+                <li>Habla con alguien de confianza cuando lo necesites.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- VISTA: PERFIL -->
+        <section id="view-student-profile" class="p-6 max-w-2xl mx-auto space-y-6 hidden">
+          <h2 class="text-2xl font-bold text-white">Mi perfil</h2>
+          <div class="bg-[#1c2541]/50 p-6 rounded-2xl border border-slate-800 space-y-6">
+            <div class="flex items-center space-x-4">
+              <div class="w-16 h-16 rounded-full bg-indigo-600 flex items-center justify-center font-bold text-white text-xl">JP</div>
+              <button class="px-4 py-2 bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded-xl hover:bg-slate-700">Cambiar foto</button>
+            </div>
+            <div class="space-y-4">
+              <div>
+                <label class="block text-xs text-slate-400 mb-1">Nombre completo</label>
+                <input type="text" value="Juan Pérez" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white" />
+              </div>
+              <div>
+                <label class="block text-xs text-slate-400 mb-1">Correo electrónico</label>
+                <input type="email" value="juanperez@gmail.com" class="w-full bg-[#0b132b] border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VISTA: PANEL DE PSICÓLOGO -->
+        <section id="view-psych-dashboard" class="p-6 space-y-6 hidden">
+          <div>
+            <h2 class="text-2xl font-bold text-white">Panel de control</h2>
+            <p class="text-xs text-slate-400">Resumen general del sistema de asistencia psicológica.</p>
+          </div>
+
+          <!-- Métricas -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-[#1c2541]/50 p-5 rounded-2xl border border-slate-800">
+              <p class="text-xs text-slate-400">Total de estudiantes</p>
+              <h3 class="text-2xl font-extrabold text-white mt-1">1248</h3>
+              <span class="text-[10px] text-emerald-400 font-semibold"><i class="fa-solid fa-arrow-up"></i> 12% vs mes anterior</span>
+            </div>
+            <div class="bg-[#1c2541]/50 p-5 rounded-2xl border border-slate-800">
+              <p class="text-xs text-slate-400">Cuestionarios completados</p>
+              <h3 class="text-2xl font-extrabold text-white mt-1">1120</h3>
+              <span class="text-[10px] text-emerald-400 font-semibold"><i class="fa-solid fa-arrow-up"></i> 8%</span>
+            </div>
+            <div class="bg-[#1c2541]/50 p-5 rounded-2xl border border-slate-800">
+              <p class="text-xs text-slate-400">Casos en seguimiento</p>
+              <h3 class="text-2xl font-extrabold text-white mt-1">18</h3>
+              <span class="text-[10px] text-amber-400 font-semibold"><i class="fa-solid fa-arrow-up"></i> 5%</span>
+            </div>
+            <div class="bg-[#1c2541]/50 p-5 rounded-2xl border border-slate-800">
+              <p class="text-xs text-slate-400">Alertas activas</p>
+              <h3 class="text-2xl font-extrabold text-red-400 mt-1">3</h3>
+              <span class="text-[10px] text-red-400 font-semibold"><i class="fa-solid fa-arrow-up"></i> 2 urgentes</span>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- SCRIPTS DE NAVEGACIÓN E INTERACTIVIDAD -->
+    <script is:inline>
+      let currentRole = 'student';
+
+      function setRole(role) {
+        currentRole = role;
+        const studentBtn = document.getElementById('role-student-btn');
+        const psychBtn = document.getElementById('role-psych-btn');
+
+        if (role === 'student') {
+          studentBtn.className = "py-2 rounded-lg bg-indigo-600 text-white transition";
+          psychBtn.className = "py-2 rounded-lg text-slate-400 hover:text-white transition";
+        } else {
+          psychBtn.className = "py-2 rounded-lg bg-indigo-600 text-white transition";
+          studentBtn.className = "py-2 rounded-lg text-slate-400 hover:text-white transition";
+        }
+      }
+
+      function handleLogin(e) {
+        e.preventDefault();
+        document.getElementById('view-login').classList.add('hidden');
+        document.getElementById('sidebar').classList.remove('hidden');
+
+        if (currentRole === 'student') {
+          document.getElementById('nav-student').classList.remove('hidden');
+          document.getElementById('nav-psychologist').classList.add('hidden');
+          document.getElementById('user-name').innerText = "Juan Pérez";
+          document.getElementById('user-role').innerText = "Estudiante";
+          document.getElementById('user-avatar').innerText = "JP";
+          switchView('student-dashboard');
+        } else {
+          document.getElementById('nav-student').classList.add('hidden');
+          document.getElementById('nav-psychologist').classList.remove('hidden');
+          document.getElementById('user-name').innerText = "Dra. Laura Gómez";
+          document.getElementById('user-role').innerText = "Psicóloga";
+          document.getElementById('user-avatar').innerText = "LG";
+          switchView('psych-dashboard');
+        }
+      }
+
+      function logout() {
+        document.getElementById('sidebar').classList.add('hidden');
+        document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
+        document.getElementById('view-login').classList.remove('hidden');
+      }
+
+      function switchView(viewId) {
+        document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
+        const targetView = document.getElementById(`view-${viewId}`);
+        if (targetView) targetView.classList.remove('hidden');
+      }
+
+      function sendMessage() {
+        const input = document.getElementById('chat-input');
+        const chatBox = document.getElementById('chat-box');
+        if (!input.value.trim()) return;
+
+        const userText = input.value;
+        chatBox.innerHTML += `
+          <div class="flex items-start justify-end space-x-3">
+            <div class="bg-indigo-600 p-3.5 rounded-2xl max-w-md text-xs text-white">
+              ${userText}
+            </div>
+          </div>
+        `;
+        input.value = '';
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        setTimeout(() => {
+          chatBox.innerHTML += `
+            <div class="flex items-start space-x-3">
+              <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs font-bold">IA</div>
+              <div class="bg-[#1c2541] p-3.5 rounded-2xl max-w-md text-xs text-slate-200 border border-slate-700/50">
+                Entiendo cómo te sientes. Recuerda que tomarte un tiempo para respirar y reflexionar sobre esto ayuda bastante. ¿Te gustaría que exploremos más a fondo qué lo genera?
+              </div>
+            </div>
+          `;
+          chatBox.scrollTop = chatBox.scrollHeight;
+        }, 1000);
+      }
+    </script>
+  </body>
 </html>
