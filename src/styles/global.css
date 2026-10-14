@@ -1,124 +1,245 @@
 /* ==========================================
-   ESTILOS FIELES AL PROTOTIPO ORIGINAL
+   REPLICA EXACTA DEL PROTOTIPO ORIGINAL
    ================================---------- */
+
+/* Variables de Color y Tema */
 :root {
-  --bg-main: #0b132b;
-  --card-bg: #ffffff;
-  --text-main: #1e293b;
+  --bg-dark-main: #0a0f1d;
+  --bg-sidebar: #0f172a;
+  --bg-card-dark: #1e293b;
+  --bg-card-light: #ffffff;
+  --primary-purple: #6366f1;
+  --primary-purple-hover: #4f46e5;
+  --text-dark: #0f172a;
   --text-muted: #64748b;
-  --primary-indigo: #4f46e5;
-  --primary-hover: #4338ca;
-  --border-color: #e2e8f0;
+  --text-light: #f8fafc;
+  --border-light: #e2e8f0;
+  --border-dark: #334155;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+}
+
+/* Reset Global */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  background-color: var(--bg-main) !important;
-  color: #f8fafc !important;
+  background-color: var(--bg-dark-main) !important;
+  color: var(--text-light) !important;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  margin: 0;
-  padding: 0;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Contenedor principal de la vista de login */
+/* ==========================================
+   1. ESTRUCTURA DE LOGIN (PANTALLA DIVIDIDA)
+   ================================---------- */
+
 #view-login-wrapper {
   display: flex;
   min-height: 100vh;
+  width: 100%;
   align-items: center;
   justify-content: center;
+  background: radial-gradient(circle at top left, #1e1b4b 0%, #0a0f1d 60%);
   padding: 2rem;
-  background-color: var(--bg-main);
 }
 
-/* Tarjeta principal de login idéntica al prototipo */
-.login-card-container, .bg-white {
-  background-color: #ffffff !important;
-  color: var(--text-main) !important;
-  border-radius: 1.5rem;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
-  padding: 2.5rem;
+/* Contenedor principal de 2 columnas */
+.login-container, #view-login-wrapper > div {
+  display: flex;
+  flex-direction: row;
   width: 100%;
-  max-width: 450px;
+  max-width: 1000px;
+  background-color: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
-/* Tipografías y títulos dentro del login */
-.login-card-container h2, h2 {
-  color: #0f172a !important;
-  font-weight: 700;
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+/* Lado Izquierdo: Ilustración y Bienvenida */
+.login-info-side, #view-login-wrapper > div > div:first-child {
+  flex: 1;
+  padding: 3.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--text-light);
 }
 
-.login-card-container p, .text-slate-500 {
-  color: var(--text-muted) !important;
-  font-size: 0.875rem;
+.login-info-side h1, h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: #ffffff !important;
+}
+
+.login-info-side p {
+  color: #94a3b8 !important;
+  font-size: 1rem;
+  line-height: 1.6;
   margin-bottom: 1.5rem;
 }
 
-/* Inputs de texto limpios y profesionales */
+/* Lado Derecho: Tarjeta Blanca de Formulario */
+.login-card, #view-login-wrapper > div > div:last-child {
+  flex: 1;
+  background-color: var(--bg-card-light) !important;
+  color: var(--text-dark) !important;
+  padding: 3.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: var(--radius-xl);
+  margin: 0.75rem;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+}
+
+.login-card h2, h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-dark) !important;
+  margin-bottom: 0.5rem;
+}
+
+.login-card p {
+  color: var(--text-muted) !important;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Selectores de Rol (Estudiante / Psicólogo) */
+.role-selector, div.flex.gap-2 {
+  display: flex;
+  background-color: #f1f5f9;
+  padding: 0.35rem;
+  border-radius: 0.75rem;
+  margin-bottom: 1.5rem;
+  gap: 0.5rem;
+}
+
+.role-selector button, button.role-btn {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-weight: 600;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.role-selector button.active, button.role-btn.active, button.bg-indigo-600 {
+  background-color: var(--primary-purple) !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* Inputs del Formulario */
+label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 0.4rem;
+}
+
 input[type="text"],
 input[type="email"],
-input[type="password"],
-input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]) {
-  background-color: #f8fafc !important;
-  color: #0f172a !important;
-  border: 1px solid var(--border-color) !important;
-  border-radius: 0.75rem;
-  padding: 0.75rem 1rem;
+input[type="password"] {
   width: 100%;
-  box-sizing: border-box;
-  margin-bottom: 1rem;
-  outline: none;
+  padding: 0.8rem 1rem;
+  background-color: #f8fafc !important;
+  color: var(--text-dark) !important;
+  border: 1px solid var(--border-light) !important;
+  border-radius: 0.75rem;
   font-size: 0.95rem;
+  outline: none;
+  margin-bottom: 1.25rem;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 input:focus {
-  border-color: var(--primary-indigo) !important;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+  border-color: var(--primary-purple) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
 
-/* Botones de pestañas (Estudiante / Psicólogo) */
-.role-btn {
-  background-color: #f1f5f9;
-  color: #475569;
-  border: none;
-  padding: 0.6rem 1.2rem;
-  border-radius: 0.5rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.role-btn.active, button.bg-indigo-600 {
-  background-color: var(--primary-indigo) !important;
-  color: #ffffff !important;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
-}
-
-/* Botón principal de Entrar */
-button[type="submit"], .btn-primary {
-  background-color: var(--primary-indigo) !important;
-  color: #ffffff !important;
+/* Botón Principal */
+button[type="submit"], .btn-login {
   width: 100%;
-  padding: 0.75rem;
-  border-radius: 0.75rem;
-  font-weight: 600;
+  padding: 0.85rem;
+  background-color: var(--primary-purple) !important;
+  color: #ffffff !important;
   border: none;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4);
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
   transition: background-color 0.2s, transform 0.1s;
 }
 
-button[type="submit"]:hover {
-  background-color: var(--primary-hover) !important;
+button[type="submit"]:hover, .btn-login:hover {
+  background-color: var(--primary-purple-hover) !important;
   transform: translateY(-1px);
 }
 
-/* Utilidades de compatibilidad */
+/* ==========================================
+   2. DASHBOARD / SISTEMA INTERNO (TEMA OSCURO)
+   ================================---------- */
+
+#app {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--bg-dark-main);
+}
+
+/* Sidebar lateral */
+aside, .sidebar {
+  width: 260px;
+  background-color: var(--bg-sidebar);
+  border-right: 1px solid var(--border-dark);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tarjetas y Paneles del Dashboard */
+.card-dashboard, .bg-slate-800, div[class*="bg-slate"] {
+  background-color: var(--bg-card-dark) !important;
+  border: 1px solid var(--border-dark) !important;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  color: var(--text-light) !important;
+}
+
+/* ==========================================
+   3. REGLAS DE VISIBILIDAD Y UTILIDADES
+   ================================---------- */
+
 .hidden { display: none !important; }
 .flex { display: flex; }
-.grid { display: grid; }
+.flex-col { flex-direction: column; }
 .items-center { align-items: center; }
 .justify-between { justify-content: space-between; }
-.space-y-4 > * + * { margin-top: 1rem; }
+.gap-4 { gap: 1rem; }
+.w-full { width: 100%; }
+
+/* Adaptación Responsive para Móviles */
+@media (max-width: 768px) {
+  .login-container, #view-login-wrapper > div {
+    flex-direction: column;
+  }
+  .login-info-side {
+    display: none; /* En pantallas pequeñas se enfoca en el formulario */
+  }
+}
