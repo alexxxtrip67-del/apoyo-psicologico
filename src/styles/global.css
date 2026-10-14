@@ -1,5 +1,5 @@
 /* ==========================================
-   LAYOUT ORGANIZADO Y ESTRUCTURADO (PROTOTIPO)
+   INTERFAZ PROFESIONAL CON GRÁFICOS Y HEADER
    ================================---------- */
 
 * {
@@ -15,7 +15,7 @@ body {
   min-height: 100vh;
 }
 
-/* 1. ESTRUCTURA PRINCIPAL (SIDEBAR + CONTENIDO) */
+/* 1. ESTRUCTURA DE LA APLICACIÓN */
 #app {
   display: flex !important;
   flex-direction: row !important;
@@ -23,7 +23,7 @@ body {
   min-height: 100vh;
 }
 
-/* Sidebar lateral a la izquierda */
+/* Sidebar lateral alineado a la izquierda */
 aside, .sidebar {
   width: 260px !important;
   min-width: 260px !important;
@@ -50,7 +50,12 @@ aside a, aside button {
   text-align: left;
 }
 
-/* 2. ÁREA DE CONTENIDO PRINCIPAL */
+aside a:hover, aside button:hover, aside a.active {
+  background-color: #1e293b !important;
+  color: #ffffff !important;
+}
+
+/* 2. ÁREA PRINCIPAL */
 main, .main-content {
   flex: 1 !important;
   padding: 2rem 2.5rem !important;
@@ -61,46 +66,78 @@ main, .main-content {
   max-width: 1200px;
 }
 
-/* 3. HEADER SUPERIOR (BUSCADOR Y PERFIL A LA DERECHA) */
+/* 3. BARRA SUPERIOR ORGANIZADA (HEADER) */
 header {
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
   width: 100% !important;
-  margin-bottom: 1rem !important;
+  padding-bottom: 1.25rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
   position: static !important;
 }
 
-/* Corregir la barra de búsqueda para que no flote en el medio */
+/* Buscador limpio arriba a la izquierda */
 header input[type="text"], header input {
   background-color: #1e293b !important;
   color: #f8fafc !important;
   border: 1px solid #334155 !important;
   border-radius: 0.75rem !important;
-  padding: 0.6rem 1rem 0.6rem 2.5rem !important;
-  width: 280px !important;
+  padding: 0.65rem 1rem 0.65rem 2.5rem !important;
+  width: 320px !important;
+  font-size: 0.9rem !important;
   position: static !important;
+  outline: none;
 }
 
-/* Iconos de la derecha (Notificaciones y Perfil JP) */
+header input:focus {
+  border-color: #6366f1 !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2) !important;
+}
+
+/* Perfil y Notificaciones arriba a la derecha */
 header div, header button {
   position: static !important;
   display: flex !important;
   align-items: center !important;
-  gap: 0.75rem !important;
+  gap: 1rem !important;
 }
 
-/* 4. BANNER "NO ESTÁS SOLO" */
+.profile-avatar, .user-badge {
+  background-color: #4f46e5 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  padding: 0.5rem 0.85rem !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3) !important;
+}
+
+/* 4. BANNER "NO ESTÁS SOLO" LLAMATIVO CON DEGRADADO */
 div.bg-indigo-900, div[class*="bg-indigo"], .banner-assist {
-  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%) !important;
-  border: 1px solid #4338ca !important;
-  border-radius: 1.25rem !important;
-  padding: 2rem !important;
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%) !important;
+  border: 1px solid #6366f1 !important;
+  border-radius: 1.5rem !important;
+  padding: 2.25rem !important;
   width: 100% !important;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4) !important;
+  position: relative !important;
+  overflow: hidden !important;
 }
 
-/* 5. GRILLA DE TARJETAS (4 OPCIONES) */
+div.bg-indigo-900 h2, div[class*="bg-indigo"] h2 {
+  color: #ffffff !important;
+  font-size: 1.6rem !important;
+  font-weight: 800 !important;
+  margin-bottom: 0.5rem !important;
+}
+
+div.bg-indigo-900 p, div[class*="bg-indigo"] p {
+  color: #c7d2fe !important;
+  font-size: 0.95rem !important;
+  margin-bottom: 1.25rem !important;
+}
+
+/* 5. TARJETAS DE OPCIONES LUMINOSAS Y LLAMATIVAS */
 .grid, div.grid {
   display: grid !important;
   grid-template-columns: repeat(4, 1fr) !important;
@@ -115,17 +152,24 @@ div.bg-indigo-900, div[class*="bg-indigo"], .banner-assist {
   }
 }
 
-/* Tarjetas Blancas pulidas */
 .grid > div {
-  background-color: #ffffff !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%) !important;
   color: #0f172a !important;
-  padding: 1.5rem !important;
+  padding: 1.75rem 1.5rem !important;
   border-radius: 1.25rem !important;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.25) !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
-  min-height: 220px !important;
+  min-height: 230px !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.grid > div:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 15px 30px -5px rgba(79, 70, 229, 0.3) !important;
+  border-color: #818cf8 !important;
 }
 
 .grid > div h3, .grid > div h4 {
@@ -141,20 +185,36 @@ div.bg-indigo-900, div[class*="bg-indigo"], .banner-assist {
   line-height: 1.4 !important;
 }
 
-/* Botones morados limpios */
+/* Botones de acción dentro de las tarjetas */
 .grid button, .grid a, button.bg-indigo-600 {
-  background-color: #4f46e5 !important;
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%) !important;
   color: #ffffff !important;
   border: none !important;
-  padding: 0.7rem 1rem !important;
+  padding: 0.75rem 1rem !important;
   border-radius: 0.75rem !important;
   font-weight: 600 !important;
   font-size: 0.875rem !important;
   width: 100% !important;
   text-align: center !important;
   cursor: pointer !important;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3) !important;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35) !important;
+  transition: all 0.2s ease !important;
 }
 
-/* Visibilidad y utilidades */
+.grid button:hover, .grid a:hover, button.bg-indigo-600:hover {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%) !important;
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.5) !important;
+}
+
+/* 6. ESTILOS DE GRÁFICOS Y DETALLES VISUALES */
+.chart-card, .dashboard-stats {
+  background-color: #1e293b !important;
+  border: 1px solid #334155 !important;
+  border-radius: 1.25rem !important;
+  padding: 1.5rem !important;
+  color: #f8fafc !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Utilidades */
 .hidden { display: none !important; }
