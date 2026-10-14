@@ -1,0 +1,22 @@
+/* Estilos generales del prototipo */
+body {
+  background-color: #0b132b !important;
+  color: #f1f5f9 !important;
+  font-family: system-ui, -apple-system, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+}
+
+/* Clases de utilidad rápida para reemplazar dependencias */
+.bg-dark-blue { background-color: #0b132b; }
+.bg-card-blue { background-color: #1c2541; }
+.text-slate-100 { color: #f1f5f9; }
+.text-slate-400 { color: #94a3b8; }
+.border-slate-700 { border-color: #334155; }
+.bg-indigo-600 { background-color: #4f46e5; }
+.hover\:bg-indigo-700:hover { background-color: #4338ca; }
+.rounded-xl { border-radius: 0.75rem; }
+.rounded-2xl { border-radius: 1rem; }
+.p-6 { padding: 1.5rem; }
+.flex { display: flex; }
+.hidden { display: none !important; }
