@@ -1,22 +1,111 @@
-/* Estilos generales del prototipo */
-body {
-  background-color: #0b132b !important;
-  color: #f1f5f9 !important;
-  font-family: system-ui, -apple-system, sans-serif;
-  margin: 0;
-  min-height: 100vh;
+/* ==========================================
+   ESTILOS GENERALES Y TEMA OSCURO PROFUNDO
+   ================================---------- */
+:root {
+  --bg-main: #0b132b;
+  --bg-card: #1c2541;
+  --bg-card-hover: #233055;
+  --accent-indigo: #4f46e5;
+  --accent-indigo-hover: #6366f1;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(99, 102, 241, 0.5);
 }
 
-/* Clases de utilidad rápida para reemplazar dependencias */
-.bg-dark-blue { background-color: #0b132b; }
-.bg-card-blue { background-color: #1c2541; }
-.text-slate-100 { color: #f1f5f9; }
-.text-slate-400 { color: #94a3b8; }
-.border-slate-700 { border-color: #334155; }
-.bg-indigo-600 { background-color: #4f46e5; }
-.hover\:bg-indigo-700:hover { background-color: #4338ca; }
+body {
+  background-color: var(--bg-main) !important;
+  color: var(--text-main) !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================
+   TARJETAS Y CONTENEDORES CON EFECTO MODERNO
+   ================================---------- */
+.card, div[class*="bg-"], section {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* ==========================================
+   BOTONES Y ACCESOS INTERACTIVOS
+   ================================---------- */
+button, .btn, input[type="submit"], input[type="button"] {
+  background-color: var(--accent-indigo);
+  color: #ffffff;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+button:hover, .btn:hover {
+  background-color: var(--accent-indigo-hover);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* ==========================================
+   FORMULARIOS E INPUTS ELEGANTES
+   ================================---------- */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+  background-color: #0f172a !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--accent-indigo) !important;
+  box-shadow: 0 0 0 3px var(--border-focus);
+}
+
+/* ==========================================
+   CLASES DE UTILIDAD COMPATIBLES
+   ================================---------- */
+.bg-dark-blue { background-color: var(--bg-main); }
+.bg-card-blue { background-color: var(--bg-card); }
+.text-slate-100 { color: var(--text-main); }
+.text-slate-400 { color: var(--text-muted); }
+.border-slate-700 { border-color: var(--border-color); }
+.bg-indigo-600 { background-color: var(--accent-indigo); }
+.hover\:bg-indigo-700:hover { background-color: var(--accent-indigo-hover); }
+
 .rounded-xl { border-radius: 0.75rem; }
 .rounded-2xl { border-radius: 1rem; }
 .p-6 { padding: 1.5rem; }
 .flex { display: flex; }
 .hidden { display: none !important; }
+
+/* Scrollbar personalizado y elegante */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+::-webkit-scrollbar-thumb {
+  background: #233055;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-indigo);
+}
