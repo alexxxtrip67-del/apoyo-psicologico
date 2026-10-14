@@ -1,25 +1,8 @@
 /* ==========================================
-   REPLICA EXACTA DEL PROTOTIPO ORIGINAL
+   ESTILOS GENERALES Y DASHBOARD DEL ESTUDIANTE
    ================================---------- */
 
-/* Variables de Color y Tema */
-:root {
-  --bg-dark-main: #0a0f1d;
-  --bg-sidebar: #0f172a;
-  --bg-card-dark: #1e293b;
-  --bg-card-light: #ffffff;
-  --primary-purple: #6366f1;
-  --primary-purple-hover: #4f46e5;
-  --text-dark: #0f172a;
-  --text-muted: #64748b;
-  --text-light: #f8fafc;
-  --border-light: #e2e8f0;
-  --border-dark: #334155;
-  --radius-lg: 1rem;
-  --radius-xl: 1.5rem;
-}
-
-/* Reset Global */
+/* Reset y Base */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -27,219 +10,163 @@
 }
 
 body {
-  background-color: var(--bg-dark-main) !important;
-  color: var(--text-light) !important;
+  background-color: #0b132b !important;
+  color: #f8fafc !important;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 
-/* ==========================================
-   1. ESTRUCTURA DE LOGIN (PANTALLA DIVIDIDA)
-   ================================---------- */
-
-#view-login-wrapper {
-  display: flex;
+/* Layout del App Principal (Sidebar + Contenido) */
+#app {
+  display: flex !important;
+  flex-direction: row !important;
   min-height: 100vh;
   width: 100%;
-  align-items: center;
-  justify-content: center;
-  background: radial-gradient(circle at top left, #1e1b4b 0%, #0a0f1d 60%);
-  padding: 2rem;
 }
 
-/* Contenedor principal de 2 columnas */
-.login-container, #view-login-wrapper > div {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  max-width: 1000px;
-  background-color: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-}
-
-/* Lado Izquierdo: Ilustración y Bienvenida */
-.login-info-side, #view-login-wrapper > div > div:first-child {
-  flex: 1;
-  padding: 3.5rem 2.5rem;
+/* Sidebar Lateral Izquierdo */
+aside, .sidebar {
+  width: 260px !important;
+  min-width: 260px;
+  background-color: #0f172a !important;
+  border-right: 1px solid #1e293b;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  color: var(--text-light);
-}
-
-.login-info-side h1, h1 {
-  font-size: 2.25rem;
-  font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 1rem;
-  color: #ffffff !important;
-}
-
-.login-info-side p {
-  color: #94a3b8 !important;
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-}
-
-/* Lado Derecho: Tarjeta Blanca de Formulario */
-.login-card, #view-login-wrapper > div > div:last-child {
-  flex: 1;
-  background-color: var(--bg-card-light) !important;
-  color: var(--text-dark) !important;
-  padding: 3.5rem 3rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-radius: var(--radius-xl);
-  margin: 0.75rem;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
-}
-
-.login-card h2, h2 {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--text-dark) !important;
-  margin-bottom: 0.5rem;
-}
-
-.login-card p {
-  color: var(--text-muted) !important;
-  font-size: 0.9rem;
-  margin-bottom: 1.5rem;
-}
-
-/* Selectores de Rol (Estudiante / Psicólogo) */
-.role-selector, div.flex.gap-2 {
-  display: flex;
-  background-color: #f1f5f9;
-  padding: 0.35rem;
-  border-radius: 0.75rem;
-  margin-bottom: 1.5rem;
   gap: 0.5rem;
 }
 
-.role-selector button, button.role-btn {
-  flex: 1;
-  padding: 0.6rem 1rem;
-  border: none;
+aside a, aside button {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #94a3b8 !important;
+  text-decoration: none;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  transition: all 0.2s;
   background: transparent;
-  color: var(--text-muted);
-  font-weight: 600;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.role-selector button.active, button.role-btn.active, button.bg-indigo-600 {
-  background-color: var(--primary-purple) !important;
-  color: #ffffff !important;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-}
-
-/* Inputs del Formulario */
-label {
-  display: block;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-dark);
-  margin-bottom: 0.4rem;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-  width: 100%;
-  padding: 0.8rem 1rem;
-  background-color: #f8fafc !important;
-  color: var(--text-dark) !important;
-  border: 1px solid var(--border-light) !important;
-  border-radius: 0.75rem;
-  font-size: 0.95rem;
-  outline: none;
-  margin-bottom: 1.25rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-input:focus {
-  border-color: var(--primary-purple) !important;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-}
-
-/* Botón Principal */
-button[type="submit"], .btn-login {
-  width: 100%;
-  padding: 0.85rem;
-  background-color: var(--primary-purple) !important;
-  color: #ffffff !important;
   border: none;
-  border-radius: 0.75rem;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
-  transition: background-color 0.2s, transform 0.1s;
+  width: 100%;
+  text-align: left;
 }
 
-button[type="submit"]:hover, .btn-login:hover {
-  background-color: var(--primary-purple-hover) !important;
+aside a:hover, aside button:hover, aside a.active {
+  background-color: #1e293b !important;
+  color: #ffffff !important;
+}
+
+/* Área Principal de Contenido */
+main, .main-content {
+  flex: 1;
+  padding: 2rem;
+  background-color: #0b132b;
+  overflow-y: auto;
+}
+
+/* Header Superior */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+header input[type="text"] {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+  border: 1px solid #334155 !important;
+  border-radius: 0.75rem;
+  padding: 0.6rem 1rem;
+  width: 280px;
+}
+
+/* Saludo "Hola, Juan" y Encabezados */
+h1, h2, h3, h4 {
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+p { color: #94a3b8 !important; font-size: 0.95rem; }
+
+/* Contenedores y Tarjetas del Dashboard */
+.card, div[class*="bg-"] {
+  border-radius: 1rem;
+}
+
+/* Banner Principal ("No estás solo") estilo Prototipo */
+.banner-assist, div.bg-indigo-900, div[class*="bg-indigo"] {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%) !important;
+  border: 1px solid #4338ca !important;
+  padding: 1.75rem !important;
+  border-radius: 1.25rem !important;
+  margin: 1.5rem 0 !important;
+}
+
+.banner-assist h2, .banner-assist h3 {
+  color: #ffffff !important;
+}
+
+/* Tarjetas Informativas (Cuestionario, Chat, Reportes, Recursos) */
+.grid, div.grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+  gap: 1.25rem !important;
+  margin-top: 1.5rem !important;
+}
+
+.grid > div {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  padding: 1.5rem !important;
+  border-radius: 1.25rem !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  transition: transform 0.2s;
+}
+
+.grid > div:hover {
+  transform: translateY(-3px);
+}
+
+.grid > div h3, .grid > div h4 {
+  color: #0f172a !important;
+  font-size: 1.1rem !important;
+  margin-bottom: 0.4rem !important;
+}
+
+.grid > div p {
+  color: #64748b !important;
+  font-size: 0.85rem !important;
+  margin-bottom: 1.25rem !important;
+}
+
+/* Botones de las Tarjetas */
+button, .btn, a.btn {
+  background-color: #4f46e5 !important;
+  color: #ffffff !important;
+  border: none !important;
+  padding: 0.65rem 1.2rem !important;
+  border-radius: 0.75rem !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  cursor: pointer !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  transition: background-color 0.2s, transform 0.1s !important;
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3) !important;
+}
+
+button:hover, .btn:hover {
+  background-color: #4338ca !important;
   transform: translateY(-1px);
 }
 
-/* ==========================================
-   2. DASHBOARD / SISTEMA INTERNO (TEMA OSCURO)
-   ================================---------- */
-
-#app {
-  display: flex;
-  min-height: 100vh;
-  width: 100%;
-  background-color: var(--bg-dark-main);
-}
-
-/* Sidebar lateral */
-aside, .sidebar {
-  width: 260px;
-  background-color: var(--bg-sidebar);
-  border-right: 1px solid var(--border-dark);
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Tarjetas y Paneles del Dashboard */
-.card-dashboard, .bg-slate-800, div[class*="bg-slate"] {
-  background-color: var(--bg-card-dark) !important;
-  border: 1px solid var(--border-dark) !important;
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  color: var(--text-light) !important;
-}
-
-/* ==========================================
-   3. REGLAS DE VISIBILIDAD Y UTILIDADES
-   ================================---------- */
-
+/* Clases de visibilidad */
 .hidden { display: none !important; }
 .flex { display: flex; }
-.flex-col { flex-direction: column; }
-.items-center { align-items: center; }
-.justify-between { justify-content: space-between; }
-.gap-4 { gap: 1rem; }
-.w-full { width: 100%; }
-
-/* Adaptación Responsive para Móviles */
-@media (max-width: 768px) {
-  .login-container, #view-login-wrapper > div {
-    flex-direction: column;
-  }
-  .login-info-side {
-    display: none; /* En pantallas pequeñas se enfoca en el formulario */
-  }
-}
