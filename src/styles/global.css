@@ -1,8 +1,7 @@
 /* ==========================================
-   ESTILOS GENERALES Y DASHBOARD DEL ESTUDIANTE
+   LAYOUT ORGANIZADO Y ESTRUCTURADO (PROTOTIPO)
    ================================---------- */
 
-/* Reset y Base */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -16,21 +15,21 @@ body {
   min-height: 100vh;
 }
 
-/* Layout del App Principal (Sidebar + Contenido) */
+/* 1. ESTRUCTURA PRINCIPAL (SIDEBAR + CONTENIDO) */
 #app {
   display: flex !important;
   flex-direction: row !important;
-  min-height: 100vh;
   width: 100%;
+  min-height: 100vh;
 }
 
-/* Sidebar Lateral Izquierdo */
+/* Sidebar lateral a la izquierda */
 aside, .sidebar {
   width: 260px !important;
-  min-width: 260px;
+  min-width: 260px !important;
   background-color: #0f172a !important;
   border-right: 1px solid #1e293b;
-  padding: 1.5rem;
+  padding: 1.5rem 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -45,128 +44,117 @@ aside a, aside button {
   text-decoration: none;
   border-radius: 0.75rem;
   font-weight: 500;
-  transition: all 0.2s;
   background: transparent;
   border: none;
   width: 100%;
   text-align: left;
 }
 
-aside a:hover, aside button:hover, aside a.active {
-  background-color: #1e293b !important;
-  color: #ffffff !important;
-}
-
-/* Área Principal de Contenido */
+/* 2. ÁREA DE CONTENIDO PRINCIPAL */
 main, .main-content {
-  flex: 1;
-  padding: 2rem;
-  background-color: #0b132b;
-  overflow-y: auto;
+  flex: 1 !important;
+  padding: 2rem 2.5rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.5rem !important;
+  background-color: #0b132b !important;
+  max-width: 1200px;
 }
 
-/* Header Superior */
+/* 3. HEADER SUPERIOR (BUSCADOR Y PERFIL A LA DERECHA) */
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin-bottom: 1rem !important;
+  position: static !important;
 }
 
-header input[type="text"] {
+/* Corregir la barra de búsqueda para que no flote en el medio */
+header input[type="text"], header input {
   background-color: #1e293b !important;
   color: #f8fafc !important;
   border: 1px solid #334155 !important;
-  border-radius: 0.75rem;
-  padding: 0.6rem 1rem;
-  width: 280px;
+  border-radius: 0.75rem !important;
+  padding: 0.6rem 1rem 0.6rem 2.5rem !important;
+  width: 280px !important;
+  position: static !important;
 }
 
-/* Saludo "Hola, Juan" y Encabezados */
-h1, h2, h3, h4 {
-  color: #ffffff !important;
-  font-weight: 700;
+/* Iconos de la derecha (Notificaciones y Perfil JP) */
+header div, header button {
+  position: static !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
 }
 
-h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-p { color: #94a3b8 !important; font-size: 0.95rem; }
-
-/* Contenedores y Tarjetas del Dashboard */
-.card, div[class*="bg-"] {
-  border-radius: 1rem;
-}
-
-/* Banner Principal ("No estás solo") estilo Prototipo */
-.banner-assist, div.bg-indigo-900, div[class*="bg-indigo"] {
+/* 4. BANNER "NO ESTÁS SOLO" */
+div.bg-indigo-900, div[class*="bg-indigo"], .banner-assist {
   background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%) !important;
   border: 1px solid #4338ca !important;
-  padding: 1.75rem !important;
   border-radius: 1.25rem !important;
-  margin: 1.5rem 0 !important;
+  padding: 2rem !important;
+  width: 100% !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3) !important;
 }
 
-.banner-assist h2, .banner-assist h3 {
-  color: #ffffff !important;
-}
-
-/* Tarjetas Informativas (Cuestionario, Chat, Reportes, Recursos) */
+/* 5. GRILLA DE TARJETAS (4 OPCIONES) */
 .grid, div.grid {
   display: grid !important;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+  grid-template-columns: repeat(4, 1fr) !important;
   gap: 1.25rem !important;
-  margin-top: 1.5rem !important;
+  width: 100% !important;
+  margin-top: 1rem !important;
 }
 
+@media (max-width: 1024px) {
+  .grid, div.grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* Tarjetas Blancas pulidas */
 .grid > div {
   background-color: #ffffff !important;
   color: #0f172a !important;
   padding: 1.5rem !important;
   border-radius: 1.25rem !important;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
-  transition: transform 0.2s;
-}
-
-.grid > div:hover {
-  transform: translateY(-3px);
+  min-height: 220px !important;
 }
 
 .grid > div h3, .grid > div h4 {
   color: #0f172a !important;
-  font-size: 1.1rem !important;
-  margin-bottom: 0.4rem !important;
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  margin: 0.5rem 0 !important;
 }
 
 .grid > div p {
   color: #64748b !important;
   font-size: 0.85rem !important;
-  margin-bottom: 1.25rem !important;
+  line-height: 1.4 !important;
 }
 
-/* Botones de las Tarjetas */
-button, .btn, a.btn {
+/* Botones morados limpios */
+.grid button, .grid a, button.bg-indigo-600 {
   background-color: #4f46e5 !important;
   color: #ffffff !important;
   border: none !important;
-  padding: 0.65rem 1.2rem !important;
+  padding: 0.7rem 1rem !important;
   border-radius: 0.75rem !important;
   font-weight: 600 !important;
-  font-size: 0.9rem !important;
-  cursor: pointer !important;
+  font-size: 0.875rem !important;
+  width: 100% !important;
   text-align: center !important;
-  text-decoration: none !important;
-  display: inline-block !important;
-  transition: background-color 0.2s, transform 0.1s !important;
-  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3) !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3) !important;
 }
 
-button:hover, .btn:hover {
-  background-color: #4338ca !important;
-  transform: translateY(-1px);
-}
-
-/* Clases de visibilidad */
+/* Visibilidad y utilidades */
 .hidden { display: none !important; }
-.flex { display: flex; }
