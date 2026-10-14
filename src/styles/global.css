@@ -1,6 +1,0 @@
-/* src/styles/global.css */
-@import "tailwindcss";
-
-.hidden {
-  display: none !important;
-}
