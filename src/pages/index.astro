@@ -4,8 +4,6 @@ import Login from '../components/Login.astro';
 import StudentDashboard from '../components/StudentDashboard.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Header from '../components/Header.astro';
-
-// Importación directa de los estilos globales
 import '../styles/global.css';
 ---
 
@@ -22,19 +20,32 @@ import '../styles/global.css';
 		<!-- 1. VISTA DE INICIO DE SESIÓN -->
 		<Login />
 
-		<!-- 2. VISTA PRINCIPAL DEL SISTEMA (Oculta hasta iniciar sesión) -->
-		<div id="app" class="hidden">
+		<!-- 2. VISTA PRINCIPAL (Oculta hasta iniciar sesión) -->
+		<div id="app" style="display: none; flex-direction: row; width: 100%; min-height: 100vh; background-color: #f8fafc;">
 			<!-- Barra lateral izquierda -->
 			<Sidebar />
 
 			<!-- Contenido principal a la derecha -->
-			<div class="main-content-wrapper">
+			<div class="main-content-wrapper" style="flex: 1; display: flex; flex-direction: column; min-height: 100vh; background-color: #f8fafc; overflow-y: auto;">
 				<Header />
 				
-				<main>
+				<main style="padding: 2rem 2.5rem; flex: 1;">
 					<StudentDashboard />
 				</main>
 			</div>
 		</div>
+
+		<script>
+			// Funcionalidad para el botón de cerrar sesión
+			document.addEventListener('click', (e) => {
+				const target = e.target as HTMLElement;
+				if (target.closest('#logout-btn')) {
+					const loginWrapper = document.getElementById('view-login-wrapper');
+					const appWrapper = document.getElementById('app');
+					if (loginWrapper) loginWrapper.style.setProperty('display', 'flex', 'important');
+					if (appWrapper) appWrapper.style.setProperty('display', 'none', 'important');
+				}
+			});
+		</script>
 	</body>
 </html>
