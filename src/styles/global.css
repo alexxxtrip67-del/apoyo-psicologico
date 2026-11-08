@@ -1,5 +1,5 @@
 /* ==========================================
-   ESTILOS EXACTOS DASHBOARD DE ESTUDIANTE
+   CORRECCIÓN DEFINITIVA DE DISEÑO
    ================================---------- */
 * {
   box-sizing: border-box;
@@ -8,147 +8,143 @@
 }
 
 body {
-  background-color: #f1f5f9 !important;
-  color: #0f172a !important;
+  background-color: #0b132b !important;
+  color: #f8fafc !important;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   min-height: 100vh;
 }
 
-#app {
+/* Contenedor principal de la pantalla de inicio */
+.login-page-wrapper {
   display: flex !important;
   flex-direction: row !important;
-  width: 100% !important;
   min-height: 100vh !important;
-  background-color: #f1f5f9 !important;
-}
-
-/* Sidebar lateral oscuro */
-aside, .sidebar {
-  width: 250px !important;
-  min-width: 250px !important;
-  background-color: #0b132b !important;
-  border-right: 1px solid #1c2541 !important;
-  padding: 1.5rem 1rem !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: space-between !important;
-}
-
-aside a, aside button {
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.75rem !important;
-  padding: 0.75rem 1rem !important;
-  color: #94a3b8 !important;
-  text-decoration: none !important;
-  border-radius: 0.75rem !important;
-  font-weight: 500 !important;
-  background: transparent !important;
-  border: none !important;
   width: 100% !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: radial-gradient(circle at top left, #1e1b4b 0%, #0b132b 70%) !important;
+  padding: 2.5rem !important;
+  gap: 4rem !important;
 }
 
-aside a.active, aside a:hover {
-  background-color: #4f46e5 !important;
-  color: #ffffff !important;
-}
-
-/* ÁREA PRINCIPAL EN FONDO CLARO */
-main, .main-content, #view-student-dashboard {
+/* Lado izquierdo: Bienvenida */
+.welcome-side {
   flex: 1 !important;
-  padding: 2rem 2.5rem !important;
-  background-color: #f8fafc !important;
+  max-width: 480px !important;
   display: flex !important;
   flex-direction: column !important;
   gap: 1.5rem !important;
 }
 
-/* Header superior */
-header {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  width: 100% !important;
-  position: static !important;
-  margin-bottom: 1rem !important;
+.welcome-side h1 {
+  font-size: 2.75rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  line-height: 1.2 !important;
 }
 
-header input {
+.welcome-side p {
+  color: #94a3b8 !important;
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
+}
+
+.info-card-box {
+  background-color: rgba(30, 41, 59, 0.7) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding: 1.25rem !important;
+  border-radius: 1rem !important;
+  color: #cbd5e1 !important;
+  font-size: 0.9rem !important;
+}
+
+/* Lado derecho: Tarjeta Blanca de Inicio de Sesión */
+.login-card {
   background-color: #ffffff !important;
   color: #0f172a !important;
-  border: 1px solid #e2e8f0 !important;
-  border-radius: 0.75rem !important;
-  padding: 0.6rem 1rem 0.6rem 2.5rem !important;
-  width: 300px !important;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
-}
-
-/* Banner Lila "No estás solo" */
-.banner-assist, div[class*="bg-indigo"] {
-  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%) !important;
-  border: 1px solid #a5b4fc !important;
-  border-radius: 1.25rem !important;
-  padding: 2rem !important;
+  padding: 2.5rem !important;
+  border-radius: 1.5rem !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
   width: 100% !important;
-  color: #1e1b4b !important;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1) !important;
+  max-width: 420px !important;
 }
 
-.banner-assist h2, .banner-assist h3 {
-  color: #1e1b4b !important;
-  font-size: 1.6rem !important;
-  font-weight: 800 !important;
+.login-card h2 {
+  color: #0f172a !important;
+  font-size: 1.75rem !important;
+  font-weight: 700 !important;
   margin-bottom: 0.5rem !important;
 }
 
-.banner-assist p {
-  color: #3730a3 !important;
+.login-card p {
+  color: #64748b !important;
+  font-size: 0.9rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+/* Pestañas de rol (Estudiante / Psicóloga) */
+.role-tabs {
+  display: flex !important;
+  background-color: #f1f5f9 !important;
+  padding: 0.35rem !important;
+  border-radius: 0.75rem !important;
+  margin-bottom: 1.5rem !important;
+  gap: 0.5rem !important;
+}
+
+.role-tabs button {
+  flex: 1 !important;
+  padding: 0.6rem !important;
+  border: none !important;
+  background: transparent !important;
+  color: #64748b !important;
+  font-weight: 600 !important;
+  border-radius: 0.5rem !important;
+  cursor: pointer !important;
+  transition: all 0.2s !important;
+}
+
+.role-tabs button.active {
+  background-color: #4f46e5 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3) !important;
+}
+
+/* Inputs de formulario */
+.login-card input[type="text"],
+.login-card input[type="password"] {
+  width: 100% !important;
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 0.75rem !important;
+  padding: 0.8rem 1rem 0.8rem 2.5rem !important;
+  font-size: 0.95rem !important;
+  outline: none !important;
   margin-bottom: 1.25rem !important;
 }
 
-/* Grilla de tarjetas blancas */
-div.grid {
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important;
-  gap: 1.25rem !important;
+.login-card input:focus {
+  border-color: #4f46e5 !important;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15) !important;
+}
+
+/* Botón Entrar */
+.btn-submit {
   width: 100% !important;
-}
-
-div.grid > div {
-  background-color: #ffffff !important;
-  color: #0f172a !important;
-  padding: 1.5rem !important;
-  border-radius: 1.25rem !important;
-  border: 1px solid #f1f5f9 !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: space-between !important;
-  min-height: 220px !important;
-}
-
-div.grid > div h3, div.grid > div h4 {
-  color: #0f172a !important;
-  font-size: 1.1rem !important;
-  font-weight: 700 !important;
-}
-
-div.grid > div p {
-  color: #64748b !important;
-  font-size: 0.875rem !important;
-}
-
-div.grid button, div.grid a {
   background-color: #4f46e5 !important;
   color: #ffffff !important;
   border: none !important;
-  padding: 0.75rem 1rem !important;
+  padding: 0.85rem !important;
   border-radius: 0.75rem !important;
-  font-weight: 600 !important;
-  text-align: center !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
   cursor: pointer !important;
-  width: 100% !important;
-  text-decoration: none !important;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4) !important;
+}
+
+.btn-submit:hover {
+  background-color: #4338ca !important;
 }
 
 .hidden { display: none !important; }
