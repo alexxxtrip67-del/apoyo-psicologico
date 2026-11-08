@@ -1,5 +1,5 @@
 /* ==========================================
-   REGLAS ESPECÍFICAS DE ALTA FIDELIDAD
+   DISEÑO IDÉNTICO AL PROTOTIPO (LOGIN Y PANEL)
    ================================---------- */
 
 * {
@@ -15,144 +15,155 @@ body {
   min-height: 100vh;
 }
 
-/* 1. LAYOUT PRINCIPAL Y SIDEBAR */
-#app {
+/* Contenedor principal de la página de inicio (Pantalla dividida) */
+.login-page-wrapper, main {
   display: flex !important;
   flex-direction: row !important;
-  width: 100% !important;
   min-height: 100vh !important;
-}
-
-#app > aside, #app > div:first-child {
-  width: 250px !important;
-  min-width: 250px !important;
-  background-color: #0f172a !important;
-  border-right: 1px solid #1e293b !important;
-  padding: 1.5rem 1rem !important;
-}
-
-#app > main, #app > div:last-child {
-  flex: 1 !important;
+  width: 100% !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: radial-gradient(circle at top left, #1e1b4b 0%, #0b132b 70%) !important;
   padding: 2rem !important;
-  background-color: #0b132b !important;
+  gap: 3rem !important;
+}
+
+/* Lado izquierdo: Bienvenida y texto de apoyo */
+.welcome-side {
+  flex: 1 !important;
+  max-width: 500px !important;
   display: flex !important;
   flex-direction: column !important;
   gap: 1.5rem !important;
 }
 
-/* 2. CORRECCIÓN DEL HEADER (BUSCADOR ARRIBA) */
-header {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  width: 100% !important;
-  position: static !important;
-  margin-bottom: 1.5rem !important;
-}
-
-header form, header div:first-child {
-  position: static !important;
-  width: 300px !important;
-}
-
-header input {
-  width: 100% !important;
-  position: static !important;
-  background-color: #1e293b !important;
+.welcome-side h1 {
+  font-size: 2.75rem !important;
+  font-weight: 800 !important;
   color: #ffffff !important;
-  border: 1px solid #334155 !important;
-  border-radius: 0.75rem !important;
-  padding: 0.65rem 1rem 0.65rem 2.5rem !important;
+  line-height: 1.2 !important;
 }
 
-header div.flex, header div:last-child {
-  position: static !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 0.75rem !important;
+.welcome-side p {
+  color: #94a3b8 !important;
+  font-size: 1.05rem !important;
+  line-height: 1.6 !important;
 }
 
-/* 3. BANNER "NO ESTÁS SOLO" DEGRADADO */
-div.bg-indigo-900, div[class*="bg-indigo"] {
-  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%) !important;
-  border: 1px solid #4338ca !important;
-  border-radius: 1.25rem !important;
-  padding: 2rem !important;
+/* Tarjeta de información adicional abajo del texto */
+.info-card-box {
+  background-color: rgba(30, 41, 59, 0.7) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding: 1.25rem !important;
+  border-radius: 1rem !important;
+  color: #cbd5e1 !important;
+  font-size: 0.9rem !important;
+}
+
+/* Lado derecho: Tarjeta Blanca de Inicio de Sesión */
+.login-card, .card-login, form.login-box {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  padding: 2.5rem !important;
+  border-radius: 1.5rem !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
   width: 100% !important;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3) !important;
+  max-width: 420px !important;
 }
 
-div.bg-indigo-900 h2, div[class*="bg-indigo"] h2 {
-  color: #ffffff !important;
-  font-size: 1.5rem !important;
+.login-card h2, h2 {
+  color: #0f172a !important;
+  font-size: 1.75rem !important;
   font-weight: 700 !important;
   margin-bottom: 0.5rem !important;
 }
 
-div.bg-indigo-900 p, div[class*="bg-indigo"] p {
-  color: #c7d2fe !important;
-  margin-bottom: 1.25rem !important;
-}
-
-/* 4. GRILLA Y TARJETAS BLANCAS (IDÉNTICAS AL PROTOTIPO) */
-div.grid {
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important;
-  gap: 1.25rem !important;
-  width: 100% !important;
-}
-
-@media (max-width: 1024px) {
-  div.grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-}
-
-div.grid > div {
-  background-color: #ffffff !important;
-  color: #0f172a !important;
-  padding: 1.5rem !important;
-  border-radius: 1.25rem !important;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25) !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: space-between !important;
-  min-height: 220px !important;
-}
-
-div.grid > div h3, div.grid > div h4 {
-  color: #0f172a !important;
-  font-size: 1.1rem !important;
-  font-weight: 700 !important;
-  margin: 0.5rem 0 !important;
-}
-
-div.grid > div p {
+.login-card p, .login-subtitle {
   color: #64748b !important;
-  font-size: 0.875rem !important;
-  line-height: 1.4 !important;
+  font-size: 0.9rem !important;
+  margin-bottom: 1.5rem !important;
 }
 
-/* Botones morados rectangulares dentro de las tarjetas */
-div.grid button, div.grid a, div.grid input[type="button"] {
+/* Botones de selección de rol (Estudiante / Psicóloga) */
+.role-tabs {
+  display: flex !important;
+  background-color: #f1f5f9 !important;
+  padding: 0.35rem !important;
+  border-radius: 0.75rem !important;
+  margin-bottom: 1.5rem !important;
+  gap: 0.5rem !important;
+}
+
+.role-tabs button {
+  flex: 1 !important;
+  padding: 0.6rem !important;
+  border: none !important;
+  background: transparent !important;
+  color: #64748b !important;
+  font-weight: 600 !important;
+  border-radius: 0.5rem !important;
+  cursor: pointer !important;
+  transition: all 0.2s !important;
+}
+
+.role-tabs button.active, .role-tabs button:hover {
+  background-color: #4f46e5 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3) !important;
+}
+
+/* Inputs de Usuario (ej: rider.espinoza) y Cédula */
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  width: 100% !important;
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 0.75rem !important;
+  padding: 0.8rem 1rem !important;
+  font-size: 0.95rem !important;
+  outline: none !important;
+  margin-bottom: 1.25rem !important;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+}
+
+input:focus {
+  border-color: #4f46e5 !important;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15) !important;
+}
+
+/* Botón de Entrar */
+button[type="submit"], .btn-submit {
+  width: 100% !important;
   background-color: #4f46e5 !important;
   color: #ffffff !important;
   border: none !important;
-  padding: 0.75rem 1rem !important;
+  padding: 0.85rem !important;
   border-radius: 0.75rem !important;
-  font-weight: 600 !important;
-  font-size: 0.875rem !important;
-  width: 100% !important;
-  text-align: center !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
   cursor: pointer !important;
-  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3) !important;
-  display: block !important;
-  text-decoration: none !important;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.4) !important;
+  transition: background-color 0.2s, transform 0.1s !important;
 }
 
-div.grid button:hover, div.grid a:hover {
+button[type="submit"]:hover {
   background-color: #4338ca !important;
+  transform: translateY(-1px) !important;
 }
 
-/* Ocultar elementos auxiliares */
+/* Utilidades */
 .hidden { display: none !important; }
+
+/* Adaptación para celulares */
+@media (max-width: 900px) {
+  .login-page-wrapper, main {
+    flex-direction: column !important;
+    padding: 1rem !important;
+  }
+  .welcome-side {
+    text-align: center !important;
+    max-width: 100% !important;
+  }
+}
