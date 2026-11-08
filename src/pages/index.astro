@@ -1,128 +1,61 @@
 ---
-import '../styles/global.css';
-
-import Sidebar from '../components/Sidebar.astro';
-import Header from '../components/Header.astro';
+// src/pages/index.astro
 import Login from '../components/Login.astro';
 import StudentDashboard from '../components/StudentDashboard.astro';
-import Quiz from '../components/Quiz.astro';
-import Chat from '../components/Chat.astro';
-import Reports from '../components/Reports.astro';
-import PsychDashboard from '../components/PsychDashboard.astro';
+import Sidebar from '../components/Sidebar.astro';
+import Header from '../components/Header.astro';
 ---
 
-<!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Apoyo Psicológico - Tu bienestar también importa</title>
-    
-    <!-- CDN de Tailwind de respaldo -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  </head>
-  <body class="bg-[#0b132b] text-slate-100 font-sans min-h-screen">
-    
-    <!-- VISTA LOGIN -->
-    <div id="view-login-wrapper">
-      <Login />
-    </div>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Apoyo Psicológico - Tu bienestar también importa</title>
+		<!-- FontAwesome para los íconos -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+	</head>
+	<body>
+		<!-- 1. VISTA DE INICIO DE SESIÓN -->
+		<Login />
 
-    <!-- CONTENEDOR PRINCIPAL -->
-    <div id="app" class="flex min-h-screen hidden">
-      <Sidebar />
-      <main class="flex-1 flex flex-col min-w-0 bg-[#0b132b] overflow-y-auto">
-        <Header />
-        
-        <div id="view-student-dashboard" class="view-section p-6 space-y-6 hidden"><StudentDashboard /></div>
-        <div id="view-student-quiz" class="view-section p-6 hidden"><Quiz /></div>
-        <div id="view-student-chat" class="view-section p-6 hidden"><Chat /></div>
-        <div id="view-student-reports" class="view-section p-6 hidden"><Reports /></div>
-        <div id="view-psych-dashboard" class="view-section p-6 hidden"><PsychDashboard /></div>
-      </main>
-    </div>
+		<!-- 2. VISTA PRINCIPAL DEL SISTEMA (Oculta por defecto hasta iniciar sesión) -->
+		<div id="app" class="hidden">
+			<!-- Barra lateral izquierda -->
+			<Sidebar />
 
-    <script is:inline>
-      let currentRole = 'student';
+			<!-- Contenido principal a la derecha -->
+			<div class="main-content-wrapper">
+				<Header />
+				
+				<main>
+					<StudentDashboard />
+				</main>
+			</div>
+		</div>
 
-      function setRole(role) {
-        currentRole = role;
-        const studentBtn = document.getElementById('role-student-btn');
-        const psychBtn = document.getElementById('role-psych-btn');
+		<style>
+			/* Asegurar que la estructura principal ocupe toda la pantalla de forma ordenada */
+			#app {
+				display: none; /* Se muestra con JS al hacer login */
+				min-height: 100vh;
+				width: 100%;
+				background-color: #f8fafc;
+			}
 
-        if (role === 'student') {
-          if (studentBtn) studentBtn.className = "py-2 rounded-lg bg-indigo-600 text-white transition";
-          if (psychBtn) psychBtn.className = "py-2 rounded-lg text-slate-400 hover:text-white transition";
-        } else {
-          if (psychBtn) psychBtn.className = "py-2 rounded-lg bg-indigo-600 text-white transition";
-          if (studentBtn) studentBtn.className = "py-2 rounded-lg text-slate-400 hover:text-white transition";
-        }
-      }
+			.main-content-wrapper {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				min-height: 100vh;
+				background-color: #f8fafc;
+				overflow-y: auto;
+			}
 
-      function handleLogin(e) {
-        e.preventDefault();
-        document.getElementById('view-login-wrapper').classList.add('hidden');
-        document.getElementById('app').classList.remove('hidden');
-
-        if (currentRole === 'student') {
-          document.getElementById('nav-student').classList.remove('hidden');
-          document.getElementById('nav-psychologist').classList.add('hidden');
-          document.getElementById('user-name').innerText = "Juan Pérez";
-          document.getElementById('user-role').innerText = "Estudiante";
-          document.getElementById('user-avatar').innerText = "JP";
-          switchView('student-dashboard');
-        } else {
-          document.getElementById('nav-student').classList.add('hidden');
-          document.getElementById('nav-psychologist').classList.remove('hidden');
-          document.getElementById('user-name').innerText = "Dra. Laura Gómez";
-          document.getElementById('user-role').innerText = "Psicóloga";
-          document.getElementById('user-avatar').innerText = "LG";
-          switchView('psych-dashboard');
-        }
-      }
-
-      function logout() {
-        document.getElementById('app').classList.add('hidden');
-        document.getElementById('view-login-wrapper').classList.remove('hidden');
-      }
-
-      function switchView(viewId) {
-        document.querySelectorAll('.view-section').forEach(sec => sec.classList.add('hidden'));
-        const targetView = document.getElementById(`view-${viewId}`);
-        if (targetView) targetView.classList.remove('hidden');
-      }
-
-      function sendMessage() {
-        const input = document.getElementById('chat-input');
-        const chatBox = document.getElementById('chat-box');
-        if (!input || !input.value.trim()) return;
-
-        const userText = input.value;
-        chatBox.innerHTML += `
-          <div class="flex items-start justify-end space-x-3">
-            <div class="bg-indigo-600 p-3.5 rounded-2xl max-w-md text-xs text-white">
-              ${userText}
-            </div>
-          </div>
-        `;
-        input.value = '';
-        chatBox.scrollTop = chatBox.scrollHeight;
-
-        setTimeout(() => {
-          chatBox.innerHTML += `
-            <div class="flex items-start space-x-3">
-              <div class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs font-bold">IA</div>
-              <div class="bg-[#1c2541] p-3.5 rounded-2xl max-w-md text-xs text-slate-200 border border-slate-700/50">
-                Entiendo cómo te sientes. Recuerda que tomarte un tiempo para respirar y reflexionar sobre esto ayuda bastante. ¿Te gustaría que exploremos más a fondo qué lo genera?
-              </div>
-            </div>
-          `;
-          chatBox.scrollTop = chatBox.scrollHeight;
-        }, 1000);
-      }
-    </script>
-  </body>
+			main {
+				padding: 2rem 2.5rem;
+				flex: 1;
+			}
+		</style>
+	</body>
 </html>
