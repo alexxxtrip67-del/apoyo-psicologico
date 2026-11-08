@@ -12,11 +12,14 @@
     <div class="banner-assist" style="background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%); border: 1px solid #c7d2fe; border-radius: 1.25rem; padding: 2.25rem; margin: 1.5rem 0; color: #1e1b4b;">
       <h3>Asistencia Emocional</h3>
       <h2 style="font-size: 1.6rem; font-weight: 800; margin: 0.5rem 0;">No estás solo</h2>
-      <p style="color: #4338ca; margin-bottom: 1.25rem;">Si necesitas hablar, puedes hacerlo con nuestro asistente de IA o directamente con la psicóloga de la institución.</p>
-      <button type="button" class="nav-trigger" data-target="chat" style="background: #4f46e5; color: #ffffff; border: none; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer;">Ir al chat con IA &rarr;</button>
+      <p style="color: #4338ca; margin-bottom: 1.25rem;">Si necesitas hablar, puedes hacerlo con nuestro asistente de IA o agendar una cita directa con la psicóloga de la institución.</p>
+      <div style="display: flex; gap: 1rem;">
+        <button type="button" class="nav-trigger" data-target="chat" style="background: #4f46e5; color: #ffffff; border: none; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer;">Ir al chat con IA &rarr;</button>
+        <button type="button" class="nav-trigger" data-target="citas" style="background: #ffffff; color: #4f46e5; border: 1px solid #4f46e5; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer;">Agendar con Psicóloga</button>
+      </div>
     </div>
 
-    <!-- Grilla de 4 tarjetas -->
+    <!-- Grilla de Tarjetas -->
     <div class="grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 1.5rem;">
       <div style="background: #ffffff; padding: 1.75rem 1.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between; min-height: 220px; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
         <div>
@@ -29,11 +32,11 @@
 
       <div style="background: #ffffff; padding: 1.75rem 1.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between; min-height: 220px; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
         <div>
-          <div style="color: #4f46e5; font-size: 1.25rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-robot"></i></div>
-          <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.4rem;">Chat con IA</h3>
-          <p style="font-size: 0.85rem; color: #64748b;">Habla con nuestro asistente cuando lo necesites.</p>
+          <div style="color: #4f46e5; font-size: 1.25rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-calendar-check"></i></div>
+          <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.4rem;">Citas disponibles</h3>
+          <p style="font-size: 0.85rem; color: #64748b;">Reserva tu horario con la psicóloga.</p>
         </div>
-        <button type="button" class="nav-trigger" data-target="chat" style="background: #4f46e5; color: white; border: none; padding: 0.65rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; width: 100%;">Abrir chat</button>
+        <button type="button" class="nav-trigger" data-target="citas" style="background: #4f46e5; color: white; border: none; padding: 0.65rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; width: 100%;">Agendar cita</button>
       </div>
 
       <div style="background: #ffffff; padding: 1.75rem 1.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between; min-height: 220px; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
@@ -47,19 +50,19 @@
 
       <div style="background: #ffffff; padding: 1.75rem 1.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between; min-height: 220px; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
         <div>
-          <div style="color: #4f46e5; font-size: 1.25rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-book-open"></i></div>
-          <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.4rem;">Recursos</h3>
-          <p style="font-size: 0.85rem; color: #64748b;">Consejos, guías y material de apoyo.</p>
+          <div style="color: #4f46e5; font-size: 1.25rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-robot"></i></div>
+          <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.4rem;">Chat con IA</h3>
+          <p style="font-size: 0.85rem; color: #64748b;">Habla con nuestro asistente cuando quieras.</p>
         </div>
-        <button type="button" onclick="alert('Guías de bienestar emocional y técnicas de respiración disponibles.')" style="background: #4f46e5; color: white; border: none; padding: 0.65rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; width: 100%;">Ver recursos</button>
+        <button type="button" class="nav-trigger" data-target="chat" style="background: #4f46e5; color: white; border: none; padding: 0.65rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; width: 100%;">Abrir chat</button>
       </div>
     </div>
   </div>
 
-  <!-- SECCIÓN 2: CUESTIONARIO EMOCIONAL (1-10 PREGUNTAS COHERENTES) -->
+  <!-- SECCIÓN 2: CUESTIONARIO EMOCIONAL DE 10 PREGUNTAS -->
   <div id="section-cuestionario" class="dashboard-section hidden">
     <h2>Cuestionario de bienestar emocional</h2>
-    <p style="margin-bottom: 1.5rem; color: #64748b;">Responde con sinceridad. Esta evaluación consta de 10 preguntas clave para conocer tu estado actual.</p>
+    <p style="margin-bottom: 1.5rem; color: #64748b;">Responde con sinceridad. Esta evaluación consta de 10 preguntas para analizar tu estado emocional actual.</p>
     
     <div style="background: #ffffff; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
@@ -71,9 +74,8 @@
 
       <h3 id="question-title" style="font-size: 1.25rem; color: #0f172a; margin-bottom: 1.5rem;">Cargando pregunta...</h3>
 
-      <!-- Opciones dinámicas lógicas -->
       <div id="options-container" style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem;">
-        <!-- Se inyectan con JavaScript -->
+        <!-- Inyección JS -->
       </div>
 
       <div style="display: flex; justify-content: space-between;">
@@ -83,7 +85,30 @@
     </div>
   </div>
 
-  <!-- SECCIÓN 3: CHAT CON IA -->
+  <!-- SECCIÓN 3: CITAS CON LA PSICÓLOGA -->
+  <div id="section-citas" class="dashboard-section hidden">
+    <h2>Agendamiento de Citas con Psicología</h2>
+    <p style="margin-bottom: 1.5rem; color: #64748b;">Selecciona un horario disponible configurado por la psicóloga institucional para recibir atención personalizada.</p>
+
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;">
+      <div style="background: #ffffff; padding: 2rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
+        <h3 style="font-size: 1.15rem; color: #0f172a; margin-bottom: 1.25rem;"><i class="fa-solid fa-clock" style="color: #4f46e5; margin-right: 0.5rem;"></i> Horarios Libres Disponibles</h3>
+        <div id="slots-container" style="display: flex; flex-direction: column; gap: 0.85rem;">
+          <!-- Inyección dinámica de horarios -->
+        </div>
+      </div>
+
+      <!-- Citas agendadas del alumno -->
+      <div style="background: #ffffff; padding: 2rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
+        <h3 style="font-size: 1.15rem; color: #0f172a; margin-bottom: 1.25rem;"><i class="fa-solid fa-calendar-check" style="color: #10b981; margin-right: 0.5rem;"></i> Tus Citas Reservadas</h3>
+        <div id="my-appointments" style="display: flex; flex-direction: column; gap: 1rem;">
+          <p style="color: #94a3b8; font-size: 0.875rem;">Aún no has reservado una cita este mes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECCIÓN 4: CHAT CON IA -->
   <div id="section-chat" class="dashboard-section hidden">
     <h2>Chat con IA</h2>
     <p style="margin-bottom: 1.5rem; color: #64748b;">Aquí puedes hablar libremente. Estoy para escucharte.</p>
@@ -93,7 +118,7 @@
         <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
           <div style="background: #e0e7ff; color: #4f46e5; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;"><i class="fa-solid fa-robot"></i></div>
           <div style="background: #f1f5f9; padding: 1rem; border-radius: 1rem; max-width: 75%; color: #0f172a; font-size: 0.95rem;">
-            Hola, soy tu asistente virtual. Estoy aquí para escucharte y apoyarte. Puedes contarme lo que sientes o preguntarme lo que necesites[cite: 17].
+            Hola, soy tu asistente virtual. Estoy aquí para escucharte y apoyarte. Puedes contarme lo que sientes o preguntarme lo que necesites.
           </div>
         </div>
       </div>
@@ -105,7 +130,7 @@
     </div>
   </div>
 
-  <!-- SECCIÓN 4: MIS REPORTES (CALIFICACIÓN AUTOMÁTICA Y FECHAS) -->
+  <!-- SECCIÓN 5: MIS REPORTES -->
   <div id="section-reportes" class="dashboard-section hidden">
     <h2>Resultados de tu cuestionario</h2>
     <p style="margin-bottom: 1.5rem; color: #64748b;">Aquí puedes ver el análisis de tu última evaluación y recomendaciones personalizadas.</p>
@@ -122,9 +147,9 @@
       <div style="background: #ffffff; padding: 1.75rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
         <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.75rem;">Recomendaciones</h3>
         <ul id="report-recommendations" style="padding-left: 1.25rem; color: #64748b; font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.4rem;">
-          <li>Mantén una buena rutina de sueño[cite: 18].</li>
-          <li>Realiza actividades físicas o recreativas[cite: 18].</li>
-          <li>Acude al chat con IA ante cualquier duda.</li>
+          <li>Mantén una buena rutina de sueño.</li>
+          <li>Realiza actividades físicas o recreativas.</li>
+          <li>Acude a agendar una cita si requieres desahogarte.</li>
         </ul>
       </div>
     </div>
@@ -143,34 +168,27 @@
           <tr style="border-bottom: 1px solid #f1f5f9;">
             <td style="padding: 1rem 1.5rem;" id="table-date-1">08/11/2026</td>
             <td style="padding: 1rem 1.5rem; color: #10b981; font-weight: 600;" id="table-status-1">Estable</td>
-            <td style="padding: 1rem 1.5rem; text-align: right;"><button onclick="alert('Reporte actual generado tras completar el cuestionario.')" style="background: #f1f5f9; color: #4f46e5; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Ver detalles</button></td>
-          </tr>
-          <tr style="border-bottom: 1px solid #f1f5f9;">
-            <td style="padding: 1rem 1.5rem;">03/10/2026</td>
-            <td style="padding: 1rem 1.5rem; color: #f59e0b; font-weight: 600;">Con signos de estrés</td>
-            <td style="padding: 1rem 1.5rem; text-align: right;"><button onclick="alert('Detalles del reporte del 03/10/2026')" style="background: #f1f5f9; color: #4f46e5; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Ver detalles</button></td>
-          </tr>
-          <tr>
-            <td style="padding: 1rem 1.5rem;">15/09/2026</td>
-            <td style="padding: 1rem 1.5rem; color: #10b981; font-weight: 600;">Estable</td>
-            <td style="padding: 1rem 1.5rem; text-align: right;"><button onclick="alert('Detalles del reporte del 15/09/2026')" style="background: #f1f5f9; color: #4f46e5; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Ver detalles</button></td>
+            <td style="padding: 1rem 1.5rem; text-align: right;"><button onclick="alert('Reporte generado tras completar el cuestionario.')" style="background: #f1f5f9; color: #4f46e5; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Ver detalles</button></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <!-- SECCIÓN 5: PERFIL -->
+  <!-- SECCIÓN 6: PERFIL CON SUBIDA DE FOTO REAL -->
   <div id="section-perfil" class="dashboard-section hidden">
     <h2>Mi perfil</h2>
-    <p style="margin-bottom: 1.5rem; color: #64748b;">Administra tu información personal y datos de cuenta.</p>
+    <p style="margin-bottom: 1.5rem; color: #64748b;">Administra tu información personal y sube tu foto de perfil real.</p>
 
     <div style="background: #ffffff; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; display: flex; gap: 3rem; align-items: flex-start; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
       <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
-        <div id="profile-avatar-large" style="width: 100px; height: 100px; background: #4f46e5; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold;">
+        <!-- Avatar circular con imagen o iniciales -->
+        <div id="profile-avatar-large" style="width: 105px; height: 105px; background: #4f46e5; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: bold; overflow: hidden; border: 3px solid #e0e7ff;">
           JP
         </div>
-        <button type="button" onclick="alert('Función para actualizar foto de perfil')" style="background: #ffffff; color: #4f46e5; border: 1px solid #4f46e5; padding: 0.5rem 1rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; font-size: 0.85rem;">Cambiar foto</button>
+        <!-- Input de archivo oculto -->
+        <input type="file" id="photo-input" accept="image/*" style="display: none;" />
+        <button type="button" id="change-photo-btn" style="background: #ffffff; color: #4f46e5; border: 1px solid #4f46e5; padding: 0.5rem 1rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; font-size: 0.85rem;">Cambiar foto</button>
       </div>
 
       <form id="profile-form" style="flex: 1; display: flex; flex-direction: column; gap: 1.25rem;">
@@ -197,7 +215,7 @@
 </div>
 
 <script>
-  // Control de secciones
+  // Cambiar secciones
   function switchDashboardSection(targetId) {
     document.querySelectorAll('.dashboard-section').forEach(sec => sec.classList.add('hidden'));
     const target = document.getElementById(`section-${targetId}`);
@@ -227,18 +245,18 @@
     switchDashboardSection(e.detail);
   }) as EventListener);
 
-  // --- CUESTIONARIO DE 10 PREGUNTAS CLAVE ---
+  // --- 10 PREGUNTAS CLAVE DEL CUESTIONARIO ---
   const questionsList = [
     { q: "¿Con qué frecuencia te sientes abrumado/a por las tareas escolares o exámenes?", options: ["Nunca", "Rara vez", "A veces", "Frecuentemente", "Siempre"], weights: [1, 2, 3, 4, 5] },
     { q: "¿Cómo calificarías tu calidad de sueño y descanso durante las últimas dos semanas?", options: ["Excelente", "Buena", "Regular", "Mala", "Muy mala"], weights: [1, 2, 3, 4, 5] },
     { q: "¿Te cuesta concentrarte o mantener la atención en tus clases habituales?", options: ["Nunca", "Rara vez", "A veces", "Frecuentemente", "Siempre"], weights: [1, 2, 3, 4, 5] },
-    { q: "¿Sientes que cuentas con apoyo emocional de amigos o familiares cercanos?", options: ["Siempre", "Frecuentemente", "A veces", "Rara vez", "Nunca"], weights: [5, 4, 3, 2, 1] }, // Inversa
-    { q: "¿Experimentas dolores de cabeza, tensión muscular ofatiga sin causa médica?", options: ["Nunca", "Rara vez", "A veces", "Frecuentemente", "Siempre"], weights: [1, 2, 3, 4, 5] },
-    { q: "¿Disfrutas realizando tus actividades diarias y pasatiempos favoritos?", options: ["Siempre", "Frecuentemente", "A veces", "Rara vez", "Nunca"], weights: [5, 4, 3, 2, 1] }, // Inversa
+    { q: "¿Sientes que cuentas con apoyo emocional de amigos o familiares cercanos?", options: ["Siempre", "Frecuentemente", "A veces", "Rara vez", "Nunca"], weights: [5, 4, 3, 2, 1] },
+    { q: "¿Experimentas dolores de cabeza, tensión muscular o fatiga sin causa médica?", options: ["Nunca", "Rara vez", "A veces", "Frecuentemente", "Siempre"], weights: [1, 2, 3, 4, 5] },
+    { q: "¿Disfrutas realizando tus actividades diarias y pasatiempos favoritos?", options: ["Siempre", "Frecuentemente", "A veces", "Rara vez", "Nunca"], weights: [5, 4, 3, 2, 1] },
     { q: "¿Te sientes irritable, molesto/a o impaciente con facilidad últimamente?", options: ["Nunca", "Rara vez", "A veces", "Frecuentemente", "Siempre"], weights: [1, 2, 3, 4, 5] },
-    { q: "¿Te consideras capaz de manejar los problemas cotidianos de forma adecuada?", options: ["Siempre", "Frecuentemente", "A veces", "Rara vez", "Nunca"], weights: [5, 4, 3, 2, 1] }, // Inversa
+    { q: "¿Te consideras capaz de manejar los problemas cotidianos de forma adecuada?", options: ["Siempre", "Frecuentemente", "A veces", "Rara vez", "Nunca"], weights: [5, 4, 3, 2, 1] },
     { q: "¿Has sentido tristeza profunda o falta de motivación sin motivo aparente?", options: ["Nunca", "Rara vez", "A veces", "Frecuentemente", "Siempre"], weights: [1, 2, 3, 4, 5] },
-    { q: "¿Te sientes optimista y con expectativas positivas sobre tu futuro?", options: ["Siempre", "Frecuentemente", "A veces", "Rara vez", "Nunca"], weights: [5, 4, 3, 2, 1] }  // Inversa
+    { q: "¿Te sientes optimista y con expectativas positivas sobre tu futuro?", options: ["Siempre", "Frecuentemente", "A veces", "Rara vez", "Nunca"], weights: [5, 4, 3, 2, 1] }
   ];
 
   let currentQIdx = 0;
@@ -288,7 +306,6 @@
       currentQIdx++;
       renderQuestion();
     } else {
-      // Calcular puntaje total y actualizar reportes automáticamente
       calculateAndSaveReport();
       switchDashboardSection('reportes');
       currentQIdx = 0;
@@ -317,9 +334,9 @@
 
     if (totalScore <= 20) {
       if (statusTitle) statusTitle.textContent = "Tu estado emocional se encuentra en un rango muy estable.";
-      if (statusDesc) statusDesc.textContent = "¡Excelente trabajo! Posees buenos mecanismos de afrontamiento y bienestar.";
+      if (statusDesc) statusDesc.textContent = "¡Excelente trabajo! Posees buenos mecanismos de afrontamiento.";
       if (reportIcon) { reportIcon.innerHTML = '<i class="fa-solid fa-face-laugh-beam"></i>'; reportIcon.style.color = "#10b981"; }
-      if (tableStatus1) { tableStatus1.textContent = "Estable y Óptimo"; tableStatus1.style.color = "#10b981"; }
+      if (tableStatus1) { tableStatus1.textContent = "Estable u Óptimo"; tableStatus1.style.color = "#10b981"; }
     } else if (totalScore <= 35) {
       if (statusTitle) statusTitle.textContent = "Tu estado emocional es estable con signos leves de estrés.";
       if (statusDesc) statusDesc.textContent = "Mantén rutinas saludables de descanso y realiza actividades recreativas.";
@@ -327,17 +344,73 @@
       if (tableStatus1) { tableStatus1.textContent = "Estable"; tableStatus1.style.color = "#3b82f6"; }
     } else {
       if (statusTitle) statusTitle.textContent = "Se detectaron signos moderados de estrés o ansiedad.";
-      if (statusDesc) statusDesc.textContent = "Te sugerimos conversar con nuestra asistente de IA o agendar con la psicóloga.";
+      if (statusDesc) statusDesc.textContent = "Te sugerimos agendar una cita directa con la psicóloga.";
       if (reportIcon) { reportIcon.innerHTML = '<i class="fa-solid fa-face-frown"></i>'; reportIcon.style.color = "#f59e0b"; }
       if (tableStatus1) { tableStatus1.textContent = "Con signos de estrés"; tableStatus1.style.color = "#f59e0b"; }
     }
-    alert('¡Cuestionario completado con éxito! Revisa tus resultados en la sección Mis Reportes.');
+    alert('¡Cuestionario completado! Tu evaluación se ha registrado en Mis Reportes.');
   }
 
-  // Inicializar primera pregunta
   renderQuestion();
 
-  // Chat con IA interactivo
+  // --- LÓGICA DE CITAS LIBRES DE LA PSICÓLOGA ---
+  const availableSlots = [
+    { id: 1, date: "Martes 10 de Noviembre", time: "10:00 AM - 10:45 AM", mode: "Presencial - Cubículo 2" },
+    { id: 2, date: "Martes 10 de Noviembre", time: "03:00 PM - 03:45 PM", mode: "Virtual - Zoom" },
+    { id: 3, date: "Jueves 12 de Noviembre", time: "11:00 AM - 11:45 AM", mode: "Presencial - Cubículo 2" },
+    { id: 4, date: "Viernes 13 de Noviembre", time: "09:00 AM - 09:45 AM", mode: "Virtual - Zoom" }
+  ];
+
+  function renderSlots() {
+    const container = document.getElementById('slots-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    if (availableSlots.length === 0) {
+      container.innerHTML = '<p style="color: #64748b; font-size: 0.9rem;">No hay más horarios disponibles por esta semana.</p>';
+      return;
+    }
+
+    availableSlots.forEach(slot => {
+      const card = document.createElement('div');
+      card.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; background: #f8fafc;";
+      card.innerHTML = `
+        <div>
+          <div style="font-weight: 700; color: #0f172a; font-size: 0.95rem;">${slot.date}</div>
+          <div style="font-size: 0.85rem; color: #4f46e5; font-weight: 600; margin-top: 0.2rem;">${slot.time}</div>
+          <div style="font-size: 0.75rem; color: #64748b; margin-top: 0.1rem;">${slot.mode}</div>
+        </div>
+        <button onclick="bookSlot(${slot.id})" style="background: #4f46e5; color: white; border: none; padding: 0.6rem 1.1rem; border-radius: 0.6rem; font-weight: 600; cursor: pointer; font-size: 0.85rem;">Reservar cita</button>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  (window as any).bookSlot = function(id: number) {
+    const idx = availableSlots.findIndex(s => s.id === id);
+    if (idx !== -1) {
+      const booked = availableSlots.splice(idx, 1)[0];
+      renderSlots();
+
+      const myAppContainer = document.getElementById('my-appointments');
+      if (myAppContainer) {
+        if (myAppContainer.querySelector('p')) myAppContainer.innerHTML = '';
+        const item = document.createElement('div');
+        item.style.cssText = "padding: 1rem; background: #e0e7ff; border: 1px solid #c7d2fe; border-radius: 0.75rem; color: #1e1b4b;";
+        item.innerHTML = `
+          <div style="font-weight: 700; font-size: 0.9rem;">${booked.date}</div>
+          <div style="font-size: 0.85rem; color: #4f46e5; font-weight: 600;">${booked.time}</div>
+          <div style="font-size: 0.75rem; color: #4338ca; margin-top: 0.25rem;">Estado: <span style="font-weight:700;">Confirmada</span></div>
+        `;
+        myAppContainer.appendChild(item);
+      }
+      alert(`¡Cita agendada con éxito para el ${booked.date} a las ${booked.time}!`);
+    }
+  };
+
+  renderSlots();
+
+  // --- CHAT CON IA ---
   const chatForm = document.getElementById('chat-form');
   const chatInput = document.getElementById('chat-input') as HTMLInputElement;
   const chatMessages = document.getElementById('chat-messages');
@@ -360,7 +433,7 @@
       aiMsg.innerHTML = `
         <div style="background: #e0e7ff; color: #4f46e5; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;"><i class="fa-solid fa-robot"></i></div>
         <div style="background: #f1f5f9; padding: 1rem; border-radius: 1rem; max-width: 75%; color: #0f172a; font-size: 0.95rem;">
-          Te entiendo perfectamente. Estoy aquí para escucharte y apoyarte en lo que necesites. ¿Te gustaría realizar una técnica de respiración guiada o prefieres desahogarte sobre algo en específico?
+          Te entiendo perfectamente. Estoy aquí para escucharte y apoyarte. ¿Te gustaría realizar una técnica de respiración o prefieres agendar una cita con la psicóloga?
         </div>
       `;
       chatMessages?.appendChild(aiMsg);
@@ -368,17 +441,7 @@
     }, 1000);
   });
 
-  // Guardar perfil
-  const profileForm = document.getElementById('profile-form');
-  profileForm?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const newName = (document.getElementById('profile-name-input') as HTMLInputElement).value;
-    if (newName) {
-      const headerName = document.getElementById('header-name');
-      const headerAvatar = document.getElementById('header-avatar');
-      if (headerName) headerName.textContent = newName;
-      if (headerAvatar) headerAvatar.textContent = newName.substring(0, 2).toUpperCase();
-    }
-    alert('¡Cambios guardados con éxito en tu perfil!');
-  });
-</script>
+  // --- SUBIDA DE FOTO REAL EN PERFIL ---
+  const changePhotoBtn = document.getElementById('change-photo-btn');
+  const photoInput = document.getElementById('photo-input') as HTMLInputElement;
+  const profile

@@ -13,19 +13,17 @@ import '../styles/global.css';
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Apoyo Psicológico - Tu bienestar también importa</title>
-		<!-- FontAwesome para los íconos -->
+		<!-- FontAwesome -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 	</head>
 	<body>
-		<!-- 1. VISTA DE INICIO DE SESIÓN -->
+		<!-- 1. LOGIN (DOS COLUMNAS) -->
 		<Login />
 
-		<!-- 2. VISTA PRINCIPAL (Oculta hasta iniciar sesión) -->
+		<!-- 2. VISTA PRINCIPAL DASHBOARD DE ESTUDIANTE -->
 		<div id="app" style="display: none; flex-direction: row; width: 100%; min-height: 100vh; background-color: #f8fafc;">
-			<!-- Barra lateral izquierda -->
 			<Sidebar />
 
-			<!-- Contenido principal a la derecha -->
 			<div class="main-content-wrapper" style="flex: 1; display: flex; flex-direction: column; min-height: 100vh; background-color: #f8fafc; overflow-y: auto;">
 				<Header />
 				
@@ -36,7 +34,7 @@ import '../styles/global.css';
 		</div>
 
 		<script>
-			// Funcionalidad para el botón de cerrar sesión
+			// Cerrar sesión
 			document.addEventListener('click', (e) => {
 				const target = e.target as HTMLElement;
 				if (target.closest('#logout-btn')) {

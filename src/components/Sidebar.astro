@@ -3,7 +3,7 @@
 ---
 <aside class="sidebar" style="width: 260px; min-width: 260px; background-color: #0b132b; border-right: 1px solid #1c2541; padding: 1.5rem 1rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 100vh;">
   <div>
-    <!-- Logo y título en el Sidebar -->
+    <!-- Logo y título -->
     <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem; padding: 0.5rem;">
       <div style="background: rgba(99, 102, 241, 0.2); padding: 0.5rem; border-radius: 0.75rem;">
         <i class="fa-solid fa-brain" style="color: #818cf8; font-size: 1.25rem;"></i>
@@ -14,13 +14,16 @@
       </div>
     </div>
 
-    <!-- Enlaces de navegación interactivos -->
+    <!-- Navegación lateral -->
     <nav style="display: flex; flex-direction: column; gap: 0.5rem;">
       <a href="#" class="sidebar-link active" data-section="inicio" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #ffffff; background-color: #4f46e5; text-decoration: none; border-radius: 0.75rem; font-weight: 500;">
         <i class="fa-solid fa-house"></i> Inicio
       </a>
       <a href="#" class="sidebar-link" data-section="cuestionario" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #94a3b8; text-decoration: none; border-radius: 0.75rem; font-weight: 500;">
         <i class="fa-solid fa-clipboard-list"></i> Cuestionario
+      </a>
+      <a href="#" class="sidebar-link" data-section="citas" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #94a3b8; text-decoration: none; border-radius: 0.75rem; font-weight: 500;">
+        <i class="fa-solid fa-calendar-check"></i> Citas con Psicóloga
       </a>
       <a href="#" class="sidebar-link" data-section="chat" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #94a3b8; text-decoration: none; border-radius: 0.75rem; font-weight: 500;">
         <i class="fa-solid fa-comments"></i> Chat con IA
@@ -34,7 +37,7 @@
     </nav>
   </div>
 
-  <!-- Botón de cerrar sesión abajo -->
+  <!-- Botón Cerrar sesión -->
   <div>
     <button id="logout-btn" style="background: transparent; border: none; color: #94a3b8; display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; width: 100%; border-radius: 0.75rem; cursor: pointer; font-weight: 500; text-align: left;">
       <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
@@ -43,14 +46,12 @@
 </aside>
 
 <script>
-  // Lógica para alternar la sección activa desde el Sidebar
   const sidebarLinks = document.querySelectorAll('.sidebar-link');
   sidebarLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const section = link.getAttribute('data-section');
       if (section) {
-        // Disparar evento personalizado para cambiar de sección
         window.dispatchEvent(new CustomEvent('change-section', { detail: section }));
         
         sidebarLinks.forEach(l => {
