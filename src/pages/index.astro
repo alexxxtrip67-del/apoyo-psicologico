@@ -4,6 +4,9 @@ import Login from '../components/Login.astro';
 import StudentDashboard from '../components/StudentDashboard.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Header from '../components/Header.astro';
+
+// Importación directa de los estilos globales
+import '../styles/global.css';
 ---
 
 <html lang="es">
@@ -19,7 +22,7 @@ import Header from '../components/Header.astro';
 		<!-- 1. VISTA DE INICIO DE SESIÓN -->
 		<Login />
 
-		<!-- 2. VISTA PRINCIPAL DEL SISTEMA (Oculta por defecto hasta iniciar sesión) -->
+		<!-- 2. VISTA PRINCIPAL DEL SISTEMA (Oculta hasta iniciar sesión) -->
 		<div id="app" class="hidden">
 			<!-- Barra lateral izquierda -->
 			<Sidebar />
@@ -33,29 +36,5 @@ import Header from '../components/Header.astro';
 				</main>
 			</div>
 		</div>
-
-		<style>
-			/* Asegurar que la estructura principal ocupe toda la pantalla de forma ordenada */
-			#app {
-				display: none; /* Se muestra con JS al hacer login */
-				min-height: 100vh;
-				width: 100%;
-				background-color: #f8fafc;
-			}
-
-			.main-content-wrapper {
-				flex: 1;
-				display: flex;
-				flex-direction: column;
-				min-height: 100vh;
-				background-color: #f8fafc;
-				overflow-y: auto;
-			}
-
-			main {
-				padding: 2rem 2.5rem;
-				flex: 1;
-			}
-		</style>
 	</body>
 </html>
