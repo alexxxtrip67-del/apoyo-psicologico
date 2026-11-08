@@ -1,5 +1,5 @@
 /* ==========================================
-   ESTILOS GLOBALES: LOGIN + DASHBOARD DE ESTUDIANTE
+   ESTILOS FINALES: LOGIN Y DASHBOARD IDÉNTICOS
    ================================---------- */
 
 * {
@@ -9,15 +9,13 @@
 }
 
 body {
-  background-color: #0b132b !important;
+  background-color: #f1f5f9 !important;
   color: #0f172a !important;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   min-height: 100vh;
 }
 
-/* ------------------------------------------
-   1. PANTALLA DE LOGIN (CONSERVADA INTACTA)
-   ------------------------------------------ */
+/* 1. PANTALLA DE LOGIN (DOS COLUMNAS) */
 .login-page-wrapper {
   display: flex !important;
   flex-direction: row !important;
@@ -127,33 +125,34 @@ body {
 }
 
 /* ------------------------------------------
-   2. DASHBOARD DE ESTUDIANTE (FONDO CLARO)
+   2. DASHBOARD DEL ESTUDIANTE (CON SIDEBAR Y FONDO CLARO)
    ------------------------------------------ */
 #app {
   display: flex !important;
   flex-direction: row !important;
   width: 100% !important;
   min-height: 100vh !important;
-  background-color: #f1f5f9 !important;
+  background-color: #f8fafc !important;
 }
 
-/* Barra lateral izquierda (Sidebar azul oscuro) */
-aside, .sidebar {
-  width: 250px !important;
-  min-width: 250px !important;
+/* Barra lateral izquierda fija */
+aside, .sidebar, #app > div:first-child {
+  width: 260px !important;
+  min-width: 260px !important;
   background-color: #0b132b !important;
   border-right: 1px solid #1c2541 !important;
-  padding: 1.5rem 1rem !important;
+  padding: 2rem 1.25rem !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
+  min-height: 100vh !important;
 }
 
-aside a, aside button {
+aside a, aside button, .sidebar a {
   display: flex !important;
   align-items: center !important;
   gap: 0.75rem !important;
-  padding: 0.75rem 1rem !important;
+  padding: 0.85rem 1rem !important;
   color: #94a3b8 !important;
   text-decoration: none !important;
   border-radius: 0.75rem !important;
@@ -161,30 +160,32 @@ aside a, aside button {
   background: transparent !important;
   border: none !important;
   width: 100% !important;
+  text-align: left !important;
 }
 
-aside a.active, aside a:hover {
+aside a.active, aside a:hover, .sidebar a:hover {
   background-color: #4f46e5 !important;
   color: #ffffff !important;
 }
 
-/* Contenido Principal en fondo blanco/gris claro */
-main, .main-content, #view-student-dashboard {
+/* Contenido Principal a la derecha */
+main, .main-content, #view-student-dashboard, #app > div:last-child {
   flex: 1 !important;
-  padding: 2rem 2.5rem !important;
+  padding: 2.5rem 3rem !important;
   background-color: #f8fafc !important;
   display: flex !important;
   flex-direction: column !important;
-  gap: 1.5rem !important;
+  gap: 1.75rem !important;
+  overflow-y: auto !important;
 }
 
-/* Header superior con buscador e iniciales */
+/* Header superior con buscador y perfil */
 header {
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
   width: 100% !important;
-  margin-bottom: 1rem !important;
+  margin-bottom: 0.5rem !important;
 }
 
 header input {
@@ -192,65 +193,81 @@ header input {
   color: #0f172a !important;
   border: 1px solid #e2e8f0 !important;
   border-radius: 0.75rem !important;
-  padding: 0.6rem 1rem 0.6rem 2.5rem !important;
-  width: 280px !important;
+  padding: 0.65rem 1rem 0.65rem 2.5rem !important;
+  width: 320px !important;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
 }
 
-/* Greeting Header */
+/* Saludo dinámico */
 h1 {
   color: #0f172a !important;
-  font-size: 2rem !important;
+  font-size: 2.25rem !important;
   font-weight: 800 !important;
 }
 
-/* Banner de asistencia con degradado morado claro */
+p {
+  color: #64748b !important;
+  font-size: 0.95rem !important;
+}
+
+/* Banner "No estás solo" con degradado lila exacto al prototipo */
 .banner-assist, div[class*="bg-indigo"] {
-  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%) !important;
-  border: 1px solid #a5b4fc !important;
+  background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%) !important;
+  border: 1px solid #c7d2fe !important;
   border-radius: 1.25rem !important;
-  padding: 2rem !important;
+  padding: 2.25rem !important;
   width: 100% !important;
   color: #1e1b4b !important;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1) !important;
+  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.08) !important;
 }
 
 .banner-assist h2, .banner-assist h3 {
   color: #1e1b4b !important;
-  font-size: 1.5rem !important;
+  font-size: 1.6rem !important;
   font-weight: 800 !important;
   margin-bottom: 0.5rem !important;
 }
 
 .banner-assist p {
-  color: #3730a3 !important;
+  color: #4338ca !important;
   margin-bottom: 1.25rem !important;
 }
 
-/* Grilla con 4 tarjetas blancas horizontales */
+.banner-assist a, .banner-assist button {
+  background-color: #4f46e5 !important;
+  color: #ffffff !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 0.75rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3) !important;
+}
+
+/* Grilla de 4 tarjetas blancas horizontales */
 div.grid {
   display: grid !important;
   grid-template-columns: repeat(4, 1fr) !important;
-  gap: 1.25rem !important;
+  gap: 1.5rem !important;
   width: 100% !important;
 }
 
 div.grid > div {
   background-color: #ffffff !important;
   color: #0f172a !important;
-  padding: 1.5rem !important;
+  padding: 1.75rem 1.5rem !important;
   border-radius: 1.25rem !important;
   border: 1px solid #e2e8f0 !important;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04) !important;
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-between !important;
-  min-height: 220px !important;
+  min-height: 230px !important;
 }
 
 div.grid > div h3, div.grid > div h4 {
   color: #0f172a !important;
-  font-size: 1.1rem !important;
+  font-size: 1.15rem !important;
   font-weight: 700 !important;
 }
 
@@ -270,6 +287,7 @@ div.grid button, div.grid a {
   cursor: pointer !important;
   width: 100% !important;
   text-decoration: none !important;
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.25) !important;
 }
 
 .hidden { display: none !important; }
