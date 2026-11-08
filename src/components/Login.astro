@@ -3,7 +3,7 @@
 ---
 
 <div class="login-page-wrapper" id="view-login-wrapper">
-  <!-- LADO IZQUIERDO: Ilustración y textos de bienvenida -->
+  <!-- LADO IZQUIERDO: Ilustración y textos de bienvenida (Idéntico al prototipo) -->
   <div class="welcome-side">
     <div class="logo-area" style="display: flex; align-items: center; gap: 0.75rem;">
       <div style="background: rgba(99, 102, 241, 0.2); padding: 0.5rem; border-radius: 0.75rem;">
@@ -31,7 +31,7 @@
   <!-- LADO DERECHO: Tarjeta Blanca de Inicio de Sesión -->
   <div class="login-card">
     <h2>Iniciar sesión</h2>
-    <p id="login-subtitle">Accede a tu cuenta de estudiante para continuar</p>
+    <p id="login-subtitle">Accede a tu cuenta para continuar</p>
 
     <!-- Selector de Roles -->
     <div class="role-tabs">
@@ -42,7 +42,7 @@
     <!-- Formulario de Acceso -->
     <form id="login-form">
       <div style="margin-bottom: 1rem;">
-        <label id="label-user" for="username" style="display: block; font-size: 0.85rem; font-weight: 600; color: #1e293b; margin-bottom: 0.4rem;">
+        <label id="label-user" style="display: block; font-size: 0.85rem; font-weight: 600; color: #1e293b; margin-bottom: 0.4rem;">
           Usuario
         </label>
         <div style="position: relative;">
@@ -60,7 +60,7 @@
       </div>
 
       <div style="margin-bottom: 1.5rem;">
-        <label id="label-pass" for="password" style="display: block; font-size: 0.85rem; font-weight: 600; color: #1e293b; margin-bottom: 0.4rem;">
+        <label id="label-pass" style="display: block; font-size: 0.85rem; font-weight: 600; color: #1e293b; margin-bottom: 0.4rem;">
           Contraseña
         </label>
         <div style="position: relative;">
@@ -104,10 +104,47 @@
   const btnPsicologa = document.getElementById('btn-psicologa');
   const inputUser = document.getElementById('username') as HTMLInputElement;
   const inputPass = document.getElementById('password') as HTMLInputElement;
+  const togglePasswordBtn = document.getElementById('toggle-password');
+  const eyeIcon = document.getElementById('eye-icon');
   const loginForm = document.getElementById('login-form');
+  const subtitle = document.getElementById('login-subtitle');
 
   let currentRole = 'estudiante';
 
+  // 1. Funcionalidad del ojito para mostrar/ocultar contraseña
+  togglePasswordBtn?.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (inputPass.type === 'password') {
+      inputPass.type = 'text';
+      eyeIcon?.classList.remove('fa-eye');
+      eyeIcon?.classList.add('fa-eye-slash');
+    } else {
+      inputPass.type = 'password';
+      eyeIcon?.classList.remove('fa-eye-slash');
+      eyeIcon?.classList.add('fa-eye');
+    }
+  });
+
+  // 2. Cambio entre Estudiante y Psicóloga
+  btnEstudiante?.addEventListener('click', () => {
+    currentRole = 'estudiante';
+    btnEstudiante.classList.add('active');
+    btnPsicologa?.classList.remove('active');
+    if (subtitle) subtitle.textContent = 'Accede a tu cuenta para continuar';
+    if (inputUser) inputUser.placeholder = 'rider.espinoza';
+    if (inputPass) inputPass.placeholder = 'Número de cédula';
+  });
+
+  btnPsicologa?.addEventListener('click', () => {
+    currentRole = 'psicologa';
+    btnPsicologa.classList.add('active');
+    btnEstudiante?.classList.remove('active');
+    if (subtitle) subtitle.textContent = 'Accede con tu ID institucional';
+    if (inputUser) inputUser.placeholder = 'ID Único (Ej: PSIC-01)';
+    if (inputPass) inputPass.placeholder = 'Contraseña institucional';
+  });
+
+  // 3. Al hacer clic en Entrar: capturar nombre dinámico y mostrar el Dashboard limpio
   loginForm?.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -117,28 +154,28 @@
       return;
     }
 
-    // Extraer el primer nombre si ingresan rider.espinoza -> Rider
-    let mainName = rawUser.split('.')[0];
-    mainName = mainName.charAt(0).toUpperCase() + mainName.slice(1).toLowerCase();
+    // Extraer el nombre (ej: rider.espinoza -> Rider)
+    let firstName = rawUser.split('.')[0];
+    firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
 
-    // Actualizar el texto "Hola, [Nombre] 👋" en la pantalla de bienvenida
-    const greetingElement = document.querySelector('#view-student-dashboard h1');
-    if (greetingElement) {
-      greetingElement.innerHTML = `Hola, ${mainName} 👋`;
+    // Actualizar el saludo dinámico en el Dashboard ("Hola, Rider 👋")
+    const greetingEl = document.querySelector('main h1, .main-content h1, #view-student-dashboard h1');
+    if (greetingEl) {
+      greetingEl.innerHTML = `Hola, ${firstName} 👋`;
     }
 
-    // Actualizar también la esquina superior derecha (Header)
-    const headerNameElement = document.querySelector('header .user-name');
-    if (headerNameElement) {
-      headerNameElement.textContent = `${mainName}`;
+    // Actualizar las iniciales y el nombre en la esquina superior derecha
+    const userBadgeName = document.querySelector('header .user-name, header span:last-child');
+    if (userBadgeName) {
+      userBadgeName.textContent = `${firstName} Estudiante`;
     }
 
-    const headerAvatarElement = document.querySelector('header .user-avatar');
-    if (headerAvatarElement) {
-      headerAvatarElement.textContent = mainName.substring(0, 2).toUpperCase();
+    const userAvatar = document.querySelector('header .user-avatar, header .rounded-full');
+    if (userAvatar) {
+      userAvatar.textContent = firstName.substring(0, 2).toUpperCase();
     }
 
-    // Ocultar Login y mostrar Dashboard
+    // Ocultar login y mostrar el contenedor principal del Dashboard
     const loginWrapper = document.getElementById('view-login-wrapper');
     const appWrapper = document.getElementById('app');
 
