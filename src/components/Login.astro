@@ -100,82 +100,52 @@
 </div>
 
 <script>
-  // Selección de elementos del DOM
   const btnEstudiante = document.getElementById('btn-estudiante');
   const btnPsicologa = document.getElementById('btn-psicologa');
   const inputUser = document.getElementById('username') as HTMLInputElement;
   const inputPass = document.getElementById('password') as HTMLInputElement;
-  const togglePasswordBtn = document.getElementById('toggle-password');
-  const eyeIcon = document.getElementById('eye-icon');
   const loginForm = document.getElementById('login-form');
-  const subtitle = document.getElementById('login-subtitle');
 
   let currentRole = 'estudiante';
 
-  // 1. Lógica del ojo para mostrar/ocultar contraseña
-  togglePasswordBtn?.addEventListener('click', () => {
-    if (inputPass.type === 'password') {
-      inputPass.type = 'text';
-      eyeIcon?.classList.remove('fa-eye');
-      eyeIcon?.classList.add('fa-eye-slash');
-    } else {
-      inputPass.type = 'password';
-      eyeIcon?.classList.remove('fa-eye-slash');
-      eyeIcon?.classList.add('fa-eye');
-    }
-  });
-
-  // 2. Cambio entre roles (Estudiante / Psicóloga)
-  btnEstudiante?.addEventListener('click', () => {
-    currentRole = 'estudiante';
-    btnEstudiante.classList.add('active');
-    btnPsicologa?.classList.remove('active');
-    if (subtitle) subtitle.textContent = 'Accede a tu cuenta de estudiante para continuar';
-    if (inputUser) inputUser.placeholder = 'rider.espinoza';
-    if (inputPass) inputPass.placeholder = 'Número de cédula';
-  });
-
-  btnPsicologa?.addEventListener('click', () => {
-    currentRole = 'psicologa';
-    btnPsicologa.classList.add('active');
-    btnEstudiante?.classList.remove('active');
-    if (subtitle) subtitle.textContent = 'Accede con tu ID institucional de psicóloga';
-    if (inputUser) inputUser.placeholder = 'ID Único (Ej: PSIC-2026)';
-    if (inputPass) inputPass.placeholder = 'Contraseña institucional';
-  });
-
-  // 3. Lógica del botón "Entrar" para ingresar a la plataforma
   loginForm?.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    if (inputUser.value.trim() === '' || inputPass.value.trim() === '') {
-      alert('Por favor, completa todos los campos.');
+    const rawUser = inputUser.value.trim();
+    if (!rawUser || !inputPass.value.trim()) {
+      alert('Por favor completa todos los campos.');
       return;
     }
 
-    const loginWrapper = document.getElementById('view-login-wrapper');
-    const appWrapper = document.getElementById('app');
-    const psychDashboard = document.getElementById('view-psych-dashboard');
-    const studentDashboard = document.getElementById('view-student-dashboard');
+    // Extraer el primer nombre si ingresan rider.espinoza -> Rider
+    let mainName = rawUser.split('.')[0];
+    mainName = mainName.charAt(0).toUpperCase() + mainName.slice(1).toLowerCase();
 
-    // Ocultar la pantalla de Login
-    if (loginWrapper) {
-      loginWrapper.style.setProperty('display', 'none', 'important');
+    // Actualizar el texto "Hola, [Nombre] 👋" en la pantalla de bienvenida
+    const greetingElement = document.querySelector('#view-student-dashboard h1');
+    if (greetingElement) {
+      greetingElement.innerHTML = `Hola, ${mainName} 👋`;
     }
 
-    // Mostrar el layout principal (#app)
+    // Actualizar también la esquina superior derecha (Header)
+    const headerNameElement = document.querySelector('header .user-name');
+    if (headerNameElement) {
+      headerNameElement.textContent = `${mainName}`;
+    }
+
+    const headerAvatarElement = document.querySelector('header .user-avatar');
+    if (headerAvatarElement) {
+      headerAvatarElement.textContent = mainName.substring(0, 2).toUpperCase();
+    }
+
+    // Ocultar Login y mostrar Dashboard
+    const loginWrapper = document.getElementById('view-login-wrapper');
+    const appWrapper = document.getElementById('app');
+
+    if (loginWrapper) loginWrapper.style.setProperty('display', 'none', 'important');
     if (appWrapper) {
       appWrapper.style.setProperty('display', 'flex', 'important');
       appWrapper.classList.remove('hidden');
-    }
-
-    // Redirección según el rol seleccionado
-    if (currentRole === 'psicologa') {
-      if (studentDashboard) studentDashboard.classList.add('hidden');
-      if (psychDashboard) psychDashboard.classList.remove('hidden');
-    } else {
-      if (psychDashboard) psychDashboard.classList.add('hidden');
-      if (studentDashboard) studentDashboard.classList.remove('hidden');
     }
   });
 </script>
