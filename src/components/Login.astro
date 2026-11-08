@@ -2,8 +2,8 @@
 // src/components/Login.astro
 ---
 
-<div class="login-page-wrapper">
-  <!-- LADO IZQUIERDO: Ilustración y textos de bienvenida (Idéntico al prototipo) -->
+<div class="login-page-wrapper" id="view-login-wrapper">
+  <!-- LADO IZQUIERDO: Ilustración y textos de bienvenida -->
   <div class="welcome-side">
     <div class="logo-area" style="display: flex; align-items: center; gap: 0.75rem;">
       <div style="background: rgba(99, 102, 241, 0.2); padding: 0.5rem; border-radius: 0.75rem;">
@@ -31,7 +31,7 @@
   <!-- LADO DERECHO: Tarjeta Blanca de Inicio de Sesión -->
   <div class="login-card">
     <h2>Iniciar sesión</h2>
-    <p>Accede a tu cuenta para continuar</p>
+    <p id="login-subtitle">Accede a tu cuenta de estudiante para continuar</p>
 
     <!-- Selector de Roles -->
     <div class="role-tabs">
@@ -42,7 +42,7 @@
     <!-- Formulario de Acceso -->
     <form id="login-form">
       <div style="margin-bottom: 1rem;">
-        <label for="username" style="display: block; font-size: 0.85rem; font-weight: 600; color: #1e293b; margin-bottom: 0.4rem;">
+        <label id="label-user" for="username" style="display: block; font-size: 0.85rem; font-weight: 600; color: #1e293b; margin-bottom: 0.4rem;">
           Usuario
         </label>
         <div style="position: relative;">
@@ -60,7 +60,7 @@
       </div>
 
       <div style="margin-bottom: 1.5rem;">
-        <label for="password" style="display: block; font-size: 0.85rem; font-weight: 600; color: #1e293b; margin-bottom: 0.4rem;">
+        <label id="label-pass" for="password" style="display: block; font-size: 0.85rem; font-weight: 600; color: #1e293b; margin-bottom: 0.4rem;">
           Contraseña
         </label>
         <div style="position: relative;">
@@ -74,9 +74,13 @@
             style="padding-left: 2.5rem !important; padding-right: 2.5rem !important;"
             required 
           />
-          <span style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: #64748b; cursor: pointer;">
-            <i class="fa-regular fa-eye"></i>
-          </span>
+          <button 
+            type="button" 
+            id="toggle-password" 
+            style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: transparent !important; border: none !important; box-shadow: none !important; color: #64748b; cursor: pointer; padding: 0.25rem;"
+          >
+            <i class="fa-regular fa-eye" id="eye-icon"></i>
+          </button>
         </div>
       </div>
 
@@ -96,17 +100,82 @@
 </div>
 
 <script>
-  // Script rápido para alternar la pestaña activa entre Estudiante y Psicóloga
+  // Selección de elementos del DOM
   const btnEstudiante = document.getElementById('btn-estudiante');
   const btnPsicologa = document.getElementById('btn-psicologa');
+  const inputUser = document.getElementById('username') as HTMLInputElement;
+  const inputPass = document.getElementById('password') as HTMLInputElement;
+  const togglePasswordBtn = document.getElementById('toggle-password');
+  const eyeIcon = document.getElementById('eye-icon');
+  const loginForm = document.getElementById('login-form');
+  const subtitle = document.getElementById('login-subtitle');
 
+  let currentRole = 'estudiante';
+
+  // 1. Lógica del ojo para mostrar/ocultar contraseña
+  togglePasswordBtn?.addEventListener('click', () => {
+    if (inputPass.type === 'password') {
+      inputPass.type = 'text';
+      eyeIcon?.classList.remove('fa-eye');
+      eyeIcon?.classList.add('fa-eye-slash');
+    } else {
+      inputPass.type = 'password';
+      eyeIcon?.classList.remove('fa-eye-slash');
+      eyeIcon?.classList.add('fa-eye');
+    }
+  });
+
+  // 2. Cambio entre roles (Estudiante / Psicóloga)
   btnEstudiante?.addEventListener('click', () => {
+    currentRole = 'estudiante';
     btnEstudiante.classList.add('active');
     btnPsicologa?.classList.remove('active');
+    if (subtitle) subtitle.textContent = 'Accede a tu cuenta de estudiante para continuar';
+    if (inputUser) inputUser.placeholder = 'rider.espinoza';
+    if (inputPass) inputPass.placeholder = 'Número de cédula';
   });
 
   btnPsicologa?.addEventListener('click', () => {
+    currentRole = 'psicologa';
     btnPsicologa.classList.add('active');
     btnEstudiante?.classList.remove('active');
+    if (subtitle) subtitle.textContent = 'Accede con tu ID institucional de psicóloga';
+    if (inputUser) inputUser.placeholder = 'ID Único (Ej: PSIC-2026)';
+    if (inputPass) inputPass.placeholder = 'Contraseña institucional';
+  });
+
+  // 3. Lógica del botón "Entrar" para ingresar a la plataforma
+  loginForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    if (inputUser.value.trim() === '' || inputPass.value.trim() === '') {
+      alert('Por favor, completa todos los campos.');
+      return;
+    }
+
+    const loginWrapper = document.getElementById('view-login-wrapper');
+    const appWrapper = document.getElementById('app');
+    const psychDashboard = document.getElementById('view-psych-dashboard');
+    const studentDashboard = document.getElementById('view-student-dashboard');
+
+    // Ocultar la pantalla de Login
+    if (loginWrapper) {
+      loginWrapper.style.setProperty('display', 'none', 'important');
+    }
+
+    // Mostrar el layout principal (#app)
+    if (appWrapper) {
+      appWrapper.style.setProperty('display', 'flex', 'important');
+      appWrapper.classList.remove('hidden');
+    }
+
+    // Redirección según el rol seleccionado
+    if (currentRole === 'psicologa') {
+      if (studentDashboard) studentDashboard.classList.add('hidden');
+      if (psychDashboard) psychDashboard.classList.remove('hidden');
+    } else {
+      if (psychDashboard) psychDashboard.classList.add('hidden');
+      if (studentDashboard) studentDashboard.classList.remove('hidden');
+    }
   });
 </script>
