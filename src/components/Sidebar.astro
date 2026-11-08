@@ -14,21 +14,21 @@
       </div>
     </div>
 
-    <!-- Enlaces de navegación -->
+    <!-- Enlaces de navegación interactivos -->
     <nav style="display: flex; flex-direction: column; gap: 0.5rem;">
-      <a href="#" class="active" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #ffffff; background-color: #4f46e5; text-decoration: none; border-radius: 0.75rem; font-weight: 500;">
+      <a href="#" class="sidebar-link active" data-section="inicio" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #ffffff; background-color: #4f46e5; text-decoration: none; border-radius: 0.75rem; font-weight: 500;">
         <i class="fa-solid fa-house"></i> Inicio
       </a>
-      <a href="#" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #94a3b8; text-decoration: none; border-radius: 0.75rem; font-weight: 500;">
+      <a href="#" class="sidebar-link" data-section="cuestionario" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #94a3b8; text-decoration: none; border-radius: 0.75rem; font-weight: 500;">
         <i class="fa-solid fa-clipboard-list"></i> Cuestionario
       </a>
-      <a href="#" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #94a3b8; text-decoration: none; border-radius: 0.75rem; font-weight: 500;">
+      <a href="#" class="sidebar-link" data-section="chat" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #94a3b8; text-decoration: none; border-radius: 0.75rem; font-weight: 500;">
         <i class="fa-solid fa-comments"></i> Chat con IA
       </a>
-      <a href="#" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #94a3b8; text-decoration: none; border-radius: 0.75rem; font-weight: 500;">
+      <a href="#" class="sidebar-link" data-section="reportes" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #94a3b8; text-decoration: none; border-radius: 0.75rem; font-weight: 500;">
         <i class="fa-solid fa-folder-open"></i> Mis reportes
       </a>
-      <a href="#" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #94a3b8; text-decoration: none; border-radius: 0.75rem; font-weight: 500;">
+      <a href="#" class="sidebar-link" data-section="perfil" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #94a3b8; text-decoration: none; border-radius: 0.75rem; font-weight: 500;">
         <i class="fa-solid fa-user"></i> Perfil
       </a>
     </nav>
@@ -41,3 +41,27 @@
     </button>
   </div>
 </aside>
+
+<script>
+  // Lógica para alternar la sección activa desde el Sidebar
+  const sidebarLinks = document.querySelectorAll('.sidebar-link');
+  sidebarLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const section = link.getAttribute('data-section');
+      if (section) {
+        // Disparar evento personalizado para cambiar de sección
+        window.dispatchEvent(new CustomEvent('change-section', { detail: section }));
+        
+        sidebarLinks.forEach(l => {
+          l.classList.remove('active');
+          (l as HTMLElement).style.backgroundColor = 'transparent';
+          (l as HTMLElement).style.color = '#94a3b8';
+        });
+        link.classList.add('active');
+        (link as HTMLElement).style.backgroundColor = '#4f46e5';
+        (link as HTMLElement).style.color = '#ffffff';
+      }
+    });
+  });
+</script>

@@ -1,64 +1,302 @@
 ---
 // src/components/StudentDashboard.astro
 ---
-<div class="space-y-6">
-  <div>
-    <h2 class="text-2xl font-bold text-white">Hola, Juan 👋</h2>
-    <p class="text-xs text-slate-400">Tu bienestar emocional es importante. Aquí tienes un resumen de tu progreso.</p>
+
+<div class="dashboard-container">
+  <!-- SECCIÓN 1: INICIO -->
+  <div id="section-inicio" class="dashboard-section">
+    <h1 id="welcome-title">Hola, Estudiante 👋</h1>
+    <p>Tu bienestar emocional es importante. Aquí tienes un resumen de tu progreso.</p>
+
+    <!-- Banner "No estás solo" -->
+    <div class="banner-assist" style="background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%); border: 1px solid #c7d2fe; border-radius: 1.25rem; padding: 2.25rem; margin: 1.5rem 0; color: #1e1b4b;">
+      <h3>Asistencia Emocional</h3>
+      <h2 style="font-size: 1.6rem; font-weight: 800; margin: 0.5rem 0;">No estás solo</h2>
+      <p style="color: #4338ca; margin-bottom: 1.25rem;">Si necesitas hablar, puedes hacerlo con nuestro asistente de IA o directamente con la psicóloga de la institución.</p>
+      <button type="button" class="nav-trigger" data-target="chat" style="background: #4f46e5; color: #ffffff; border: none; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer;">Ir al chat con IA &rarr;</button>
+    </div>
+
+    <!-- Grilla de 4 tarjetas -->
+    <div class="grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 1.5rem;">
+      <div style="background: #ffffff; padding: 1.75rem 1.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between; min-height: 220px; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
+        <div>
+          <div style="color: #4f46e5; font-size: 1.25rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-heart-pulse"></i></div>
+          <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.4rem;">Cuestionario emocional</h3>
+          <p style="font-size: 0.85rem; color: #64748b;">Completa tu evaluación periódica.</p>
+        </div>
+        <button type="button" class="nav-trigger" data-target="cuestionario" style="background: #4f46e5; color: white; border: none; padding: 0.65rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; width: 100%;">Ir al cuestionario</button>
+      </div>
+
+      <div style="background: #ffffff; padding: 1.75rem 1.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between; min-height: 220px; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
+        <div>
+          <div style="color: #4f46e5; font-size: 1.25rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-robot"></i></div>
+          <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.4rem;">Chat con IA</h3>
+          <p style="font-size: 0.85rem; color: #64748b;">Habla con nuestro asistente cuando lo necesites.</p>
+        </div>
+        <button type="button" class="nav-trigger" data-target="chat" style="background: #4f46e5; color: white; border: none; padding: 0.65rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; width: 100%;">Abrir chat</button>
+      </div>
+
+      <div style="background: #ffffff; padding: 1.75rem 1.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between; min-height: 220px; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
+        <div>
+          <div style="color: #4f46e5; font-size: 1.25rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-folder-open"></i></div>
+          <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.4rem;">Mis reportes</h3>
+          <p style="font-size: 0.85rem; color: #64748b;">Revisa tu historial de respuestas.</p>
+        </div>
+        <button type="button" class="nav-trigger" data-target="reportes" style="background: #4f46e5; color: white; border: none; padding: 0.65rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; width: 100%;">Ver reportes</button>
+      </div>
+
+      <div style="background: #ffffff; padding: 1.75rem 1.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between; min-height: 220px; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
+        <div>
+          <div style="color: #4f46e5; font-size: 1.25rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-book-open"></i></div>
+          <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.4rem;">Recursos</h3>
+          <p style="font-size: 0.85rem; color: #64748b;">Consejos, guías y material de apoyo.</p>
+        </div>
+        <button type="button" onclick="alert('Guías y consejos de bienestar emocional disponibles próximamente.')" style="background: #4f46e5; color: white; border: none; padding: 0.65rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; width: 100%;">Ver recursos</button>
+      </div>
+    </div>
   </div>
 
-  <!-- Banner Principal -->
-  <div class="bg-gradient-to-r from-indigo-900/60 to-purple-900/40 p-6 rounded-3xl border border-indigo-500/30 flex items-center justify-between">
-    <div class="space-y-3 max-w-lg">
-      <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 text-[10px] font-semibold rounded-full border border-indigo-500/30">Asistencia Emocional</span>
-      <h3 class="text-xl font-bold text-white">No estás solo</h3>
-      <p class="text-xs text-slate-300 leading-relaxed">Si necesitas hablar, puedes hacerlo con nuestro asistente de IA o directamente con la psicóloga de la institución.</p>
-      <button onclick="switchView('student-chat')" class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-xl transition inline-flex items-center space-x-2">
-        <span>Ir al chat con IA</span>
-        <i class="fa-solid fa-arrow-right"></i>
-      </button>
-    </div>
-    <div class="hidden md:block text-indigo-400 opacity-80 text-7xl">
-      <i class="fa-solid fa-brain"></i>
+  <!-- SECCIÓN 2: CUESTIONARIO EMOCIONAL -->
+  <div id="section-cuestionario" class="dashboard-section hidden">
+    <h2>Cuestionario de bienestar emocional</h2>
+    <p style="margin-bottom: 1.5rem; color: #64748b;">Responde con sinceridad. No hay respuestas correctas o incorrectas.</p>
+    
+    <div style="background: #ffffff; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <div style="background: #e2e8f0; height: 10px; border-radius: 5px; flex: 1; margin-right: 1.5rem; overflow: hidden;">
+          <div id="progress-fill" style="background: #4f46e5; height: 100%; width: 30%; transition: width 0.3s;"></div>
+        </div>
+        <span id="question-counter" style="font-size: 0.9rem; font-weight: 600; color: #64748b;">Pregunta 3 de 10</span>
+      </div>
+
+      <h3 id="question-title" style="font-size: 1.25rem; color: #0f172a; margin-bottom: 1.5rem;">¿Con qué frecuencia te sientes ansioso/a o preocupado/a?</h3>
+
+      <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem;">
+        <label style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; cursor: pointer;"><input type="radio" name="q" /> Nunca</label>
+        <label style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; cursor: pointer;"><input type="radio" name="q" /> Rara vez</label>
+        <label style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: 1px solid #4f46e5; background: #e0e7ff33; border-radius: 0.75rem; cursor: pointer;"><input type="radio" name="q" checked /> A veces</label>
+        <label style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; cursor: pointer;"><input type="radio" name="q" /> Frecuentemente</label>
+        <label style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; cursor: pointer;"><input type="radio" name="q" /> Siempre</label>
+      </div>
+
+      <div style="display: flex; justify-content: space-between;">
+        <button type="button" id="prev-question" style="background: #ffffff; color: #4f46e5; border: 1px solid #4f46e5; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer;">&larr; Anterior</button>
+        <button type="button" id="next-question" style="background: #4f46e5; color: #ffffff; border: none; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer;">Siguiente &rarr;</button>
+      </div>
     </div>
   </div>
 
-  <!-- Tarjetas de Acceso -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-    <div class="bg-[#1c2541]/50 p-5 rounded-2xl border border-slate-800 space-y-3">
-      <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
-        <i class="fa-solid fa-heart-pulse"></i>
+  <!-- SECCIÓN 3: CHAT CON IA -->
+  <div id="section-chat" class="dashboard-section hidden">
+    <h2>Chat con IA</h2>
+    <p style="margin-bottom: 1.5rem; color: #64748b;">Aquí puedes hablar libremente. Estoy para escucharte.</p>
+
+    <div style="background: #ffffff; border-radius: 1.25rem; border: 1px solid #e2e8f0; display: flex; flex-direction: column; height: 480px; padding: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
+      <div id="chat-messages" style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; padding-right: 0.5rem; margin-bottom: 1rem;">
+        <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+          <div style="background: #e0e7ff; color: #4f46e5; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;"><i class="fa-solid fa-robot"></i></div>
+          <div style="background: #f1f5f9; padding: 1rem; border-radius: 1rem; max-width: 75%; color: #0f172a; font-size: 0.95rem;">
+            Hola, soy tu asistente virtual. Estoy aquí para escucharte y apoyarte. Puedes contarme lo que sientes o preguntarme lo que necesites[cite: 17].
+          </div>
+        </div>
       </div>
-      <h4 class="font-bold text-white text-sm">Cuestionario emocional</h4>
-      <p class="text-[11px] text-slate-400">Completa tu evaluación periódica.</p>
-      <button onclick="switchView('student-quiz')" class="w-full py-2 bg-indigo-600/30 hover:bg-indigo-600 text-indigo-200 hover:text-white text-xs font-semibold rounded-lg transition">Ir al cuestionario</button>
+
+      <form id="chat-form" style="display: flex; gap: 0.75rem; border-top: 1px solid #e2e8f0; padding-top: 1rem;">
+        <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." style="flex: 1; padding: 0.8rem 1rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none;" required />
+        <button type="submit" style="background: #4f46e5; color: white; border: none; padding: 0.8rem 1.25rem; border-radius: 0.75rem; cursor: pointer;"><i class="fa-solid fa-paper-plane"></i></button>
+      </form>
+    </div>
+  </div>
+
+  <!-- SECCIÓN 4: MIS REPORTES -->
+  <div id="section-reportes" class="dashboard-section hidden">
+    <h2>Resultados de tu cuestionario</h2>
+    <p style="margin-bottom: 1.5rem; color: #64748b;">Aquí puedes ver un resumen de tus respuestas y tu estado emocional[cite: 18].</p>
+
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
+      <div style="background: #ffffff; padding: 1.75rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; display: flex; align-items: center; gap: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
+        <div style="font-size: 3rem; color: #10b981;"><i class="fa-solid fa-face-smile"></i></div>
+        <div>
+          <h3 style="font-size: 1.15rem; color: #0f172a; margin-bottom: 0.4rem;">Tu estado emocional se encuentra en un rango estable[cite: 18].</h3>
+          <p style="color: #64748b; font-size: 0.85rem;">Continúa con tus hábitos de autocuidado y no dudes en pedir ayuda si lo necesitas[cite: 18].</p>
+        </div>
+      </div>
+
+      <div style="background: #ffffff; padding: 1.75rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
+        <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.75rem;">Recomendaciones[cite: 18]</h3>
+        <ul style="padding-left: 1.25rem; color: #64748b; font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li>Mantén una buena rutina de sueño[cite: 18].</li>
+          <li>Realiza actividades que disfrutes[cite: 18].</li>
+          <li>Habla con alguien de confianza cuando lo necesites[cite: 18].</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="bg-[#1c2541]/50 p-5 rounded-2xl border border-slate-800 space-y-3">
-      <div class="w-9 h-9 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center">
-        <i class="fa-solid fa-robot"></i>
-      </div>
-      <h4 class="font-bold text-white text-sm">Chat con IA</h4>
-      <p class="text-[11px] text-slate-400">Habla con nuestro asistente cuando lo necesites.</p>
-      <button onclick="switchView('student-chat')" class="w-full py-2 bg-indigo-600/30 hover:bg-indigo-600 text-indigo-200 hover:text-white text-xs font-semibold rounded-lg transition">Abrir chat</button>
+    <h3 style="font-size: 1.25rem; color: #0f172a; margin-bottom: 1rem;">Historial de cuestionarios[cite: 18]</h3>
+    <div style="background: #ffffff; border-radius: 1.25rem; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
+      <table style="width: 100%; border-collapse: collapse; text-align: left;">
+        <thead>
+          <tr style="border-bottom: 1px solid #e2e8f0; background: #f8fafc; color: #64748b; font-size: 0.85rem;">
+            <th style="padding: 1rem 1.5rem;">Fecha[cite: 18]</th>
+            <th style="padding: 1rem 1.5rem;">Estado emocional[cite: 18]</th>
+            <th style="padding: 1rem 1.5rem; text-align: right;">Acciones[cite: 18]</th>
+          </tr>
+        </thead>
+        <tbody style="font-size: 0.9rem; color: #0f172a;">
+          <tr style="border-bottom: 1px solid #f1f5f9;">
+            <td style="padding: 1rem 1.5rem;">10/04/2026[cite: 18]</td>
+            <td style="padding: 1rem 1.5rem; color: #10b981; font-weight: 600;">Estable[cite: 18]</td>
+            <td style="padding: 1rem 1.5rem; text-align: right;"><button onclick="alert('Detalles del reporte del 10/04/2026')" style="background: #f1f5f9; color: #4f46e5; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Ver detalles[cite: 18]</button></td>
+          </tr>
+          <tr style="border-bottom: 1px solid #f1f5f9;">
+            <td style="padding: 1rem 1.5rem;">03/04/2026[cite: 18]</td>
+            <td style="padding: 1rem 1.5rem; color: #f59e0b; font-weight: 600;">Con signos de estrés[cite: 18]</td>
+            <td style="padding: 1rem 1.5rem; text-align: right;"><button onclick="alert('Detalles del reporte del 03/04/2026')" style="background: #f1f5f9; color: #4f46e5; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Ver detalles[cite: 18]</button></td>
+          </tr>
+          <tr>
+            <td style="padding: 1rem 1.5rem;">27/03/2026[cite: 18]</td>
+            <td style="padding: 1rem 1.5rem; color: #10b981; font-weight: 600;">Estable[cite: 18]</td>
+            <td style="padding: 1rem 1.5rem; text-align: right;"><button onclick="alert('Detalles del reporte del 27/03/2026')" style="background: #f1f5f9; color: #4f46e5; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Ver detalles[cite: 18]</button></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
 
-    <div class="bg-[#1c2541]/50 p-5 rounded-2xl border border-slate-800 space-y-3">
-      <div class="w-9 h-9 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center">
-        <i class="fa-solid fa-folder-open"></i>
-      </div>
-      <h4 class="font-bold text-white text-sm">Mis reportes</h4>
-      <p class="text-[11px] text-slate-400">Revisa tu historial de respuestas.</p>
-      <button onclick="switchView('student-reports')" class="w-full py-2 bg-indigo-600/30 hover:bg-indigo-600 text-indigo-200 hover:text-white text-xs font-semibold rounded-lg transition">Ver reportes</button>
-    </div>
+  <!-- SECCIÓN 5: PERFIL -->
+  <div id="section-perfil" class="dashboard-section hidden">
+    <h2>Mi perfil[cite: 19]</h2>
+    <p style="margin-bottom: 1.5rem; color: #64748b;">Administra tu información personal y datos de cuenta.</p>
 
-    <div class="bg-[#1c2541]/50 p-5 rounded-2xl border border-slate-800 space-y-3">
-      <div class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center">
-        <i class="fa-solid fa-book-bookmark"></i>
+    <div style="background: #ffffff; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; display: flex; gap: 3rem; align-items: flex-start; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+        <div id="profile-avatar-large" style="width: 100px; height: 100px; background: #4f46e5; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold;">
+          JP
+        </div>
+        <button type="button" onclick="alert('Función para actualizar foto de perfil')" style="background: #ffffff; color: #4f46e5; border: 1px solid #4f46e5; padding: 0.5rem 1rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; font-size: 0.85rem;">Cambiar foto[cite: 19]</button>
       </div>
-      <h4 class="font-bold text-white text-sm">Recursos</h4>
-      <p class="text-[11px] text-slate-400">Consejos, guías y material de apoyo.</p>
-      <button class="w-full py-2 bg-indigo-600/30 hover:bg-indigo-600 text-indigo-200 hover:text-white text-xs font-semibold rounded-lg transition">Ver recursos</button>
+
+      <form id="profile-form" style="flex: 1; display: flex; flex-direction: column; gap: 1.25rem;">
+        <div>
+          <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #64748b; margin-bottom: 0.4rem;">Nombre completo[cite: 19]</label>
+          <input type="text" id="profile-name" value="Juan Pérez" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none;" />
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #64748b; margin-bottom: 0.4rem;">Correo electrónico[cite: 19]</label>
+          <input type="email" id="profile-email" value="juanperez@gmail.com" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none;" />
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #64748b; margin-bottom: 0.4rem;">Rol[cite: 19]</label>
+          <select style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; background: white;">
+            <option>Estudiante[cite: 19]</option>
+          </select>
+        </div>
+        <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
+          <button type="submit" style="background: #4f46e5; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer;">Guardar cambios[cite: 19]</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
+
+<script>
+  // Control global de secciones
+  function switchDashboardSection(targetId) {
+    document.querySelectorAll('.dashboard-section').forEach(sec => sec.classList.add('hidden'));
+    const target = document.getElementById(`section-${targetId}`);
+    if (target) target.classList.remove('hidden');
+
+    // Sincronizar el sidebar
+    document.querySelectorAll('.sidebar-link').forEach(l => {
+      l.classList.remove('active');
+      (l as HTMLElement).style.backgroundColor = 'transparent';
+      (l as HTMLElement).style.color = '#94a3b8';
+      if (l.getAttribute('data-section') === targetId) {
+        l.classList.add('active');
+        (l as HTMLElement).style.backgroundColor = '#4f46e5';
+        (l as HTMLElement).style.color = '#ffffff';
+      }
+    });
+  }
+
+  // Escuchar clics en botones internos (tarjetas y banners)
+  document.addEventListener('click', (e) => {
+    const trigger = (e.target as HTMLElement).closest('.nav-trigger');
+    if (trigger) {
+      const target = trigger.getAttribute('data-target');
+      if (target) switchDashboardSection(target);
+    }
+  });
+
+  // Escuchar eventos desde el Sidebar
+  window.addEventListener('change-section', ((e: CustomEvent) => {
+    switchDashboardSection(e.detail);
+  }) as EventListener);
+
+  // Navegación del cuestionario
+  const questions = [
+    { title: "¿Con qué frecuencia te sientes ansioso/a o preocupado/a?", progress: 30, current: "Pregunta 3 de 10" },
+    { title: "¿Te resulta difícil concentrarte en tus actividades diarias?", progress: 40, current: "Pregunta 4 de 10" },
+    { title: "¿Cómo calificarías tu calidad de sueño en las últimas semanas?", progress: 50, current: "Pregunta 5 de 10" },
+    { title: "¿Sientes apoyo emocional por parte de tus amigos o familiares?", progress: 60, current: "Pregunta 6 de 10" }
+  ];
+  let qIdx = 0;
+
+  const nextBtn = document.getElementById('next-question');
+  const prevBtn = document.getElementById('prev-question');
+  const qTitle = document.getElementById('question-title');
+  const qCounter = document.getElementById('question-counter');
+  const qProgress = document.getElementById('progress-fill');
+
+  nextBtn?.addEventListener('click', () => {
+    qIdx = (qIdx + 1) % questions.length;
+    if (qTitle) qTitle.textContent = questions[qIdx].title;
+    if (qCounter) qCounter.textContent = questions[qIdx].current;
+    if (qProgress) qProgress.style.width = `${questions[qIdx].progress}%`;
+  });
+
+  prevBtn?.addEventListener('click', () => {
+    qIdx = (qIdx - 1 + questions.length) % questions.length;
+    if (qTitle) qTitle.textContent = questions[qIdx].title;
+    if (qCounter) qCounter.textContent = questions[qIdx].current;
+    if (qProgress) qProgress.style.width = `${questions[qIdx].progress}%`;
+  });
+
+  // Chat interactivo
+  const chatForm = document.getElementById('chat-form');
+  const chatInput = document.getElementById('chat-input') as HTMLInputElement;
+  const chatMessages = document.getElementById('chat-messages');
+
+  chatForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const text = chatInput.value.trim();
+    if (!text) return;
+
+    const userMsg = document.createElement('div');
+    userMsg.style.cssText = "display: flex; justify-content: flex-end;";
+    userMsg.innerHTML = `<div style="background: #4f46e5; color: white; padding: 1rem; border-radius: 1rem; max-width: 75%; font-size: 0.95rem;">${text}</div>`;
+    chatMessages?.appendChild(userMsg);
+    chatInput.value = '';
+    if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    setTimeout(() => {
+      const aiMsg = document.createElement('div');
+      aiMsg.style.cssText = "display: flex; gap: 0.75rem; align-items: flex-start;";
+      aiMsg.innerHTML = `
+        <div style="background: #e0e7ff; color: #4f46e5; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;"><i class="fa-solid fa-robot"></i></div>
+        <div style="background: #f1f5f9; padding: 1rem; border-radius: 1rem; max-width: 75%; color: #0f172a; font-size: 0.95rem;">
+          Comprendo lo que me dices. Estoy aquí para apoyarte en tu bienestar emocional. ¿Te gustaría que registremos esto en tus reportes o prefieres conversar algo más?
+        </div>
+      `;
+      chatMessages?.appendChild(aiMsg);
+      if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
+    }, 1000);
+  });
+
+  // Guardar perfil
+  const profileForm = document.getElementById('profile-form');
+  profileForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert('¡Cambios guardados con éxito!');
+  });
+</script>
