@@ -1,21 +1,35 @@
 ---
 // src/components/Header.astro
 ---
-<header id="main-header" class="h-16 border-b border-slate-800 px-6 flex items-center justify-between bg-[#1c2541]/40 backdrop-blur-md sticky top-0 z-10">
-  <div class="flex items-center space-x-3">
-    <i class="fa-solid fa-magnifying-glass text-slate-400 text-sm"></i>
-    <input type="text" placeholder="Buscar..." class="bg-transparent text-sm focus:outline-none text-slate-200 placeholder-slate-500 w-48 md:w-64" />
+<header style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 1rem 0; margin-bottom: 1rem;">
+  <!-- Buscador -->
+  <div style="position: relative;">
+    <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #64748b;">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </span>
+    <input 
+      type="text" 
+      placeholder="Buscar..." 
+      style="background-color: #ffffff; color: #0f172a; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 0.6rem 1rem 0.6rem 2.5rem; width: 300px; outline: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05);" 
+    />
   </div>
-  <div class="flex items-center space-x-4">
-    <button class="text-slate-400 hover:text-white relative">
-      <i class="fa-regular fa-bell text-lg"></i>
-      <span class="absolute -top-1 -right-1 w-2 h-2 bg-indigo-500 rounded-full"></span>
-    </button>
-    <div class="flex items-center space-x-3 pl-4 border-l border-slate-800">
-      <div id="user-avatar" class="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center font-bold text-xs text-white">JP</div>
-      <div class="hidden sm:block">
-        <p id="user-name" class="text-xs font-semibold text-white leading-tight">Juan Pérez</p>
-        <p id="user-role" class="text-[10px] text-indigo-300">Estudiante</p>
+
+  <!-- Zona derecha: Notificaciones y Perfil -->
+  <div style="display: flex; align-items: center; gap: 1.25rem;">
+    <!-- Campanita de notificaciones con puntito morado -->
+    <div style="position: relative; cursor: pointer; color: #4f46e5; font-size: 1.15rem;">
+      <i class="fa-regular fa-bell"></i>
+      <span style="position: absolute; top: -2px; right: -2px; width: 8px; height: 8px; background-color: #4f46e5; border-radius: 50%;"></span>
+    </div>
+
+    <!-- Perfil Badge -->
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <div id="header-avatar" style="width: 40px; height: 40px; background-color: #4f46e5; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: font-weight: bold; font-size: 0.9rem;">
+        JP
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <span id="header-name" style="font-weight: 700; color: #0f172a; font-size: 0.9rem; line-height: 1.2;">Juan Pérez</span>
+        <span style="font-size: 0.75rem; color: #64748b;">Estudiante</span>
       </div>
     </div>
   </div>

@@ -6,7 +6,7 @@
   <!-- SECCIÓN 1: INICIO -->
   <div id="section-inicio" class="dashboard-section">
     <h1 id="welcome-title">Hola, Estudiante 👋</h1>
-    <p>Tu bienestar emocional es importante. Aquí tienes un resumen de tu progreso.</p>
+    <p style="color: #64748b;">Tu bienestar emocional es importante. Aquí tienes un resumen de tu progreso.</p>
 
     <!-- Banner "No estás solo" -->
     <div class="banner-assist" style="background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%); border: 1px solid #c7d2fe; border-radius: 1.25rem; padding: 2.25rem; margin: 1.5rem 0; color: #1e1b4b;">
@@ -51,32 +51,29 @@
           <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.4rem;">Recursos</h3>
           <p style="font-size: 0.85rem; color: #64748b;">Consejos, guías y material de apoyo.</p>
         </div>
-        <button type="button" onclick="alert('Guías y consejos de bienestar emocional disponibles próximamente.')" style="background: #4f46e5; color: white; border: none; padding: 0.65rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; width: 100%;">Ver recursos</button>
+        <button type="button" onclick="alert('Guías de bienestar emocional y técnicas de respiración disponibles.')" style="background: #4f46e5; color: white; border: none; padding: 0.65rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; width: 100%;">Ver recursos</button>
       </div>
     </div>
   </div>
 
-  <!-- SECCIÓN 2: CUESTIONARIO EMOCIONAL -->
+  <!-- SECCIÓN 2: CUESTIONARIO EMOCIONAL (1-10 PREGUNTAS COHERENTES) -->
   <div id="section-cuestionario" class="dashboard-section hidden">
     <h2>Cuestionario de bienestar emocional</h2>
-    <p style="margin-bottom: 1.5rem; color: #64748b;">Responde con sinceridad. No hay respuestas correctas o incorrectas.</p>
+    <p style="margin-bottom: 1.5rem; color: #64748b;">Responde con sinceridad. Esta evaluación consta de 10 preguntas clave para conocer tu estado actual.</p>
     
     <div style="background: #ffffff; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
         <div style="background: #e2e8f0; height: 10px; border-radius: 5px; flex: 1; margin-right: 1.5rem; overflow: hidden;">
-          <div id="progress-fill" style="background: #4f46e5; height: 100%; width: 30%; transition: width 0.3s;"></div>
+          <div id="progress-fill" style="background: #4f46e5; height: 100%; width: 10%; transition: width 0.3s;"></div>
         </div>
-        <span id="question-counter" style="font-size: 0.9rem; font-weight: 600; color: #64748b;">Pregunta 3 de 10</span>
+        <span id="question-counter" style="font-size: 0.9rem; font-weight: 600; color: #64748b;">Pregunta 1 de 10</span>
       </div>
 
-      <h3 id="question-title" style="font-size: 1.25rem; color: #0f172a; margin-bottom: 1.5rem;">¿Con qué frecuencia te sientes ansioso/a o preocupado/a?</h3>
+      <h3 id="question-title" style="font-size: 1.25rem; color: #0f172a; margin-bottom: 1.5rem;">Cargando pregunta...</h3>
 
-      <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem;">
-        <label style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; cursor: pointer;"><input type="radio" name="q" /> Nunca</label>
-        <label style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; cursor: pointer;"><input type="radio" name="q" /> Rara vez</label>
-        <label style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: 1px solid #4f46e5; background: #e0e7ff33; border-radius: 0.75rem; cursor: pointer;"><input type="radio" name="q" checked /> A veces</label>
-        <label style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; cursor: pointer;"><input type="radio" name="q" /> Frecuentemente</label>
-        <label style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; cursor: pointer;"><input type="radio" name="q" /> Siempre</label>
+      <!-- Opciones dinámicas lógicas -->
+      <div id="options-container" style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem;">
+        <!-- Se inyectan con JavaScript -->
       </div>
 
       <div style="display: flex; justify-content: space-between;">
@@ -108,55 +105,55 @@
     </div>
   </div>
 
-  <!-- SECCIÓN 4: MIS REPORTES -->
+  <!-- SECCIÓN 4: MIS REPORTES (CALIFICACIÓN AUTOMÁTICA Y FECHAS) -->
   <div id="section-reportes" class="dashboard-section hidden">
     <h2>Resultados de tu cuestionario</h2>
-    <p style="margin-bottom: 1.5rem; color: #64748b;">Aquí puedes ver un resumen de tus respuestas y tu estado emocional[cite: 18].</p>
+    <p style="margin-bottom: 1.5rem; color: #64748b;">Aquí puedes ver el análisis de tu última evaluación y recomendaciones personalizadas.</p>
 
     <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-bottom: 2rem;">
       <div style="background: #ffffff; padding: 1.75rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; display: flex; align-items: center; gap: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
-        <div style="font-size: 3rem; color: #10b981;"><i class="fa-solid fa-face-smile"></i></div>
+        <div id="report-icon" style="font-size: 3rem; color: #10b981;"><i class="fa-solid fa-face-smile"></i></div>
         <div>
-          <h3 style="font-size: 1.15rem; color: #0f172a; margin-bottom: 0.4rem;">Tu estado emocional se encuentra en un rango estable[cite: 18].</h3>
-          <p style="color: #64748b; font-size: 0.85rem;">Continúa con tus hábitos de autocuidado y no dudes en pedir ayuda si lo necesitas[cite: 18].</p>
+          <h3 id="report-status-title" style="font-size: 1.15rem; color: #0f172a; margin-bottom: 0.4rem;">Tu estado emocional se encuentra en un rango estable.</h3>
+          <p id="report-status-desc" style="color: #64748b; font-size: 0.85rem;">Continúa con tus hábitos de autocuidado y mantén una comunicación abierta con tus seres queridos.</p>
         </div>
       </div>
 
       <div style="background: #ffffff; padding: 1.75rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
-        <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.75rem;">Recomendaciones[cite: 18]</h3>
-        <ul style="padding-left: 1.25rem; color: #64748b; font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.4rem;">
+        <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 0.75rem;">Recomendaciones</h3>
+        <ul id="report-recommendations" style="padding-left: 1.25rem; color: #64748b; font-size: 0.85rem; display: flex; flex-direction: column; gap: 0.4rem;">
           <li>Mantén una buena rutina de sueño[cite: 18].</li>
-          <li>Realiza actividades que disfrutes[cite: 18].</li>
-          <li>Habla con alguien de confianza cuando lo necesites[cite: 18].</li>
+          <li>Realiza actividades físicas o recreativas[cite: 18].</li>
+          <li>Acude al chat con IA ante cualquier duda.</li>
         </ul>
       </div>
     </div>
 
-    <h3 style="font-size: 1.25rem; color: #0f172a; margin-bottom: 1rem;">Historial de cuestionarios[cite: 18]</h3>
+    <h3 style="font-size: 1.25rem; color: #0f172a; margin-bottom: 1rem;">Historial de cuestionarios</h3>
     <div style="background: #ffffff; border-radius: 1.25rem; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
       <table style="width: 100%; border-collapse: collapse; text-align: left;">
         <thead>
           <tr style="border-bottom: 1px solid #e2e8f0; background: #f8fafc; color: #64748b; font-size: 0.85rem;">
-            <th style="padding: 1rem 1.5rem;">Fecha[cite: 18]</th>
-            <th style="padding: 1rem 1.5rem;">Estado emocional[cite: 18]</th>
-            <th style="padding: 1rem 1.5rem; text-align: right;">Acciones[cite: 18]</th>
+            <th style="padding: 1rem 1.5rem;">Fecha</th>
+            <th style="padding: 1rem 1.5rem;">Estado emocional</th>
+            <th style="padding: 1rem 1.5rem; text-align: right;">Acciones</th>
           </tr>
         </thead>
         <tbody style="font-size: 0.9rem; color: #0f172a;">
           <tr style="border-bottom: 1px solid #f1f5f9;">
-            <td style="padding: 1rem 1.5rem;">10/04/2026[cite: 18]</td>
-            <td style="padding: 1rem 1.5rem; color: #10b981; font-weight: 600;">Estable[cite: 18]</td>
-            <td style="padding: 1rem 1.5rem; text-align: right;"><button onclick="alert('Detalles del reporte del 10/04/2026')" style="background: #f1f5f9; color: #4f46e5; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Ver detalles[cite: 18]</button></td>
+            <td style="padding: 1rem 1.5rem;" id="table-date-1">08/11/2026</td>
+            <td style="padding: 1rem 1.5rem; color: #10b981; font-weight: 600;" id="table-status-1">Estable</td>
+            <td style="padding: 1rem 1.5rem; text-align: right;"><button onclick="alert('Reporte actual generado tras completar el cuestionario.')" style="background: #f1f5f9; color: #4f46e5; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Ver detalles</button></td>
           </tr>
           <tr style="border-bottom: 1px solid #f1f5f9;">
-            <td style="padding: 1rem 1.5rem;">03/04/2026[cite: 18]</td>
-            <td style="padding: 1rem 1.5rem; color: #f59e0b; font-weight: 600;">Con signos de estrés[cite: 18]</td>
-            <td style="padding: 1rem 1.5rem; text-align: right;"><button onclick="alert('Detalles del reporte del 03/04/2026')" style="background: #f1f5f9; color: #4f46e5; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Ver detalles[cite: 18]</button></td>
+            <td style="padding: 1rem 1.5rem;">03/10/2026</td>
+            <td style="padding: 1rem 1.5rem; color: #f59e0b; font-weight: 600;">Con signos de estrés</td>
+            <td style="padding: 1rem 1.5rem; text-align: right;"><button onclick="alert('Detalles del reporte del 03/10/2026')" style="background: #f1f5f9; color: #4f46e5; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Ver detalles</button></td>
           </tr>
           <tr>
-            <td style="padding: 1rem 1.5rem;">27/03/2026[cite: 18]</td>
-            <td style="padding: 1rem 1.5rem; color: #10b981; font-weight: 600;">Estable[cite: 18]</td>
-            <td style="padding: 1rem 1.5rem; text-align: right;"><button onclick="alert('Detalles del reporte del 27/03/2026')" style="background: #f1f5f9; color: #4f46e5; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Ver detalles[cite: 18]</button></td>
+            <td style="padding: 1rem 1.5rem;">15/09/2026</td>
+            <td style="padding: 1rem 1.5rem; color: #10b981; font-weight: 600;">Estable</td>
+            <td style="padding: 1rem 1.5rem; text-align: right;"><button onclick="alert('Detalles del reporte del 15/09/2026')" style="background: #f1f5f9; color: #4f46e5; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Ver detalles</button></td>
           </tr>
         </tbody>
       </table>
@@ -165,7 +162,7 @@
 
   <!-- SECCIÓN 5: PERFIL -->
   <div id="section-perfil" class="dashboard-section hidden">
-    <h2>Mi perfil[cite: 19]</h2>
+    <h2>Mi perfil</h2>
     <p style="margin-bottom: 1.5rem; color: #64748b;">Administra tu información personal y datos de cuenta.</p>
 
     <div style="background: #ffffff; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; display: flex; gap: 3rem; align-items: flex-start; box-shadow: 0 4px 15px rgba(0,0,0,0.04);">
@@ -173,26 +170,26 @@
         <div id="profile-avatar-large" style="width: 100px; height: 100px; background: #4f46e5; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold;">
           JP
         </div>
-        <button type="button" onclick="alert('Función para actualizar foto de perfil')" style="background: #ffffff; color: #4f46e5; border: 1px solid #4f46e5; padding: 0.5rem 1rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; font-size: 0.85rem;">Cambiar foto[cite: 19]</button>
+        <button type="button" onclick="alert('Función para actualizar foto de perfil')" style="background: #ffffff; color: #4f46e5; border: 1px solid #4f46e5; padding: 0.5rem 1rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; font-size: 0.85rem;">Cambiar foto</button>
       </div>
 
       <form id="profile-form" style="flex: 1; display: flex; flex-direction: column; gap: 1.25rem;">
         <div>
-          <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #64748b; margin-bottom: 0.4rem;">Nombre completo[cite: 19]</label>
-          <input type="text" id="profile-name" value="Juan Pérez" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none;" />
+          <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #64748b; margin-bottom: 0.4rem;">Nombre completo</label>
+          <input type="text" id="profile-name-input" value="Juan Pérez" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none;" />
         </div>
         <div>
-          <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #64748b; margin-bottom: 0.4rem;">Correo electrónico[cite: 19]</label>
-          <input type="email" id="profile-email" value="juanperez@gmail.com" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none;" />
+          <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #64748b; margin-bottom: 0.4rem;">Correo electrónico</label>
+          <input type="email" id="profile-email-input" value="juanperez@gmail.com" style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none;" />
         </div>
         <div>
-          <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #64748b; margin-bottom: 0.4rem;">Rol[cite: 19]</label>
+          <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #64748b; margin-bottom: 0.4rem;">Rol</label>
           <select style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; background: white;">
-            <option>Estudiante[cite: 19]</option>
+            <option>Estudiante</option>
           </select>
         </div>
         <div style="display: flex; justify-content: flex-end; margin-top: 1rem;">
-          <button type="submit" style="background: #4f46e5; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer;">Guardar cambios[cite: 19]</button>
+          <button type="submit" style="background: #4f46e5; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer;">Guardar cambios</button>
         </div>
       </form>
     </div>
@@ -200,13 +197,12 @@
 </div>
 
 <script>
-  // Control global de secciones
+  // Control de secciones
   function switchDashboardSection(targetId) {
     document.querySelectorAll('.dashboard-section').forEach(sec => sec.classList.add('hidden'));
     const target = document.getElementById(`section-${targetId}`);
     if (target) target.classList.remove('hidden');
 
-    // Sincronizar el sidebar
     document.querySelectorAll('.sidebar-link').forEach(l => {
       l.classList.remove('active');
       (l as HTMLElement).style.backgroundColor = 'transparent';
@@ -219,7 +215,6 @@
     });
   }
 
-  // Escuchar clics en botones internos (tarjetas y banners)
   document.addEventListener('click', (e) => {
     const trigger = (e.target as HTMLElement).closest('.nav-trigger');
     if (trigger) {
@@ -228,41 +223,121 @@
     }
   });
 
-  // Escuchar eventos desde el Sidebar
   window.addEventListener('change-section', ((e: CustomEvent) => {
     switchDashboardSection(e.detail);
   }) as EventListener);
 
-  // Navegación del cuestionario
-  const questions = [
-    { title: "¿Con qué frecuencia te sientes ansioso/a o preocupado/a?", progress: 30, current: "Pregunta 3 de 10" },
-    { title: "¿Te resulta difícil concentrarte en tus actividades diarias?", progress: 40, current: "Pregunta 4 de 10" },
-    { title: "¿Cómo calificarías tu calidad de sueño en las últimas semanas?", progress: 50, current: "Pregunta 5 de 10" },
-    { title: "¿Sientes apoyo emocional por parte de tus amigos o familiares?", progress: 60, current: "Pregunta 6 de 10" }
+  // --- CUESTIONARIO DE 10 PREGUNTAS CLAVE ---
+  const questionsList = [
+    { q: "¿Con qué frecuencia te sientes abrumado/a por las tareas escolares o exámenes?", options: ["Nunca", "Rara vez", "A veces", "Frecuentemente", "Siempre"], weights: [1, 2, 3, 4, 5] },
+    { q: "¿Cómo calificarías tu calidad de sueño y descanso durante las últimas dos semanas?", options: ["Excelente", "Buena", "Regular", "Mala", "Muy mala"], weights: [1, 2, 3, 4, 5] },
+    { q: "¿Te cuesta concentrarte o mantener la atención en tus clases habituales?", options: ["Nunca", "Rara vez", "A veces", "Frecuentemente", "Siempre"], weights: [1, 2, 3, 4, 5] },
+    { q: "¿Sientes que cuentas con apoyo emocional de amigos o familiares cercanos?", options: ["Siempre", "Frecuentemente", "A veces", "Rara vez", "Nunca"], weights: [5, 4, 3, 2, 1] }, // Inversa
+    { q: "¿Experimentas dolores de cabeza, tensión muscular ofatiga sin causa médica?", options: ["Nunca", "Rara vez", "A veces", "Frecuentemente", "Siempre"], weights: [1, 2, 3, 4, 5] },
+    { q: "¿Disfrutas realizando tus actividades diarias y pasatiempos favoritos?", options: ["Siempre", "Frecuentemente", "A veces", "Rara vez", "Nunca"], weights: [5, 4, 3, 2, 1] }, // Inversa
+    { q: "¿Te sientes irritable, molesto/a o impaciente con facilidad últimamente?", options: ["Nunca", "Rara vez", "A veces", "Frecuentemente", "Siempre"], weights: [1, 2, 3, 4, 5] },
+    { q: "¿Te consideras capaz de manejar los problemas cotidianos de forma adecuada?", options: ["Siempre", "Frecuentemente", "A veces", "Rara vez", "Nunca"], weights: [5, 4, 3, 2, 1] }, // Inversa
+    { q: "¿Has sentido tristeza profunda o falta de motivación sin motivo aparente?", options: ["Nunca", "Rara vez", "A veces", "Frecuentemente", "Siempre"], weights: [1, 2, 3, 4, 5] },
+    { q: "¿Te sientes optimista y con expectativas positivas sobre tu futuro?", options: ["Siempre", "Frecuentemente", "A veces", "Rara vez", "Nunca"], weights: [5, 4, 3, 2, 1] }  // Inversa
   ];
-  let qIdx = 0;
 
-  const nextBtn = document.getElementById('next-question');
-  const prevBtn = document.getElementById('prev-question');
+  let currentQIdx = 0;
+  let userAnswers = new Array(questionsList.length).fill(0);
+
   const qTitle = document.getElementById('question-title');
   const qCounter = document.getElementById('question-counter');
   const qProgress = document.getElementById('progress-fill');
+  const optionsContainer = document.getElementById('options-container');
+  const nextBtn = document.getElementById('next-question');
+  const prevBtn = document.getElementById('prev-question');
+
+  function renderQuestion() {
+    const current = questionsList[currentQIdx];
+    if (qTitle) qTitle.textContent = current.q;
+    if (qCounter) qCounter.textContent = `Pregunta ${currentQIdx + 1} de 10`;
+    if (qProgress) qProgress.style.width = `${((currentQIdx + 1) / 10) * 100}%`;
+
+    if (optionsContainer) {
+      optionsContainer.innerHTML = '';
+      current.options.forEach((opt, idx) => {
+        const isChecked = userAnswers[currentQIdx] === current.weights[idx];
+        const label = document.createElement('label');
+        label.style.cssText = "display: flex; align-items: center; gap: 0.75rem; padding: 0.85rem 1rem; border: 1px solid " + (isChecked ? "#4f46e5" : "#e2e8f0") + "; background: " + (isChecked ? "#e0e7ff33" : "#ffffff") + "; border-radius: 0.75rem; cursor: pointer; font-weight: 500; color: #0f172a;";
+        label.innerHTML = `<input type="radio" name="question-opt" value="${current.weights[idx]}" ${isChecked ? 'checked' : ''} style="accent-color: #4f46e5;" /> ${opt}`;
+        
+        label.addEventListener('click', () => {
+          userAnswers[currentQIdx] = current.weights[idx];
+          renderQuestion();
+        });
+
+        optionsContainer.appendChild(label);
+      });
+    }
+
+    if (prevBtn) (prevBtn as HTMLElement).style.display = currentQIdx === 0 ? 'none' : 'block';
+    if (nextBtn) nextBtn.textContent = currentQIdx === questionsList.length - 1 ? 'Finalizar evaluación →' : 'Siguiente →';
+  }
 
   nextBtn?.addEventListener('click', () => {
-    qIdx = (qIdx + 1) % questions.length;
-    if (qTitle) qTitle.textContent = questions[qIdx].title;
-    if (qCounter) qCounter.textContent = questions[qIdx].current;
-    if (qProgress) qProgress.style.width = `${questions[qIdx].progress}%`;
+    if (userAnswers[currentQIdx] === 0) {
+      alert('Por favor selecciona una opción antes de continuar.');
+      return;
+    }
+
+    if (currentQIdx < questionsList.length - 1) {
+      currentQIdx++;
+      renderQuestion();
+    } else {
+      // Calcular puntaje total y actualizar reportes automáticamente
+      calculateAndSaveReport();
+      switchDashboardSection('reportes');
+      currentQIdx = 0;
+      userAnswers.fill(0);
+      renderQuestion();
+    }
   });
 
   prevBtn?.addEventListener('click', () => {
-    qIdx = (qIdx - 1 + questions.length) % questions.length;
-    if (qTitle) qTitle.textContent = questions[qIdx].title;
-    if (qCounter) qCounter.textContent = questions[qIdx].current;
-    if (qProgress) qProgress.style.width = `${questions[qIdx].progress}%`;
+    if (currentQIdx > 0) {
+      currentQIdx--;
+      renderQuestion();
+    }
   });
 
-  // Chat interactivo
+  function calculateAndSaveReport() {
+    const totalScore = userAnswers.reduce((a, b) => a + b, 0);
+    const statusTitle = document.getElementById('report-status-title');
+    const statusDesc = document.getElementById('report-status-desc');
+    const reportIcon = document.getElementById('report-icon');
+    const tableStatus1 = document.getElementById('table-status-1');
+
+    const todayStr = new Date().toLocaleDateString('es-ES');
+    const dateCell = document.getElementById('table-date-1');
+    if (dateCell) dateCell.textContent = todayStr;
+
+    if (totalScore <= 20) {
+      if (statusTitle) statusTitle.textContent = "Tu estado emocional se encuentra en un rango muy estable.";
+      if (statusDesc) statusDesc.textContent = "¡Excelente trabajo! Posees buenos mecanismos de afrontamiento y bienestar.";
+      if (reportIcon) { reportIcon.innerHTML = '<i class="fa-solid fa-face-laugh-beam"></i>'; reportIcon.style.color = "#10b981"; }
+      if (tableStatus1) { tableStatus1.textContent = "Estable y Óptimo"; tableStatus1.style.color = "#10b981"; }
+    } else if (totalScore <= 35) {
+      if (statusTitle) statusTitle.textContent = "Tu estado emocional es estable con signos leves de estrés.";
+      if (statusDesc) statusDesc.textContent = "Mantén rutinas saludables de descanso y realiza actividades recreativas.";
+      if (reportIcon) { reportIcon.innerHTML = '<i class="fa-solid fa-face-smile"></i>'; reportIcon.style.color = "#3b82f6"; }
+      if (tableStatus1) { tableStatus1.textContent = "Estable"; tableStatus1.style.color = "#3b82f6"; }
+    } else {
+      if (statusTitle) statusTitle.textContent = "Se detectaron signos moderados de estrés o ansiedad.";
+      if (statusDesc) statusDesc.textContent = "Te sugerimos conversar con nuestra asistente de IA o agendar con la psicóloga.";
+      if (reportIcon) { reportIcon.innerHTML = '<i class="fa-solid fa-face-frown"></i>'; reportIcon.style.color = "#f59e0b"; }
+      if (tableStatus1) { tableStatus1.textContent = "Con signos de estrés"; tableStatus1.style.color = "#f59e0b"; }
+    }
+    alert('¡Cuestionario completado con éxito! Revisa tus resultados en la sección Mis Reportes.');
+  }
+
+  // Inicializar primera pregunta
+  renderQuestion();
+
+  // Chat con IA interactivo
   const chatForm = document.getElementById('chat-form');
   const chatInput = document.getElementById('chat-input') as HTMLInputElement;
   const chatMessages = document.getElementById('chat-messages');
@@ -285,7 +360,7 @@
       aiMsg.innerHTML = `
         <div style="background: #e0e7ff; color: #4f46e5; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;"><i class="fa-solid fa-robot"></i></div>
         <div style="background: #f1f5f9; padding: 1rem; border-radius: 1rem; max-width: 75%; color: #0f172a; font-size: 0.95rem;">
-          Comprendo lo que me dices. Estoy aquí para apoyarte en tu bienestar emocional. ¿Te gustaría que registremos esto en tus reportes o prefieres conversar algo más?
+          Te entiendo perfectamente. Estoy aquí para escucharte y apoyarte en lo que necesites. ¿Te gustaría realizar una técnica de respiración guiada o prefieres desahogarte sobre algo en específico?
         </div>
       `;
       chatMessages?.appendChild(aiMsg);
@@ -297,6 +372,13 @@
   const profileForm = document.getElementById('profile-form');
   profileForm?.addEventListener('submit', (e) => {
     e.preventDefault();
-    alert('¡Cambios guardados con éxito!');
+    const newName = (document.getElementById('profile-name-input') as HTMLInputElement).value;
+    if (newName) {
+      const headerName = document.getElementById('header-name');
+      const headerAvatar = document.getElementById('header-avatar');
+      if (headerName) headerName.textContent = newName;
+      if (headerAvatar) headerAvatar.textContent = newName.substring(0, 2).toUpperCase();
+    }
+    alert('¡Cambios guardados con éxito en tu perfil!');
   });
 </script>
