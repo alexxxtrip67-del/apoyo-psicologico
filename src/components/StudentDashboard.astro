@@ -1,7 +1,7 @@
 ---
 // src/components/StudentDashboard.astro
 ---
-<div style="display: flex; flex-direction: column; gap: 2rem; width: 100%;">
+<div style="display: flex; flex-direction: column; gap: 2rem; width: 100%; box-sizing: border-box;">
 
   <!-- SECCIÓN 1: INICIO -->
   <div id="section-inicio" class="student-section" style="display: flex; flex-direction: column; gap: 2rem;">
@@ -49,8 +49,8 @@
   </div>
 
   <!-- SECCIÓN 2: CUESTIONARIO -->
-  <div id="section-cuestionario" class="student-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0;">
-    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 1rem;">Cuestionario Emocional Institucional</h2>
+  <div id="section-cuestionario" class="student-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; flex-direction: column;">
+    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Cuestionario Emocional Institucional</h2>
     <p style="color: #64748b; margin-bottom: 2rem;">Responde con sinceridad para evaluar tu bienestar actual.</p>
     <div style="display: flex; flex-direction: column; gap: 1.5rem;">
       <div style="padding: 1.25rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0;">
@@ -66,9 +66,9 @@
   </div>
 
   <!-- SECCIÓN 3: CITAS CON PSICÓLOGA -->
-  <div id="section-citas" class="student-section" style="display: none; display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;">
+  <div id="section-citas" class="student-section" style="display: none; grid-template-columns: 2fr 1fr; gap: 1.5rem;">
     <div style="background: white; padding: 2rem; border-radius: 1.25rem; border: 1px solid #e2e8f0;">
-      <h3 style="font-size: 1.2rem; font-weight: 700; color: #0f172a; margin-bottom: 1rem;">Horarios Libres Disponibles</h3>
+      <h3 style="font-size: 1.2rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Horarios Libres Disponibles</h3>
       <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1.5rem;">Selecciona el horario publicado por la Dra. Laura Gómez.</p>
       <div id="student-slots-list" style="display: flex; flex-direction: column; gap: 1rem;"></div>
     </div>
@@ -81,7 +81,7 @@
   </div>
 
   <!-- SECCIÓN 4: CHAT CON IA -->
-  <div id="section-chat" class="student-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; height: 500px; display: flex; flex-direction: column; justify-content: space-between;">
+  <div id="section-chat" class="student-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; height: 500px; flex-direction: column; justify-content: space-between;">
     <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 1rem;">Chat de Apoyo Emocional (IA)</h2>
     <div style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 1rem; overflow-y: auto; margin-bottom: 1rem;">
       <p style="background: #e0e7ff; padding: 0.75rem 1rem; border-radius: 0.75rem; width: fit-content; color: #1e1b4b; font-size: 0.9rem;">¡Hola! Soy tu asistente virtual de apoyo emocional. ¿En qué te puedo ayudar hoy?</p>
@@ -93,25 +93,44 @@
   </div>
 
   <!-- SECCIÓN 5: MIS REPORTES -->
-  <div id="section-reportes" class="student-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0;">
-    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 1rem;">Mis Reportes y Historial</h2>
+  <div id="section-reportes" class="student-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; flex-direction: column;">
+    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Mis Reportes y Historial</h2>
     <p style="color: #64748b;">Aquí puedes ver el historial de tus participaciones y cuestionarios previos.</p>
   </div>
 
-  <!-- SECCIÓN 6: PERFIL -->
-  <div id="section-perfil" class="student-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0;">
-    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 1rem;">Mi Perfil</h2>
-    <p style="color: #64748b; margin-bottom: 1.5rem;">Administra tu información personal y datos institucionales.</p>
-    <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 500px;">
-      <div>
-        <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.3rem;">Nombre Completo</label>
-        <input type="text" id="profile-name-input" value="Rider Pérez" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.5rem;" />
+  <!-- SECCIÓN 6: PERFIL (CON OPCIÓN DE SUBIR FOTO REAL) -->
+  <div id="section-perfil" class="student-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; flex-direction: column;">
+    <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Mi Perfil</h2>
+    <p style="color: #64748b; margin-bottom: 2rem;">Administra tu información personal y sube tu foto de perfil real.</p>
+    
+    <div style="display: flex; gap: 2.5rem; align-items: flex-start;">
+      <!-- Avatar y botón de cambiar foto -->
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+        <div id="profile-avatar-large" style="width: 100px; height: 100px; background: #4f46e5; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; overflow: hidden; border: 3px solid #e2e8f0;">
+          RP
+        </div>
+        <input type="file" id="avatar-file-input" accept="image/*" style="display: none;" />
+        <button onclick="document.getElementById('avatar-file-input')?.click()" style="background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; font-size: 0.85rem; cursor: pointer;">
+          Cambiar foto
+        </button>
       </div>
-      <div>
-        <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.3rem;">Rol</label>
-        <input type="text" value="Estudiante" disabled style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.5rem; background: #f1f5f9;" />
+
+      <!-- Campos de texto -->
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 1.25rem; max-width: 500px;">
+        <div>
+          <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.3rem;">Nombre Completo</label>
+          <input type="text" id="profile-name-input" value="Rider Pérez" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.5rem; outline: none;" />
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.3rem;">Correo electrónico</label>
+          <input type="email" value="rider.perez@estudiante.edu.ec" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.5rem; outline: none;" />
+        </div>
+        <div>
+          <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.3rem;">Rol</label>
+          <input type="text" value="Estudiante" disabled style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.5rem; background: #f1f5f9; color: #64748b;" />
+        </div>
+        <button onclick="alert('¡Cambios y foto de perfil guardados con éxito!')" style="background: #4f46e5; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; width: fit-content;">Guardar cambios</button>
       </div>
-      <button onclick="alert('¡Cambios guardados con éxito!')" style="background: #4f46e5; color: white; border: none; padding: 0.75rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Guardar cambios</button>
     </div>
   </div>
 
@@ -133,6 +152,26 @@
   window.addEventListener('change-section', (e: any) => {
     const section = e.detail;
     (window as any).switchStudentSection(section);
+  });
+
+  // Funcionalidad para subir foto de perfil real
+  const avatarInput = document.getElementById('avatar-file-input') as HTMLInputElement;
+  avatarInput?.addEventListener('change', (e) => {
+    const file = (e.target as HTMLInputElement).files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(uploadEvent) {
+        const imageUrl = uploadEvent.target?.result as string;
+        const avatarLarge = document.getElementById('profile-avatar-large');
+        if (avatarLarge) {
+          avatarLarge.style.backgroundImage = `url(${imageUrl})`;
+          avatarLarge.style.backgroundSize = 'cover';
+          avatarLarge.style.backgroundPosition = 'center';
+          avatarLarge.textContent = '';
+        }
+      };
+      reader.readAsDataURL(file);
+    }
   });
 
   // Renderizar horarios de citas disponibles
