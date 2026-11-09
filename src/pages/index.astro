@@ -17,18 +17,16 @@ import '../styles/global.css';
 		<!-- FontAwesome -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 	</head>
-	<body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; overflow-x: hidden;">
+	<body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: system-ui, -apple-system, sans-serif;">
 		
-		<!-- 1. PANTALLA DE LOGIN (Visible por defecto) -->
-		<div id="view-login-wrapper">
-			<Login />
-		</div>
+		<!-- 1. LOGIN -->
+		<Login />
 
-		<!-- 2. PANEL DE ESTUDIANTE (Exclusivo para alumnos, oculto para psicóloga) -->
-		<div id="app" style="display: none; width: 100vw; height: 100vh; background-color: #f8fafc; overflow: hidden;">
-			<div style="display: flex; width: 100%; height: 100vh;">
+		<!-- 2. PANEL DE ESTUDIANTE -->
+		<div id="app" style="display: none; width: 100vw; min-height: 100vh; background-color: #f8fafc;">
+			<div style="display: flex; width: 100%; min-height: 100vh;">
 				<Sidebar />
-				<div style="flex: 1; display: flex; flex-direction: column; height: 100vh; background-color: #f8fafc; overflow-y: auto;">
+				<div style="flex: 1; display: flex; flex-direction: column; min-height: 100vh; background-color: #f8fafc; overflow-y: auto;">
 					<Header />
 					<main style="padding: 2rem 2.5rem; flex: 1; box-sizing: border-box;">
 						<StudentDashboard />
@@ -37,13 +35,10 @@ import '../styles/global.css';
 			</div>
 		</div>
 
-		<!-- 3. PANEL PROFESIONAL DE PSICÓLOGA (Exclusivo para la Dra. Laura Gómez, oculto para alumnos) -->
-		<div id="psych-app" style="display: none; width: 100vw; height: 100vh; background-color: #f8fafc; overflow: hidden;">
-			<PsychDashboard />
-		</div>
+		<!-- 3. PANEL PROFESIONAL DE PSICÓLOGA -->
+		<PsychDashboard />
 
 		<script>
-			// Control global estricto para mostrar exclusivamente la vista que corresponde
 			document.addEventListener('click', (e) => {
 				const target = e.target as HTMLElement;
 				if (target.closest('#logout-btn') || target.closest('#psych-logout-btn')) {
@@ -51,9 +46,9 @@ import '../styles/global.css';
 					const appWrapper = document.getElementById('app');
 					const psychWrapper = document.getElementById('psych-app');
 
-					if (loginWrapper) loginWrapper.style.setProperty('display', 'block', 'important');
-					if (appWrapper) appWrapper.style.setProperty('display', 'none', 'important');
-					if (psychWrapper) psychWrapper.style.setProperty('display', 'none', 'important');
+					if (loginWrapper) loginWrapper.style.display = 'flex';
+					if (appWrapper) appWrapper.style.display = 'none';
+					if (psychWrapper) psychWrapper.style.display = 'none';
 				}
 			});
 		</script>
