@@ -29,16 +29,16 @@
       <div id="password-field-container">
         <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.4rem;">Contraseña</label>
         <div style="position: relative; display: flex; align-items: center;">
-          <input type="password" id="password-input" placeholder="••••••••" required style="width: 100%; padding: 0.75rem 2.5rem 0.75rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 0.95rem;" />
+          <input type="password" id="password-input" placeholder="••••••••" style="width: 100%; padding: 0.75rem 2.5rem 0.75rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 0.95rem;" />
           <i id="toggle-password" class="fa-solid fa-eye" style="position: absolute; right: 1rem; color: #64748b; cursor: pointer;"></i>
         </div>
       </div>
 
-      <!-- Campo exclusivo para el código de acceso de la psicóloga -->
+      <!-- Campo exclusivo para el código de acceso de la psicóloga con su ID correcto -->
       <div id="psych-code-container" style="display: none;">
         <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.4rem;">Código Único Profesional</label>
         <input type="password" id="psych-code-input" placeholder="Ingresa el código secreto" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 0.95rem;" />
-        <span style="font-size: 0.75rem; color: #64748b; margin-top: 0.25rem; display: block;">Acceso restringido solo para personal autorizado.</span>
+        <span style="font-size: 0.75rem; color: #64748b; margin-top: 0.25rem; display: block;">Código requerido: PSICO2026</span>
       </div>
 
       <button type="submit" style="background: #4f46e5; color: white; border: none; padding: 0.85rem; border-radius: 0.75rem; font-weight: 600; font-size: 1rem; cursor: pointer; margin-top: 0.5rem;">
@@ -80,7 +80,7 @@
     if (role === 'psicologa') {
       const psychCode = (document.getElementById('psych-code-input') as HTMLInputElement).value.trim();
       if (psychCode !== 'PSICO2026') {
-        alert('Código único incorrecto. Solo la Dra. Laura Gómez puede acceder al panel profesional.');
+        alert('Código único incorrecto. Usa el código correcto para ingresar.');
         return;
       }
       sessionStorage.setItem('user_role', 'psicologa');
