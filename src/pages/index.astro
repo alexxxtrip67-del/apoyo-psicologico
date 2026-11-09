@@ -17,12 +17,14 @@ import '../styles/global.css';
 		<!-- FontAwesome -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 	</head>
-	<body>
-		<!-- 1. PANTALLA DE LOGIN -->
-		<Login />
+	<body style="margin: 0; padding: 0; overflow-x: hidden;">
+		<!-- 1. PANTALLA DE LOGIN (Visible por defecto) -->
+		<div id="view-login-wrapper" style="display: flex; width: 100vw; height: 100vh;">
+			<Login />
+		</div>
 
-		<!-- 2. PANEL DE ESTUDIANTE -->
-		<div id="app" style="display: none; flex-direction: row; width: 100%; min-height: 100vh; background-color: #f8fafc;">
+		<!-- 2. PANEL DE ESTUDIANTE (Oculto por defecto) -->
+		<div id="app" style="display: none !important; flex-direction: row; width: 100vw; min-height: 100vh; background-color: #f8fafc;">
 			<Sidebar />
 
 			<div class="main-content-wrapper" style="flex: 1; display: flex; flex-direction: column; min-height: 100vh; background-color: #f8fafc; overflow-y: auto;">
@@ -34,11 +36,56 @@ import '../styles/global.css';
 			</div>
 		</div>
 
-		<!-- 3. PANEL PROFESIONAL DE PSICÓLOGA -->
-		<PsychDashboard />
+		<!-- 3. PANEL PROFESIONAL DE PSICÓLOGA (Oculto por defecto) -->
+		<div id="psych-app" style="display: none !important; width: 100vw; min-height: 100vh; background-color: #f8fafc;">
+			<PsychDashboard />
+		</div>
 
 		<script>
-			// Cerrar sesión global (tanto para estudiante como psicóloga)
+			// Control global del inicio de sesión diferenciado
+			const loginForm = document.getElementById('login-form');
+			loginForm?.addEventListener('submit', (e) => {
+				e.preventDefault();
+				const userInput = (document.getElementById('login-user') as HTMLInputElement).value.trim().toLowerCase();
+
+				const loginWrapper = document.getElementById('view-login-wrapper');
+				const studentApp = document.getElementById('app');
+				const psychApp = document.getElementById('psych-app');
+
+				// Ocultar login
+				if (loginWrapper) loginWrapper.style.setProperty('display', 'none', 'important');
+
+				// Validar si es psicóloga o estudiante
+				if (userInput.includes('psico') || userInput.includes('laura') || userInput.includes('psicologa')) {
+					if (studentApp) studentApp.style.setProperty('display', 'none', 'important');
+					if (psychApp) psychApp.style.setProperty('display', 'flex', 'important');
+				} else {
+					if (psychApp) psychApp.style.setProperty('display', 'none', 'important');
+					if (studentApp) studentApp.style.setProperty('display', 'flex', 'important');
+
+					let firstName = "Estudiante";
+					if (userInput.includes('.')) {
+						const parts = userInput.split('.');
+						firstName = parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
+					} else if (userInput.length > 0) {
+						firstName = userInput.charAt(0).toUpperCase() + userInput.slice(1);
+					}
+
+					const welcomeTitle = document.getElementById('welcome-title');
+					const headerName = document.getElementById('header-name');
+					const headerAvatar = document.getElementById('header-avatar');
+					const profileNameInput = document.getElementById('profile-name-input') as HTMLInputElement;
+					const profileAvatarLarge = document.getElementById('profile-avatar-large');
+
+					if (welcomeTitle) welcomeTitle.textContent = `Hola, ${firstName} 👋`;
+					if (headerName) headerName.textContent = firstName + " Pérez";
+					if (headerAvatar) headerAvatar.textContent = firstName.substring(0, 2).toUpperCase();
+					if (profileNameInput) profileNameInput.value = firstName + " Pérez";
+					if (profileAvatarLarge) profileAvatarLarge.textContent = firstName.substring(0, 2).toUpperCase();
+				}
+			});
+
+			// Cerrar sesión global
 			document.addEventListener('click', (e) => {
 				const target = e.target as HTMLElement;
 				if (target.closest('#logout-btn') || target.closest('#psych-logout-btn')) {
