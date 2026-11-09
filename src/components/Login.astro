@@ -1,7 +1,7 @@
 ---
 // src/components/Login.astro
 ---
-<div id="view-login-wrapper" style="display: flex; width: 100vw; height: 100vh; background-color: #f8fafc; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; z-index: 2000;">
+<div id="view-login-wrapper" style="display: flex; width: 100vw; height: 100vh; background-color: #f8fafc; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; z-index: 9999;">
   <div style="display: flex; width: 900px; background: white; border-radius: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.08); overflow: hidden; border: 1px solid #e2e8f0;">
     
     <!-- Columna Izquierda: Formulario -->
@@ -29,13 +29,8 @@
         </div>
 
         <div>
-          <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.4rem;">Contraseña o Código Único</label>
-          <div style="position: relative;">
-            <input type="password" id="login-pass" placeholder="Número de cédula o código" required style="width: 100%; padding: 0.75rem 2.5rem 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 0.95rem;" />
-            <button type="button" id="toggle-password" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #64748b;">
-              <i class="fa-solid fa-eye" id="eye-icon"></i>
-            </button>
-          </div>
+          <label id="pass-label" style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.4rem;">Número de Cédula (Solo números)</label>
+          <input type="text" id="login-pass" inputmode="numeric" pattern="[0-9]*" placeholder="Ingresa solo números" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 0.95rem;" />
         </div>
 
         <button type="submit" style="background: #4f46e5; color: white; border: none; padding: 0.85rem; border-radius: 0.75rem; font-weight: 600; font-size: 1rem; cursor: pointer; margin-top: 0.5rem; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);">
@@ -61,6 +56,8 @@
   const rolePsychBtn = document.getElementById('role-psych-btn');
   const userInput = document.getElementById('login-user') as HTMLInputElement;
   const userLabel = document.getElementById('user-label');
+  const passInput = document.getElementById('login-pass') as HTMLInputElement;
+  const passLabel = document.getElementById('pass-label');
 
   roleStudentBtn?.addEventListener('click', () => {
     selectedRole = 'student';
@@ -70,6 +67,8 @@
     rolePsychBtn!.style.color = '#64748b';
     if (userInput) userInput.placeholder = 'ej. rider.perez';
     if (userLabel) userLabel.textContent = 'Usuario o Correo del Estudiante';
+    if (passInput) passInput.placeholder = 'Número de cédula (solo números)';
+    if (passLabel) passLabel.textContent = 'Número de Cédula (Solo números)';
   });
 
   rolePsychBtn?.addEventListener('click', () => {
@@ -79,43 +78,34 @@
     roleStudentBtn!.style.background = 'transparent';
     roleStudentBtn!.style.color = '#64748b';
     if (userInput) userInput.placeholder = 'Dra. Laura Gómez';
-    if (userLabel) userLabel.textContent = 'Nombre de la Psicóloga o Código Único';
+    if (userLabel) userLabel.textContent = 'Nombre de la Psicóloga';
+    if (passInput) passInput.placeholder = 'Código institucional (Ej: 2026)';
+    if (passLabel) passLabel.textContent = 'Código Único de Acceso (Números)';
   });
 
-  const togglePassBtn = document.getElementById('toggle-password');
-  const passInput = document.getElementById('login-pass') as HTMLInputElement;
-  const eyeIcon = document.getElementById('eye-icon');
-
-  togglePassBtn?.addEventListener('click', () => {
-    if (passInput.type === 'password') {
-      passInput.type = 'text';
-      eyeIcon?.classList.remove('fa-eye');
-      eyeIcon?.classList.add('fa-eye-slash');
-    } else {
-      passInput.type = 'password';
-      eyeIcon?.classList.remove('fa-eye-slash');
-      eyeIcon?.classList.add('fa-eye');
-    }
+  // Validar que en el campo de contraseña solo se ingresen números
+  passInput?.addEventListener('input', (e) => {
+    const target = e.target as HTMLInputElement;
+    target.value = target.value.replace(/[^0-9]/g, '');
   });
 
   const loginForm = document.getElementById('login-form');
   loginForm?.addEventListener('submit', (e) => {
     e.preventDefault();
     const userVal = userInput.value.trim();
-    const passVal = (document.getElementById('login-pass') as HTMLInputElement).value.trim();
+    const passVal = passInput.value.trim();
 
     const loginWrapper = document.getElementById('view-login-wrapper');
     const studentApp = document.getElementById('app');
     const psychApp = document.getElementById('psych-app');
 
     if (selectedRole === 'psych') {
-      // Validar código único de la psicóloga (Ej: PSICO-2026 o clave segura)
-      if (passVal === 'PSICO-2026' || passVal.length >= 4) {
+      if (passVal === '2026' || passVal.length >= 4) {
         if (loginWrapper) loginWrapper.style.display = 'none';
         if (studentApp) studentApp.style.display = 'none';
         if (psychApp) psychApp.style.display = 'flex';
       } else {
-        alert('Código único incorrecto. Usa el código institucional (Ej: PSICO-2026)');
+        alert('Código de acceso incorrecto. Debe ser numérico (Ej: 2026)');
       }
     } else {
       if (loginWrapper) loginWrapper.style.display = 'none';
