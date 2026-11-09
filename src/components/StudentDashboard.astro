@@ -113,8 +113,8 @@
 </div>
 
 <script>
-  const currentStudent = sessionStorage.getItem('student_user'] || 'Estudiante';
-  
+  const currentStudent = sessionStorage.getItem('student_user') ?? 'Estudiante';
+
   const welcomeTitle = document.getElementById('welcome-title');
   if (welcomeTitle) welcomeTitle.textContent = `Hola, ${currentStudent} 👋`;
 
@@ -138,88 +138,4 @@
       target.style.display = sectionId === 'citas' ? 'grid' : 'flex';
     }
   };
-
-  function renderSlots() {
-    const listContainer = document.getElementById('student-slots-list');
-    if (!listContainer) return;
-
-    let slots = JSON.parse(localStorage.getItem('psych_slots') || '[]');
-    if (slots.length === 0) {
-      slots = [
-        { id: 1, date: "Martes 10 de Noviembre", time: "10:00 AM - 10:45 AM", mode: "Presencial - Cubículo 2" },
-        { id: 2, date: "Jueves 12 de Noviembre", time: "03:00 PM - 03:45 PM", mode: "Virtual - Zoom" }
-      ];
-    }
-
-    listContainer.innerHTML = '';
-    slots.forEach((slot: any) => {
-      const card = document.createElement('div');
-      card.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 1.25rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; background: #f8fafc;";
-      card.innerHTML = `
-        <div>
-          <div style="font-weight: 700; color: #0f172a; font-size: 0.95rem;">${slot.date}</div>
-          <div style="font-size: 0.9rem; color: #4f46e5; font-weight: 600;">${slot.time}</div>
-          <div style="font-size: 0.8rem; color: #64748b;">Modalidad: ${slot.mode}</div>
-        </div>
-        <button onclick="bookSlot(${slot.id})" style="background: #4f46e5; color: white; border: none; padding: 0.6rem 1.25rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Reservar cita</button>
-      `;
-      listContainer.appendChild(card);
-    });
-  }
-
-  (window as any).bookSlot = function(id: number) {
-    let slots = JSON.parse(localStorage.getItem('psych_slots') || '[]');
-    const idx = slots.findIndex((s: any) => s.id === id);
-    if (idx !== -1) {
-      const booked = slots.splice(idx, 1)[0];
-      localStorage.setItem('psych_slots', JSON.stringify(slots));
-      renderSlots();
-
-      let psychBookings = JSON.parse(localStorage.getItem('psych_booked_appointments') || '[]');
-      psychBookings.unshift({
-        id: Date.now(),
-        student: currentStudent,
-        date: booked.date,
-        time: booked.time,
-        mode: booked.mode,
-        status: 'En espera'
-      });
-      localStorage.setItem('psych_booked_appointments', JSON.stringify(psychBookings));
-
-      renderMyAppointments();
-      alert(`¡Cita solicitada con éxito! Estado actual: En espera.`);
-    }
-  };
-
-  function renderMyAppointments() {
-    const myAppContainer = document.getElementById('my-appointments');
-    if (!myAppContainer) return;
-
-    let psychBookings = JSON.parse(localStorage.getItem('psych_booked_appointments') || '[]');
-    const myBookings = psychBookings.filter((b: any) => b.student === currentStudent);
-
-    if (myBookings.length === 0) {
-      myAppContainer.innerHTML = '<p style="color: #64748b; font-size: 0.85rem;">Aún no has reservado ninguna cita.</p>';
-      return;
-    }
-
-    myAppContainer.innerHTML = '';
-    myBookings.forEach((b: any) => {
-      const isConfirmed = b.status === 'Confirmada';
-      const item = document.createElement('div');
-      item.style.cssText = `padding: 1rem; background: ${isConfirmed ? '#d1fae5' : '#fef3c7'}; border: 1px solid ${isConfirmed ? '#10b981' : '#f59e0b'}; border-radius: 0.75rem; margin-bottom: 0.75rem;`;
-      item.innerHTML = `
-        <div style="font-weight: 700; font-size: 0.9rem;">${b.date}</div>
-        <div style="font-size: 0.85rem; color: #4f46e5; font-weight: 600;">${b.time}</div>
-        <div style="font-size: 0.75rem; color: #334155;">Modalidad: ${b.mode}</div>
-        <div style="font-size: 0.75rem; font-weight: 700; margin-top: 0.3rem; color: ${isConfirmed ? '#065f46' : '#b45309'};">
-          Estado: ${b.status || 'En espera'}
-        </div>
-      `;
-      myAppContainer.appendChild(item);
-    });
-  }
-
-  renderSlots();
-  renderMyAppointments();
 </script>
