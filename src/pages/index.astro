@@ -2,6 +2,7 @@
 // src/pages/index.astro
 import Login from '../components/Login.astro';
 import StudentDashboard from '../components/StudentDashboard.astro';
+import PsychDashboard from '../components/PsychDashboard.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Header from '../components/Header.astro';
 import '../styles/global.css';
@@ -17,10 +18,10 @@ import '../styles/global.css';
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 	</head>
 	<body>
-		<!-- 1. LOGIN (DOS COLUMNAS) -->
+		<!-- 1. PANTALLA DE LOGIN -->
 		<Login />
 
-		<!-- 2. VISTA PRINCIPAL DASHBOARD DE ESTUDIANTE -->
+		<!-- 2. PANEL DE ESTUDIANTE -->
 		<div id="app" style="display: none; flex-direction: row; width: 100%; min-height: 100vh; background-color: #f8fafc;">
 			<Sidebar />
 
@@ -33,15 +34,21 @@ import '../styles/global.css';
 			</div>
 		</div>
 
+		<!-- 3. PANEL PROFESIONAL DE PSICÓLOGA -->
+		<PsychDashboard />
+
 		<script>
-			// Cerrar sesión
+			// Cerrar sesión global (tanto para estudiante como psicóloga)
 			document.addEventListener('click', (e) => {
 				const target = e.target as HTMLElement;
-				if (target.closest('#logout-btn')) {
+				if (target.closest('#logout-btn') || target.closest('#psych-logout-btn')) {
 					const loginWrapper = document.getElementById('view-login-wrapper');
 					const appWrapper = document.getElementById('app');
+					const psychWrapper = document.getElementById('psych-app');
+
 					if (loginWrapper) loginWrapper.style.setProperty('display', 'flex', 'important');
 					if (appWrapper) appWrapper.style.setProperty('display', 'none', 'important');
+					if (psychWrapper) psychWrapper.style.setProperty('display', 'none', 'important');
 				}
 			});
 		</script>
