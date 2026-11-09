@@ -48,20 +48,113 @@
     </div>
   </div>
 
-  <!-- SECCIÓN 2: CUESTIONARIO -->
+  <!-- SECCIÓN 2: CUESTIONARIO COMPLETO DE 10 PREGUNTAS -->
   <div id="section-cuestionario" class="student-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; flex-direction: column;">
     <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Cuestionario Emocional Institucional</h2>
-    <p style="color: #64748b; margin-bottom: 2rem;">Responde con sinceridad para evaluar tu bienestar actual.</p>
+    <p style="color: #64748b; margin-bottom: 2rem;">Responde con sinceridad las 10 preguntas para evaluar tu bienestar actual.</p>
+    
     <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+      <!-- Pregunta 1 -->
       <div style="padding: 1.25rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0;">
         <p style="font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">1. ¿Cómo te has sentido emocionalmente durante esta última semana?</p>
-        <div style="display: flex; gap: 1rem;">
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
           <label><input type="radio" name="p1" /> Muy bien</label>
           <label><input type="radio" name="p1" /> Regular</label>
           <label><input type="radio" name="p1" /> Abrumado/a</label>
         </div>
       </div>
-      <button onclick="alert('¡Cuestionario enviado con éxito! Gracias por tus respuestas.')" style="background: #4f46e5; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; width: fit-content;">Enviar respuestas</button>
+
+      <!-- Pregunta 2 -->
+      <div style="padding: 1.25rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0;">
+        <p style="font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">2. ¿Has experimentado dificultades para conciliar el sueño o mantener descansos adecuados?</p>
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <label><input type="radio" name="p2" /> Nunca</label>
+          <label><input type="radio" name="p2" /> A veces</label>
+          <label><input type="radio" name="p2" /> Casi siempre</label>
+        </div>
+      </div>
+
+      <!-- Pregunta 3 -->
+      <div style="padding: 1.25rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0;">
+        <p style="font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">3. ¿Sientes que cuentas con apoyo suficiente de familiares o amigos ante situaciones difíciles?</p>
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <label><input type="radio" name="p3" /> Sí, totalmente</label>
+          <label><input type="radio" name="p3" /> Parcialmente</label>
+          <label><input type="radio" name="p3" /> No, me siento solo/a</label>
+        </div>
+      </div>
+
+      <!-- Pregunta 4 -->
+      <div style="padding: 1.25rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0;">
+        <p style="font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">4. ¿Te resulta difícil concentrarte en tus actividades académicas o diarias?</p>
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <label><input type="radio" name="p4" /> Rara vez</label>
+          <label><input type="radio" name="p4" /> Frecuentemente</label>
+          <label><input type="radio" name="p4" /> Todo el tiempo</label>
+        </div>
+      </div>
+
+      <!-- Pregunta 5 -->
+      <div style="padding: 1.25rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0;">
+        <p style="font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">5. ¿Has experimentado niveles altos de estrés o ansiedad recientemente?</p>
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <label><input type="radio" name="p5" /> Bajo</label>
+          <label><input type="radio" name="p5" /> Moderado</label>
+          <label><input type="radio" name="p5" /> Alto / Intenso</label>
+        </div>
+      </div>
+
+      <!-- Pregunta 6 -->
+      <div style="padding: 1.25rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0;">
+        <p style="font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">6. ¿Participas habitualmente en actividades recreativas, deportivas o de esparcimiento?</p>
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <label><input type="radio" name="p6" /> Sí, regularmente</label>
+          <label><input type="radio" name="p6" /> Pocas veces</label>
+          <label><input type="radio" name="p6" /> Nunca</label>
+        </div>
+      </div>
+
+      <!-- Pregunta 7 -->
+      <div style="padding: 1.25rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0;">
+        <p style="font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">7. ¿Te consideras capaz de manejar los problemas cotidianos de manera efectiva?</p>
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <label><input type="radio" name="p7" /> Sí, la mayoría de veces</label>
+          <label><input type="radio" name="p7" /> Me cuesta un poco</label>
+          <label><input type="radio" name="p7" /> No sé cómo manejarlos</label>
+        </div>
+      </div>
+
+      <!-- Pregunta 8 -->
+      <div style="padding: 1.25rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0;">
+        <p style="font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">8. ¿Has sentido desánimo o pérdida de interés por cosas que antes disfrutabas?</p>
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <label><input type="radio" name="p8" /> No</label>
+          <label><input type="radio" name="p8" /> Un poco</label>
+          <label><input type="radio" name="p8" /> Sí, bastante</label>
+        </div>
+      </div>
+
+      <!-- Pregunta 9 -->
+      <div style="padding: 1.25rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0;">
+        <p style="font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">9. ¿Te sentirías cómodo/a conversando con el departamento de psicología institucional?</p>
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <label><input type="radio" name="p9" /> Sí, totalmente dispuesto/a</label>
+          <label><input type="radio" name="p9" /> Tengo dudas</label>
+          <label><input type="radio" name="p9" /> Prefiero no hacerlo</label>
+        </div>
+      </div>
+
+      <!-- Pregunta 10 -->
+      <div style="padding: 1.25rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0;">
+        <p style="font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">10. ¿Cómo evalúas tu nivel general de bienestar emocional actual?</p>
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+          <label><input type="radio" name="p10" /> Bueno</label>
+          <label><input type="radio" name="p10" /> Regular</label>
+          <label><input type="radio" name="p10" /> Necesito apoyo urgente</label>
+        </div>
+      </div>
+
+      <button onclick="alert('¡Cuestionario de 10 preguntas enviado con éxito! Gracias por completar tu evaluación.')" style="background: #4f46e5; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; width: fit-content;">Enviar respuestas</button>
     </div>
   </div>
 
