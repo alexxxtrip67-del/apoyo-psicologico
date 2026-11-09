@@ -1,7 +1,7 @@
 ---
 // src/components/Login.astro
 ---
-<div id="view-login-wrapper" style="display: flex; width: 100vw; height: 100vh; background-color: #f8fafc; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; z-index: 9999;">
+<div style="display: flex; width: 100vw; height: 100vh; background-color: #f8fafc; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; z-index: 9999;">
   <div style="display: flex; width: 900px; background: white; border-radius: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.08); overflow: hidden; border: 1px solid #e2e8f0;">
     
     <!-- Columna Izquierda: Formulario -->
@@ -83,6 +83,7 @@
     if (passLabel) passLabel.textContent = 'Código Único de Acceso (Números)';
   });
 
+  // Restringir contraseña estrictamente a números
   passInput?.addEventListener('input', (e) => {
     const target = e.target as HTMLInputElement;
     target.value = target.value.replace(/[^0-9]/g, '');
@@ -94,42 +95,15 @@
     const userVal = userInput.value.trim();
     const passVal = passInput.value.trim();
 
-    const loginWrapper = document.getElementById('view-login-wrapper');
-    const studentApp = document.getElementById('app');
-    const psychApp = document.getElementById('psych-app');
-
     if (selectedRole === 'psych') {
       if (passVal === '2026' || passVal.length >= 4) {
-        if (loginWrapper) loginWrapper.style.display = 'none';
-        if (studentApp) studentApp.style.display = 'none';
-        if (psychApp) psychApp.style.display = 'flex';
+        window.location.href = '/psicologa';
       } else {
         alert('Código de acceso incorrecto. Debe ser numérico (Ej: 2026)');
       }
     } else {
-      if (loginWrapper) loginWrapper.style.display = 'none';
-      if (psychApp) psychApp.style.display = 'none';
-      if (studentApp) studentApp.style.display = 'flex';
-
-      let firstName = "Estudiante";
-      if (userVal.includes('.')) {
-        const parts = userVal.split('.');
-        firstName = parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
-      } else if (userVal.length > 0) {
-        firstName = userVal.charAt(0).toUpperCase() + userVal.slice(1);
-      }
-
-      const welcomeTitle = document.getElementById('welcome-title');
-      const headerName = document.getElementById('header-name');
-      const headerAvatar = document.getElementById('header-avatar');
-      const profileNameInput = document.getElementById('profile-name-input') as HTMLInputElement;
-      const profileAvatarLarge = document.getElementById('profile-avatar-large');
-
-      if (welcomeTitle) welcomeTitle.textContent = `Hola, ${firstName} 👋`;
-      if (headerName) headerName.textContent = firstName + " Pérez";
-      if (headerAvatar) headerAvatar.textContent = firstName.substring(0, 2).toUpperCase();
-      if (profileNameInput) profileNameInput.value = firstName + " Pérez";
-      if (profileAvatarLarge) profileAvatarLarge.textContent = firstName.substring(0, 2).toUpperCase();
+      sessionStorage.setItem('student_user', userVal);
+      window.location.href = '/estudiante';
     }
   });
 </script>

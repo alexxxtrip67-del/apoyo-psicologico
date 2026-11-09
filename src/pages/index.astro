@@ -1,10 +1,6 @@
 ---
 // src/pages/index.astro
 import Login from '../components/Login.astro';
-import StudentDashboard from '../components/StudentDashboard.astro';
-import PsychDashboard from '../components/PsychDashboard.astro';
-import Sidebar from '../components/Sidebar.astro';
-import Header from '../components/Header.astro';
 import '../styles/global.css';
 ---
 
@@ -18,46 +14,6 @@ import '../styles/global.css';
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 	</head>
 	<body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: system-ui, -apple-system, sans-serif;">
-		
-		<!-- 1. LOGIN -->
 		<Login />
-
-		<!-- 2. PANEL DE ESTUDIANTE (Exclusivo Alumnos) -->
-		<div id="app" style="display: none; flex-direction: row; width: 100vw; min-height: 100vh; background-color: #f8fafc;">
-			<Sidebar />
-
-			<div class="main-content-wrapper" style="flex: 1; display: flex; flex-direction: column; min-height: 100vh; background-color: #f8fafc; overflow-y: auto;">
-				<Header />
-				
-				<main style="padding: 2rem 2.5rem; flex: 1;">
-					<StudentDashboard />
-				</main>
-			</div>
-		</div>
-
-		<!-- 3. PANEL PROFESIONAL DE PSICÓLOGA (Exclusivo Dra. Laura Gómez) -->
-		<PsychDashboard />
-
-		<script>
-			// Control global de cierre de sesión
-			document.addEventListener('click', (e) => {
-				const target = e.target as HTMLElement;
-				if (target.closest('#logout-btn') || target.closest('#psych-logout-btn')) {
-					const loginWrapper = document.getElementById('view-login-wrapper');
-					const appWrapper = document.getElementById('app');
-					const psychWrapper = document.getElementById('psych-app');
-
-					if (loginWrapper) loginWrapper.style.display = 'flex';
-					if (appWrapper) appWrapper.style.display = 'none';
-					if (psychWrapper) psychWrapper.style.display = 'none';
-
-					// Limpiar inputs del login al salir
-					const userInput = document.getElementById('login-user') as HTMLInputElement;
-					const passInput = document.getElementById('login-pass') as HTMLInputElement;
-					if (userInput) userInput.value = '';
-					if (passInput) passInput.value = '';
-				}
-			});
-		</script>
 	</body>
 </html>

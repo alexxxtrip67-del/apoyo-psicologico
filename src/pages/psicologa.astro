@@ -1,0 +1,33 @@
+---
+// src/pages/psicologa.astro
+import PsychDashboard from '../components/PsychDashboard.astro';
+import '../styles/global.css';
+---
+
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Panel Profesional - Apoyo Psicológico</title>
+		<!-- FontAwesome -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+	</head>
+	<body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: system-ui, -apple-system, sans-serif;">
+		<div style="width: 100vw; min-height: 100vh; background-color: #f8fafc; display: flex;">
+			<PsychDashboard />
+		</div>
+
+		<script>
+			const psychApp = document.getElementById('psych-app');
+			if (psychApp) psychApp.style.display = 'flex';
+
+			document.addEventListener('click', (e) => {
+				const target = e.target as HTMLElement;
+				if (target.closest('#psych-logout-btn')) {
+					window.location.href = '/';
+				}
+			});
+		</script>
+	</body>
+</html>
