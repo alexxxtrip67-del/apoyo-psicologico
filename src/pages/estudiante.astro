@@ -1,61 +1,87 @@
 ---
 // src/pages/estudiante.astro
-import StudentDashboard from '../components/StudentDashboard.astro';
-import Sidebar from '../components/Sidebar.astro';
-import Header from '../components/Header.astro';
-import '../styles/global.css';
+import Quiz from '../components/Quiz.astro';
+import Chat from '../components/Chat.astro';
+import Reports from '../components/Reports.astro';
 ---
-
 <html lang="es">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Panel de Estudiante - Apoyo Psicológico</title>
-		<!-- FontAwesome -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-	</head>
-	<body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: system-ui, -apple-system, sans-serif;">
-		<div style="display: flex; width: 100vw; min-height: 100vh; background-color: #f8fafc;">
-			<Sidebar />
-			<div style="flex: 1; display: flex; flex-direction: column; min-height: 100vh; background-color: #f8fafc; overflow-y: auto;">
-				<Header />
-				<main style="padding: 2rem 2.5rem; flex: 1;">
-					<StudentDashboard />
-				</main>
-			</div>
-		</div>
+  <head>
+    <meta charset="utf-8" />
+    <title>Panel de Estudiante - Apoyo Psicológico</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </head>
+  <body style="margin: 0; font-family: system-ui, sans-serif; background: #f8fafc; display: flex; height: 100vh; overflow: hidden;">
 
-		<script>
-			const storedUser = sessionStorage.getItem('student_user');
-			if (storedUser) {
-				let firstName = "Estudiante";
-				if (storedUser.includes('.')) {
-					const parts = storedUser.split('.');
-					firstName = parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
-				} else if (storedUser.length > 0) {
-					firstName = storedUser.charAt(0).toUpperCase() + storedUser.slice(1);
-				}
-				const welcomeTitle = document.getElementById('welcome-title');
-				const headerName = document.getElementById('header-name');
-				const headerAvatar = document.getElementById('header-avatar');
-				const profileNameInput = document.getElementById('profile-name-input') as HTMLInputElement;
-				const profileAvatarLarge = document.getElementById('profile-avatar-large');
+    <!-- SIDEBAR FIJO -->
+    <aside style="width: 260px; background: #0f172a; color: white; display: flex; flex-direction: column; justify-content: space-between; padding: 2rem 1.5rem; flex-shrink: 0;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2.5rem;">
+          <div style="width: 40px; height: 40px; background: #4f46e5; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center;">
+            <i class="fa-solid fa-shield-heart" style="color: white; font-size: 1.25rem;"></i>
+          </div>
+          <div>
+            <h2 style="font-size: 1.1rem; font-weight: 700; margin: 0; color: white;">Apoyo Psicológico</h2>
+            <p style="font-size: 0.75rem; color: #94a3b8; margin: 0;">Tu bienestar importa</p>
+          </div>
+        </div>
 
-				if (welcomeTitle) welcomeTitle.textContent = `Hola, ${firstName} 👋`;
-				if (headerName) headerName.textContent = firstName + " Pérez";
-				if (headerAvatar) headerAvatar.textContent = firstName.substring(0, 2).toUpperCase();
-				if (profileNameInput) profileNameInput.value = firstName + " Pérez";
-				if (profileAvatarLarge) profileAvatarLarge.textContent = firstName.substring(0, 2).toUpperCase();
-			}
+        <nav style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <button onclick="showTab('inicio')" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; background: transparent; border: none; color: #94a3b8; cursor: pointer; border-radius: 0.75rem; font-weight: 600; text-align: left; width: 100%;">
+            <i class="fa-solid fa-house"></i> Inicio
+          </button>
+          <button onclick="showTab('cuestionario')" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; background: transparent; border: none; color: #94a3b8; cursor: pointer; border-radius: 0.75rem; font-weight: 600; text-align: left; width: 100%;">
+            <i class="fa-solid fa-clipboard-list"></i> Cuestionario
+          </button>
+          <button onclick="showTab('chat')" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; background: transparent; border: none; color: #94a3b8; cursor: pointer; border-radius: 0.75rem; font-weight: 600; text-align: left; width: 100%;">
+            <i class="fa-solid fa-comments"></i> Chat con IA
+          </button>
+          <button onclick="showTab('reportes')" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; background: transparent; border: none; color: #94a3b8; cursor: pointer; border-radius: 0.75rem; font-weight: 600; text-align: left; width: 100%;">
+            <i class="fa-solid fa-folder-open"></i> Mis reportes
+          </button>
+        </nav>
+      </div>
 
-			document.addEventListener('click', (e) => {
-				const target = e.target as HTMLElement;
-				if (target.closest('#logout-btn')) {
-					sessionStorage.removeItem('student_user');
-					window.location.href = '/';
-				}
-			});
-		</script>
-	</body>
+      <div>
+        <a href="/" onclick="sessionStorage.clear()" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #94a3b8; text-decoration: none; font-size: 0.95rem;">
+          <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+        </a>
+      </div>
+    </aside>
+
+    <!-- CONTENIDO DINÁMICO POR PESTAÑAS -->
+    <main style="flex: 1; padding: 2.5rem; overflow-y: auto; box-sizing: border-box;">
+      
+      <div id="tab-inicio" class="content-tab">
+        <h1 id="welcome-title" style="font-size: 2rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Hola, Estudiante 👋</h1>
+        <p style="color: #64748b;">Selecciona una opción en el menú lateral para comenzar.</p>
+      </div>
+
+      <div id="tab-cuestionario" class="content-tab" style="display: none;">
+        <Quiz />
+      </div>
+
+      <div id="tab-chat" class="content-tab" style="display: none;">
+        <Chat />
+      </div>
+
+      <div id="tab-reportes" class="content-tab" style="display: none;">
+        <Reports />
+      </div>
+
+    </main>
+  </body>
 </html>
+
+<script>
+  const student = sessionStorage.getItem('student_user') || 'Estudiante';
+  const title = document.getElementById('welcome-title');
+  if (title) title.textContent = `Hola, ${student} 👋`;
+
+  (window as any).showTab = function(tabName: string) {
+    document.querySelectorAll('.content-tab').forEach(tab => {
+      (tab as HTMLElement).style.display = 'none';
+    });
+    const target = document.getElementById(`tab-${tabName}`);
+    if (target) target.style.display = 'block';
+  }
+</script>
