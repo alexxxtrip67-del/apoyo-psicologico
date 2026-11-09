@@ -24,22 +24,22 @@
         </div>
 
         <nav style="display: flex; flex-direction: column; gap: 0.5rem;">
-          <button onclick="navStudent('inicio')" id="btn-student-inicio" class="nav-btn" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: none; border-radius: 0.75rem; font-weight: 600; cursor: pointer; text-align: left; width: 100%; background: #4f46e5; color: white;">
+          <button type="button" onclick="window.switchTab('inicio')" id="nav-inicio" class="nav-btn" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: none; border-radius: 0.75rem; font-weight: 600; cursor: pointer; text-align: left; width: 100%; background: #4f46e5; color: white;">
             <i class="fa-solid fa-house"></i> Inicio
           </button>
-          <button onclick="navStudent('cuestionario')" id="btn-student-cuestionario" class="nav-btn" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: none; border-radius: 0.75rem; font-weight: 600; cursor: pointer; text-align: left; width: 100%; background: transparent; color: #94a3b8;">
+          <button type="button" onclick="window.switchTab('cuestionario')" id="nav-cuestionario" class="nav-btn" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: none; border-radius: 0.75rem; font-weight: 600; cursor: pointer; text-align: left; width: 100%; background: transparent; color: #94a3b8;">
             <i class="fa-solid fa-clipboard-list"></i> Cuestionario
           </button>
-          <button onclick="navStudent('citas')" id="btn-student-citas" class="nav-btn" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: none; border-radius: 0.75rem; font-weight: 600; cursor: pointer; text-align: left; width: 100%; background: transparent; color: #94a3b8;">
+          <button type="button" onclick="window.switchTab('citas')" id="nav-citas" class="nav-btn" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: none; border-radius: 0.75rem; font-weight: 600; cursor: pointer; text-align: left; width: 100%; background: transparent; color: #94a3b8;">
             <i class="fa-solid fa-calendar-check"></i> Citas con Psicóloga
           </button>
-          <button onclick="navStudent('chat')" id="btn-student-chat" class="nav-btn" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: none; border-radius: 0.75rem; font-weight: 600; cursor: pointer; text-align: left; width: 100%; background: transparent; color: #94a3b8;">
+          <button type="button" onclick="window.switchTab('chat')" id="nav-chat" class="nav-btn" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: none; border-radius: 0.75rem; font-weight: 600; cursor: pointer; text-align: left; width: 100%; background: transparent; color: #94a3b8;">
             <i class="fa-solid fa-comments"></i> Chat con IA
           </button>
-          <button onclick="navStudent('reportes')" id="btn-student-reportes" class="nav-btn" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: none; border-radius: 0.75rem; font-weight: 600; cursor: pointer; text-align: left; width: 100%; background: transparent; color: #94a3b8;">
+          <button type="button" onclick="window.switchTab('reportes')" id="nav-reportes" class="nav-btn" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: none; border-radius: 0.75rem; font-weight: 600; cursor: pointer; text-align: left; width: 100%; background: transparent; color: #94a3b8;">
             <i class="fa-solid fa-folder-open"></i> Mis reportes
           </button>
-          <button onclick="navStudent('perfil')" id="btn-student-perfil" class="nav-btn" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: none; border-radius: 0.75rem; font-weight: 600; cursor: pointer; text-align: left; width: 100%; background: transparent; color: #94a3b8;">
+          <button type="button" onclick="window.switchTab('perfil')" id="nav-perfil" class="nav-btn" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: none; border-radius: 0.75rem; font-weight: 600; cursor: pointer; text-align: left; width: 100%; background: transparent; color: #94a3b8;">
             <i class="fa-solid fa-user"></i> Perfil
           </button>
         </nav>
@@ -52,16 +52,16 @@
       </div>
     </aside>
 
-    <!-- ÁREA PRINCIPAL -->
+    <!-- CONTENIDO PRINCIPAL -->
     <main style="flex: 1; padding: 2.5rem; overflow-y: auto; box-sizing: border-box;">
 
-      <!-- VISTA INICIO -->
-      <div id="view-inicio" class="student-view" style="display: flex; flex-direction: column; gap: 2rem;">
+      <!-- VISTA: INICIO -->
+      <div id="section-inicio" class="app-section" style="display: flex; flex-direction: column; gap: 2rem;">
         <div style="background: linear-gradient(135deg, #e0e7ff 0%, #edf2f7 100%); padding: 2.5rem; border-radius: 1.5rem; border: 1px solid #c7d2fe; display: flex; justify-content: space-between; align-items: center;">
           <div>
             <h1 id="user-greeting" style="font-size: 2rem; font-weight: 800; color: #1e1b4b; margin: 0 0 0.5rem 0;">Hola, Estudiante 👋</h1>
             <p style="color: #312e81; font-size: 0.95rem; margin: 0 0 1.25rem 0;">Tu bienestar emocional es importante. Aquí tienes un resumen de tu progreso y herramientas de apoyo.</p>
-            <button onclick="navStudent('chat')" style="background: #4f46e5; color: white; border: none; padding: 0.75rem 1.25rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer;">Ir al chat con IA &rarr;</button>
+            <button type="button" onclick="window.switchTab('chat')" style="background: #4f46e5; color: white; border: none; padding: 0.75rem 1.25rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer;">Ir al chat con IA &rarr;</button>
           </div>
           <div style="font-size: 4rem; color: #4f46e5; opacity: 0.75;">
             <i class="fa-solid fa-hands-holding-circle"></i>
@@ -77,7 +77,7 @@
               <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin: 0 0 0.4rem 0;">Cuestionario emocional</h3>
               <p style="color: #64748b; font-size: 0.85rem; margin: 0 0 1.25rem 0;">Completa tu evaluación de 10 preguntas.</p>
             </div>
-            <button onclick="navStudent('cuestionario')" style="background: #4f46e5; color: white; border: none; padding: 0.65rem 1rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer;">Ir al cuestionario</button>
+            <button type="button" onclick="window.switchTab('cuestionario')" style="background: #4f46e5; color: white; border: none; padding: 0.65rem 1rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer;">Ir al cuestionario</button>
           </div>
 
           <div style="background: white; padding: 1.75rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between;">
@@ -88,7 +88,7 @@
               <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin: 0 0 0.4rem 0;">Citas con Psicóloga</h3>
               <p style="color: #64748b; font-size: 0.85rem; margin: 0 0 1.25rem 0;">Agenda una cita directa con la especialista.</p>
             </div>
-            <button onclick="navStudent('citas')" style="background: #10b981; color: white; border: none; padding: 0.65rem 1rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer;">Ver horarios</button>
+            <button type="button" onclick="window.switchTab('citas')" style="background: #10b981; color: white; border: none; padding: 0.65rem 1rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer;">Ver horarios</button>
           </div>
 
           <div style="background: white; padding: 1.75rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; display: flex; flex-direction: column; justify-content: space-between;">
@@ -99,37 +99,36 @@
               <h3 style="font-size: 1.1rem; font-weight: 700; color: #0f172a; margin: 0 0 0.4rem 0;">Chat con IA</h3>
               <p style="color: #64748b; font-size: 0.85rem; margin: 0 0 1.25rem 0;">Conversa de forma confidencial.</p>
             </div>
-            <button onclick="navStudent('chat')" style="background: #3b82f6; color: white; border: none; padding: 0.65rem 1rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer;">Abrir chat</button>
+            <button type="button" onclick="window.switchTab('chat')" style="background: #3b82f6; color: white; border: none; padding: 0.65rem 1rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer;">Abrir chat</button>
           </div>
         </div>
       </div>
 
-      <!-- VISTA CUESTIONARIO CON 10 PREGUNTAS -->
-      <div id="view-cuestionario" class="student-view" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; flex-direction: column;">
+      <!-- VISTA: CUESTIONARIO DE 10 PREGUNTAS -->
+      <div id="section-cuestionario" class="app-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; flex-direction: column;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
           <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0;">Cuestionario de bienestar emocional</h2>
-          <span id="question-counter" style="font-weight: 700; color: #4f46e5; font-size: 0.95rem;">Pregunta 1 de 10</span>
+          <span id="q-counter" style="font-weight: 700; color: #4f46e5; font-size: 0.95rem;">Pregunta 1 de 10</span>
         </div>
         <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1.5rem;">Responde con sinceridad. No hay respuestas correctas o incorrectas.</p>
         
-        <!-- BARRA DE PROGRESO -->
         <div style="width: 100%; background: #e2e8f0; height: 8px; border-radius: 99px; margin-bottom: 2rem; overflow: hidden;">
-          <div id="quiz-progress-bar" style="width: 10%; background: #4f46e5; height: 100%; transition: width 0.3s ease;"></div>
+          <div id="q-progress" style="width: 10%; background: #4f46e5; height: 100%; transition: width 0.3s ease;"></div>
         </div>
 
         <div style="padding: 2rem; background: #f8fafc; border-radius: 1rem; border: 1px solid #e2e8f0; margin-bottom: 1.5rem;">
-          <p id="quiz-question-text" style="font-weight: 700; color: #0f172a; font-size: 1.1rem; margin-bottom: 1.25rem;"></p>
-          <div id="quiz-options-container" style="display: flex; flex-direction: column; gap: 0.85rem;"></div>
+          <p id="q-text" style="font-weight: 700; color: #0f172a; font-size: 1.1rem; margin-bottom: 1.25rem;"></p>
+          <div id="q-options" style="display: flex; flex-direction: column; gap: 0.85rem;"></div>
         </div>
         
         <div style="display: flex; justify-content: space-between;">
-          <button onclick="prevQuestion()" id="btn-prev" style="background: #e2e8f0; color: #334155; border: none; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer;">&larr; Anterior</button>
-          <button onclick="nextQuestion()" id="btn-next" style="background: #4f46e5; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer;">Siguiente &rarr;</button>
+          <button type="button" onclick="window.prevQuestion()" id="btn-prev-q" style="background: #e2e8f0; color: #334155; border: none; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer;">&larr; Anterior</button>
+          <button type="button" onclick="window.nextQuestion()" id="btn-next-q" style="background: #4f46e5; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer;">Siguiente &rarr;</button>
         </div>
       </div>
 
-      <!-- VISTA CITAS DISPONIBLES Y SOLICITADAS -->
-      <div id="view-citas" class="student-view" style="display: none; display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;">
+      <!-- VISTA: CITAS CON PSICÓLOGA -->
+      <div id="section-citas" class="app-section" style="display: none; display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;">
         <div style="background: white; padding: 2rem; border-radius: 1.25rem; border: 1px solid #e2e8f0;">
           <h3 style="font-size: 1.2rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Horarios Libres Publicados por la Psicóloga</h3>
           <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1.5rem;">Selecciona una hora para reservar tu cita institucional.</p>
@@ -143,8 +142,8 @@
         </div>
       </div>
 
-      <!-- VISTA CHAT DE IA -->
-      <div id="view-chat" class="student-view" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; height: 520px; flex-direction: column; justify-content: space-between;">
+      <!-- VISTA: CHAT CON IA -->
+      <div id="section-chat" class="app-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; height: 520px; flex-direction: column; justify-content: space-between;">
         <div>
           <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Chat con IA</h2>
           <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">Aquí puedes hablar libremente. Estoy para escucharte.</p>
@@ -156,12 +155,12 @@
         </div>
         <div style="display: flex; gap: 0.75rem;">
           <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." style="flex: 1; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 0.95rem;" />
-          <button onclick="sendChatMessage()" style="background: #4f46e5; color: white; border: none; padding: 0.75rem 1.25rem; border-radius: 0.75rem; cursor: pointer; font-weight: 600;">Enviar</button>
+          <button type="button" onclick="window.sendChatMessage()" style="background: #4f46e5; color: white; border: none; padding: 0.75rem 1.25rem; border-radius: 0.75rem; cursor: pointer; font-weight: 600;">Enviar</button>
         </div>
       </div>
 
-      <!-- VISTA MIS REPORTES -->
-      <div id="view-reportes" class="student-view" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; flex-direction: column; gap: 1.5rem;">
+      <!-- VISTA: REPORTES -->
+      <div id="section-reportes" class="app-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; flex-direction: column; gap: 1.5rem;">
         <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0;">Resultados de tu cuestionario</h2>
         <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem;">
           <div style="background: #f8fafc; padding: 1.5rem; border-radius: 1rem; border: 1px solid #e2e8f0; display: flex; align-items: center; gap: 1.5rem;">
@@ -181,8 +180,8 @@
         </div>
       </div>
 
-      <!-- VISTA PERFIL -->
-      <div id="view-perfil" class="student-view" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; flex-direction: column; gap: 1.5rem;">
+      <!-- VISTA: PERFIL -->
+      <div id="section-perfil" class="app-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; flex-direction: column; gap: 1.5rem;">
         <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0;">Mi Perfil</h2>
         <div style="display: flex; gap: 2rem; align-items: flex-start;">
           <div id="profile-avatar" style="width: 80px; height: 80px; background: #4f46e5; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.75rem; font-weight: bold;">ES</div>
@@ -204,42 +203,43 @@
 </html>
 
 <script>
-  const student = sessionStorage.getItem('student_user') || 'Estudiante';
+  const studentName = sessionStorage.getItem('student_user') || 'Estudiante';
   
-  const greeting = document.getElementById('user-greeting');
-  if (greeting) greeting.textContent = `Hola, ${student} 👋`;
+  const greetingEl = document.getElementById('user-greeting');
+  if (greetingEl) greetingEl.textContent = `Hola, ${studentName} 👋`;
 
-  const profileName = document.getElementById('profile-name') as HTMLInputElement;
-  if (profileName) profileName.value = student;
+  const profileInput = document.getElementById('profile-name') as HTMLInputElement;
+  if (profileInput) profileInput.value = studentName;
 
-  const avatar = document.getElementById('profile-avatar');
-  if (avatar) avatar.textContent = student.substring(0, 2).toUpperCase();
+  const avatarEl = document.getElementById('profile-avatar');
+  if (avatarEl) avatarEl.textContent = studentName.substring(0, 2).toUpperCase();
 
-  (window as any).navStudent = function(viewName: string) {
-    document.querySelectorAll('.student-view').forEach(v => {
-      (v as HTMLElement).style.display = 'none';
+  // Función global robusta para cambiar de pestaña
+  window.switchTab = function(tabId: string) {
+    document.querySelectorAll('.app-section').forEach(sec => {
+      (sec as HTMLElement).style.display = 'none';
     });
     document.querySelectorAll('.nav-btn').forEach(btn => {
       (btn as HTMLElement).style.background = 'transparent';
       (btn as HTMLElement).style.color = '#94a3b8';
     });
 
-    const activeBtn = document.getElementById(`btn-student-${viewName}`);
+    const activeBtn = document.getElementById(`nav-${tabId}`);
     if (activeBtn) {
       activeBtn.style.background = '#4f46e5';
       activeBtn.style.color = 'white';
     }
 
-    const target = document.getElementById(`view-${viewName}`);
-    if (target) {
-      target.style.display = viewName === 'citas' ? 'grid' : 'flex';
+    const targetSection = document.getElementById(`section-${tabId}`);
+    if (targetSection) {
+      targetSection.style.display = tabId === 'citas' ? 'grid' : 'flex';
     }
   };
 
-  // 10 PREGUNTAS INTERESANTES DE BIENESTAR EMOCIONAL
-  const quizQuestions = [
+  // Cuestionario de 10 preguntas
+  const questionsList = [
     { q: "¿Con qué frecuencia te sientes ansioso/a o preocupado/a?", options: ["Nunca", "Rara vez", "A veces", "Frecuentemente", "Siempre"] },
-    { q: "¿Cómo calificarías la calidad de tu sueño durante las últimas semanas?", q2: "¿Te cuesta conciliar el sueño?", options: ["Excelente", "Buena", "Regular", "Mala", "Muy mala"] },
+    { q: "¿Cómo calificarías la calidad de tu sueño durante las últimas semanas?", options: ["Excelente", "Buena", "Regular", "Mala", "Muy mala"] },
     { q: "¿Te resulta fácil concentrarte en tus actividades académicas o cotidianas?", options: ["Siempre", "Casi siempre", "A veces", "Rara vez", "Nunca"] },
     { q: "¿Has experimentado cambios repentinos en tu estado de ánimo o irritabilidad?", options: ["Nunca", "Rara vez", "A veces", "Frecuentemente", "Constantemente"] },
     { q: "¿Cuentas con redes de apoyo (amigos, familiares) con quienes hablar cuando lo necesitas?", options: ["Sí, totalmente", "En su mayoría", "Poco", "Casi nadie", "Nadie"] },
@@ -250,74 +250,74 @@
     { q: "¿Consideras que manejas de manera adecuada la presión de los exámenes o trabajos?", options: ["Muy bien", "Bien", "Regular", "Con dificultad", "No la manejo"] }
   ];
 
-  let currentQIndex = 0;
-  const userAnswers: string[] = new Array(quizQuestions.length).fill('A veces');
+  let currentIndex = 0;
+  const userResponses = new Array(questionsList.length).fill('A veces');
 
-  function renderQuestion() {
-    const qText = document.getElementById('quiz-question-text');
-    const optionsContainer = document.getElementById('quiz-options-container');
-    const counter = document.getElementById('question-counter');
-    const progressBar = document.getElementById('quiz-progress-bar');
-    const btnPrev = document.getElementById('btn-prev') as HTMLButtonElement;
-    const btnNext = document.getElementById('btn-next') as HTMLButtonElement;
+  function loadQuizQuestion() {
+    const textEl = document.getElementById('q-text');
+    const optionsEl = document.getElementById('q-options');
+    const counterEl = document.getElementById('q-counter');
+    const progressEl = document.getElementById('q-progress');
+    const btnPrev = document.getElementById('btn-prev-q') as HTMLButtonElement;
+    const btnNext = document.getElementById('btn-next-q') as HTMLButtonElement;
 
-    if (!qText || !optionsContainer || !counter || !progressBar) return;
+    if (!textEl || !optionsEl || !counterEl || !progressEl) return;
 
-    const currentItem = quizQuestions[currentQIndex];
-    qText.textContent = `${currentQIndex + 1}. ${currentItem.q}`;
-    counter.textContent = `Pregunta ${currentQIndex + 1} de ${quizQuestions.length}`;
-    progressBar.style.width = `${((currentQIndex + 1) / quizQuestions.length) * 100}%`;
+    const current = questionsList[currentIndex];
+    textEl.textContent = `${currentIndex + 1}. ${current.q}`;
+    counterEl.textContent = `Pregunta ${currentIndex + 1} de ${questionsList.length}`;
+    progressEl.style.width = `${((currentIndex + 1) / questionsList.length) * 100}%`;
 
-    if (btnPrev) btnPrev.style.display = currentQIndex === 0 ? 'none' : 'block';
-    if (btnNext) btnNext.textContent = currentQIndex === quizQuestions.length - 1 ? 'Finalizar cuestionario' : 'Siguiente →';
+    if (btnPrev) btnPrev.style.display = currentIndex === 0 ? 'none' : 'block';
+    if (btnNext) btnNext.textContent = currentIndex === questionsList.length - 1 ? 'Finalizar cuestionario' : 'Siguiente →';
 
-    optionsContainer.innerHTML = '';
-    currentItem.options.forEach((opt) => {
-      const isChecked = userAnswers[currentQIndex] === opt ? 'checked' : '';
+    optionsEl.innerHTML = '';
+    current.options.forEach((opt) => {
+      const isChecked = userResponses[currentIndex] === opt ? 'checked' : '';
       const label = document.createElement('label');
       label.style.cssText = "display: flex; align-items: center; gap: 0.75rem; cursor: pointer; padding: 0.5rem 0; font-size: 0.95rem; color: #1e293b;";
       label.innerHTML = `
-        <input type="radio" name="quiz_opt" value="${opt}" ${isChecked} style="accent-color: #4f46e5; width: 18px; height: 18px;" />
+        <input type="radio" name="quiz_choice" value="${opt}" ${isChecked} style="accent-color: #4f46e5; width: 18px; height: 18px;" />
         ${opt}
       `;
       label.querySelector('input')?.addEventListener('change', () => {
-        userAnswers[currentQIndex] = opt;
+        userResponses[currentIndex] = opt;
       });
-      optionsContainer.appendChild(label);
+      optionsEl.appendChild(label);
     });
   }
 
-  (window as any).nextQuestion = function() {
-    if (currentQIndex < quizQuestions.length - 1) {
-      currentQIndex++;
-      renderQuestion();
+  window.nextQuestion = function() {
+    if (currentIndex < questionsList.length - 1) {
+      currentIndex++;
+      loadQuizQuestion();
     } else {
-      alert('¡Cuestionario completado con éxito! Tus resultados han sido guardados y reportados.');
+      alert('¡Cuestionario completado con éxito! Tus respuestas se han guardado.');
       
-      // Guardar alerta o reporte para la psicóloga
-      let reports = JSON.parse(localStorage.getItem('psych_alerts') || '[]');
-      reports.unshift({
+      let alerts = JSON.parse(localStorage.getItem('psych_alerts') || '[]');
+      alerts.unshift({
         id: Date.now(),
-        student: student,
-        reason: 'Cuestionario emocional completado - Rango Estable',
+        student: studentName,
+        reason: 'Evaluación de bienestar emocional completada',
         date: new Date().toLocaleDateString()
       });
-      localStorage.setItem('psych_alerts', JSON.stringify(reports));
+      localStorage.setItem('psych_alerts', JSON.stringify(alerts));
 
-      (window as any).navStudent('reportes');
+      window.switchTab('reportes');
     }
   };
 
-  (window as any).prevQuestion = function() {
-    if (currentQIndex > 0) {
-      currentQIndex--;
-      renderQuestion();
+  window.prevQuestion = function() {
+    if (currentIndex > 0) {
+      currentIndex--;
+      loadQuizQuestion();
     }
   };
 
-  renderQuestion();
+  loadQuizQuestion();
 
-  (window as any).sendChatMessage = function() {
+  // Chat con IA
+  window.sendChatMessage = function() {
     const input = document.getElementById('chat-input') as HTMLInputElement;
     const box = document.getElementById('chat-box');
     if (!input || !input.value.trim() || !box) return;
@@ -332,12 +332,13 @@
     setTimeout(() => {
       const reply = document.createElement('div');
       reply.style.cssText = "background: white; padding: 0.85rem 1rem; border-radius: 0.75rem; border: 1px solid #e2e8f0; width: fit-content; max-width: 80%; font-size: 0.9rem; color: #1e293b;";
-      reply.textContent = "Te entiendo perfectamente. Estoy aquí para acompañarte en tu proceso.";
+      reply.textContent = "Te escucho con atención. ¿Hay algo más en lo que te pueda orientar?";
       box.appendChild(reply);
       box.scrollTop = box.scrollHeight;
     }, 600);
   };
 
+  // Sincronización de Citas
   function renderStudentSlots() {
     const container = document.getElementById('student-slots-list');
     if (!container) return;
@@ -361,13 +362,13 @@
           <div style="font-size: 0.85rem; color: #4f46e5; font-weight: 600;">${s.time}</div>
           <div style="font-size: 0.75rem; color: #64748b;">Modalidad: ${s.mode}</div>
         </div>
-        <button onclick="bookAppointment(${s.id})" style="background: #10b981; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; font-size: 0.85rem;">Solicitar Cita</button>
+        <button type="button" onclick="window.bookAppointment(${s.id})" style="background: #10b981; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; font-size: 0.85rem;">Solicitar Cita</button>
       `;
       container.appendChild(div);
     });
   }
 
-  (window as any).bookAppointment = function(id: number) {
+  window.bookAppointment = function(id: number) {
     let slots = JSON.parse(localStorage.getItem('psych_slots') || '[]');
     const idx = slots.findIndex((s: any) => s.id === id);
     if (idx !== -1) {
@@ -375,7 +376,7 @@
       let bookings = JSON.parse(localStorage.getItem('psych_booked_appointments') || '[]');
       bookings.unshift({
         id: Date.now(),
-        student: student,
+        student: studentName,
         date: slot.date,
         time: slot.time,
         mode: slot.mode,
@@ -392,7 +393,7 @@
     if (!box) return;
 
     let bookings = JSON.parse(localStorage.getItem('psych_booked_appointments') || '[]');
-    const myBookings = bookings.filter((b: any) => b.student === student);
+    const myBookings = bookings.filter((b: any) => b.student === studentName);
 
     if (myBookings.length === 0) {
       box.innerHTML = '<p style="color: #64748b; font-size: 0.85rem;">Aún no has solicitado citas.</p>';
