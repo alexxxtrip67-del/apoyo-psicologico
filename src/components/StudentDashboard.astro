@@ -53,14 +53,14 @@
     <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Cuestionario Emocional Institucional</h2>
     <p style="color: #64748b; margin-bottom: 2rem;">Responde con sinceridad las 10 preguntas para evaluar tu bienestar actual.</p>
     
-    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+    <form id="questionnaire-form" style="display: flex; flex-direction: column; gap: 1.5rem;">
       <!-- Pregunta 1 -->
       <div style="padding: 1.25rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0;">
         <p style="font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">1. ¿Cómo te has sentido emocionalmente durante esta última semana?</p>
         <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-          <label><input type="radio" name="p1" /> Muy bien</label>
-          <label><input type="radio" name="p1" /> Regular</label>
-          <label><input type="radio" name="p1" /> Abrumado/a</label>
+          <label><input type="radio" name="p1" value="bajo" required /> Muy bien</label>
+          <label><input type="radio" name="p1" value="medio" /> Regular</label>
+          <label><input type="radio" name="p1" value="alto" /> Abrumado/a</label>
         </div>
       </div>
 
@@ -68,9 +68,9 @@
       <div style="padding: 1.25rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0;">
         <p style="font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">2. ¿Has experimentado dificultades para conciliar el sueño o mantener descansos adecuados?</p>
         <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-          <label><input type="radio" name="p2" /> Nunca</label>
-          <label><input type="radio" name="p2" /> A veces</label>
-          <label><input type="radio" name="p2" /> Casi siempre</label>
+          <label><input type="radio" name="p2" value="bajo" required /> Nunca</label>
+          <label><input type="radio" name="p2" value="medio" /> A veces</label>
+          <label><input type="radio" name="p2" value="alto" /> Casi siempre</label>
         </div>
       </div>
 
@@ -78,9 +78,9 @@
       <div style="padding: 1.25rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0;">
         <p style="font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">3. ¿Sientes que cuentas con apoyo suficiente de familiares o amigos ante situaciones difíciles?</p>
         <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-          <label><input type="radio" name="p3" /> Sí, totalmente</label>
-          <label><input type="radio" name="p3" /> Parcialmente</label>
-          <label><input type="radio" name="p3" /> No, me siento solo/a</label>
+          <label><input type="radio" name="p3" value="bajo" required /> Sí, totalmente</label>
+          <label><input type="radio" name="p3" value="medio" /> Parcialmente</label>
+          <label><input type="radio" name="p3" value="alto" /> No, me siento solo/a</label>
         </div>
       </div>
 
@@ -88,9 +88,9 @@
       <div style="padding: 1.25rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0;">
         <p style="font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">4. ¿Te resulta difícil concentrarte en tus actividades académicas o diarias?</p>
         <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-          <label><input type="radio" name="p4" /> Rara vez</label>
-          <label><input type="radio" name="p4" /> Frecuentemente</label>
-          <label><input type="radio" name="p4" /> Todo el tiempo</label>
+          <label><input type="radio" name="p4" value="bajo" required /> Rara vez</label>
+          <label><input type="radio" name="p4" value="medio" /> Frecuentemente</label>
+          <label><input type="radio" name="p4" value="alto" /> Todo el tiempo</label>
         </div>
       </div>
 
@@ -98,9 +98,9 @@
       <div style="padding: 1.25rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0;">
         <p style="font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">5. ¿Has experimentado niveles altos de estrés o ansiedad recientemente?</p>
         <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-          <label><input type="radio" name="p5" /> Bajo</label>
-          <label><input type="radio" name="p5" /> Moderado</label>
-          <label><input type="radio" name="p5" /> Alto / Intenso</label>
+          <label><input type="radio" name="p5" value="bajo" required /> Bajo</label>
+          <label><input type="radio" name="p5" value="medio" /> Moderado</label>
+          <label><input type="radio" name="p5" value="alto" /> Alto / Intenso</label>
         </div>
       </div>
 
@@ -108,9 +108,9 @@
       <div style="padding: 1.25rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0;">
         <p style="font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">6. ¿Participas habitualmente en actividades recreativas, deportivas o de esparcimiento?</p>
         <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-          <label><input type="radio" name="p6" /> Sí, regularmente</label>
-          <label><input type="radio" name="p6" /> Pocas veces</label>
-          <label><input type="radio" name="p6" /> Nunca</label>
+          <label><input type="radio" name="p6" value="bajo" required /> Sí, regularmente</label>
+          <label><input type="radio" name="p6" value="medio" /> Pocas veces</label>
+          <label><input type="radio" name="p6" value="alto" /> Nunca</label>
         </div>
       </div>
 
@@ -118,9 +118,9 @@
       <div style="padding: 1.25rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0;">
         <p style="font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">7. ¿Te consideras capaz de manejar los problemas cotidianos de manera efectiva?</p>
         <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-          <label><input type="radio" name="p7" /> Sí, la mayoría de veces</label>
-          <label><input type="radio" name="p7" /> Me cuesta un poco</label>
-          <label><input type="radio" name="p7" /> No sé cómo manejarlos</label>
+          <label><input type="radio" name="p7" value="bajo" required /> Sí, la mayoría de veces</label>
+          <label><input type="radio" name="p7" value="medio" /> Me cuesta un poco</label>
+          <label><input type="radio" name="p7" value="alto" /> No sé cómo manejarlos</label>
         </div>
       </div>
 
@@ -128,9 +128,9 @@
       <div style="padding: 1.25rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0;">
         <p style="font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">8. ¿Has sentido desánimo o pérdida de interés por cosas que antes disfrutabas?</p>
         <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-          <label><input type="radio" name="p8" /> No</label>
-          <label><input type="radio" name="p8" /> Un poco</label>
-          <label><input type="radio" name="p8" /> Sí, bastante</label>
+          <label><input type="radio" name="p8" value="bajo" required /> No</label>
+          <label><input type="radio" name="p8" value="medio" /> Un poco</label>
+          <label><input type="radio" name="p8" value="alto" /> Sí, bastante</label>
         </div>
       </div>
 
@@ -138,9 +138,9 @@
       <div style="padding: 1.25rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0;">
         <p style="font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">9. ¿Te sentirías cómodo/a conversando con el departamento de psicología institucional?</p>
         <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-          <label><input type="radio" name="p9" /> Sí, totalmente dispuesto/a</label>
-          <label><input type="radio" name="p9" /> Tengo dudas</label>
-          <label><input type="radio" name="p9" /> Prefiero no hacerlo</label>
+          <label><input type="radio" name="p9" value="bajo" required /> Sí, totalmente dispuesto/a</label>
+          <label><input type="radio" name="p9" value="medio" /> Tengo dudas</label>
+          <label><input type="radio" name="p9" value="alto" /> Prefiero no hacerlo</label>
         </div>
       </div>
 
@@ -148,14 +148,14 @@
       <div style="padding: 1.25rem; background: #f8fafc; border-radius: 0.75rem; border: 1px solid #e2e8f0;">
         <p style="font-weight: 600; color: #0f172a; margin-bottom: 0.75rem;">10. ¿Cómo evalúas tu nivel general de bienestar emocional actual?</p>
         <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-          <label><input type="radio" name="p10" /> Bueno</label>
-          <label><input type="radio" name="p10" /> Regular</label>
-          <label><input type="radio" name="p10" /> Necesito apoyo urgente</label>
+          <label><input type="radio" name="p10" value="bajo" required /> Bueno</label>
+          <label><input type="radio" name="p10" value="medio" /> Regular</label>
+          <label><input type="radio" name="p10" value="alto" /> Necesito apoyo urgente</label>
         </div>
       </div>
 
-      <button onclick="alert('¡Cuestionario de 10 preguntas enviado con éxito! Gracias por completar tu evaluación.')" style="background: #4f46e5; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; width: fit-content;">Enviar respuestas</button>
-    </div>
+      <button type="submit" style="background: #4f46e5; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; width: fit-content;">Enviar respuestas</button>
+    </form>
   </div>
 
   <!-- SECCIÓN 3: CITAS CON PSICÓLOGA -->
@@ -185,19 +185,22 @@
     </div>
   </div>
 
-  <!-- SECCIÓN 5: MIS REPORTES -->
+  <!-- SECCIÓN 5: MIS REPORTES (SE LLENA AUTOMÁTICO) -->
   <div id="section-reportes" class="student-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; flex-direction: column;">
     <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Mis Reportes y Historial</h2>
-    <p style="color: #64748b;">Aquí puedes ver el historial de tus participaciones y cuestionarios previos.</p>
+    <p style="color: #64748b; margin-bottom: 1.5rem;">Aquí puedes ver el historial de tus evaluaciones y cuestionarios completados.</p>
+    
+    <div id="student-reports-list" style="display: flex; flex-direction: column; gap: 1rem;">
+      <p style="color: #64748b; font-size: 0.9rem;">Aún no has completado ningún cuestionario.</p>
+    </div>
   </div>
 
-  <!-- SECCIÓN 6: PERFIL (CON OPCIÓN DE SUBIR FOTO REAL) -->
+  <!-- SECCIÓN 6: PERFIL -->
   <div id="section-perfil" class="student-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; flex-direction: column;">
     <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Mi Perfil</h2>
     <p style="color: #64748b; margin-bottom: 2rem;">Administra tu información personal y sube tu foto de perfil real.</p>
     
     <div style="display: flex; gap: 2.5rem; align-items: flex-start;">
-      <!-- Avatar y botón de cambiar foto -->
       <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
         <div id="profile-avatar-large" style="width: 100px; height: 100px; background: #4f46e5; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; overflow: hidden; border: 3px solid #e2e8f0;">
           RP
@@ -208,7 +211,6 @@
         </button>
       </div>
 
-      <!-- Campos de texto -->
       <div style="flex: 1; display: flex; flex-direction: column; gap: 1.25rem; max-width: 500px;">
         <div>
           <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.3rem;">Nombre Completo</label>
@@ -222,7 +224,7 @@
           <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.3rem;">Rol</label>
           <input type="text" value="Estudiante" disabled style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.5rem; background: #f1f5f9; color: #64748b;" />
         </div>
-        <button onclick="alert('¡Cambios y foto de perfil guardados con éxito!')" style="background: #4f46e5; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; width: fit-content;">Guardar cambios</button>
+        <button onclick="alert('¡Cambios guardados con éxito!')" style="background: #4f46e5; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; width: fit-content;">Guardar cambios</button>
       </div>
     </div>
   </div>
@@ -230,7 +232,6 @@
 </div>
 
 <script>
-  // CONTROL DE CAMBIO DE SECCIÓN DESDE EL SIDEBAR
   (window as any).switchStudentSection = function(sectionId: string) {
     document.querySelectorAll('.student-section').forEach(sec => {
       (sec as HTMLElement).style.display = 'none';
@@ -241,13 +242,93 @@
     }
   };
 
-  // Escuchar eventos globales de la barra lateral (Sidebar)
   window.addEventListener('change-section', (e: any) => {
     const section = e.detail;
     (window as any).switchStudentSection(section);
   });
 
-  // Funcionalidad para subir foto de perfil real
+  // Manejar el envío del Cuestionario Emocional
+  const questionnaireForm = document.getElementById('questionnaire-form');
+  questionnaireForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const formData = new FormData(questionnaireForm as HTMLFormElement);
+    let highRiskCount = 0;
+
+    formData.forEach((value) => {
+      if (value === 'alto') highRiskCount++;
+    });
+
+    const studentUser = sessionStorage.getItem('student_user') || 'Rider';
+    const formattedName = studentUser.charAt(0).toUpperCase() + studentUser.slice(1) + " Pérez";
+    const dateStr = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+
+    let statusText = "Estable / Bienestar Adecuado";
+    let statusColor = "#10b981";
+    let statusBg = "#d1fae5";
+
+    if (highRiskCount >= 4) {
+      statusText = "Riesgo Alto - Requiere Atención";
+      statusColor = "#ef4444";
+      statusBg = "#fee2e2";
+
+      // Generar alerta automática para la psicóloga
+      let psychAlerts = JSON.parse(localStorage.getItem('psych_alerts') || '[]');
+      psychAlerts.unshift({
+        student: formattedName,
+        date: dateStr,
+        reason: `Evaluación emocional con ${highRiskCount} indicadores de alto riesgo.`,
+        level: "Alto"
+      });
+      localStorage.setItem('psych_alerts', JSON.stringify(psychAlerts));
+    } else if (highRiskCount >= 2) {
+      statusText = "Seguimiento Moderado";
+      statusColor = "#f59e0b";
+      statusBg = "#fef3c7";
+    }
+
+    // Guardar en Mis Reportes del estudiante
+    let reports = JSON.parse(localStorage.getItem('student_reports') || '[]');
+    reports.unshift({
+      date: dateStr,
+      status: statusText,
+      color: statusColor,
+      bg: statusBg
+    });
+    localStorage.setItem('student_reports', JSON.stringify(reports));
+
+    alert('¡Cuestionario enviado con éxito! Tus resultados se han registrado en "Mis reportes".');
+    renderReports();
+    (window as any).switchStudentSection('reportes');
+  });
+
+  function renderReports() {
+    const listContainer = document.getElementById('student-reports-list');
+    if (!listContainer) return;
+
+    let reports = JSON.parse(localStorage.getItem('student_reports') || '[]');
+    if (reports.length === 0) {
+      listContainer.innerHTML = '<p style="color: #64748b; font-size: 0.9rem;">Aún no has completado ningún cuestionario.</p>';
+      return;
+    }
+
+    listContainer.innerHTML = '';
+    reports.forEach((rep: any) => {
+      const card = document.createElement('div');
+      card.style.cssText = "padding: 1.25rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; display: flex; justify-content: space-between; align-items: center;";
+      card.innerHTML = `
+        <div>
+          <div style="font-weight: 700; color: #0f172a; font-size: 1rem;"><i class="fa-solid fa-clipboard-check" style="color: #4f46e5; margin-right: 0.5rem;"></i> Cuestionario Institucional</div>
+          <div style="font-size: 0.85rem; color: #64748b; margin-top: 0.2rem;">Fecha de envío: ${rep.date}</div>
+        </div>
+        <span style="font-size: 0.8rem; color: ${rep.color}; background: ${rep.bg}; padding: 0.3rem 0.75rem; border-radius: 99px; font-weight: 600;">${rep.status}</span>
+      `;
+      listContainer.appendChild(card);
+    });
+  }
+
+  renderReports();
+
+  // Subir foto de perfil
   const avatarInput = document.getElementById('avatar-file-input') as HTMLInputElement;
   avatarInput?.addEventListener('change', (e) => {
     const file = (e.target as HTMLInputElement).files?.[0];
