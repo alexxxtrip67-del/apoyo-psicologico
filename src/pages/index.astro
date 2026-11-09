@@ -19,18 +19,13 @@ import '../styles/global.css';
 	</head>
 	<body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: system-ui, -apple-system, sans-serif;">
 		
-		<!-- 1. PANTALLA DE LOGIN -->
-		<div id="view-login-wrapper" style="display: flex; width: 100vw; height: 100vh; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; background: #f8fafc; z-index: 1000;">
-			<Login />
-		</div>
+		<!-- 1. LOGIN -->
+		<Login />
 
-		<!-- 2. PANEL DE ESTUDIANTE (Sidebar + Header + Contenido) -->
-		<div id="app" style="display: none; width: 100vw; min-height: 100vh; background-color: #f8fafc; display: none;">
+		<!-- 2. ESTUDIANTE -->
+		<div id="app" style="display: none; width: 100vw; min-height: 100vh; background-color: #f8fafc;">
 			<div style="display: flex; width: 100%; min-height: 100vh;">
-				<!-- Sidebar fijo a la izquierda -->
 				<Sidebar />
-
-				<!-- Contenido principal a la derecha -->
 				<div style="flex: 1; display: flex; flex-direction: column; min-height: 100vh; background-color: #f8fafc; overflow-y: auto;">
 					<Header />
 					<main style="padding: 2rem 2.5rem; flex: 1;">
@@ -40,13 +35,10 @@ import '../styles/global.css';
 			</div>
 		</div>
 
-		<!-- 3. PANEL PROFESIONAL DE PSICÓLOGA -->
-		<div id="psych-app" style="display: none; width: 100vw; min-height: 100vh; background-color: #f8fafc;">
-			<PsychDashboard />
-		</div>
+		<!-- 3. PSICÓLOGA -->
+		<PsychDashboard />
 
 		<script>
-			// Control global de cierre de sesión
 			document.addEventListener('click', (e) => {
 				const target = e.target as HTMLElement;
 				if (target.closest('#logout-btn') || target.closest('#psych-logout-btn')) {

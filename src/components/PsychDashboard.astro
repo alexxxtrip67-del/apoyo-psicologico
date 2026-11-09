@@ -2,7 +2,7 @@
 // src/components/PsychDashboard.astro
 ---
 
-<div id="psych-app" style="display: none; width: 100%; min-height: 100vh; background-color: #f8fafc; flex-direction: row;">
+<div id="psych-app" style="display: none; width: 100vw; min-height: 100vh; background-color: #f8fafc; flex-direction: row;">
   <!-- SIDEBAR DE LA PSICÓLOGA -->
   <aside style="width: 260px; min-width: 260px; background-color: #0b132b; border-right: 1px solid #1c2541; padding: 1.5rem 1rem; display: flex; flex-direction: column; justify-content: space-between; min-height: 100vh;">
     <div>
@@ -29,9 +29,6 @@
         <a href="#" class="psych-link" data-psection="alertas" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #94a3b8; text-decoration: none; border-radius: 0.75rem; font-weight: 500;">
           <i class="fa-solid fa-triangle-exclamation"></i> Alertas
         </a>
-        <a href="#" class="psych-link" data-psection="config" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #94a3b8; text-decoration: none; border-radius: 0.75rem; font-weight: 500;">
-          <i class="fa-solid fa-gear"></i> Configuración
-        </a>
       </nav>
     </div>
 
@@ -45,80 +42,45 @@
   <!-- CONTENIDO PRINCIPAL DE LA PSICÓLOGA -->
   <div style="flex: 1; display: flex; flex-direction: column; min-height: 100vh; overflow-y: auto;">
     <header style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 1.5rem 2.5rem; background: #ffffff; border-bottom: 1px solid #e2e8f0;">
-      <div style="font-weight: 700; color: #0f172a; font-size: 1.25rem;">Panel de Control - Resumen General</div>
+      <div style="font-weight: 700; color: #0f172a; font-size: 1.25rem;">Panel de Control - Dra. Laura Gómez</div>
       <div style="display: flex; align-items: center; gap: 1rem;">
-        <i class="fa-regular fa-bell" style="color: #4f46e5; font-size: 1.2rem; cursor: pointer;"></i>
-        <div style="display: flex; align-items: center; gap: 0.75rem;">
-          <div style="width: 40px; height: 40px; background: #3b82f6; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">LG</div>
-          <div>
-            <div style="font-weight: 700; font-size: 0.9rem; color: #0f172a;">Laura Gómez</div>
-            <div style="font-size: 0.75rem; color: #64748b;">Psicóloga Institucional</div>
-          </div>
+        <div style="width: 40px; height: 40px; background: #4f46e5; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">LG</div>
+        <div>
+          <div style="font-weight: 700; font-size: 0.9rem; color: #0f172a;">Dra. Laura Gómez</div>
+          <div style="font-size: 0.75rem; color: #64748b;">Código: PSICO-2026</div>
         </div>
       </div>
     </header>
 
     <main style="padding: 2rem 2.5rem; flex: 1;">
-      <!-- SECCIÓN 1: INICIO PSICÓLOGA -->
+      <!-- SECCIÓN 1: INICIO -->
       <div id="psych-section-inicio" class="psych-section">
-        <!-- 4 Tarjetas de Estadísticas -->
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 2rem;">
-          <div style="background: white; padding: 1.5rem; border-radius: 1rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-            <div style="color: #64748b; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">Total de estudiantes</div>
+          <div style="background: white; padding: 1.5rem; border-radius: 1rem; border: 1px solid #e2e8f0;">
+            <div style="color: #64748b; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">Total estudiantes</div>
             <div style="font-size: 1.8rem; font-weight: 800; color: #0f172a;">1,248</div>
-            <div style="font-size: 0.75rem; color: #10b981; font-weight: 600; margin-top: 0.2rem;">↑ 12% este mes</div>
           </div>
-          <div style="background: white; padding: 1.5rem; border-radius: 1rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-            <div style="color: #64748b; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">Cuestionarios completados</div>
+          <div style="background: white; padding: 1.5rem; border-radius: 1rem; border: 1px solid #e2e8f0;">
+            <div style="color: #64748b; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">Cuestionarios</div>
             <div style="font-size: 1.8rem; font-weight: 800; color: #0f172a;">1,120</div>
-            <div style="font-size: 0.75rem; color: #10b981; font-weight: 600; margin-top: 0.2rem;">↑ 8% este mes</div>
           </div>
-          <div style="background: white; padding: 1.5rem; border-radius: 1rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
-            <div style="color: #64748b; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">Casos en seguimiento</div>
+          <div style="background: white; padding: 1.5rem; border-radius: 1rem; border: 1px solid #e2e8f0;">
+            <div style="color: #64748b; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">En seguimiento</div>
             <div style="font-size: 1.8rem; font-weight: 800; color: #0f172a;">18</div>
-            <div style="font-size: 0.75rem; color: #3b82f6; font-weight: 600; margin-top: 0.2rem;">↑ 5% esta semana</div>
           </div>
-          <div style="background: white; padding: 1.5rem; border-radius: 1rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+          <div style="background: white; padding: 1.5rem; border-radius: 1rem; border: 1px solid #e2e8f0;">
             <div style="color: #64748b; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">Alertas activas</div>
             <div style="font-size: 1.8rem; font-weight: 800; color: #ef4444;">3</div>
-            <div style="font-size: 0.75rem; color: #ef4444; font-weight: 600; margin-top: 0.2rem;">Requieren atención</div>
-          </div>
-        </div>
-
-        <!-- Grilla inferior: Estado emocional y Alertas recientes -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
-          <div style="background: white; padding: 1.75rem; border-radius: 1rem; border: 1px solid #e2e8f0;">
-            <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 1.25rem;">Estado emocional general</h3>
-            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-              <div style="display: flex; justify-content: space-between; align-items: center;"><span style="color: #10b981; font-weight: 600;">● Estable</span> <b>68%</b></div>
-              <div style="display: flex; justify-content: space-between; align-items: center;"><span style="color: #f59e0b; font-weight: 600;">● En riesgo</span> <b>20%</b></div>
-              <div style="display: flex; justify-content: space-between; align-items: center;"><span style="color: #ef4444; font-weight: 600;">● Crítico</span> <b>12%</b></div>
-            </div>
-          </div>
-
-          <div style="background: white; padding: 1.75rem; border-radius: 1rem; border: 1px solid #e2e8f0;">
-            <h3 style="font-size: 1.1rem; color: #0f172a; margin-bottom: 1.25rem;">Alertas recientes</h3>
-            <div style="display: flex; flex-direction: column; gap: 1rem; font-size: 0.9rem;">
-              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 0.75rem;">
-                <div><b>Estudiante #1023</b><br/><span style="color: #ef4444; font-size: 0.8rem;">Riesgo alto - No completó cuestionario</span></div>
-                <span style="font-size: 0.75rem; color: #64748b;">Hoy 09:42</span>
-              </div>
-              <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 0.75rem;">
-                <div><b>Estudiante #0676</b><br/><span style="color: #f59e0b; font-size: 0.8rem;">Riesgo moderado - Cambios de ánimo</span></div>
-                <span style="font-size: 0.75rem; color: #64748b;">Hoy 09:17</span>
-              </div>
-            </div>
           </div>
         </div>
       </div>
 
-      <!-- SECCIÓN 2: GESTIÓN DE HORARIOS LIBRES (PARA QUE APAREZCAN AL ESTUDIANTE) -->
+      <!-- SECCIÓN 2: GESTIÓN DE HORARIOS -->
       <div id="psych-section-horarios" class="psych-section hidden">
         <h2>Gestionar Horarios de Atención</h2>
-        <p style="color: #64748b; margin-bottom: 1.5rem;">Agrega los días y horas disponibles en los que los estudiantes podrán agendar su cita contigo.</p>
+        <p style="color: #64748b; margin-bottom: 1.5rem;">Agrega los días y horas disponibles que verán los estudiantes en su sección de citas.</p>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-          <!-- Formulario para agregar horario -->
           <div style="background: white; padding: 2rem; border-radius: 1rem; border: 1px solid #e2e8f0;">
             <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: #0f172a;">Añadir Nuevo Horario Libre</h3>
             <form id="add-slot-form" style="display: flex; flex-direction: column; gap: 1rem;">
@@ -137,66 +99,30 @@
                   <option>Virtual - Zoom</option>
                 </select>
               </div>
-              <button type="submit" style="background: #4f46e5; color: white; border: none; padding: 0.75rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; margin-top: 0.5rem;">Publicar horario para estudiantes</button>
+              <button type="submit" style="background: #4f46e5; color: white; border: none; padding: 0.75rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Publicar horario para estudiantes</button>
             </form>
           </div>
 
-          <!-- Lista de horarios actuales publicados -->
           <div style="background: white; padding: 2rem; border-radius: 1rem; border: 1px solid #e2e8f0;">
-            <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: #0f172a;">Horarios Disponibles Activos</h3>
-            <div id="psych-slots-list" style="display: flex; flex-direction: column; gap: 0.75rem;">
-              <!-- Se cargan dinámicamente -->
-            </div>
+            <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: #0f172a;">Horarios Activos Publicados</h3>
+            <div id="psych-slots-list" style="display: flex; flex-direction: column; gap: 0.75rem;"></div>
           </div>
         </div>
       </div>
 
-      <!-- SECCIÓN 3: ESTUDIANTES Y ALERTAS -->
+      <!-- SECCIÓN 3: ESTUDIANTES -->
       <div id="psych-section-estudiantes" class="psych-section hidden">
-        <h2>Listado de Estudiantes y Seguimiento</h2>
-        <p style="color: #64748b; margin-bottom: 1.5rem;">Revisa el estado de los alumnos y gestiona sus casos directamente.</p>
+        <h2>Listado de Estudiantes</h2>
         <div style="background: white; padding: 2rem; border-radius: 1rem; border: 1px solid #e2e8f0;">
-          <table style="width: 100%; border-collapse: collapse; text-align: left;">
-            <thead>
-              <tr style="border-bottom: 1px solid #e2e8f0; color: #64748b; font-size: 0.85rem;">
-                <th style="padding: 0.75rem;">Estudiante</th>
-                <th style="padding: 0.75rem;">Curso</th>
-                <th style="padding: 0.75rem;">Nivel de Riesgo</th>
-                <th style="padding: 0.75rem; text-align: right;">Acciones</th>
-              </tr>
-            </thead>
-            <tbody style="font-size: 0.9rem; color: #0f172a;">
-              <tr style="border-bottom: 1px solid #f1f5f9;">
-                <td style="padding: 0.75rem;">Juan Pérez (#1023)</td>
-                <td style="padding: 0.75rem;">2do BTI</td>
-                <td style="padding: 0.75rem; color: #ef4444; font-weight: 600;">Alto</td>
-                <td style="padding: 0.75rem; text-align: right;"><button onclick="alert('Abriendo expediente del estudiante #1023')" style="background: #f1f5f9; color: #4f46e5; border: none; padding: 0.4rem 0.8rem; border-radius: 0.4rem; cursor: pointer; font-weight: 600;">Ver caso</button></td>
-              </tr>
-              <tr>
-                <td style="padding: 0.75rem;">María López (#0676)</td>
-                <td style="padding: 0.75rem;">1ro BGU</td>
-                <td style="padding: 0.75rem; color: #f59e0b; font-weight: 600;">Moderado</td>
-                <td style="padding: 0.75rem; text-align: right;"><button onclick="alert('Abriendo expediente de María López')" style="background: #f1f5f9; color: #4f46e5; border: none; padding: 0.4rem 0.8rem; border-radius: 0.4rem; cursor: pointer; font-weight: 600;">Ver caso</button></td>
-              </tr>
-            </tbody>
-          </table>
+          <p style="color: #0f172a; font-weight: 600;">Juan Pérez (#1023) - 2do BTI (Riesgo Alto)</p>
         </div>
       </div>
 
-      <!-- OTRAS SECCIONES SIMPLES -->
+      <!-- SECCIÓN 4: ALERTAS -->
       <div id="psych-section-alertas" class="psych-section hidden">
-        <h2>Panel de Alertas Activas</h2>
-        <p style="color: #64748b; margin-bottom: 1.5rem;">Monitoreo en tiempo real de notificaciones emocionales de estudiantes.</p>
+        <h2>Alertas Activas</h2>
         <div style="background: white; padding: 2rem; border-radius: 1rem; border: 1px solid #e2e8f0;">
-          <p style="color: #0f172a; font-weight: 600;">⚠️ 3 alertas pendientes de revisión psicológica.</p>
-        </div>
-      </div>
-
-      <div id="psych-section-config" class="psych-section hidden">
-        <h2>Configuración Profesional</h2>
-        <p style="color: #64748b; margin-bottom: 1.5rem;">Ajusta tus preferencias de notificación y disponibilidad institucional.</p>
-        <div style="background: white; padding: 2rem; border-radius: 1rem; border: 1px solid #e2e8f0;">
-          <p style="color: #64748b;">Perfil institucional vinculado: Dra. Laura Gómez (ID: PSIC-2026).</p>
+          <p style="color: #ef4444; font-weight: 600;">⚠️ 3 alertas pendientes de revisión.</p>
         </div>
       </div>
     </main>
@@ -204,7 +130,6 @@
 </div>
 
 <script>
-  // Navegación interna del panel de la psicóloga
   const psychLinks = document.querySelectorAll('.psych-link');
   psychLinks.forEach(link => {
     link.addEventListener('click', (e) => {
@@ -227,7 +152,6 @@
     });
   });
 
-  // Gestión de Horarios Libres compartidos con el estudiante
   const addSlotForm = document.getElementById('add-slot-form');
   addSlotForm?.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -237,13 +161,11 @@
 
     if (date && time) {
       const newSlot = { id: Date.now(), date, time, mode };
-      
-      // Guardar en localStorage para sincronizar con el estudiante
       let currentSlots = JSON.parse(localStorage.getItem('psych_slots') || '[]');
       currentSlots.push(newSlot);
       localStorage.setItem('psych_slots', JSON.stringify(currentSlots));
 
-      alert('¡Horario publicado con éxito! Ahora aparecerá disponible para los estudiantes.');
+      alert('¡Horario publicado con éxito para los estudiantes!');
       (addSlotForm as HTMLFormElement).reset();
       renderPsychSlots();
     }
