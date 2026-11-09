@@ -46,7 +46,7 @@
     </div>
   </div>
 
-  <!-- SECCIÓN 2: CUESTIONARIO COMPLETO DE 10 PREGUNTAS -->
+  <!-- SECCIÓN 2: CUESTIONARIO -->
   <div id="section-cuestionario" class="student-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; flex-direction: column;">
     <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Cuestionario Emocional Institucional</h2>
     <p style="color: #64748b; margin-bottom: 2rem;">Responde con sinceridad las 10 preguntas para evaluar tu bienestar actual.</p>
@@ -146,7 +146,7 @@
     </form>
   </div>
 
-  <!-- SECCIÓN 3: CITAS CON PSICÓLOGA -->
+  <!-- SECCIÓN 3: CITAS -->
   <div id="section-citas" class="student-section" style="display: none; grid-template-columns: 2fr 1fr; gap: 1.5rem;">
     <div style="background: white; padding: 2rem; border-radius: 1.25rem; border: 1px solid #e2e8f0;">
       <h3 style="font-size: 1.2rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Horarios Libres Disponibles</h3>
@@ -161,16 +161,16 @@
     </div>
   </div>
 
-  <!-- SECCIÓN 4: CHAT CON ASISTENTE DE IA INTELIGENTE -->
+  <!-- SECCIÓN 4: CHAT IA -->
   <div id="section-chat" class="student-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; height: 550px; flex-direction: column; justify-content: space-between;">
     <div>
       <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Chat de Apoyo Emocional (IA)</h2>
-      <p style="color: #64748b; font-size: 0.85rem; margin-bottom: 1rem;">Asistente inteligente configurado para brindarte orientación y escucha confidencial.</p>
+      <p style="color: #64748b; font-size: 0.85rem; margin-bottom: 1rem;">Espacio seguro y confidencial para conversar y recibir orientación.</p>
     </div>
 
     <div id="chat-messages-container" style="flex: 1; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; padding: 1.25rem; overflow-y: auto; margin-bottom: 1rem; display: flex; flex-direction: column;">
       <div style="background: #e0e7ff; padding: 0.75rem 1rem; border-radius: 0.75rem; width: fit-content; max-width: 80%; color: #1e1b4b; font-size: 0.9rem; margin-bottom: 0.75rem;">
-        ¡Hola! Soy tu asistente virtual de apoyo emocional. Estoy aquí para escucharte en un espacio seguro y confidencial. ¿Cómo te sientes hoy?
+        ¡Hola! Soy tu asistente virtual de apoyo emocional. Estoy aquí para escucharte en un espacio seguro. ¿Cómo te sientes hoy?
       </div>
     </div>
 
@@ -182,7 +182,7 @@
     </div>
   </div>
 
-  <!-- SECCIÓN 5: MIS REPORTES -->
+  <!-- SECCIÓN 5: REPORTES -->
   <div id="section-reportes" class="student-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; flex-direction: column;">
     <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Mis Reportes y Historial</h2>
     <p style="color: #64748b; margin-bottom: 1.5rem;">Aquí puedes ver el historial de tus evaluaciones y cuestionarios completados.</p>
@@ -192,7 +192,7 @@
     </div>
   </div>
 
-  <!-- SECCIÓN 6: PERFIL CON OPCIÓN DE SUBIR FOTO REAL -->
+  <!-- SECCIÓN 6: PERFIL -->
   <div id="section-perfil" class="student-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; flex-direction: column;">
     <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Mi Perfil</h2>
     <p style="color: #64748b; margin-bottom: 2rem;">Administra tu información personal y sube tu foto de perfil real.</p>
@@ -229,22 +229,21 @@
 </div>
 
 <script>
-  // Cargar nombre real del estudiante guardado en sessionStorage
+  // Cargar exactamente el nombre con el que ingresaste (sin agregar apellidos fijos)
   const currentStudent = sessionStorage.getItem('student_user') || 'Estudiante';
-  const formattedStudentName = currentStudent.charAt(0).toUpperCase() + currentStudent.slice(1);
   
   const welcomeTitle = document.getElementById('welcome-title');
-  if (welcomeTitle) welcomeTitle.textContent = `Hola, ${formattedStudentName} 👋`;
+  if (welcomeTitle) welcomeTitle.textContent = `Hola, ${currentStudent} 👋`;
 
   const profileNameInput = document.getElementById('profile-name-input') as HTMLInputElement;
-  if (profileNameInput) profileNameInput.value = formattedStudentName;
+  if (profileNameInput) profileNameInput.value = currentStudent;
 
   const profileEmailInput = document.getElementById('profile-email-input') as HTMLInputElement;
   if (profileEmailInput) profileEmailInput.value = `${currentStudent.toLowerCase().replace(/\s+/g, '')}@estudiante.edu.ec`;
 
   const avatarLarge = document.getElementById('profile-avatar-large');
   if (avatarLarge) {
-    const initials = formattedStudentName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+    const initials = currentStudent.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
     avatarLarge.textContent = initials;
   }
 
@@ -263,7 +262,7 @@
     (window as any).switchStudentSection(section);
   });
 
-  // IA Inteligente de Chat
+  // Chat IA
   const chatInput = document.getElementById('chat-input-field') as HTMLInputElement;
   const chatMessages = document.getElementById('chat-messages-container');
   const chatSendBtn = document.getElementById('chat-send-btn');
@@ -309,7 +308,7 @@
     if (e.key === 'Enter') handleSendChatMessage();
   });
 
-  // Cuestionario y Alertas
+  // Cuestionario y Reportes
   const questionnaireForm = document.getElementById('questionnaire-form');
   questionnaireForm?.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -329,7 +328,7 @@
 
       let psychAlerts = JSON.parse(localStorage.getItem('psych_alerts') || '[]');
       psychAlerts.unshift({
-        student: formattedStudentName,
+        student: currentStudent,
         date: dateStr,
         reason: `Evaluación con ${highRiskCount} respuestas de riesgo alto.`,
         level: "Alto"
@@ -370,7 +369,7 @@
   }
   renderReports();
 
-  // Gestión de Citas (Estado "En espera" hasta que la psicóloga confirme)
+  // Gestión de Citas (Inicia siempre como "En espera" de forma limpia)
   function renderSlots() {
     const listContainer = document.getElementById('student-slots-list');
     if (!listContainer) return;
@@ -410,7 +409,7 @@
       let psychBookings = JSON.parse(localStorage.getItem('psych_booked_appointments') || '[]');
       const newBooking = {
         id: Date.now(),
-        student: formattedStudentName,
+        student: currentStudent,
         date: booked.date,
         time: booked.time,
         mode: booked.mode,
@@ -429,7 +428,7 @@
     if (!myAppContainer) return;
 
     let psychBookings = JSON.parse(localStorage.getItem('psych_booked_appointments') || '[]');
-    const myBookings = psychBookings.filter((b: any) => b.student === formattedStudentName);
+    const myBookings = psychBookings.filter((b: any) => b.student === currentStudent);
 
     if (myBookings.length === 0) {
       myAppContainer.innerHTML = '<p style="color: #64748b; font-size: 0.85rem;">Aún no has reservado ninguna cita.</p>';
@@ -446,7 +445,7 @@
         <div style="font-size: 0.85rem; color: #4f46e5; font-weight: 600;">${b.time}</div>
         <div style="font-size: 0.75rem; color: #334155; margin-top: 0.25rem;">Modalidad: ${b.mode}</div>
         <div style="font-size: 0.75rem; font-weight: 700; margin-top: 0.3rem; color: ${isConfirmed ? '#065f46' : '#b45309'};">
-          Estado: ${b.status}
+          Estado: ${b.status || 'En espera'}
         </div>
       `;
       myAppContainer.appendChild(item);

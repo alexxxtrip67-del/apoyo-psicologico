@@ -41,7 +41,7 @@
         <span style="font-size: 0.75rem; color: #64748b; margin-top: 0.25rem; display: block;">Acceso restringido solo para personal autorizado.</span>
       </div>
 
-      <button type="submit" style="background: #4f46e5; color: white; border: none; padding: 0.85rem; border-radius: 0.75rem; font-weight: 600; font-size: 1rem; cursor: pointer; margin-top: 0.5rem; transition: background 0.2s;">
+      <button type="submit" style="background: #4f46e5; color: white; border: none; padding: 0.85rem; border-radius: 0.75rem; font-weight: 600; font-size: 1rem; cursor: pointer; margin-top: 0.5rem;">
         Iniciar Sesión
       </button>
     </form>
@@ -56,7 +56,6 @@
   const passwordInput = document.getElementById('password-input') as HTMLInputElement;
   const loginForm = document.getElementById('login-form');
 
-  // Mostrar u ocultar el campo de código único según el rol seleccionado
   roleSelect?.addEventListener('change', () => {
     if (roleSelect.value === 'psicologa') {
       if (psychCodeContainer) psychCodeContainer.style.display = 'block';
@@ -67,14 +66,12 @@
     }
   });
 
-  // Funcionalidad del ojito para ver/ocultar contraseña
   togglePassword?.addEventListener('click', () => {
     const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
     passwordInput.setAttribute('type', type);
     togglePassword.className = type === 'password' ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash';
   });
 
-  // Manejar el envío del login
   loginForm?.addEventListener('submit', (e) => {
     e.preventDefault();
     const role = roleSelect.value;
@@ -82,7 +79,6 @@
 
     if (role === 'psicologa') {
       const psychCode = (document.getElementById('psych-code-input') as HTMLInputElement).value.trim();
-      // Código único de acceso para la psicóloga
       if (psychCode !== 'PSICO2026') {
         alert('Código único incorrecto. Solo la Dra. Laura Gómez puede acceder al panel profesional.');
         return;

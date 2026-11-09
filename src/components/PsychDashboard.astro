@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <!-- ESTADÍSTICAS / ALERTAS ACTIVAS -->
+  <!-- ESTADÍSTICAS -->
   <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
     <div style="background: white; padding: 1.75rem; border-radius: 1.25rem; border: 1px solid #e2e8f0;">
       <div style="font-size: 0.85rem; font-weight: 600; color: #64748b; margin-bottom: 0.5rem;">Alertas Activas</div>
@@ -52,7 +52,6 @@
 
 <script>
   function renderPsychDashboard() {
-    // Renderizar Alertas
     const alertsList = document.getElementById('psych-alerts-list');
     const alertsCounter = document.getElementById('alerts-counter');
     const alerts = JSON.parse(localStorage.getItem('psych_alerts') || '[]');
@@ -66,7 +65,7 @@
         card.style.cssText = "padding: 1.25rem; background: #fee2e2; border: 1px solid #fca5a5; border-radius: 0.75rem; display: flex; justify-content: space-between; align-items: center;";
         card.innerHTML = `
           <div>
-            <div style="font-weight: 700; color: #991b1b; font-size: 1rem;">${alertData.student}</div>
+            <div style="font-weight: 700; color: #991b1b; font-size: 1rem;">Estudiante: ${alertData.student}</div>
             <div style="font-size: 0.85rem; color: #7f1d1d; margin-top: 0.2rem;">${alertData.reason}</div>
             <div style="font-size: 0.75rem; color: #991b1b; margin-top: 0.2rem;">Fecha: ${alertData.date}</div>
           </div>
@@ -76,7 +75,6 @@
       });
     }
 
-    // Renderizar Citas para confirmar
     const appList = document.getElementById('psych-appointments-list');
     const appCounter = document.getElementById('appointments-counter');
     let bookings = JSON.parse(localStorage.getItem('psych_booked_appointments') || '[]');
@@ -91,14 +89,15 @@
 
       appList.innerHTML = '';
       bookings.forEach((b: any) => {
-        const isConfirmed = b.status === 'Confirmada';
+        const currentStatus = b.status || 'En espera';
+        const isConfirmed = currentStatus === 'Confirmada';
         const card = document.createElement('div');
         card.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 1.25rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; background: #f8fafc;";
         card.innerHTML = `
           <div>
             <div style="font-weight: 700; color: #0f172a; font-size: 1rem;">Estudiante: ${b.student}</div>
             <div style="font-size: 0.9rem; color: #4f46e5; font-weight: 600; margin-top: 0.2rem;">${b.date} - ${b.time}</div>
-            <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.2rem;">Modalidad: ${b.mode} | Estado: <span style="font-weight:700; color:${isConfirmed ? '#10b981' : '#f59e0b'};">${b.status}</span></div>
+            <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.2rem;">Modalidad: ${b.mode} | Estado: <span style="font-weight:700; color:${isConfirmed ? '#10b981' : '#f59e0b'};">${currentStatus}</span></div>
           </div>
           ${!isConfirmed ? `<button onclick="confirmBooking(${b.id})" style="background: #10b981; color: white; border: none; padding: 0.6rem 1.25rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; font-size: 0.85rem;">Confirmar Cita</button>` : `<span style="color: #10b981; font-weight: 600; font-size: 0.85rem;"><i class="fa-solid fa-check-circle"></i> Confirmada</span>`}
         `;
@@ -114,7 +113,7 @@
       bookings[index].status = 'Confirmada';
       localStorage.setItem('psych_booked_appointments', JSON.stringify(bookings));
       renderPsychDashboard();
-      alert('¡Cita confirmada con éxito! El estudiante verá la confirmación en su panel.');
+      alert('¡Cita confirmada con éxito!');
     }
   };
 
