@@ -17,32 +17,36 @@ import '../styles/global.css';
 		<!-- FontAwesome -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 	</head>
-	<body style="margin: 0; padding: 0; overflow-x: hidden;">
+	<body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; overflow-x: hidden;">
+		
 		<!-- 1. PANTALLA DE LOGIN -->
-		<div id="view-login-wrapper" style="display: flex; width: 100vw; height: 100vh;">
+		<div id="view-login-wrapper" style="display: flex; width: 100%; min-height: 100vh; align-items: center; justify-content: center; padding: 1rem;">
 			<Login />
 		</div>
 
-		<!-- 2. PANEL DE ESTUDIANTE -->
-		<div id="app" style="display: none; flex-direction: row; width: 100vw; min-height: 100vh; background-color: #f8fafc;">
-			<Sidebar />
+		<!-- 2. PANEL DE ESTUDIANTE (Adaptable a móviles y PC) -->
+		<div id="app" style="display: none; width: 100%; min-height: 100vh; background-color: #f8fafc;">
+			<div class="app-layout" style="display: flex; width: 100%; min-height: 100vh; flex-direction: row; flex-wrap: wrap;">
+				<div class="sidebar-container" style="width: 260px; flex-shrink: 0;">
+					<Sidebar />
+				</div>
 
-			<div class="main-content-wrapper" style="flex: 1; display: flex; flex-direction: column; min-height: 100vh; background-color: #f8fafc; overflow-y: auto;">
-				<Header />
-				
-				<main style="padding: 2rem 2.5rem; flex: 1;">
-					<StudentDashboard />
-				</main>
+				<div class="main-content-wrapper" style="flex: 1; display: flex; flex-direction: column; min-width: 0; min-height: 100vh; background-color: #f8fafc;">
+					<Header />
+					<main style="padding: 1.5rem 2rem; flex: 1; box-sizing: border-box;">
+						<StudentDashboard />
+					</main>
+				</div>
 			</div>
 		</div>
 
 		<!-- 3. PANEL PROFESIONAL DE PSICÓLOGA -->
-		<div id="psych-app" style="display: none; width: 100vw; min-height: 100vh; background-color: #f8fafc;">
+		<div id="psych-app" style="display: none; width: 100%; min-height: 100vh; background-color: #f8fafc;">
 			<PsychDashboard />
 		</div>
 
 		<script>
-			// Cerrar sesión global
+			// Control global de cierre de sesión
 			document.addEventListener('click', (e) => {
 				const target = e.target as HTMLElement;
 				if (target.closest('#logout-btn') || target.closest('#psych-logout-btn')) {
