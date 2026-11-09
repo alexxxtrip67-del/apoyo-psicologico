@@ -77,12 +77,12 @@
     const role = roleSelect.value;
     const usernameInput = (document.getElementById('username-input') as HTMLInputElement).value.trim();
 
-    sessionStorage.clear(); // Limpiar sesiones previas para evitar arrastrar nombres o roles incorrectos
+    sessionStorage.clear();
 
     if (role === 'psicologa') {
       const psychCode = (document.getElementById('psych-code-input') as HTMLInputElement).value.trim();
       if (psychCode !== 'PSICO2026') {
-        alert('Código único incorrecto. Usa el código correcto para ingresar.');
+        alert('Código único incorrecto. Solo la Dra. Laura Gómez puede acceder al panel profesional.');
         return;
       }
       sessionStorage.setItem('user_role', 'psicologa');
