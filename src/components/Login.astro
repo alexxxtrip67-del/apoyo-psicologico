@@ -23,7 +23,7 @@
 
       <div>
         <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.4rem;">Nombre de Usuario / Correo</label>
-        <input type="text" id="username-input" placeholder="Ej. Natalia u operador" required style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 0.95rem;" />
+        <input type="text" id="username-input" placeholder="Ej. Natalia" required style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 0.95rem;" />
       </div>
 
       <div id="password-field-container">
@@ -34,7 +34,7 @@
         </div>
       </div>
 
-      <!-- Campo exclusivo para el código de acceso de la psicóloga con su ID correcto -->
+      <!-- Campo exclusivo para el código de acceso de la psicóloga -->
       <div id="psych-code-container" style="display: none;">
         <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.4rem;">Código Único Profesional</label>
         <input type="password" id="psych-code-input" placeholder="Ingresa el código secreto" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 0.95rem;" />
@@ -76,6 +76,8 @@
     e.preventDefault();
     const role = roleSelect.value;
     const usernameInput = (document.getElementById('username-input') as HTMLInputElement).value.trim();
+
+    sessionStorage.clear(); // Limpiar sesiones previas para evitar arrastrar nombres o roles incorrectos
 
     if (role === 'psicologa') {
       const psychCode = (document.getElementById('psych-code-input') as HTMLInputElement).value.trim();
