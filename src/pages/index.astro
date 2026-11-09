@@ -17,25 +17,21 @@ import '../styles/global.css';
 		<!-- FontAwesome -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 	</head>
-	<body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; overflow: hidden; height: 100vh;">
+	<body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: system-ui, -apple-system, sans-serif;">
 		
 		<!-- 1. LOGIN -->
 		<Login />
 
-		<!-- 2. PANEL DE ESTUDIANTE -->
-		<div id="app" style="display: none; width: 100vw; height: 100vh; background-color: #f8fafc; display: none; overflow: hidden;">
-			<div style="display: flex; width: 100%; height: 100vh;">
-				<!-- Sidebar fijo a la izquierda -->
-				<div style="width: 260px; min-width: 260px; height: 100vh;">
-					<Sidebar />
-				</div>
-				<!-- Contenedor derecho (Header + Contenido con scroll) -->
-				<div style="flex: 1; display: flex; flex-direction: column; height: 100vh; background-color: #f8fafc; overflow-y: auto;">
-					<Header />
-					<main style="padding: 2rem 2.5rem; flex: 1; box-sizing: border-box;">
-						<StudentDashboard />
-					</main>
-				</div>
+		<!-- 2. PANEL DE ESTUDIANTE (Estructura original en fila perfecta) -->
+		<div id="app" style="display: none; flex-direction: row; width: 100vw; height: 100vh; background-color: #f8fafc; overflow: hidden;">
+			<Sidebar />
+
+			<div class="main-content-wrapper" style="flex: 1; display: flex; flex-direction: column; height: 100vh; background-color: #f8fafc; overflow-y: auto;">
+				<Header />
+				
+				<main style="padding: 2rem 2.5rem; flex: 1; box-sizing: border-box;">
+					<StudentDashboard />
+				</main>
 			</div>
 		</div>
 
@@ -43,6 +39,7 @@ import '../styles/global.css';
 		<PsychDashboard />
 
 		<script>
+			// Control global de cierre de sesión
 			document.addEventListener('click', (e) => {
 				const target = e.target as HTMLElement;
 				if (target.closest('#logout-btn') || target.closest('#psych-logout-btn')) {
