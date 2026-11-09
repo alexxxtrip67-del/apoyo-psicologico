@@ -22,7 +22,7 @@ import '../styles/global.css';
 		<!-- 1. LOGIN -->
 		<Login />
 
-		<!-- 2. PANEL DE ESTUDIANTE -->
+		<!-- 2. PANEL DE ESTUDIANTE (Exclusivo Alumnos) -->
 		<div id="app" style="display: none; flex-direction: row; width: 100vw; min-height: 100vh; background-color: #f8fafc;">
 			<Sidebar />
 
@@ -35,10 +35,11 @@ import '../styles/global.css';
 			</div>
 		</div>
 
-		<!-- 3. PANEL PROFESIONAL DE PSICÓLOGA -->
+		<!-- 3. PANEL PROFESIONAL DE PSICÓLOGA (Exclusivo Dra. Laura Gómez) -->
 		<PsychDashboard />
 
 		<script>
+			// Control global de cierre de sesión
 			document.addEventListener('click', (e) => {
 				const target = e.target as HTMLElement;
 				if (target.closest('#logout-btn') || target.closest('#psych-logout-btn')) {
@@ -49,6 +50,12 @@ import '../styles/global.css';
 					if (loginWrapper) loginWrapper.style.display = 'flex';
 					if (appWrapper) appWrapper.style.display = 'none';
 					if (psychWrapper) psychWrapper.style.display = 'none';
+
+					// Limpiar inputs del login al salir
+					const userInput = document.getElementById('login-user') as HTMLInputElement;
+					const passInput = document.getElementById('login-pass') as HTMLInputElement;
+					if (userInput) userInput.value = '';
+					if (passInput) passInput.value = '';
 				}
 			});
 		</script>
