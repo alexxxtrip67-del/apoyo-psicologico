@@ -1,47 +1,47 @@
 ---
 // src/components/Login.astro
 ---
-<div style="display: flex; justify-content: center; align-items: center; min-height: 80vh; padding: 1rem;">
-  <div style="background: white; padding: 2.5rem; border-radius: 1.5rem; border: 1px solid #e2e8f0; width: 100%; max-width: 420px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
+<div style="display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #f8fafc; padding: 2rem; box-sizing: border-box;">
+  <div style="background: white; padding: 3rem; border-radius: 1.5rem; border: 1px solid #e2e8f0; width: 100%; max-width: 480px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); box-sizing: border-box;">
     
-    <div style="text-align: center; margin-bottom: 2rem;">
-      <div style="width: 60px; height: 60px; background: rgba(79, 70, 229, 0.1); border-radius: 1rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto;">
-        <i class="fa-solid fa-shield-heart" style="color: #4f46e5; font-size: 1.75rem;"></i>
+    <div style="text-align: center; margin-bottom: 2.5rem;">
+      <div style="width: 64px; height: 64px; background: rgba(79, 70, 229, 0.1); border-radius: 1rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem auto;">
+        <i class="fa-solid fa-shield-heart" style="color: #4f46e5; font-size: 2rem;"></i>
       </div>
-      <h2 style="font-size: 1.5rem; font-weight: 800; color: #0f172a; margin: 0 0 0.5rem 0;">Espacio Seguro</h2>
-      <p style="color: #64748b; font-size: 0.9rem; margin: 0;">Ingresa a tu portal institucional</p>
+      <h1 style="font-size: 1.75rem; font-weight: 800; color: #0f172a; margin: 0 0 0.5rem 0;">Espacio Seguro</h1>
+      <p style="color: #64748b; font-size: 0.95rem; margin: 0;">Accede a tu cuenta para continuar</p>
     </div>
 
-    <form id="login-form" style="display: flex; flex-direction: column; gap: 1.25rem;">
+    <form id="login-form" style="display: flex; flex-direction: column; gap: 1.5rem;">
       <div>
-        <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.4rem;">Selecciona tu Rol</label>
-        <select id="role-select" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; background: #f8fafc; font-size: 0.95rem;">
+        <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.5rem;">Selecciona tu Rol</label>
+        <select id="role-select" style="width: 100%; padding: 0.85rem 1rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; background: #f8fafc; font-size: 1rem; color: #0f172a; box-sizing: border-box;">
           <option value="estudiante">Estudiante</option>
           <option value="psicologa">Psicóloga / Profesional</option>
         </select>
       </div>
 
       <div>
-        <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.4rem;">Nombre de Usuario / Correo</label>
-        <input type="text" id="username-input" placeholder="Ej. Natalia" required style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 0.95rem;" />
+        <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.5rem;">Nombre de Usuario / Correo</label>
+        <input type="text" id="username-input" placeholder="Ej. Natalia" required style="width: 100%; padding: 0.85rem 1rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 1rem; color: #0f172a; box-sizing: border-box;" />
       </div>
 
       <div id="password-field-container">
-        <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.4rem;">Contraseña</label>
-        <div style="position: relative; display: flex; align-items: center;">
-          <input type="password" id="password-input" placeholder="••••••••" style="width: 100%; padding: 0.75rem 2.5rem 0.75rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 0.95rem;" />
-          <i id="toggle-password" class="fa-solid fa-eye" style="position: absolute; right: 1rem; color: #64748b; cursor: pointer;"></i>
+        <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.5rem;">Contraseña</label>
+        <div style="position: relative; display: flex; align-items: center; width: 100%; box-sizing: border-box;">
+          <input type="password" id="password-input" placeholder="••••••••" style="width: 100%; padding: 0.85rem 3rem 0.85rem 1rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 1rem; color: #0f172a; box-sizing: border-box;" />
+          <i id="toggle-password" class="fa-solid fa-eye" style="position: absolute; right: 1rem; color: #64748b; cursor: pointer; font-size: 1.1rem;"></i>
         </div>
       </div>
 
       <!-- Campo exclusivo para el código de acceso de la psicóloga -->
       <div id="psych-code-container" style="display: none;">
-        <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.4rem;">Código Único Profesional</label>
-        <input type="password" id="psych-code-input" placeholder="Ingresa el código secreto" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 0.95rem;" />
-        <span style="font-size: 0.75rem; color: #64748b; margin-top: 0.25rem; display: block;">Código requerido: PSICO2026</span>
+        <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.5rem;">Código Único Profesional</label>
+        <input type="password" id="psych-code-input" placeholder="Ingresa el código secreto" style="width: 100%; padding: 0.85rem 1rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 1rem; color: #0f172a; box-sizing: border-box;" />
+        <span style="font-size: 0.75rem; color: #64748b; margin-top: 0.4rem; display: block;">Código requerido: PSICO2026</span>
       </div>
 
-      <button type="submit" style="background: #4f46e5; color: white; border: none; padding: 0.85rem; border-radius: 0.75rem; font-weight: 600; font-size: 1rem; cursor: pointer; margin-top: 0.5rem;">
+      <button type="submit" style="background: #4f46e5; color: white; border: none; padding: 0.95rem; border-radius: 0.75rem; font-weight: 600; font-size: 1rem; cursor: pointer; margin-top: 0.5rem; width: 100%; transition: background 0.2s; box-sizing: border-box;">
         Iniciar Sesión
       </button>
     </form>
