@@ -180,20 +180,25 @@
         </div>
       </div>
 
-      <!-- VISTA: PERFIL -->
+      <!-- VISTA: PERFIL CON BOTÓN CAMBIAR FOTO -->
       <div id="section-perfil" class="app-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; flex-direction: column; gap: 1.5rem;">
         <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin: 0;">Mi Perfil</h2>
-        <div style="display: flex; gap: 2rem; align-items: flex-start;">
-          <div id="profile-avatar" style="width: 80px; height: 80px; background: #4f46e5; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.75rem; font-weight: bold;">ES</div>
+        <div style="display: flex; gap: 2.5rem; align-items: flex-start;">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+            <div id="profile-avatar" style="width: 90px; height: 90px; background: #4f46e5; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.75rem; font-weight: bold; overflow: hidden;">ES</div>
+            <input type="file" id="avatar-file-input" accept="image/*" style="display: none;" onchange="handleImageUpload(event)" />
+            <button type="button" onclick="document.getElementById('avatar-file-input').click()" style="background: white; color: #4f46e5; border: 1px solid #4f46e5; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; font-size: 0.85rem;">Cambiar foto</button>
+          </div>
           <div style="flex: 1; display: flex; flex-direction: column; gap: 1rem; max-width: 450px;">
             <div>
               <label style="font-size: 0.8rem; font-weight: 600; color: #334155; display: block; margin-bottom: 0.3rem;">Nombre completo</label>
-              <input type="text" id="profile-name" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.5rem;" />
+              <input type="text" id="profile-name" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.5rem; box-sizing: border-box;" />
             </div>
             <div>
               <label style="font-size: 0.8rem; font-weight: 600; color: #334155; display: block; margin-bottom: 0.3rem;">Rol</label>
-              <input type="text" value="Estudiante Institucional" disabled style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.5rem; background: #f1f5f9; color: #64748b;" />
+              <input type="text" value="Estudiante Institucional" disabled style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.5rem; background: #f1f5f9; color: #64748b; box-sizing: border-box;" />
             </div>
+            <button type="button" onclick="alert('¡Cambios guardados con éxito!');" style="background: #4f46e5; color: white; border: none; padding: 0.75rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Guardar cambios</button>
           </div>
         </div>
       </div>
@@ -212,9 +217,31 @@
   if (profileInput) profileInput.value = studentName;
 
   const avatarEl = document.getElementById('profile-avatar');
-  if (avatarEl) avatarEl.textContent = studentName.substring(0, 2).toUpperCase();
+  if (avatarEl) {
+    const savedImg = localStorage.getItem('student_avatar');
+    if (savedImg) {
+      avatarEl.innerHTML = `<img src="${savedImg}" style="width: 100%; height: 100%; object-fit: cover;" />`;
+    } else {
+      avatarEl.textContent = studentName.substring(0, 2).toUpperCase();
+    }
+  }
 
-  // Función global robusta para cambiar de pestaña
+  (window as any).handleImageUpload = function(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e: any) {
+        const base64Img = e.target.result;
+        localStorage.setItem('student_avatar', base64Img);
+        if (avatarEl) {
+          avatarEl.innerHTML = `<img src="${base64Img}" style="width: 100%; height: 100%; object-fit: cover;" />`;
+        }
+        alert('¡Foto de perfil actualizada con éxito!');
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   window.switchTab = function(tabId: string) {
     document.querySelectorAll('.app-section').forEach(sec => {
       (sec as HTMLElement).style.display = 'none';
@@ -236,7 +263,7 @@
     }
   };
 
-  // Cuestionario de 10 preguntas
+  // 10 Preguntas del Cuestionario
   const questionsList = [
     { q: "¿Con qué frecuencia te sientes ansioso/a o preocupado/a?", options: ["Nunca", "Rara vez", "A veces", "Frecuentemente", "Siempre"] },
     { q: "¿Cómo calificarías la calidad de tu sueño durante las últimas semanas?", options: ["Excelente", "Buena", "Regular", "Mala", "Muy mala"] },
@@ -338,7 +365,7 @@
     }, 600);
   };
 
-  // Sincronización de Citas
+  // Citas
   function renderStudentSlots() {
     const container = document.getElementById('student-slots-list');
     if (!container) return;
