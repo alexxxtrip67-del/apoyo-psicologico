@@ -161,7 +161,7 @@
     </div>
   </div>
 
-  <!-- SECCIÓN 4: CHAT CON ASISTENTE DE IA INTELIGENTE Y SEGURO -->
+  <!-- SECCIÓN 4: CHAT CON ASISTENTE DE IA INTELIGENTE -->
   <div id="section-chat" class="student-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0; height: 550px; flex-direction: column; justify-content: space-between;">
     <div>
       <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 0.25rem;">Chat de Apoyo Emocional (IA)</h2>
@@ -200,7 +200,7 @@
     <div style="display: flex; gap: 2.5rem; align-items: flex-start;">
       <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
         <div id="profile-avatar-large" style="width: 100px; height: 100px; background: #4f46e5; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; overflow: hidden; border: 3px solid #e2e8f0;">
-          RP
+          US
         </div>
         <input type="file" id="avatar-file-input" accept="image/*" style="display: none;" />
         <button onclick="document.getElementById('avatar-file-input')?.click()" style="background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; font-size: 0.85rem; cursor: pointer;">
@@ -210,12 +210,12 @@
 
       <div style="flex: 1; display: flex; flex-direction: column; gap: 1.25rem; max-width: 500px;">
         <div>
-          <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.3rem;">Nombre Completo</label>
-          <input type="text" id="profile-name-input" value="Rider Pérez" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.5rem; outline: none;" />
+          <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.3rem;">Nombre de Usuario</label>
+          <input type="text" id="profile-name-input" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.5rem; outline: none;" />
         </div>
         <div>
-          <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.3rem;">Correo electrónico</label>
-          <input type="email" value="rider.perez@estudiante.edu.ec" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.5rem; outline: none;" />
+          <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.3rem;">Correo institucional</label>
+          <input type="email" id="profile-email-input" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.5rem; outline: none;" />
         </div>
         <div>
           <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.3rem;">Rol</label>
@@ -229,6 +229,25 @@
 </div>
 
 <script>
+  // Cargar nombre real del estudiante guardado en sessionStorage
+  const currentStudent = sessionStorage.getItem('student_user') || 'Estudiante';
+  const formattedStudentName = currentStudent.charAt(0).toUpperCase() + currentStudent.slice(1);
+  
+  const welcomeTitle = document.getElementById('welcome-title');
+  if (welcomeTitle) welcomeTitle.textContent = `Hola, ${formattedStudentName} 👋`;
+
+  const profileNameInput = document.getElementById('profile-name-input') as HTMLInputElement;
+  if (profileNameInput) profileNameInput.value = formattedStudentName;
+
+  const profileEmailInput = document.getElementById('profile-email-input') as HTMLInputElement;
+  if (profileEmailInput) profileEmailInput.value = `${currentStudent.toLowerCase().replace(/\s+/g, '')}@estudiante.edu.ec`;
+
+  const avatarLarge = document.getElementById('profile-avatar-large');
+  if (avatarLarge) {
+    const initials = formattedStudentName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+    avatarLarge.textContent = initials;
+  }
+
   (window as any).switchStudentSection = function(sectionId: string) {
     document.querySelectorAll('.student-section').forEach(sec => {
       (sec as HTMLElement).style.display = 'none';
@@ -244,55 +263,45 @@
     (window as any).switchStudentSection(section);
   });
 
-  // MOTOR INTELIGENTE DE IA AVANZADA PARA CUMPLIR CON EL REQUERIMIENTO DEL LICENCIADO
+  // IA Inteligente de Chat
   const chatInput = document.getElementById('chat-input-field') as HTMLInputElement;
   const chatMessages = document.getElementById('chat-messages-container');
   const chatSendBtn = document.getElementById('chat-send-btn');
 
   const smartResponses = [
-    "Comprendo lo que compartes. Como asistente virtual de apoyo emocional, te sugiero tomar un momento para respirar profundo y reflexionar sobre tus prioridades. ¿Hay alguna situación específica que te esté generando mayor inquietud hoy?",
-    "Es completamente normal experimentar momentos de alta exigencia académica o personal. ¿Te gustaría que evaluemos juntos algunas estrategias prácticas de manejo del estrés o prefieres agendar una cita con la Dra. Laura Gómez?",
-    "Aprecio mucho que compartas esto en un espacio seguro. El bienestar emocional requiere atención constante. ¿Cómo has estado durmiendo y descansando durante esta semana?",
-    "Te escucho con absoluta atención. Recuerda que reconocer lo que sientes es el primer paso para buscar equilibrio. ¿Has conversado de esto con alguien de tu círculo cercano?",
-    "Gracias por abrirte en este canal confidencial. Las cargas emocionales pesan menos cuando se canalizan adecuadamente. ¿Quieres que veamos los horarios disponibles para una sesión personalizada?"
+    "Comprendo lo que compartes. Como asistente virtual de apoyo emocional, te sugiero tomar un momento para respirar profundo y reflexionar. ¿Hay alguna situación que te esté generando mayor inquietud hoy?",
+    "Es completamente normal experimentar momentos de alta exigencia académica. ¿Te gustaría que evaluemos técnicas de manejo del estrés o prefieres agendar una cita con la Dra. Laura Gómez?",
+    "Aprecio mucho que compartas esto en un espacio seguro. ¿Cómo has estado durmiendo y descansando durante esta semana?",
+    "Te escucho con absoluta atención. Reconocer lo que sientes es el primer paso. ¿Quieres que veamos los horarios disponibles para una sesión personalizada?"
   ];
-
   let responseIndex = 0;
 
   function handleSendChatMessage() {
     const userText = chatInput?.value.trim();
     if (!userText) return;
 
-    // Mensaje del usuario
     const userMsg = document.createElement('div');
     userMsg.style.cssText = "background: #4f46e5; color: white; padding: 0.75rem 1rem; border-radius: 0.75rem; width: fit-content; max-width: 80%; margin-left: auto; margin-bottom: 0.75rem; font-size: 0.9rem;";
     userMsg.textContent = userText;
     chatMessages?.appendChild(userMsg);
-
     chatInput.value = '';
     if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
 
-    // Indicador de análisis de la IA
     const loadingMsg = document.createElement('div');
     loadingMsg.id = 'ai-typing';
     loadingMsg.style.cssText = "background: #e0e7ff; padding: 0.75rem 1rem; border-radius: 0.75rem; width: fit-content; color: #1e1b4b; font-size: 0.9rem; margin-bottom: 0.75rem;";
-    loadingMsg.textContent = "Analizando contexto y redactando respuesta...";
+    loadingMsg.textContent = "Analizando contexto...";
     chatMessages?.appendChild(loadingMsg);
-    if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
 
     setTimeout(() => {
       document.getElementById('ai-typing')?.remove();
-
       const aiMsg = document.createElement('div');
       aiMsg.style.cssText = "background: #e0e7ff; padding: 0.75rem 1rem; border-radius: 0.75rem; width: fit-content; max-width: 80%; color: #1e1b4b; margin-bottom: 0.75rem; font-size: 0.9rem; line-height: 1.4;";
-      
-      // Rotamos inteligentemente la respuesta para que parezca una IA generativa analítica
       aiMsg.textContent = smartResponses[responseIndex];
       responseIndex = (responseIndex + 1) % smartResponses.length;
-
       chatMessages?.appendChild(aiMsg);
       if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
-    }, 1000);
+    }, 900);
   }
 
   chatSendBtn?.addEventListener('click', handleSendChatMessage);
@@ -300,21 +309,15 @@
     if (e.key === 'Enter') handleSendChatMessage();
   });
 
-  // CUESTIONARIO Y REPORTES
+  // Cuestionario y Alertas
   const questionnaireForm = document.getElementById('questionnaire-form');
   questionnaireForm?.addEventListener('submit', (e) => {
     e.preventDefault();
     const formData = new FormData(questionnaireForm as HTMLFormElement);
     let highRiskCount = 0;
+    formData.forEach((value) => { if (value === 'alto') highRiskCount++; });
 
-    formData.forEach((value) => {
-      if (value === 'alto') highRiskCount++;
-    });
-
-    const studentUser = sessionStorage.getItem('student_user') || 'Rider';
-    const formattedName = studentUser.charAt(0).toUpperCase() + studentUser.slice(1) + " Pérez";
     const dateStr = new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
-
     let statusText = "Estable / Bienestar Adecuado";
     let statusColor = "#10b981";
     let statusBg = "#d1fae5";
@@ -326,28 +329,19 @@
 
       let psychAlerts = JSON.parse(localStorage.getItem('psych_alerts') || '[]');
       psychAlerts.unshift({
-        student: formattedName,
+        student: formattedStudentName,
         date: dateStr,
-        reason: `Evaluación emocional con ${highRiskCount} respuestas de riesgo alto.`,
+        reason: `Evaluación con ${highRiskCount} respuestas de riesgo alto.`,
         level: "Alto"
       });
       localStorage.setItem('psych_alerts', JSON.stringify(psychAlerts));
-    } else if (highRiskCount >= 2) {
-      statusText = "Seguimiento Moderado";
-      statusColor = "#f59e0b";
-      statusBg = "#fef3c7";
     }
 
     let reports = JSON.parse(localStorage.getItem('student_reports') || '[]');
-    reports.unshift({
-      date: dateStr,
-      status: statusText,
-      color: statusColor,
-      bg: statusBg
-    });
+    reports.unshift({ date: dateStr, status: statusText, color: statusColor, bg: statusBg });
     localStorage.setItem('student_reports', JSON.stringify(reports));
 
-    alert('¡Cuestionario enviado con éxito! Tus resultados se han registrado en "Mis reportes".');
+    alert('¡Cuestionario enviado con éxito! Tus resultados se registraron en "Mis reportes".');
     renderReports();
     (window as any).switchStudentSection('reportes');
   });
@@ -355,51 +349,28 @@
   function renderReports() {
     const listContainer = document.getElementById('student-reports-list');
     if (!listContainer) return;
-
     let reports = JSON.parse(localStorage.getItem('student_reports') || '[]');
     if (reports.length === 0) {
       listContainer.innerHTML = '<p style="color: #64748b; font-size: 0.9rem;">Aún no has completado ningún cuestionario.</p>';
       return;
     }
-
     listContainer.innerHTML = '';
     reports.forEach((rep: any) => {
       const card = document.createElement('div');
       card.style.cssText = "padding: 1.25rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; display: flex; justify-content: space-between; align-items: center;";
       card.innerHTML = `
         <div>
-          <div style="font-weight: 700; color: #0f172a; font-size: 1rem;"><i class="fa-solid fa-clipboard-check" style="color: #4f46e5; margin-right: 0.5rem;"></i> Cuestionario Emocional Institucional</div>
-          <div style="font-size: 0.85rem; color: #64748b; margin-top: 0.2rem;">Fecha de envío: ${rep.date}</div>
+          <div style="font-weight: 700; color: #0f172a; font-size: 1rem;"><i class="fa-solid fa-clipboard-check" style="color: #4f46e5; margin-right: 0.5rem;"></i> Cuestionario Emocional</div>
+          <div style="font-size: 0.85rem; color: #64748b; margin-top: 0.2rem;">Fecha: ${rep.date}</div>
         </div>
         <span style="font-size: 0.8rem; color: ${rep.color}; background: ${rep.bg}; padding: 0.3rem 0.75rem; border-radius: 99px; font-weight: 600;">${rep.status}</span>
       `;
       listContainer.appendChild(card);
     });
   }
-
   renderReports();
 
-  // FOTO DE PERFIL
-  const avatarInput = document.getElementById('avatar-file-input') as HTMLInputElement;
-  avatarInput?.addEventListener('change', (e) => {
-    const file = (e.target as HTMLInputElement).files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function(uploadEvent) {
-        const imageUrl = uploadEvent.target?.result as string;
-        const avatarLarge = document.getElementById('profile-avatar-large');
-        if (avatarLarge) {
-          avatarLarge.style.backgroundImage = `url(${imageUrl})`;
-          avatarLarge.style.backgroundSize = 'cover';
-          avatarLarge.style.backgroundPosition = 'center';
-          avatarLarge.textContent = '';
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-
-  // CITAS
+  // Gestión de Citas (Estado "En espera" hasta que la psicóloga confirme)
   function renderSlots() {
     const listContainer = document.getElementById('student-slots-list');
     if (!listContainer) return;
@@ -408,8 +379,7 @@
     if (slots.length === 0) {
       slots = [
         { id: 1, date: "Martes 10 de Noviembre", time: "10:00 AM - 10:45 AM", mode: "Presencial - Cubículo 2" },
-        { id: 2, date: "Martes 10 de Noviembre", time: "03:00 PM - 03:45 PM", mode: "Virtual - Zoom" },
-        { id: 3, date: "Jueves 12 de Noviembre", time: "11:00 AM - 11:45 AM", mode: "Presencial - Cubículo 2" }
+        { id: 2, date: "Jueves 12 de Noviembre", time: "03:00 PM - 03:45 PM", mode: "Virtual - Zoom" }
       ];
     }
 
@@ -431,48 +401,58 @@
 
   (window as any).bookSlot = function(id: number) {
     let slots = JSON.parse(localStorage.getItem('psych_slots') || '[]');
-    if (slots.length === 0) {
-      slots = [
-        { id: 1, date: "Martes 10 de Noviembre", time: "10:00 AM - 10:45 AM", mode: "Presencial - Cubículo 2" },
-        { id: 2, date: "Martes 10 de Noviembre", time: "03:00 PM - 03:45 PM", mode: "Virtual - Zoom" },
-        { id: 3, date: "Jueves 12 de Noviembre", time: "11:00 AM - 11:45 AM", mode: "Presencial - Cubículo 2" }
-      ];
-    }
-
     const idx = slots.findIndex((s: any) => s.id === id);
     if (idx !== -1) {
       const booked = slots.splice(idx, 1)[0];
       localStorage.setItem('psych_slots', JSON.stringify(slots));
       renderSlots();
 
-      const studentUser = sessionStorage.getItem('student_user') || 'Rider';
-      const formattedName = studentUser.charAt(0).toUpperCase() + studentUser.slice(1) + " Pérez";
-
       let psychBookings = JSON.parse(localStorage.getItem('psych_booked_appointments') || '[]');
-      psychBookings.unshift({
-        student: formattedName,
+      const newBooking = {
+        id: Date.now(),
+        student: formattedStudentName,
         date: booked.date,
         time: booked.time,
         mode: booked.mode,
-        created: new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })
-      });
+        status: 'En espera'
+      };
+      psychBookings.unshift(newBooking);
       localStorage.setItem('psych_booked_appointments', JSON.stringify(psychBookings));
 
-      const myAppContainer = document.getElementById('my-appointments');
-      if (myAppContainer) {
-        if (myAppContainer.querySelector('p')) myAppContainer.innerHTML = '';
-        const item = document.createElement('div');
-        item.style.cssText = "padding: 1rem; background: #e0e7ff; border: 1px solid #c7d2fe; border-radius: 0.75rem; color: #1e1b4b; margin-bottom: 0.5rem;";
-        item.innerHTML = `
-          <div style="font-weight: 700; font-size: 0.9rem;">${booked.date}</div>
-          <div style="font-size: 0.85rem; color: #4f46e5; font-weight: 600;">${booked.time}</div>
-          <div style="font-size: 0.75rem; color: #4338ca; margin-top: 0.25rem;">Estado: <span style="font-weight:700;">Confirmada</span></div>
-        `;
-        myAppContainer.appendChild(item);
-      }
-      alert(`¡Cita agendada con éxito para el ${booked.date} a las ${booked.time}!`);
+      renderMyAppointments();
+      alert(`¡Cita solicitada con éxito! Estado actual: En espera de confirmación.`);
     }
   };
 
+  function renderMyAppointments() {
+    const myAppContainer = document.getElementById('my-appointments');
+    if (!myAppContainer) return;
+
+    let psychBookings = JSON.parse(localStorage.getItem('psych_booked_appointments') || '[]');
+    const myBookings = psychBookings.filter((b: any) => b.student === formattedStudentName);
+
+    if (myBookings.length === 0) {
+      myAppContainer.innerHTML = '<p style="color: #64748b; font-size: 0.85rem;">Aún no has reservado ninguna cita.</p>';
+      return;
+    }
+
+    myAppContainer.innerHTML = '';
+    myBookings.forEach((b: any) => {
+      const item = document.createElement('div');
+      const isConfirmed = b.status === 'Confirmada';
+      item.style.cssText = `padding: 1rem; background: ${isConfirmed ? '#d1fae5' : '#fef3c7'}; border: 1px solid ${isConfirmed ? '#10b981' : '#f59e0b'}; border-radius: 0.75rem; color: #0f172a; margin-bottom: 0.75rem;`;
+      item.innerHTML = `
+        <div style="font-weight: 700; font-size: 0.9rem;">${b.date}</div>
+        <div style="font-size: 0.85rem; color: #4f46e5; font-weight: 600;">${b.time}</div>
+        <div style="font-size: 0.75rem; color: #334155; margin-top: 0.25rem;">Modalidad: ${b.mode}</div>
+        <div style="font-size: 0.75rem; font-weight: 700; margin-top: 0.3rem; color: ${isConfirmed ? '#065f46' : '#b45309'};">
+          Estado: ${b.status}
+        </div>
+      `;
+      myAppContainer.appendChild(item);
+    });
+  }
+
   renderSlots();
+  renderMyAppointments();
 </script>

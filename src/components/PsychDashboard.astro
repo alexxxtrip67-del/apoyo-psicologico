@@ -1,276 +1,122 @@
 ---
 // src/components/PsychDashboard.astro
 ---
+<div style="display: flex; flex-direction: column; gap: 2rem; width: 100%; box-sizing: border-box;">
 
-<div id="psych-app" style="display: none; width: 100vw; min-height: 100vh; background-color: #f8fafc; flex-direction: row; box-sizing: border-box;">
-  <!-- SIDEBAR DE LA PSICÓLOGA -->
-  <aside style="width: 260px; min-width: 260px; background-color: #0b132b; border-right: 1px solid #1c2541; padding: 1.5rem 1rem; display: flex; flex-direction: column; justify-content: space-between; height: 100vh; position: sticky; top: 0; box-sizing: border-box;">
+  <!-- ENCABEZADO PROFESIONAL LIMPIO -->
+  <div style="background: white; padding: 2rem 2.5rem; border-radius: 1.5rem; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
     <div>
-      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem; padding: 0.5rem;">
-        <div style="background: rgba(99, 102, 241, 0.2); padding: 0.5rem; border-radius: 0.75rem;">
-          <i class="fa-solid fa-brain" style="color: #818cf8; font-size: 1.25rem;"></i>
-        </div>
-        <div>
-          <h3 style="color: #ffffff; font-size: 1rem; font-weight: 700; margin: 0;">Apoyo Psicológico</h3>
-          <p style="color: #94a3b8; font-size: 0.75rem; margin: 0;">Panel Profesional</p>
-        </div>
-      </div>
-
-      <nav style="display: flex; flex-direction: column; gap: 0.5rem;">
-        <a href="#" class="psych-link active" data-psection="inicio" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #ffffff; background-color: #4f46e5; text-decoration: none; border-radius: 0.75rem; font-weight: 500;">
-          <i class="fa-solid fa-house"></i> Inicio
-        </a>
-        <a href="#" class="psych-link" data-psection="notificaciones" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #94a3b8; text-decoration: none; border-radius: 0.75rem; font-weight: 500;">
-          <i class="fa-solid fa-bell"></i> Notificaciones de Citas <span id="notif-badge" style="background: #ef4444; color: white; font-size: 0.7rem; padding: 0.1rem 0.4rem; border-radius: 99px; display: none;">0</span>
-        </a>
-        <a href="#" class="psych-link" data-psection="horarios" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #94a3b8; text-decoration: none; border-radius: 0.75rem; font-weight: 500;">
-          <i class="fa-solid fa-calendar-days"></i> Gestionar Horarios
-        </a>
-        <a href="#" class="psych-link" data-psection="estudiantes" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #94a3b8; text-decoration: none; border-radius: 0.75rem; font-weight: 500;">
-          <i class="fa-solid fa-user-group"></i> Estudiantes
-        </a>
-      </nav>
+      <h1 style="font-size: 1.8rem; font-weight: 800; color: #0f172a; margin: 0 0 0.25rem 0;">Panel de Control - Dra. Laura Gómez</h1>
+      <p style="color: #64748b; font-size: 0.9rem; margin: 0;">Gestión institucional de bienestar y seguimiento estudiantil.</p>
     </div>
-
-    <div>
-      <button id="psych-logout-btn" style="background: transparent; border: none; color: #94a3b8; display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; width: 100%; border-radius: 0.75rem; cursor: pointer; font-weight: 500; text-align: left;">
-        <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
-      </button>
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <div style="width: 50px; height: 50px; background: #4f46e5; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem;">
+        LG
+      </div>
+      <div>
+        <div style="font-weight: 700; color: #0f172a; font-size: 1rem;">Dra. Laura Gómez</div>
+        <div style="font-size: 0.8rem; color: #10b981; font-weight: 600;">Psicóloga Titular</div>
+      </div>
     </div>
-  </aside>
-
-  <!-- CONTENIDO PRINCIPAL DE LA PSICÓLOGA -->
-  <div style="flex: 1; display: flex; flex-direction: column; min-height: 100vh; overflow-y: auto;">
-    <header style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 1.5rem 2.5rem; background: #ffffff; border-bottom: 1px solid #e2e8f0; box-sizing: border-box;">
-      <div style="font-weight: 700; color: #0f172a; font-size: 1.25rem;">Panel de Control - Dra. Laura Gómez</div>
-      <div style="display: flex; align-items: center; gap: 1rem;">
-        <div style="width: 40px; height: 40px; background: #4f46e5; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">LG</div>
-        <div>
-          <div style="font-weight: 700; font-size: 0.9rem; color: #0f172a;">Dra. Laura Gómez</div>
-          <div style="font-size: 0.75rem; color: #64748b;">Código: 2026</div>
-        </div>
-      </div>
-    </header>
-
-    <main style="padding: 2rem 2.5rem; flex: 1;">
-      <!-- SECCIÓN 1: INICIO -->
-      <div id="psych-section-inicio" class="psych-section">
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 2rem;">
-          <div style="background: white; padding: 1.5rem; border-radius: 1rem; border: 1px solid #e2e8f0;">
-            <div style="color: #64748b; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">Total estudiantes</div>
-            <div style="font-size: 1.8rem; font-weight: 800; color: #0f172a;">1,248</div>
-          </div>
-          <div style="background: white; padding: 1.5rem; border-radius: 1rem; border: 1px solid #e2e8f0;">
-            <div style="color: #64748b; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">Cuestionarios</div>
-            <div style="font-size: 1.8rem; font-weight: 800; color: #0f172a;">1,120</div>
-          </div>
-          <div style="background: white; padding: 1.5rem; border-radius: 1rem; border: 1px solid #e2e8f0;">
-            <div style="color: #64748b; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">Citas Agendadas</div>
-            <div id="stat-bookings-count" style="font-size: 1.8rem; font-weight: 800; color: #4f46e5;">0</div>
-          </div>
-          <div style="background: white; padding: 1.5rem; border-radius: 1rem; border: 1px solid #e2e8f0;">
-            <div style="color: #64748b; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">Alertas activas</div>
-            <div style="font-size: 1.8rem; font-weight: 800; color: #ef4444;">3</div>
-          </div>
-        </div>
-
-        <div style="background: white; padding: 2rem; border-radius: 1rem; border: 1px solid #e2e8f0;">
-          <h3 style="font-size: 1.15rem; color: #0f172a; margin-bottom: 1rem;"><i class="fa-solid fa-bell" style="color: #4f46e5; margin-right: 0.5rem;"></i> Últimas citas reservadas por estudiantes</h3>
-          <div id="recent-bookings-list" style="display: flex; flex-direction: column; gap: 0.75rem;">
-            <p style="color: #64748b; font-size: 0.9rem;">No hay citas reservadas recientemente.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- SECCIÓN 2: NOTIFICACIONES -->
-      <div id="psych-section-notificaciones" class="psych-section hidden">
-        <h2>Notificaciones de Citas de Estudiantes</h2>
-        <p style="color: #64748b; margin-bottom: 1.5rem;">Aquí puedes ver el historial completo de estudiantes que han seleccionado una fecha y hora para reunirse contigo.</p>
-        
-        <div style="background: white; padding: 2rem; border-radius: 1rem; border: 1px solid #e2e8f0;">
-          <div id="full-bookings-list" style="display: flex; flex-direction: column; gap: 1rem;">
-            <p style="color: #64748b; font-size: 0.9rem;">No hay notificaciones de citas registradas.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- SECCIÓN 3: GESTIÓN DE HORARIOS -->
-      <div id="psych-section-horarios" class="psych-section hidden">
-        <h2>Gestionar Horarios de Atención</h2>
-        <p style="color: #64748b; margin-bottom: 1.5rem;">Agrega los días y horas disponibles que verán los estudiantes.</p>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-          <div style="background: white; padding: 2rem; border-radius: 1rem; border: 1px solid #e2e8f0;">
-            <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: #0f172a;">Añadir Nuevo Horario Libre</h3>
-            <form id="add-slot-form" style="display: flex; flex-direction: column; gap: 1rem;">
-              <div>
-                <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #64748b; margin-bottom: 0.3rem;">Día y Fecha</label>
-                <input type="text" id="slot-date-input" placeholder="Ej: Lunes 16 de Noviembre" required style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.5rem; outline: none; box-sizing: border-box;" />
-              </div>
-              <div>
-                <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #64748b; margin-bottom: 0.3rem;">Rango de Hora</label>
-                <input type="text" id="slot-time-input" placeholder="Ej: 10:00 AM - 10:45 AM" required style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.5rem; outline: none; box-sizing: border-box;" />
-              </div>
-              <div>
-                <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #64748b; margin-bottom: 0.3rem;">Modalidad</label>
-                <select id="slot-mode-input" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.5rem; outline: none; background: white; box-sizing: border-box;">
-                  <option>Presencial - Cubículo 2</option>
-                  <option>Virtual - Zoom</option>
-                </select>
-              </div>
-              <button type="submit" style="background: #4f46e5; color: white; border: none; padding: 0.75rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Publicar horario para estudiantes</button>
-            </form>
-          </div>
-
-          <div style="background: white; padding: 2rem; border-radius: 1rem; border: 1px solid #e2e8f0;">
-            <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: #0f172a;">Horarios Activos Publicados</h3>
-            <div id="psych-slots-list" style="display: flex; flex-direction: column; gap: 0.75rem;"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SECCIÓN 4: ESTUDIANTES -->
-      <div id="psych-section-estudiantes" class="psych-section hidden">
-        <h2>Listado de Estudiantes</h2>
-        <div style="background: white; padding: 2rem; border-radius: 1rem; border: 1px solid #e2e8f0;">
-          <p style="color: #0f172a; font-weight: 600;">Juan Pérez (#1023) - 2do BTI (Riesgo Alto)</p>
-        </div>
-      </div>
-    </main>
   </div>
+
+  <!-- ESTADÍSTICAS / ALERTAS ACTIVAS -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
+    <div style="background: white; padding: 1.75rem; border-radius: 1.25rem; border: 1px solid #e2e8f0;">
+      <div style="font-size: 0.85rem; font-weight: 600; color: #64748b; margin-bottom: 0.5rem;">Alertas Activas</div>
+      <div id="alerts-counter" style="font-size: 2rem; font-weight: 800; color: #ef4444;">0</div>
+    </div>
+    <div style="background: white; padding: 1.75rem; border-radius: 1.25rem; border: 1px solid #e2e8f0;">
+      <div style="font-size: 0.85rem; font-weight: 600; color: #64748b; margin-bottom: 0.5rem;">Citas Solicitadas</div>
+      <div id="appointments-counter" style="font-size: 2rem; font-weight: 800; color: #4f46e5;">0</div>
+    </div>
+  </div>
+
+  <!-- GESTIÓN Y CONFIRMACIÓN DE CITAS -->
+  <div style="background: white; padding: 2rem; border-radius: 1.25rem; border: 1px solid #e2e8f0;">
+    <h3 style="font-size: 1.2rem; font-weight: 700; color: #0f172a; margin-bottom: 1rem;">Solicitudes de Citas de Estudiantes</h3>
+    <div id="psych-appointments-list" style="display: flex; flex-direction: column; gap: 1rem;">
+      <p style="color: #64748b; font-size: 0.9rem;">No hay citas pendientes de confirmación.</p>
+    </div>
+  </div>
+
+  <!-- ALERTAS DE ESTUDIANTES EN RIESGO -->
+  <div style="background: white; padding: 2rem; border-radius: 1.25rem; border: 1px solid #e2e8f0;">
+    <h3 style="font-size: 1.2rem; font-weight: 700; color: #0f172a; margin-bottom: 1rem;">Historial de Alertas Automáticas</h3>
+    <div id="psych-alerts-list" style="display: flex; flex-direction: column; gap: 1rem;">
+      <p style="color: #64748b; font-size: 0.9rem;">No hay alertas activas en el sistema.</p>
+    </div>
+  </div>
+
 </div>
 
 <script>
-  const psychLinks = document.querySelectorAll('.psych-link');
-  psychLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const psection = link.getAttribute('data-psection');
-      if (psection) {
-        document.querySelectorAll('.psych-section').forEach(sec => sec.classList.add('hidden'));
-        const target = document.getElementById(`psych-section-${psection}`);
-        if (target) target.classList.remove('hidden');
-
-        psychLinks.forEach(l => {
-          l.classList.remove('active');
-          (l as HTMLElement).style.backgroundColor = 'transparent';
-          (l as HTMLElement).style.color = '#94a3b8';
-        });
-        link.classList.add('active');
-        (link as HTMLElement).style.backgroundColor = '#4f46e5';
-        (link as HTMLElement).style.color = '#ffffff';
-      }
-    });
-  });
-
-  // RENDERIZAR NOTIFICACIONES Y CITAS AGENDADAS
-  function renderPsychBookings() {
-    const bookings = JSON.parse(localStorage.getItem('psych_booked_appointments') || '[]');
-    const recentContainer = document.getElementById('recent-bookings-list');
-    const fullContainer = document.getElementById('full-bookings-list');
-    const statCount = document.getElementById('stat-bookings-count');
-    const notifBadge = document.getElementById('notif-badge');
-
-    if (statCount) statCount.textContent = bookings.length.toString();
-    if (notifBadge) {
-      if (bookings.length > 0) {
-        notifBadge.style.display = 'inline-block';
-        notifBadge.textContent = bookings.length.toString();
-      } else {
-        notifBadge.style.display = 'none';
-      }
-    }
-
-    if (recentContainer) {
-      if (bookings.length === 0) {
-        recentContainer.innerHTML = '<p style="color: #64748b; font-size: 0.9rem;">No hay citas reservadas recientemente.</p>';
-      } else {
-        recentContainer.innerHTML = '';
-        bookings.slice(0, 3).forEach((b: any) => {
-          const card = document.createElement('div');
-          card.style.cssText = "padding: 1rem 1.25rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; display: flex; justify-content: space-between; align-items: center;";
-          card.innerHTML = `
-            <div>
-              <div style="font-weight: 700; color: #0f172a; font-size: 0.95rem;"><i class="fa-solid fa-user-check" style="color: #10b981; margin-right: 0.4rem;"></i> ${b.student}</div>
-              <div style="font-size: 0.85rem; color: #4f46e5; font-weight: 600; margin-top: 0.2rem;">${b.date} - ${b.time}</div>
-              <div style="font-size: 0.75rem; color: #64748b; margin-top: 0.1rem;">Modalidad: ${b.mode}</div>
-            </div>
-            <span style="font-size: 0.75rem; color: #059669; background: #d1fae5; padding: 0.25rem 0.6rem; border-radius: 99px; font-weight: 600;">Confirmada</span>
-          `;
-          recentContainer.appendChild(card);
-        });
-      }
-    }
-
-    if (fullContainer) {
-      if (bookings.length === 0) {
-        fullContainer.innerHTML = '<p style="color: #64748b; font-size: 0.9rem;">No hay notificaciones de citas registradas.</p>';
-      } else {
-        fullContainer.innerHTML = '';
-        bookings.forEach((b: any) => {
-          const card = document.createElement('div');
-          card.style.cssText = "padding: 1.25rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.75rem; display: flex; justify-content: space-between; align-items: center;";
-          card.innerHTML = `
-            <div>
-              <div style="font-weight: 700; color: #0f172a; font-size: 1rem;"><i class="fa-solid fa-calendar-check" style="color: #4f46e5; margin-right: 0.5rem;"></i> Cita reservada por: ${b.student}</div>
-              <div style="font-size: 0.9rem; color: #4f46e5; font-weight: 600; margin-top: 0.3rem;">📅 ${b.date} | ⏰ ${b.time}</div>
-              <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.2rem;">📍 ${b.mode}</div>
-            </div>
-            <span style="font-size: 0.8rem; color: #059669; background: #d1fae5; padding: 0.3rem 0.75rem; border-radius: 99px; font-weight: 600;">Nueva Cita</span>
-          `;
-          fullContainer.appendChild(card);
-        });
-      }
-    }
-  }
-
-  renderPsychBookings();
-
-  // GESTIÓN DE HORARIOS
-  const addSlotForm = document.getElementById('add-slot-form');
-  addSlotForm?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const date = (document.getElementById('slot-date-input') as HTMLInputElement).value;
-    const time = (document.getElementById('slot-time-input') as HTMLInputElement).value;
-    const mode = (document.getElementById('slot-mode-input') as HTMLSelectElement).value;
-
-    if (date && time) {
-      const newSlot = { id: Date.now(), date, time, mode };
-      let currentSlots = JSON.parse(localStorage.getItem('psych_slots') || '[]');
-      currentSlots.push(newSlot);
-      localStorage.setItem('psych_slots', JSON.stringify(currentSlots));
-
-      alert('¡Horario publicado con éxito para los estudiantes!');
-      (addSlotForm as HTMLFormElement).reset();
-      renderPsychSlots();
-    }
-  });
-
-  function renderPsychSlots() {
-    const listContainer = document.getElementById('psych-slots-list');
-    if (!listContainer) return;
+  function renderPsychDashboard() {
+    // Renderizar Alertas
+    const alertsList = document.getElementById('psych-alerts-list');
+    const alertsCounter = document.getElementById('alerts-counter');
+    const alerts = JSON.parse(localStorage.getItem('psych_alerts') || '[]');
     
-    let currentSlots = JSON.parse(localStorage.getItem('psych_slots') || '[]');
-    listContainer.innerHTML = '';
+    if (alertsCounter) alertsCounter.textContent = alerts.length.toString();
 
-    if (currentSlots.length === 0) {
-      listContainer.innerHTML = '<p style="color: #64748b; font-size: 0.85rem;">No hay horarios publicados actualmente.</p>';
-      return;
+    if (alertsList && alerts.length > 0) {
+      alertsList.innerHTML = '';
+      alerts.forEach((alertData: any) => {
+        const card = document.createElement('div');
+        card.style.cssText = "padding: 1.25rem; background: #fee2e2; border: 1px solid #fca5a5; border-radius: 0.75rem; display: flex; justify-content: space-between; align-items: center;";
+        card.innerHTML = `
+          <div>
+            <div style="font-weight: 700; color: #991b1b; font-size: 1rem;">${alertData.student}</div>
+            <div style="font-size: 0.85rem; color: #7f1d1d; margin-top: 0.2rem;">${alertData.reason}</div>
+            <div style="font-size: 0.75rem; color: #991b1b; margin-top: 0.2rem;">Fecha: ${alertData.date}</div>
+          </div>
+          <span style="font-size: 0.8rem; color: white; background: #ef4444; padding: 0.3rem 0.75rem; border-radius: 99px; font-weight: 600;">Riesgo Alto</span>
+        `;
+        alertsList.appendChild(card);
+      });
     }
 
-    currentSlots.forEach((slot: any) => {
-      const div = document.createElement('div');
-      div.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 1rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; background: #f8fafc;";
-      div.innerHTML = `
-        <div>
-          <div style="font-weight: 700; font-size: 0.85rem; color: #0f172a;">${slot.date}</div>
-          <div style="font-size: 0.8rem; color: #4f46e5; font-weight: 600;">${slot.time} (${slot.mode})</div>
-        </div>
-        <span style="font-size: 0.75rem; color: #10b981; font-weight: 600; background: #d1fae5; padding: 0.2rem 0.5rem; border-radius: 0.3rem;">Activo</span>
-      `;
-      listContainer.appendChild(div);
-    });
+    // Renderizar Citas para confirmar
+    const appList = document.getElementById('psych-appointments-list');
+    const appCounter = document.getElementById('appointments-counter');
+    let bookings = JSON.parse(localStorage.getItem('psych_booked_appointments') || '[]');
+
+    if (appCounter) appCounter.textContent = bookings.length.toString();
+
+    if (appList) {
+      if (bookings.length === 0) {
+        appList.innerHTML = '<p style="color: #64748b; font-size: 0.9rem;">No hay solicitudes de citas pendientes.</p>';
+        return;
+      }
+
+      appList.innerHTML = '';
+      bookings.forEach((b: any) => {
+        const isConfirmed = b.status === 'Confirmada';
+        const card = document.createElement('div');
+        card.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 1.25rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; background: #f8fafc;";
+        card.innerHTML = `
+          <div>
+            <div style="font-weight: 700; color: #0f172a; font-size: 1rem;">Estudiante: ${b.student}</div>
+            <div style="font-size: 0.9rem; color: #4f46e5; font-weight: 600; margin-top: 0.2rem;">${b.date} - ${b.time}</div>
+            <div style="font-size: 0.8rem; color: #64748b; margin-top: 0.2rem;">Modalidad: ${b.mode} | Estado: <span style="font-weight:700; color:${isConfirmed ? '#10b981' : '#f59e0b'};">${b.status}</span></div>
+          </div>
+          ${!isConfirmed ? `<button onclick="confirmBooking(${b.id})" style="background: #10b981; color: white; border: none; padding: 0.6rem 1.25rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; font-size: 0.85rem;">Confirmar Cita</button>` : `<span style="color: #10b981; font-weight: 600; font-size: 0.85rem;"><i class="fa-solid fa-check-circle"></i> Confirmada</span>`}
+        `;
+        appList.appendChild(card);
+      });
+    }
   }
 
-  renderPsychSlots();
+  (window as any).confirmBooking = function(id: number) {
+    let bookings = JSON.parse(localStorage.getItem('psych_booked_appointments') || '[]');
+    const index = bookings.findIndex((b: any) => b.id === id);
+    if (index !== -1) {
+      bookings[index].status = 'Confirmada';
+      localStorage.setItem('psych_booked_appointments', JSON.stringify(bookings));
+      renderPsychDashboard();
+      alert('¡Cita confirmada con éxito! El estudiante verá la confirmación en su panel.');
+    }
+  };
+
+  renderPsychDashboard();
 </script>

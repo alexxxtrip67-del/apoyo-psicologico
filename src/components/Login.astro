@@ -1,108 +1,102 @@
 ---
 // src/components/Login.astro
 ---
-<div style="display: flex; width: 100vw; height: 100vh; background-color: #f8fafc; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; z-index: 9999;">
-  <div style="display: flex; width: 900px; background: white; border-radius: 1.5rem; box-shadow: 0 10px 30px rgba(0,0,0,0.08); overflow: hidden; border: 1px solid #e2e8f0;">
+<div style="display: flex; justify-content: center; align-items: center; min-height: 80vh; padding: 1rem;">
+  <div style="background: white; padding: 2.5rem; border-radius: 1.5rem; border: 1px solid #e2e8f0; width: 100%; max-width: 420px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
     
-    <!-- Columna Izquierda: Formulario -->
-    <div style="flex: 1; padding: 3rem; display: flex; flex-direction: column; justify-content: center;">
-      <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;">
-        <div style="background: rgba(99, 102, 241, 0.1); padding: 0.5rem; border-radius: 0.75rem;">
-          <i class="fa-solid fa-brain" style="color: #4f46e5; font-size: 1.5rem;"></i>
-        </div>
-        <h2 style="font-size: 1.25rem; font-weight: 800; color: #0f172a; margin: 0;">Apoyo Psicológico</h2>
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <div style="width: 60px; height: 60px; background: rgba(79, 70, 229, 0.1); border-radius: 1rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto;">
+        <i class="fa-solid fa-shield-heart" style="color: #4f46e5; font-size: 1.75rem;"></i>
       </div>
-
-      <h3 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 0.5rem;">Bienvenido/a</h3>
-      <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1.25rem;">Selecciona tu rol institucional para ingresar.</p>
-
-      <!-- Selector de Rol -->
-      <div style="display: flex; gap: 0.75rem; margin-bottom: 1.25rem; background: #f1f5f9; padding: 0.35rem; border-radius: 0.75rem;">
-        <button type="button" id="role-student-btn" style="flex: 1; padding: 0.5rem; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer; background: #4f46e5; color: white;">Estudiante</button>
-        <button type="button" id="role-psych-btn" style="flex: 1; padding: 0.5rem; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer; background: transparent; color: #64748b;">Psicóloga</button>
-      </div>
-
-      <form id="login-form" style="display: flex; flex-direction: column; gap: 1rem;">
-        <div>
-          <label id="user-label" style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.4rem;">Usuario o Correo del Estudiante</label>
-          <input type="text" id="login-user" placeholder="ej. rider.perez" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 0.95rem;" />
-        </div>
-
-        <div>
-          <label id="pass-label" style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.4rem;">Número de Cédula (Solo números)</label>
-          <input type="text" id="login-pass" inputmode="numeric" pattern="[0-9]*" placeholder="Ingresa tu cédula" required style="width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 0.95rem;" />
-        </div>
-
-        <button type="submit" style="background: #4f46e5; color: white; border: none; padding: 0.85rem; border-radius: 0.75rem; font-weight: 600; font-size: 1rem; cursor: pointer; margin-top: 0.5rem; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);">
-          Iniciar sesión
-        </button>
-      </form>
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: #0f172a; margin: 0 0 0.5rem 0;">Espacio Seguro</h2>
+      <p style="color: #64748b; font-size: 0.9rem; margin: 0;">Ingresa a tu portal institucional</p>
     </div>
 
-    <!-- Columna Derecha -->
-    <div style="flex: 1; background: linear-gradient(135deg, #0b132b 0%, #1c2541 100%); padding: 3rem; display: flex; flex-direction: column; justify-content: center; color: white; text-align: center;">
-      <div style="font-size: 3.5rem; color: #818cf8; margin-bottom: 1.5rem;"><i class="fa-solid fa-shield-heart"></i></div>
-      <h3 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem;">Espacio Seguro e Institucional</h3>
-      <p style="color: #94a3b8; font-size: 0.95rem; line-height: 1.6;">Plataforma de bienestar emocional para el acompañamiento y seguimiento académico y psicológico.</p>
-    </div>
+    <form id="login-form" style="display: flex; flex-direction: column; gap: 1.25rem;">
+      <div>
+        <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.4rem;">Selecciona tu Rol</label>
+        <select id="role-select" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; background: #f8fafc; font-size: 0.95rem;">
+          <option value="estudiante">Estudiante</option>
+          <option value="psicologa">Psicóloga / Profesional</option>
+        </select>
+      </div>
 
+      <div>
+        <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.4rem;">Nombre de Usuario / Correo</label>
+        <input type="text" id="username-input" placeholder="Ej. Natalia u operador" required style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 0.95rem;" />
+      </div>
+
+      <div id="password-field-container">
+        <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.4rem;">Contraseña</label>
+        <div style="position: relative; display: flex; align-items: center;">
+          <input type="password" id="password-input" placeholder="••••••••" required style="width: 100%; padding: 0.75rem 2.5rem 0.75rem 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 0.95rem;" />
+          <i id="toggle-password" class="fa-solid fa-eye" style="position: absolute; right: 1rem; color: #64748b; cursor: pointer;"></i>
+        </div>
+      </div>
+
+      <!-- Campo exclusivo para el código de acceso de la psicóloga -->
+      <div id="psych-code-container" style="display: none;">
+        <label style="display: block; font-size: 0.85rem; font-weight: 600; color: #334155; margin-bottom: 0.4rem;">Código Único Profesional</label>
+        <input type="password" id="psych-code-input" placeholder="Ingresa el código secreto" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 0.95rem;" />
+        <span style="font-size: 0.75rem; color: #64748b; margin-top: 0.25rem; display: block;">Acceso restringido solo para personal autorizado.</span>
+      </div>
+
+      <button type="submit" style="background: #4f46e5; color: white; border: none; padding: 0.85rem; border-radius: 0.75rem; font-weight: 600; font-size: 1rem; cursor: pointer; margin-top: 0.5rem; transition: background 0.2s;">
+        Iniciar Sesión
+      </button>
+    </form>
   </div>
 </div>
 
 <script>
-  let selectedRole = 'student';
-
-  const roleStudentBtn = document.getElementById('role-student-btn');
-  const rolePsychBtn = document.getElementById('role-psych-btn');
-  const userInput = document.getElementById('login-user') as HTMLInputElement;
-  const userLabel = document.getElementById('user-label');
-  const passInput = document.getElementById('login-pass') as HTMLInputElement;
-  const passLabel = document.getElementById('pass-label');
-
-  roleStudentBtn?.addEventListener('click', () => {
-    selectedRole = 'student';
-    roleStudentBtn.style.background = '#4f46e5';
-    roleStudentBtn.style.color = '#ffffff';
-    rolePsychBtn!.style.background = 'transparent';
-    rolePsychBtn!.style.color = '#64748b';
-    if (userInput) userInput.placeholder = 'ej. rider.perez';
-    if (userLabel) userLabel.textContent = 'Usuario o Correo del Estudiante';
-    if (passInput) passInput.placeholder = 'Ingresa tu cédula';
-    if (passLabel) passLabel.textContent = 'Número de Cédula (Solo números)';
-  });
-
-  rolePsychBtn?.addEventListener('click', () => {
-    selectedRole = 'psych';
-    rolePsychBtn.style.background = '#4f46e5';
-    rolePsychBtn.style.color = '#ffffff';
-    roleStudentBtn!.style.background = 'transparent';
-    roleStudentBtn!.style.color = '#64748b';
-    if (userInput) userInput.placeholder = 'Dra. Laura Gómez';
-    if (userLabel) userLabel.textContent = 'Nombre de la Psicóloga';
-    if (passInput) passInput.placeholder = 'Código institucional (Ej: 2026)';
-    if (passLabel) passLabel.textContent = 'Código Único de Acceso (Números)';
-  });
-
-  // Restringir contraseña estrictamente a números
-  passInput?.addEventListener('input', (e) => {
-    const target = e.target as HTMLInputElement;
-    target.value = target.value.replace(/[^0-9]/g, '');
-  });
-
+  const roleSelect = document.getElementById('role-select') as HTMLSelectElement;
+  const psychCodeContainer = document.getElementById('psych-code-container');
+  const passwordContainer = document.getElementById('password-field-container');
+  const togglePassword = document.getElementById('toggle-password');
+  const passwordInput = document.getElementById('password-input') as HTMLInputElement;
   const loginForm = document.getElementById('login-form');
+
+  // Mostrar u ocultar el campo de código único según el rol seleccionado
+  roleSelect?.addEventListener('change', () => {
+    if (roleSelect.value === 'psicologa') {
+      if (psychCodeContainer) psychCodeContainer.style.display = 'block';
+      if (passwordContainer) passwordContainer.style.display = 'none';
+    } else {
+      if (psychCodeContainer) psychCodeContainer.style.display = 'none';
+      if (passwordContainer) passwordContainer.style.display = 'block';
+    }
+  });
+
+  // Funcionalidad del ojito para ver/ocultar contraseña
+  togglePassword?.addEventListener('click', () => {
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    togglePassword.className = type === 'password' ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash';
+  });
+
+  // Manejar el envío del login
   loginForm?.addEventListener('submit', (e) => {
     e.preventDefault();
-    const userVal = userInput.value.trim();
-    const passVal = passInput.value.trim();
+    const role = roleSelect.value;
+    const usernameInput = (document.getElementById('username-input') as HTMLInputElement).value.trim();
 
-    if (selectedRole === 'psych') {
-      if (passVal === '2026' || passVal.length >= 4) {
-        window.location.href = '/psicologa';
-      } else {
-        alert('Código de acceso incorrecto. Debe ser numérico (Ej: 2026)');
+    if (role === 'psicologa') {
+      const psychCode = (document.getElementById('psych-code-input') as HTMLInputElement).value.trim();
+      // Código único de acceso para la psicóloga
+      if (psychCode !== 'PSICO2026') {
+        alert('Código único incorrecto. Solo la Dra. Laura Gómez puede acceder al panel profesional.');
+        return;
       }
+      sessionStorage.setItem('user_role', 'psicologa');
+      sessionStorage.setItem('psych_user', usernameInput || 'Dra. Laura Gómez');
+      window.location.href = '/psicologa';
     } else {
-      sessionStorage.setItem('student_user', userVal);
+      if (!usernameInput) {
+        alert('Por favor ingresa tu nombre de usuario.');
+        return;
+      }
+      sessionStorage.setItem('user_role', 'estudiante');
+      sessionStorage.setItem('student_user', usernameInput);
       window.location.href = '/estudiante';
     }
   });
