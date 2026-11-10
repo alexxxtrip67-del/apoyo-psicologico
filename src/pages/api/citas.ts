@@ -1,9 +1,7 @@
 import type { APIRoute } from 'astro';
 
-let sharedSlots: any[] = [
-  { id: 101, date: "Martes 10 de Noviembre", time: "10:00 AM - 10:45 AM", mode: "Presencial - Cubículo 2" },
-  { id: 102, date: "Jueves 12 de Noviembre", time: "03:00 PM - 03:45 PM", mode: "Virtual - Zoom" }
-];
+// Almacenamiento inicial completamente vacío (Sin datos inventados de prueba)
+let sharedSlots: any[] = [];
 let sharedBookings: any[] = [];
 let sharedAlerts: any[] = [];
 
@@ -19,13 +17,21 @@ export const POST: APIRoute = async ({ request }) => {
     if (action === 'add_slot') {
       sharedSlots.push(payload);
     } else if (action === 'book_slot') {
-      sharedSlots = sharedSlots.filter((s: any) => s.id !== payload.slotId);
-      sharedBookings.unshift(payload.booking);
+      const slotIndex = sharedSlots.findIndex((s: any) => s.id === payload.slotId);
+      if (slotIndex !== -1) {
+        const bookedSlot = sharedSlots.splice(slotIndex, 1)[0];
+        sharedBookings.unshift({
+          id: Date.now(),
+          student: payload.student,
+          date: bookedSlot.date,
+          time: bookedSlot.time,
+          mode: bookedSlot.mode,
+          status: 'En espera'
+        });
+      }
     } else if (action === 'confirm_booking') {
       const idx = sharedBookings.findIndex((b: any) => b.id === payload.id);
       if (idx !== -1) sharedBookings[idx].status = 'Confirmada';
-    } else if (action === 'add_alert') {
-      sharedAlerts.unshift(payload);
     }
 
     return new Response(JSON.stringify({ success: true, slots: sharedSlots, bookings: sharedBookings }), { status: 200 });
