@@ -10,6 +10,7 @@
   </head>
   <body style="margin: 0; font-family: system-ui, -apple-system, sans-serif; background: #f8fafc; display: flex; height: 100vh; overflow: hidden;">
 
+    <!-- PANEL LATERAL OSCURO COMPLETO -->
     <aside style="width: 260px; background: #0f172a; color: white; display: flex; flex-direction: column; justify-content: space-between; padding: 2rem 1.5rem; flex-shrink: 0; box-sizing: border-box;">
       <div>
         <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2.5rem;">
@@ -51,15 +52,19 @@
       </div>
     </aside>
 
+    <!-- ÁREA PRINCIPAL -->
     <main style="flex: 1; padding: 2.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 2rem; box-sizing: border-box;">
 
+      <!-- CABECERA PROFESIONAL -->
       <div style="background: white; padding: 2rem 2.5rem; border-radius: 1.5rem; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
         <div>
           <h1 style="font-size: 1.8rem; font-weight: 800; color: #0f172a; margin: 0 0 0.25rem 0;">Panel de Control - Dra. Laura Gómez</h1>
           <p style="color: #64748b; font-size: 0.9rem; margin: 0;">Gestión institucional de bienestar y seguimiento estudiantil.</p>
         </div>
         <div style="display: flex; align-items: center; gap: 1rem;">
-          <div style="width: 50px; height: 50px; background: #4f46e5; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem;">LG</div>
+          <div style="width: 50px; height: 50px; background: #4f46e5; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem;">
+            LG
+          </div>
           <div>
             <div style="font-weight: 700; color: #0f172a; font-size: 1rem;">Dra. Laura Gómez</div>
             <div style="font-size: 0.8rem; color: #64748b;">Código: 2026</div>
@@ -67,8 +72,10 @@
         </div>
       </div>
 
+      <!-- VISTA: INICIO / CONTROL -->
       <div id="p-view-inicio" class="psych-section" style="display: flex; flex-direction: column; gap: 2rem;">
         
+        <!-- MÉTRICAS -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
           <div style="background: white; padding: 1.75rem; border-radius: 1.25rem; border: 1px solid #e2e8f0;">
             <div style="font-size: 0.85rem; font-weight: 600; color: #64748b; margin-bottom: 0.5rem;">Total de estudiantes</div>
@@ -88,6 +95,7 @@
           </div>
         </div>
 
+        <!-- PUBLICAR HORARIOS LIBRES -->
         <div style="background: white; padding: 2rem; border-radius: 1.25rem; border: 1px solid #e2e8f0;">
           <h3 style="font-size: 1.2rem; font-weight: 700; color: #0f172a; margin-bottom: 1rem;">Registrar Día y Horario Libre (Disponibilidad)</h3>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) 120px; gap: 1rem; align-items: end;">
@@ -107,6 +115,7 @@
           </div>
         </div>
 
+        <!-- SOLICITUDES DE CITAS EN TIEMPO REAL -->
         <div style="background: white; padding: 2rem; border-radius: 1.25rem; border: 1px solid #e2e8f0;">
           <h3 style="font-size: 1.2rem; font-weight: 700; color: #0f172a; margin-bottom: 1rem;">Solicitudes y Reservaciones de Estudiantes</h3>
           <div id="psych-appointments-list" style="display: flex; flex-direction: column; gap: 1rem;"></div>
@@ -114,6 +123,7 @@
 
       </div>
 
+      <!-- OTRAS VISTAS -->
       <div id="p-view-estudiantes" class="psych-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0;">
         <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 1rem;">Directorio de Estudiantes</h2>
       </div>
@@ -206,7 +216,7 @@
     const timeInput = document.getElementById('slot-time');
     const modeInput = document.getElementById('slot-mode');
 
-    if (!dateInput.value || !timeInput.value || !modeInput.value) {
+    if (!dateInput || !timeInput || !modeInput || !dateInput.value || !timeInput.value || !modeInput.value) {
       alert('Por favor completa todos los campos del horario libre.');
       return;
     }
@@ -228,6 +238,7 @@
     timeInput.value = '';
     modeInput.value = '';
     alert('¡Día y horario libre registrado con éxito en el servidor!');
+    renderPsychDashboard();
   };
 
   setInterval(renderPsychDashboard, 4000);
