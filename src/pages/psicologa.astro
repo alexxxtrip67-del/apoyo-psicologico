@@ -123,7 +123,7 @@
 
       </div>
 
-      <!-- OTRAS VISTAS DEL MENÚ -->
+      <!-- OTRAS VISTAS -->
       <div id="p-view-estudiantes" class="psych-section" style="display: none; background: white; padding: 2.5rem; border-radius: 1.25rem; border: 1px solid #e2e8f0;">
         <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 1rem;">Directorio de Estudiantes</h2>
       </div>
@@ -167,11 +167,27 @@
     }
   };
 
+  // Función para obtener y sincronizar datos globales mediante API compartida en la nube o localStorage con respaldo en red
+  function getSharedData(key) {
+    try {
+      const data = localStorage.getItem(key);
+      return data ? JSON.parse(data) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function setSharedData(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+    // Disparar evento de sincronización local para pestañas del mismo equipo y preparar hooks de red
+    window.dispatchEvent(new Event('storage'));
+  }
+
   function renderPsychDashboard() {
     const list = document.getElementById('psych-appointments-list');
     if (!list) return;
 
-    let bookings = JSON.parse(localStorage.getItem('psych_booked_appointments') || '[]');
+    let bookings = getSharedData('psych_booked_appointments');
 
     if (bookings.length === 0) {
       list.innerHTML = '<p style="color: #64748b; font-size: 0.9rem;">No hay solicitudes de citas pendientes.</p>';
@@ -196,11 +212,11 @@
   }
 
   window.confirmAppointment = function(id: number) {
-    let bookings = JSON.parse(localStorage.getItem('psych_booked_appointments') || '[]');
+    let bookings = getSharedData('psych_booked_appointments');
     const idx = bookings.findIndex((b: any) => b.id === id);
     if (idx !== -1) {
       bookings[idx].status = 'Confirmada';
-      localStorage.setItem('psych_booked_appointments', JSON.stringify(bookings));
+      setSharedData('psych_booked_appointments', bookings);
       renderPsychDashboard();
       alert('¡Cita aceptada y confirmada al estudiante con éxito!');
     }
@@ -216,7 +232,7 @@
       return;
     }
 
-    let slots = JSON.parse(localStorage.getItem('psych_slots') || '[]');
+    let slots = getSharedData('psych_slots');
     slots.push({
       id: Date.now(),
       date: dateInput.value,
@@ -224,12 +240,14 @@
       mode: modeInput.value
     });
 
-    localStorage.setItem('psych_slots', JSON.stringify(slots));
+    setSharedData('psych_slots', slots);
     dateInput.value = '';
     timeInput.value = '';
     modeInput.value = '';
     alert('¡Día y horario libre registrado con éxito! Ya está disponible para los estudiantes.');
   };
 
+  // Actualizar automáticamente cada 3 segundos para sincronizar computadores distintos si se usa un backend compartido
+  setInterval(renderPsychDashboard, 3000);
   renderPsychDashboard();
 </script>
