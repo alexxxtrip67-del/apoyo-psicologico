@@ -213,7 +213,7 @@
   const greetingEl = document.getElementById('user-greeting');
   if (greetingEl) greetingEl.textContent = `Hola, ${studentName} 👋`;
 
-  const profileInput = document.getElementById('profile-name') as HTMLInputElement;
+  const profileInput = document.getElementById('profile-name');
   if (profileInput) profileInput.value = studentName;
 
   const avatarEl = document.getElementById('profile-avatar');
@@ -226,11 +226,11 @@
     }
   }
 
-  window.handleImageUpload = function(event: any) {
+  window.handleImageUpload = function(event) {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = function(e: any) {
+      reader.onload = function(e) {
         const base64Img = e.target.result;
         localStorage.setItem('student_avatar', base64Img);
         if (avatarEl) {
@@ -242,13 +242,13 @@
     }
   };
 
-  window.switchTab = function(tabId: string) {
+  window.switchTab = function(tabId) {
     document.querySelectorAll('.app-section').forEach(sec => {
-      (sec as HTMLElement).style.display = 'none';
+      sec.style.display = 'none';
     });
     document.querySelectorAll('.nav-btn').forEach(btn => {
-      (btn as HTMLElement).style.background = 'transparent';
-      (btn as HTMLElement).style.color = '#94a3b8';
+      btn.style.background = 'transparent';
+      btn.style.color = '#94a3b8';
     });
 
     const activeBtn = document.getElementById(`nav-${tabId}`);
@@ -263,10 +263,8 @@
     }
   };
 
-  // Asegurar que inicie en la pestaña de inicio visible
   window.switchTab('inicio');
 
-  // 10 Preguntas del Cuestionario
   const questionsList = [
     { q: "¿Con qué frecuencia te sientes ansioso/a o preocupado/a?", options: ["Nunca", "Rara vez", "A veces", "Frecuentemente", "Siempre"] },
     { q: "¿Cómo calificarías la calidad de tu sueño durante las últimas semanas?", options: ["Excelente", "Buena", "Regular", "Mala", "Muy mala"] },
@@ -288,8 +286,8 @@
     const optionsEl = document.getElementById('q-options');
     const counterEl = document.getElementById('q-counter');
     const progressEl = document.getElementById('q-progress');
-    const btnPrev = document.getElementById('btn-prev-q') as HTMLButtonElement;
-    const btnNext = document.getElementById('btn-next-q') as HTMLButtonElement;
+    const btnPrev = document.getElementById('btn-prev-q');
+    const btnNext = document.getElementById('btn-next-q');
 
     if (!textEl || !optionsEl || !counterEl || !progressEl) return;
 
@@ -336,9 +334,8 @@
 
   loadQuizQuestion();
 
-  // Chat con IA
   window.sendChatMessage = function() {
-    const input = document.getElementById('chat-input') as HTMLInputElement;
+    const input = document.getElementById('chat-input');
     const box = document.getElementById('chat-box');
     if (!input || !input.value.trim() || !box) return;
 
@@ -358,7 +355,6 @@
     }, 600);
   };
 
-  // Sincronización de Citas con la API en Vercel
   async function fetchStudentData() {
     const container = document.getElementById('student-slots-list');
     const myAppContainer = document.getElementById('my-appointments');
@@ -375,7 +371,7 @@
           container.innerHTML = '<p style="color: #64748b; font-size: 0.9rem;">La psicóloga aún no ha registrado horarios libres.</p>';
         } else {
           container.innerHTML = '';
-          slots.forEach((s: any) => {
+          slots.forEach((s) => {
             const div = document.createElement('div');
             div.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; background: #f8fafc;";
             div.innerHTML = `
@@ -392,12 +388,12 @@
       }
 
       if (myAppContainer) {
-        const myBookings = bookings.filter((b: any) => b.student === studentName);
+        const myBookings = bookings.filter((b) => b.student === studentName);
         if (myBookings.length === 0) {
           myAppContainer.innerHTML = '<p style="color: #64748b; font-size: 0.85rem;">Aún no has solicitado citas.</p>';
         } else {
           myAppContainer.innerHTML = '';
-          myBookings.forEach((b: any) => {
+          myBookings.forEach((b) => {
             const isConfirmed = b.status === 'Confirmada';
             const item = document.createElement('div');
             item.style.cssText = `padding: 0.85rem; background: ${isConfirmed ? '#d1fae5' : '#fef3c7'}; border: 1px solid ${isConfirmed ? '#10b981' : '#f59e0b'}; border-radius: 0.75rem; margin-bottom: 0.5rem;`;
@@ -415,7 +411,7 @@
     }
   }
 
-  window.bookAppointment = async function(slotId: number) {
+  window.bookAppointment = async function(slotId) {
     await fetch('/api/citas', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

@@ -136,13 +136,13 @@
 </html>
 
 <script>
-  window.switchPsychTab = function(tabName: string) {
+  window.switchPsychTab = function(tabName) {
     document.querySelectorAll('.psych-section').forEach(sec => {
-      (sec as HTMLElement).style.display = 'none';
+      sec.style.display = 'none';
     });
     document.querySelectorAll('aside nav button').forEach(btn => {
-      (btn as HTMLElement).style.background = 'transparent';
-      (btn as HTMLElement).style.color = '#94a3b8';
+      btn.style.background = 'transparent';
+      btn.style.color = '#94a3b8';
     });
 
     const activeBtn = document.getElementById(`p-nav-${tabName}`);
@@ -172,7 +172,7 @@
       }
 
       list.innerHTML = '';
-      bookings.forEach((b: any) => {
+      bookings.forEach((b) => {
         const isConfirmed = b.status === 'Confirmada';
         const card = document.createElement('div');
         card.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 1.25rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; background: #f8fafc;";
@@ -191,7 +191,7 @@
     }
   }
 
-  window.confirmAppointment = async function(id: number) {
+  window.confirmAppointment = async function(id) {
     await fetch('/api/citas', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -202,9 +202,9 @@
   };
 
   window.addPsychSlot = async function() {
-    const dateInput = document.getElementById('slot-date') as HTMLInputElement;
-    const timeInput = document.getElementById('slot-time') as HTMLInputElement;
-    const modeInput = document.getElementById('slot-mode') as HTMLInputElement;
+    const dateInput = document.getElementById('slot-date');
+    const timeInput = document.getElementById('slot-time');
+    const modeInput = document.getElementById('slot-mode');
 
     if (!dateInput.value || !timeInput.value || !modeInput.value) {
       alert('Por favor completa todos los campos del horario libre.');
@@ -230,7 +230,6 @@
     alert('¡Día y horario libre registrado con éxito en el servidor!');
   };
 
-  // Actualización automática cada 4 segundos para reflejar lo que haga el estudiante en otro PC
   setInterval(renderPsychDashboard, 4000);
   renderPsychDashboard();
 </script>
