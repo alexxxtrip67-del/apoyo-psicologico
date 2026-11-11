@@ -1,0 +1,117 @@
+---
+// src/pages/licenciado.astro
+---
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Panel de Licenciado - Apoyo Psicológico</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </head>
+  <body style="margin: 0; font-family: system-ui, -apple-system, sans-serif; background: #f8fafc; display: flex; height: 100vh; overflow: hidden;">
+
+    <aside style="width: 260px; background: #0f172a; color: white; display: flex; flex-direction: column; justify-content: space-between; padding: 2rem 1.5rem; flex-shrink: 0; box-sizing: border-box;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2.5rem;">
+          <div style="width: 40px; height: 40px; background: #4f46e5; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center;">
+            <i class="fa-solid fa-shield-heart" style="color: white; font-size: 1.25rem;"></i>
+          </div>
+          <div>
+            <h2 style="font-size: 1.1rem; font-weight: 700; margin: 0; color: white;">Apoyo Psicológico</h2>
+            <p style="font-size: 0.75rem; color: #94a3b8; margin: 0;">Panel de Licenciado</p>
+          </div>
+        </div>
+
+        <nav style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <button type="button" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border: none; border-radius: 0.75rem; font-weight: 600; cursor: pointer; text-align: left; width: 100%; background: #4f46e5; color: white;">
+            <i class="fa-solid fa-pen-to-square"></i> Reportar Estudiante
+          </button>
+        </nav>
+      </div>
+
+      <div>
+        <a href="/" onclick="sessionStorage.clear()" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; color: #94a3b8; text-decoration: none; font-size: 0.95rem;">
+          <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+        </a>
+      </div>
+    </aside>
+
+    <main style="flex: 1; padding: 2.5rem; overflow-y: auto; display: flex; flex-direction: column; gap: 2rem; box-sizing: border-box;">
+
+      <div style="background: white; padding: 2rem 2.5rem; border-radius: 1.5rem; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
+        <div>
+          <h1 style="font-size: 1.8rem; font-weight: 800; color: #0f172a; margin: 0 0 0.25rem 0;" id="licenciado-title">Panel de Docente</h1>
+          <p style="color: #64748b; font-size: 0.9rem; margin: 0;">Informa observaciones y comentarios sobre estudiantes directamente a la psicóloga.</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <div style="width: 50px; height: 50px; background: #4f46e5; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem;">
+            LC
+          </div>
+          <div>
+            <div style="font-weight: 700; color: #0f172a; font-size: 1rem;" id="licenciado-name">Docente</div>
+            <div style="font-size: 0.8rem; color: #64748b;">Rol: Licenciado Institucional</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: white; padding: 2.5rem; border-radius: 1.5rem; border: 1px solid #e2e8f0; max-width: 700px;">
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-bottom: 1rem;">Enviar Comentario / Observación a Psicología</h2>
+        <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1.5rem;">Escribe qué te comentó el estudiante o la situación observada. Esto generará una alerta automática en el panel de la psicóloga.</p>
+
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 600; color: #334155; display: block; margin-bottom: 0.4rem;">Nombre del Estudiante</label>
+            <input type="text" id="report-student" placeholder="Ej. Natalia Ordóñez" style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; box-sizing: border-box;" />
+          </div>
+
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 600; color: #334155; display: block; margin-bottom: 0.4rem;">Comentario u Observación del Estudiante</label>
+            <textarea id="report-comment" rows="4" placeholder="Ej. El estudiante me comentó que se siente muy preocupado por..." style="width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; box-sizing: border-box; resize: vertical; font-family: inherit;"></textarea>
+          </div>
+
+          <button type="button" onclick="window.sendReport()" style="background: #4f46e5; color: white; border: none; padding: 0.85rem; border-radius: 0.75rem; font-weight: 600; cursor: pointer; font-size: 1rem;">Enviar Notificación a Psicología</button>
+        </div>
+      </div>
+
+    </main>
+  </body>
+</html>
+
+<script>
+  const licName = sessionStorage.getItem('licenciado_user') || 'Docente';
+  const nameEl = document.getElementById('licenciado-name');
+  const titleEl = document.getElementById('licenciado-title');
+  if (nameEl) nameEl.textContent = licName;
+  if (titleEl) titleEl.textContent = `Panel de ${licName}`;
+
+  window.sendReport = async function() {
+    const studentInput = document.getElementById('report-student');
+    const commentInput = document.getElementById('report-comment');
+
+    if (!studentInput.value.trim() || !commentInput.value.trim()) {
+      alert('Por favor completa el nombre del estudiante y el comentario.');
+      return;
+    }
+
+    try {
+      await fetch('/api/citas', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'add_teacher_report',
+          payload: {
+            student: studentInput.value.trim(),
+            comment: commentInput.value.trim(),
+            licenciado: licName
+          }
+        })
+      });
+
+      studentInput.value = '';
+      commentInput.value = '';
+      alert('¡Reporte enviado con éxito! La psicóloga ha recibido la notificación en su panel de Alertas.');
+    } catch (e) {
+      alert('Error al enviar el reporte al servidor.');
+    }
+  };
+</script>

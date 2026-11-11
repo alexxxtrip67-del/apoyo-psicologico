@@ -1,19 +1,133 @@
 ---
 // src/pages/index.astro
-import Login from '../components/Login.astro';
-import '../styles/global.css';
 ---
-
 <html lang="es">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Apoyo Psicológico - Tu bienestar también importa</title>
-		<!-- FontAwesome -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-	</head>
-	<body style="margin: 0; padding: 0; background-color: #f8fafc; font-family: system-ui, -apple-system, sans-serif;">
-		<Login />
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apoyo Psicológico - Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </head>
+  <body style="margin: 0; font-family: system-ui, -apple-system, sans-serif; background: #f1f5f9; display: flex; align-items: center; justify-content: center; height: 100vh;">
+
+    <div style="background: white; width: 900px; border-radius: 1.5rem; display: flex; box-shadow: 0 10px 30px rgba(0,0,0,0.08); overflow: hidden; border: 1px solid #e2e8f0;">
+      
+      <div style="flex: 1; background: #f8fafc; padding: 3rem; display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid #e2e8f0;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem;">
+            <div style="width: 40px; height: 40px; background: #4f46e5; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center;">
+              <i class="fa-solid fa-shield-heart" style="color: white; font-size: 1.25rem;"></i>
+            </div>
+            <div>
+              <h3 style="font-size: 1rem; font-weight: 700; margin: 0; color: #0f172a;">Apoyo Psicológico</h3>
+              <p style="font-size: 0.7rem; color: #64748b; margin: 0;">Tu bienestar también importa</p>
+            </div>
+          </div>
+
+          <h1 style="font-size: 2.2rem; font-weight: 800; color: #0f172a; line-height: 1.2; margin-bottom: 1rem;">
+            Hablar también es cuidarte
+          </h1>
+          <p style="color: #64748b; font-size: 0.95rem; line-height: 1.5;">
+            Aquí puedes encontrar apoyo, resolver tus dudas y recibir orientación de forma segura y confidencial.
+          </p>
+        </div>
+
+        <div style="display: flex; justify-content: center; opacity: 0.8; margin-top: 2rem;">
+          <div style="width: 100px; height: 100px; background: #e0e7ff; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+            <i class="fa-solid fa-hands-holding-circle" style="font-size: 3rem; color: #4f46e5;"></i>
+          </div>
+        </div>
+      </div>
+
+      <div style="flex: 1; padding: 3rem; display: flex; flex-direction: column; justify-content: center;">
+        <h2 style="font-size: 1.5rem; font-weight: 800; color: #0f172a; margin-bottom: 0.25rem;">Iniciar sesión</h2>
+        <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 2rem;">Accede a tu cuenta para continuar</p>
+
+        <!-- Selector de 3 roles -->
+        <div style="display: flex; background: #f1f5f9; padding: 0.35rem; border-radius: 0.75rem; margin-bottom: 1.5rem; gap: 0.25rem;">
+          <button type="button" onclick="setRole('estudiante')" id="btn-estudiante" style="flex: 1; padding: 0.6rem; border: none; border-radius: 0.5rem; font-weight: 600; font-size: 0.8rem; cursor: pointer; background: #4f46e5; color: white; transition: 0.2s;">Estudiante</button>
+          <button type="button" onclick="setRole('psicologa')" id="btn-psicologa" style="flex: 1; padding: 0.6rem; border: none; border-radius: 0.5rem; font-weight: 600; font-size: 0.8rem; cursor: pointer; background: transparent; color: #64748b; transition: 0.2s;">Psicóloga</button>
+          <button type="button" onclick="setRole('licenciado')" id="btn-licenciado" style="flex: 1; padding: 0.6rem; border: none; border-radius: 0.5rem; font-weight: 600; font-size: 0.8rem; cursor: pointer; background: transparent; color: #64748b; transition: 0.2s;">Licenciado</button>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 600; color: #334155; display: block; margin-bottom: 0.4rem;" id="label-user">Usuario o correo</label>
+            <div style="position: relative; display: flex; align-items: center;">
+              <i class="fa-solid fa-user" style="position: absolute; left: 1rem; color: #94a3b8; font-size: 0.9rem;"></i>
+              <input type="text" id="login-user" placeholder="Ingresa tu usuario" style="width: 100%; padding: 0.75rem 0.75rem 0.75rem 2.5rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 0.95rem; box-sizing: border-box;" />
+            </div>
+          </div>
+
+          <div>
+            <label style="font-size: 0.85rem; font-weight: 600; color: #334155; display: block; margin-bottom: 0.4rem;">Contraseña</label>
+            <div style="position: relative; display: flex; align-items: center;">
+              <i class="fa-solid fa-lock" style="position: absolute; left: 1rem; color: #94a3b8; font-size: 0.9rem;"></i>
+              <input type="password" id="login-pass" placeholder="••••••••" style="width: 100%; padding: 0.75rem 2.5rem 0.75rem 2.5rem; border: 1px solid #cbd5e1; border-radius: 0.75rem; outline: none; font-size: 0.95rem; box-sizing: border-box;" />
+            </div>
+          </div>
+
+          <button type="button" onclick="handleLogin()" style="background: #4f46e5; color: white; border: none; padding: 0.85rem; border-radius: 0.75rem; font-weight: 600; font-size: 1rem; cursor: pointer; margin-top: 0.5rem; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);">Entrar</button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </body>
 </html>
+
+<script>
+  let currentRole = 'estudiante';
+
+  window.setRole = function(role) {
+    currentRole = role;
+    const btnEst = document.getElementById('btn-estudiante');
+    const btnPsi = document.getElementById('btn-psicologa');
+    const btnLic = document.getElementById('btn-licenciado');
+    const labelUser = document.getElementById('label-user');
+    const inputUser = document.getElementById('login-user');
+
+    btnEst.style.background = 'transparent';
+    btnEst.style.color = '#64748b';
+    btnPsi.style.background = 'transparent';
+    btnPsi.style.color = '#64748b';
+    btnLic.style.background = 'transparent';
+    btnLic.style.color = '#64748b';
+
+    if (role === 'estudiante') {
+      btnEst.style.background = '#4f46e5';
+      btnEst.style.color = 'white';
+      labelUser.textContent = 'Usuario o correo';
+      inputUser.placeholder = 'Ingresa tu usuario';
+    } else if (role === 'psicologa') {
+      btnPsi.style.background = '#4f46e5';
+      btnPsi.style.color = 'white';
+      labelUser.textContent = 'Código profesional';
+      inputUser.placeholder = 'Ej. 2026';
+    } else if (role === 'licenciado') {
+      btnLic.style.background = '#4f46e5';
+      btnLic.style.color = 'white';
+      labelUser.textContent = 'Nombre del Docente';
+      inputUser.placeholder = 'Ej. Lic. Carlos Pérez';
+    }
+  };
+
+  window.handleLogin = function() {
+    const user = document.getElementById('login-user').value.trim();
+    if (!user) {
+      alert('Por favor ingresa tus datos de acceso.');
+      return;
+    }
+
+    if (currentRole === 'estudiante') {
+      sessionStorage.setItem('student_user', user);
+      window.location.href = '/estudiante';
+    } else if (currentRole === 'psicologa') {
+      window.location.href = '/psicologa';
+    } else if (currentRole === 'licenciado') {
+      sessionStorage.setItem('licenciado_user', user);
+      window.location.href = '/licenciado';
+    }
+  };
+</script>

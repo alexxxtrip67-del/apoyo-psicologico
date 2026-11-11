@@ -1,6 +1,5 @@
 import type { APIRoute } from 'astro';
 
-// Almacenamiento inicial completamente vacío (Sin datos inventados de prueba)
 let sharedSlots: any[] = [];
 let sharedBookings: any[] = [];
 let sharedAlerts: any[] = [];
@@ -32,9 +31,16 @@ export const POST: APIRoute = async ({ request }) => {
     } else if (action === 'confirm_booking') {
       const idx = sharedBookings.findIndex((b: any) => b.id === payload.id);
       if (idx !== -1) sharedBookings[idx].status = 'Confirmada';
+    } else if (action === 'add_teacher_report') {
+      sharedAlerts.unshift({
+        id: Date.now(),
+        student: payload.student,
+        reason: `Reporte de Licenciado (${payload.licenciado}): ${payload.comment}`,
+        date: new Date().toLocaleDateString()
+      });
     }
 
-    return new Response(JSON.stringify({ success: true, slots: sharedSlots, bookings: sharedBookings }), { status: 200 });
+    return new Response(JSON.stringify({ success: true, slots: sharedSlots, bookings: sharedBookings, alerts: sharedAlerts }), { status: 200 });
   } catch (e) {
     return new Response(JSON.stringify({ success: false }), { status: 400 });
   }
