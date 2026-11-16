@@ -116,7 +116,7 @@
       alert('Error en Supabase: ' + (errData.error || 'Desconocido'));
     }
   } catch (e) {
-    alert('Error al enviar el reporte al servidor.');
+    alert('Error detallado: ' + e.message);
   }
   };  
 </script>
