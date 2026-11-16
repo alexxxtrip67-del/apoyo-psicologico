@@ -356,87 +356,76 @@
   };
 
  async function fetchStudentData() {
+  const supabaseUrl = 'https://yhrtdtuhxdqtfbbvarqs.supabase.co';
+  const supabaseKey = 'sb_publishable_hb3zNgdhNA6FKjMFo-j5bA_CaXqwa9g';
+
+  async function getSupabase() {
+    const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
+    return createClient(supabaseUrl, supabaseKey);
+  }
+
+  async function fetchStudentData() {
     const container = document.getElementById('student-slots-list');
     const myAppContainer = document.getElementById('my-appointments');
 
     try {
-      const res = await fetch('/api/citas');
-      const data = await res.json();
-      
-      const slots = data.slots || [];
-      const bookings = data.bookings || [];
+      const supabase = await getSupabase();
+      const { data: slots } = await supabase.from('horarios').select('*');
+      const { data: bookings } = await supabase.from('citas').select('*');
 
       if (container) {
-        if (slots.length === 0) {
-          container.innerHTML = '<p style="color: #64748b; font-size: 0.9rem;">La psicóloga aún no ha registrado horarios libres.</p>';
-        } else {
-          container.innerHTML = '';
-          slots.forEach((s) => {
-            const fecha = s.fecha || s.date || '';
-            const hora = s.hora || s.time || '';
-            const modalidad = s.modalidad || s.mode || 'Presencial';
-
-            const div = document.createElement('div');
-            div.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; background: #f8fafc;";
-            div.innerHTML = `
-              <div>
-                <div style="font-weight: 700; color: #0f172a; font-size: 0.9rem;">${fecha}</div>
-                <div style="font-size: 0.85rem; color: #4f46e5; font-weight: 600;">${hora}</div>
-                <div style="font-size: 0.75rem; color: #64748b;">Modalidad: ${modalidad}</div>
-              </div>
-              <button type="button" onclick="window.bookAppointment('${fecha}', '${hora}', '${modalidad}')" style="background: #10b981; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; font-size: 0.85rem;">Solicitar Cita</button>
-            `;
-            container.appendChild(div);
-          });
-        }
+        container.innerHTML = (!slots || slots.length === 0)
+          ? '<p style="color: #64748b; font-size: 0.9rem;">La psicóloga aún no ha registrado horarios libres.</p>'
+          : '';
+        (slots || []).forEach((s) => {
+          const div = document.createElement('div');
+          div.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; background: #f8fafc;";
+          div.innerHTML = `
+            <div>
+              <div style="font-weight: 700; color: #0f172a; font-size: 0.9rem;">${s.fecha}</div>
+              <div style="font-size: 0.85rem; color: #4f46e5; font-weight: 600;">${s.hora}</div>
+              <div style="font-size: 0.75rem; color: #64748b;">Modalidad: ${s.modalidad}</div>
+            </div>
+            <button type="button" onclick="window.bookAppointment('${s.fecha}', '${s.hora}', '${s.modalidad}')" style="background: #10b981; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; font-size: 0.85rem;">Solicitar Cita</button>
+          `;
+          container.appendChild(div);
+        });
       }
 
       if (myAppContainer) {
-        const myBookings = bookings.filter((b) => (b.estudiante || b.student) === studentName);
-        if (myBookings.length === 0) {
-          myAppContainer.innerHTML = '<p style="color: #64748b; font-size: 0.85rem;">Aún no has solicitado citas.</p>';
-        } else {
-          myAppContainer.innerHTML = '';
-          myBookings.forEach((b) => {
-            const estado = b.estado || b.status || 'En espera';
-            const isConfirmed = estado === 'Confirmada';
-            const item = document.createElement('div');
-            item.style.cssText = `padding: 0.85rem; background: ${isConfirmed ? '#d1fae5' : '#fef3c7'}; border: 1px solid ${isConfirmed ? '#10b981' : '#f59e0b'}; border-radius: 0.75rem; margin-bottom: 0.5rem;`;
-            item.innerHTML = `
-              <div style="font-weight: 700; font-size: 0.85rem;">${b.fecha || b.date || ''}</div>
-              <div style="font-size: 0.8rem; color: #4f46e5; font-weight: 600;">${b.hora || b.time || ''}</div>
-              <div style="font-size: 0.75rem; color: #334155;">Estado: <span style="font-weight:700; color:${isConfirmed ? '#065f46' : '#b45309'};">${estado}</span></div>
-            `;
-            myAppContainer.appendChild(item);
-          });
-        }
+        const myBookings = (bookings || []).filter((b) => b.estudiante === studentName);
+        myAppContainer.innerHTML = myBookings.length === 0
+          ? '<p style="color: #64748b; font-size: 0.85rem;">Aún no has solicitado citas.</p>'
+          : '';
+        myBookings.forEach((b) => {
+          const isConfirmed = b.estado === 'Confirmada';
+          const item = document.createElement('div');
+          item.style.cssText = `padding: 0.85rem; background: ${isConfirmed ? '#d1fae5' : '#fef3c7'}; border: 1px solid ${isConfirmed ? '#10b981' : '#f59e0b'}; border-radius: 0.75rem; margin-bottom: 0.5rem;`;
+          item.innerHTML = `
+            <div style="font-weight: 700; font-size: 0.85rem;">${b.fecha}</div>
+            <div style="font-size: 0.8rem; color: #4f46e5; font-weight: 600;">${b.hora}</div>
+            <div style="font-size: 0.75rem; color: #334155;">Estado: <span style="font-weight:700; color:${isConfirmed ? '#065f46' : '#b45309'};">${b.estado || 'En espera'}</span></div>
+          `;
+          myAppContainer.appendChild(item);
+        });
       }
     } catch (e) {
-      console.error("Error al obtener datos de la API");
+      console.error(e);
     }
   }
 
   window.bookAppointment = async function(fecha, hora, modalidad) {
-    const res = await fetch('/api/citas', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        tipo: 'cita',
-        datos: {
-          estudiante: studentName,
-          fecha: fecha,
-          hora: hora,
-          modalidad: modalidad
-        }
-      })
-    });
-
-    if (res.ok) {
-      fetchStudentData();
-      alert('¡Cita solicitada a la psicóloga! Quedó registrada en la base de datos.');
-    } else {
-      alert('No se pudo solicitar la cita. Revisa las columnas en Supabase.');
-    }
+    const supabase = await getSupabase();
+    const { error } = await supabase.from('citas').insert([{
+      estudiante: studentName,
+      fecha,
+      hora,
+      modalidad,
+      estado: 'En espera'
+    }]);
+    if (error) return alert('Error: ' + error.message);
+    fetchStudentData();
+    alert('¡Cita solicitada con éxito!');
   };
 
   setInterval(fetchStudentData, 3000);

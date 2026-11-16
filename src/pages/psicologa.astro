@@ -162,26 +162,13 @@
 </html>
 
 <script is:inline>
-  window.switchPsychTab = function(tabName) {
-    document.querySelectorAll('.psych-section').forEach(sec => {
-      sec.style.display = 'none';
-    });
-    document.querySelectorAll('aside nav button').forEach(btn => {
-      btn.style.background = 'transparent';
-      btn.style.color = '#94a3b8';
-    });
+  const supabaseUrl = 'https://yhrtdtuhxdqtfbbvarqs.supabase.co';
+  const supabaseKey = 'sb_publishable_hb3zNgdhNA6FKjMFo-j5bA_CaXqwa9g';
 
-    const activeBtn = document.getElementById(`p-nav-${tabName}`);
-    if (activeBtn) {
-      activeBtn.style.background = '#4f46e5';
-      activeBtn.style.color = 'white';
-    }
-
-    const target = document.getElementById(`p-view-${tabName}`);
-    if (target) {
-      target.style.display = 'flex';
-    }
-  };
+  async function getSupabase() {
+    const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
+    return createClient(supabaseUrl, supabaseKey);
+  }
 
   async function renderPsychDashboard() {
     const list = document.getElementById('psych-appointments-list');
@@ -189,141 +176,81 @@
     const alertsBox = document.getElementById('psych-alerts-container');
 
     try {
-      const res = await fetch('/api/citas');
-      const data = await res.json();
-      const bookings = data.bookings || [];
-      const alerts = data.alerts || [];
+      const supabase = await getSupabase();
+      const { data: bookings } = await supabase.from('citas').select('*');
+      const { data: alerts } = await supabase.from('alertas').select('*');
 
-      // Renderizar solicitudes de citas de estudiantes
       if (list) {
-        if (bookings.length === 0) {
-          list.innerHTML = '<p style="color: #64748b; font-size: 0.9rem;">No hay solicitudes de citas pendientes.</p>';
-        } else {
-          list.innerHTML = '';
-          bookings.forEach((b) => {
-            const estudiante = b.estudiante || b.student || 'Estudiante';
-            const fecha = b.fecha || b.date || '';
-            const hora = b.hora || b.time || '';
-            const modalidad = b.modalidad || b.mode || 'Presencial';
-            const estado = b.estado || b.status || 'En espera';
-            const isConfirmed = estado === 'Confirmada';
-
-            const card = document.createElement('div');
-            card.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 1.25rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; background: #f8fafc;";
-            card.innerHTML = `
-              <div>
-                <div style="font-weight: 700; color: #0f172a; font-size: 1rem;">Estudiante: ${estudiante}</div>
-                <div style="font-size: 0.9rem; color: #4f46e5; font-weight: 600;">${fecha} - ${hora}</div>
-                <div style="font-size: 0.8rem; color: #64748b;">Modalidad: ${modalidad} | Estado: <span style="font-weight:700; color:${isConfirmed ? '#10b981' : '#f59e0b'};">${estado}</span></div>
-              </div>
-              ${!isConfirmed ? `<button type="button" onclick="window.confirmAppointment(${b.id})" style="background: #10b981; color: white; border: none; padding: 0.6rem 1.25rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Aceptar / Confirmar</button>` : `<span style="color: #10b981; font-weight: 600;"><i class="fa-solid fa-check-circle"></i> Aceptada</span>`}
-            `;
-            list.appendChild(card);
-          });
-        }
+        list.innerHTML = (!bookings || bookings.length === 0)
+          ? '<p style="color: #64748b; font-size: 0.9rem;">No hay solicitudes de citas pendientes.</p>'
+          : '';
+        (bookings || []).forEach((b) => {
+          const isConfirmed = b.estado === 'Confirmada';
+          const card = document.createElement('div');
+          card.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 1.25rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; background: #f8fafc;";
+          card.innerHTML = `
+            <div>
+              <div style="font-weight: 700; color: #0f172a; font-size: 1rem;">Estudiante: ${b.estudiante}</div>
+              <div style="font-size: 0.9rem; color: #4f46e5; font-weight: 600;">${b.fecha} - ${b.hora}</div>
+              <div style="font-size: 0.8rem; color: #64748b;">Modalidad: ${b.modalidad} | Estado: <span style="font-weight:700; color:${isConfirmed ? '#10b981' : '#f59e0b'};">${b.estado || 'En espera'}</span></div>
+            </div>
+            ${!isConfirmed ? `<button type="button" onclick="window.confirmAppointment(${b.id})" style="background: #10b981; color: white; border: none; padding: 0.6rem 1.25rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">Aceptar / Confirmar</button>` : `<span style="color: #10b981; font-weight: 600;">Aceptada</span>`}
+          `;
+          list.appendChild(card);
+        });
       }
 
-      // Renderizar reportes enviados por licenciados
-      if (teacherReportsList) {
-        if (alerts.length === 0) {
-          teacherReportsList.innerHTML = '<p style="color: #64748b; font-size: 0.9rem;">No hay reportes de docentes recibidos aún.</p>';
-        } else {
-          teacherReportsList.innerHTML = '';
-          alerts.forEach((a) => {
-            const estudiante = a.estudiante || a.student || 'Estudiante';
-            const motivo = a.motivo || a.reason || '';
-            const fecha = a.fecha || a.date || '';
+      const renderAlerts = (container, bg, border, titleColor, textColor, badgeBg, badgeText) => {
+        if (!container) return;
+        container.innerHTML = (!alerts || alerts.length === 0)
+          ? '<p style="color: #64748b; font-size: 0.9rem;">No hay registros aún.</p>'
+          : '';
+        (alerts || []).forEach((a) => {
+          const card = document.createElement('div');
+          card.style.cssText = `padding: 1.25rem; background: ${bg}; border: 1px solid ${border}; border-radius: 0.75rem; display: flex; justify-content: space-between; align-items: center;`;
+          card.innerHTML = `
+            <div>
+              <div style="font-weight: 700; color: ${titleColor}; font-size: 1rem;">Estudiante: ${a.estudiante}</div>
+              <div style="font-size: 0.9rem; color: ${textColor}; margin-top: 0.25rem;">${a.motivo}</div>
+              <div style="font-size: 0.75rem; color: ${titleColor}; margin-top: 0.35rem;">Fecha: ${a.fecha}</div>
+            </div>
+            <span style="background: ${badgeBg}; color: white; padding: 0.35rem 0.85rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600;">${badgeText}</span>
+          `;
+          container.appendChild(card);
+        });
+      };
 
-            const reportCard = document.createElement('div');
-            reportCard.style.cssText = "padding: 1.25rem; background: #fff1f2; border: 1px solid #fecdd3; border-radius: 0.75rem; display: flex; justify-content: space-between; align-items: center;";
-            reportCard.innerHTML = `
-              <div>
-                <div style="font-weight: 700; color: #9f1239; font-size: 1rem;">Estudiante: ${estudiante}</div>
-                <div style="font-size: 0.9rem; color: #881337; margin-top: 0.25rem;">${motivo}</div>
-                <div style="font-size: 0.75rem; color: #9f1239; margin-top: 0.35rem;">Fecha: ${fecha}</div>
-              </div>
-              <span style="background: #e11d48; color: white; padding: 0.35rem 0.85rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600;">Reporte Docente</span>
-            `;
-            teacherReportsList.appendChild(reportCard);
-          });
-        }
-      }
-
-      // Renderizar Alertas
-      if (alertsBox) {
-        if (alerts.length === 0) {
-          alertsBox.innerHTML = '<p style="color: #64748b; font-size: 0.9rem;">No hay alertas activas.</p>';
-        } else {
-          alertsBox.innerHTML = '';
-          alerts.forEach((a) => {
-            const estudiante = a.estudiante || a.student || 'Estudiante';
-            const motivo = a.motivo || a.reason || '';
-            const fecha = a.fecha || a.date || '';
-
-            const alertCard = document.createElement('div');
-            alertCard.style.cssText = "padding: 1.25rem; background: #fef2f2; border: 1px solid #fca5a5; border-radius: 0.75rem; display: flex; justify-content: space-between; align-items: center;";
-            alertCard.innerHTML = `
-              <div>
-                <div style="font-weight: 700; color: #991b1b; font-size: 1rem;">Estudiante: ${estudiante}</div>
-                <div style="font-size: 0.9rem; color: #7f1d1d; margin-top: 0.25rem;">${motivo}</div>
-                <div style="font-size: 0.75rem; color: #991b1b; margin-top: 0.35rem;">Fecha: ${fecha}</div>
-              </div>
-              <span style="background: #ef4444; color: white; padding: 0.35rem 0.85rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600;">Atención</span>
-            `;
-            alertsBox.appendChild(alertCard);
-          });
-        }
-      }
-
+      renderAlerts(teacherReportsList, '#fff1f2', '#fecdd3', '#9f1239', '#881337', '#e11d48', 'Reporte Docente');
+      renderAlerts(alertsBox, '#fef2f2', '#fca5a5', '#991b1b', '#7f1d1d', '#ef4444', 'Atención');
     } catch (e) {
-      console.error("Error al sincronizar datos");
+      console.error(e);
     }
   }
 
   window.confirmAppointment = async function(id) {
-    const res = await fetch('/api/citas', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tipo: 'confirmar', datos: { id } })
-    });
-    if (res.ok) {
-      renderPsychDashboard();
-      alert('¡Cita aceptada y confirmada al estudiante con éxito!');
-    }
+    const supabase = await getSupabase();
+    await supabase.from('citas').update({ estado: 'Confirmada' }).eq('id', id);
+    renderPsychDashboard();
+    alert('¡Cita aceptada y confirmada!');
   };
 
   window.addPsychSlot = async function() {
     const dateInput = document.getElementById('slot-date');
     const timeInput = document.getElementById('slot-time');
     const modeInput = document.getElementById('slot-mode');
+    if (!dateInput.value || !timeInput.value || !modeInput.value) return alert('Completa todos los campos.');
 
-    if (!dateInput || !timeInput || !modeInput || !dateInput.value || !timeInput.value || !modeInput.value) {
-      alert('Por favor completa todos los campos del horario libre.');
-      return;
-    }
+    const supabase = await getSupabase();
+    const { error } = await supabase.from('horarios').insert([{
+      fecha: dateInput.value,
+      hora: timeInput.value,
+      modalidad: modeInput.value
+    }]);
 
-    const res = await fetch('/api/citas', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        tipo: 'horario',
-        datos: {
-          fecha: dateInput.value,
-          hora: timeInput.value,
-          modalidad: modeInput.value
-        }
-      })
-    });
-
-    if (res.ok) {
-      dateInput.value = '';
-      timeInput.value = '';
-      modeInput.value = '';
-      alert('¡Día y horario libre registrado con éxito en Supabase!');
-      renderPsychDashboard();
-    } else {
-      alert('Error al guardar el horario. Revisa las columnas de la tabla horarios en Supabase.');
-    }
+    if (error) return alert('Error: ' + error.message);
+    dateInput.value = ''; timeInput.value = ''; modeInput.value = '';
+    alert('¡Horario libre guardado en Supabase!');
+    renderPsychDashboard();
   };
 
   setInterval(renderPsychDashboard, 4000);
