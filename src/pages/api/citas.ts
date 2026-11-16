@@ -37,7 +37,17 @@ export const POST: APIRoute = async ({ request }) => {
       return new Response(JSON.stringify({ success: true }), { status: 200 });
     }
 
-    // 3. Guardar cita (por defecto si no se especifica tipo)
+    // 3. Confirmar cita desde el Panel de Psicóloga
+    if (tipo === 'confirmar') {
+      const { error } = await supabase
+        .from('citas')
+        .update({ estado: 'Confirmada' })
+        .eq('id', datos.id);
+      if (error) return new Response(JSON.stringify({ error: error.message }), { status: 400 });
+      return new Response(JSON.stringify({ success: true }), { status: 200 });
+    }
+
+    // 4. Guardar cita desde el Panel de Estudiante
     const { error } = await supabase.from('citas').insert([datos || body]);
     if (error) return new Response(JSON.stringify({ error: error.message }), { status: 400 });
 
