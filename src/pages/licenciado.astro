@@ -94,29 +94,31 @@
     }
 
     try {
-      const respuesta = await fetch('/api/citas', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        tipo: 'alerta',
-        datos: {
+      // Importamos Supabase directamente en el navegador para evitar errores en la API de Vercel
+      const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
+      const supabaseUrl = 'https://yhrtdtuhxdqtfbbvarqs.supabase.co'; // Tu URL de Supabase de las imágenes anteriores
+      const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'; // <--- PEGA AQUÍ TU LLAVE ANON KEY DE SUPABASE
+
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
+      const { error } = await supabase.from('alertas').insert([
+        {
           estudiante: studentInput.value.trim(),
           motivo: `${commentInput.value.trim()} (Reportado por: ${licName})`,
           fecha: new Date().toLocaleDateString()
         }
-      })
-    });
+      ]);
 
-    if (respuesta.ok) {
+      if (error) {
+        alert('Error en Supabase: ' + error.message);
+        return;
+      }
+
       studentInput.value = '';
       commentInput.value = '';
       alert('¡Reporte enviado con éxito! La psicóloga ha recibido la notificación en su panel de Alertas.');
-    } else {
-      const errData = await respuesta.json();
-      alert('Error en Supabase: ' + (errData.error || 'Desconocido'));
+    } catch (e) {
+      alert('Error detallado: ' + e.message);
     }
-  } catch (e) {
-    alert('Error detallado: ' + e.message);
-  }
   };  
 </script>
