@@ -7,15 +7,25 @@ const supabase = createClient(
 );
 
 export const GET: APIRoute = async () => {
-  const { data: slots } = await supabase.from('horarios').select('*');
-  const { data: bookings } = await supabase.from('citas').select('*');
-  const { data: alerts } = await supabase.from('alertas').select('*');
+  try {
+    const { data: slots } = await supabase.from('horarios').select('*');
+    const { data: bookings } = await supabase.from('citas').select('*');
+    const { data: alerts } = await supabase.from('alertas').select('*');
 
-  return new Response(JSON.stringify({
-    slots: slots || [],
-    bookings: bookings || [],
-    alerts: alerts || []
-  }), { status: 200 });
+    return new Response(JSON.stringify({
+      slots: slots || [],
+      bookings: bookings || [],
+      alerts: alerts || []
+    }), { 
+      status: 200, 
+      headers: { 'Content-Type': 'application/json' } 
+    });
+  } catch (err: any) {
+    return new Response(JSON.stringify({ error: err.message || 'Error al obtener datos' }), { 
+      status: 500, 
+      headers: { 'Content-Type': 'application/json' } 
+    });
+  }
 };
 
 export const POST: APIRoute = async ({ request }) => {
@@ -26,15 +36,27 @@ export const POST: APIRoute = async ({ request }) => {
     // 1. Guardar alerta desde el Panel de Licenciado
     if (tipo === 'alerta') {
       const { error } = await supabase.from('alertas').insert([datos]);
-      if (error) return new Response(JSON.stringify({ error: error.message }), { status: 400 });
-      return new Response(JSON.stringify({ success: true }), { status: 200 });
+      if (error) {
+        return new Response(JSON.stringify({ error: error.message }), { 
+          status: 400, headers: { 'Content-Type': 'application/json' } 
+        });
+      }
+      return new Response(JSON.stringify({ success: true }), { 
+        status: 200, headers: { 'Content-Type': 'application/json' } 
+      });
     }
 
     // 2. Guardar horario desde el Panel de Psicóloga
     if (tipo === 'horario') {
       const { error } = await supabase.from('horarios').insert([datos]);
-      if (error) return new Response(JSON.stringify({ error: error.message }), { status: 400 });
-      return new Response(JSON.stringify({ success: true }), { status: 200 });
+      if (error) {
+        return new Response(JSON.stringify({ error: error.message }), { 
+          status: 400, headers: { 'Content-Type': 'application/json' } 
+        });
+      }
+      return new Response(JSON.stringify({ success: true }), { 
+        status: 200, headers: { 'Content-Type': 'application/json' } 
+      });
     }
 
     // 3. Confirmar cita desde el Panel de Psicóloga
@@ -43,16 +65,32 @@ export const POST: APIRoute = async ({ request }) => {
         .from('citas')
         .update({ estado: 'Confirmada' })
         .eq('id', datos.id);
-      if (error) return new Response(JSON.stringify({ error: error.message }), { status: 400 });
-      return new Response(JSON.stringify({ success: true }), { status: 200 });
+      if (error) {
+        return new Response(JSON.stringify({ error: error.message }), { 
+          status: 400, headers: { 'Content-Type': 'application/json' } 
+        });
+      }
+      return new Response(JSON.stringify({ success: true }), { 
+        status: 200, headers: { 'Content-Type': 'application/json' } 
+      });
     }
 
     // 4. Guardar cita desde el Panel de Estudiante
     const { error } = await supabase.from('citas').insert([datos || body]);
-    if (error) return new Response(JSON.stringify({ error: error.message }), { status: 400 });
+    if (error) {
+      return new Response(JSON.stringify({ error: error.message }), { 
+        status: 400, headers: { 'Content-Type': 'application/json' } 
+      });
+    }
 
-    return new Response(JSON.stringify({ success: true }), { status: 200 });
-  } catch (err) {
-    return new Response(JSON.stringify({ error: 'Error interno en el servidor' }), { status: 500 });
+    return new Response(JSON.stringify({ success: true }), { 
+      status: 200, headers: { 'Content-Type': 'application/json' } 
+    });
+
+  } catch (err: any) {
+    return new Response(JSON.stringify({ error: err.message || 'Error interno en el servidor' }), { 
+      status: 500, 
+      headers: { 'Content-Type': 'application/json' } 
+    });
   }
 };
