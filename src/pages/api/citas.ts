@@ -18,41 +18,22 @@ export const GET: APIRoute = async () => {
   }), { status: 200 });
 };
 
+// <--- Aquí agregas el método POST al final sin tocar lo anterior --->
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json();
-    const { action, payload } = body;
+    const { estudiante, fecha, hora, modalidad } = body;
 
-    if (action === 'add_slot') {
-      await supabase.from('horarios').insert([{
-        id: Date.now(),
-        fecha: payload.date,
-        hora: payload.time,
-        modalidad: payload.mode
-      }]);
-    } else if (action === 'book_slot') {
-      await supabase.from('horarios').delete().eq('id', payload.slotId);
-      await supabase.from('citas').insert([{
-        id: Date.now(),
-        estudiante: payload.student,
-        fecha: payload.date,
-        hora: payload.time,
-        modalidad: payload.mode,
-        estado: 'En espera'
-      }]);
-    } else if (action === 'confirm_booking') {
-      await supabase.from('citas').update({ estado: 'Confirmada' }).eq('id', payload.id);
-    } else if (action === 'add_teacher_report') {
-      await supabase.from('alertas').insert([{
-        id: Date.now(),
-        estudiante: payload.student,
-        motivo: `Reporte de Licenciado (${payload.licenciado}): ${payload.comment}`,
-        fecha: new Date().toLocaleDateString()
-      }]);
+    const { data, error } = await supabase
+      .from('citas')
+      .insert([{ estudiante, fecha, hora, modalidad }]);
+
+    if (error) {
+      return new Response(JSON.stringify({ error: error.message }), { status: 400 });
     }
 
-    return new Response(JSON.stringify({ success: true }), { status: 200 });
-  } catch (e) {
-    return new Response(JSON.stringify({ success: false }), { status: 400 });
+    return new Response(JSON.stringify({ success: true, data }), { status: 200 });
+  } catch (err) {
+    return new Response(JSON.stringify({ error: 'Error al procesar la solicitud' }), { status: 500 });
   }
 };
