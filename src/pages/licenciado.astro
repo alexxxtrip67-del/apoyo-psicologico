@@ -94,24 +94,28 @@
     }
 
     try {
-      await fetch('/api/citas', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          action: 'add_teacher_report',
-          payload: {
-            student: studentInput.value.trim(),
-            comment: commentInput.value.trim(),
-            licenciado: licName
-          }
-        })
-      });
+      const respuesta = await fetch('/api/citas', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        tipo: 'alerta',
+        datos: {
+          estudiante: studentInput.value.trim(),
+          motivo: `${commentInput.value.trim()} (Reportado por: ${licName})`,
+          fecha: new Date().toLocaleDateString()
+        }
+      })
+    });
 
+    if (respuesta.ok) {
       studentInput.value = '';
       commentInput.value = '';
       alert('¡Reporte enviado con éxito! La psicóloga ha recibido la notificación en su panel de Alertas.');
-    } catch (e) {
-      alert('Error al enviar el reporte al servidor.');
+    } else {
+      alert('Error al guardar el reporte en la base de datos.');
     }
-  };
+  } catch (e) {
+    alert('Error al enviar el reporte al servidor.');
+  }
+  };  
 </script>
