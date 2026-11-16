@@ -112,7 +112,8 @@
       commentInput.value = '';
       alert('¡Reporte enviado con éxito! La psicóloga ha recibido la notificación en su panel de Alertas.');
     } else {
-      alert('Error al guardar el reporte en la base de datos.');
+      const errData = await respuesta.json();
+      alert('Error en Supabase: ' + (errData.error || 'Desconocido'));
     }
   } catch (e) {
     alert('Error al enviar el reporte al servidor.');
