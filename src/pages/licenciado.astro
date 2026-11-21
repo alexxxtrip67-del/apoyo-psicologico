@@ -78,11 +78,28 @@
 </html>
 
 <script is:inline>
-  const licName = sessionStorage.getItem('licenciado_user') || 'Docente';
-  const nameEl = document.getElementById('licenciado-name');
-  const titleEl = document.getElementById('licenciado-title');
-  if (nameEl) nameEl.textContent = licName;
-  if (titleEl) titleEl.textContent = `Panel de ${licName}`;
+  function getLoggedUserName(fallback) {
+    // Busca en todo localStorage y sessionStorage cualquier nombre guardado al iniciar sesión
+    const keys = ['userName', 'nombre', 'usuario', 'name', 'fullName', 'user'];
+    for (const k of keys) {
+      const val = localStorage.getItem(k) || sessionStorage.getItem(k);
+      if (val && val.trim() !== '') {
+        try {
+          const parsed = JSON.parse(val);
+          if (typeof parsed === 'object' && parsed !== null) {
+            return parsed.nombre || parsed.name || parsed.userName || parsed.usuario || fallback;
+          }
+        } catch (e) {
+          return val.trim();
+        }
+      }
+    }
+    return fallback;
+  }
+
+  const licName = getLoggedUserName('Licenciado Institucional');
+  const nameBadge = document.getElementById('lic-name-badge');
+  if (nameBadge) nameBadge.textContent = licName;
 
   window.sendReport = async function() {
     const studentInput = document.getElementById('report-student');
@@ -93,32 +110,29 @@
       return;
     }
 
+    const currentLicName = getLoggedUserName('Licenciado Institucional');
+
     try {
-      // Importamos Supabase directamente en el navegador para evitar errores en la API de Vercel
-      const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
-      const supabaseUrl = 'https://yhrtdtuhxdqtfbbvarqs.supabase.co'; // Tu URL de Supabase de las imágenes anteriores
-      const supabaseKey = 'sb_publishable_hb3zNgdhNA6FKjMFo-j5bA_CaXqwa9g'; // <--- PEGA AQUÍ TU LLAVE ANON KEY DE SUPABASE
-
-      const supabase = createClient(supabaseUrl, supabaseKey);
-
-      const { error } = await supabase.from('alertas').insert([
-        {
+      const res = await fetch('http://127.0.0.1:8000/api/alertas/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
           estudiante: studentInput.value.trim(),
-          motivo: `${commentInput.value.trim()} (Reportado por: ${licName})`,
+          motivo: `${commentInput.value.trim()} (Reportado por: ${currentLicName})`,
           fecha: new Date().toLocaleDateString()
-        }
-      ]);
+        })
+      });
 
-      if (error) {
-        alert('Error en Supabase: ' + error.message);
+      if (!res.ok) {
+        alert('Error al guardar en Django.');
         return;
       }
 
       studentInput.value = '';
       commentInput.value = '';
-      alert('¡Reporte enviado con éxito! La psicóloga ha recibido la notificación en su panel de Alertas.');
+      alert('¡Reporte enviado con éxito! Ya está guardado en db.sqlite3.');
     } catch (e) {
-      alert('Error detallado: ' + e.message);
+      alert('No se pudo conectar con Django. Verifica que python manage.py runserver esté encendido.');
     }
-  };  
+  };
 </script>

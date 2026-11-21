@@ -355,29 +355,44 @@
     }, 600);
   };
 
- async function fetchStudentData() {
-  const supabaseUrl = 'https://yhrtdtuhxdqtfbbvarqs.supabase.co';
-  const supabaseKey = 'sb_publishable_hb3zNgdhNA6FKjMFo-j5bA_CaXqwa9g';
+ const API_URL = 'http://127.0.0.1:8000/api';
 
-  async function getSupabase() {
-    const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
-    return createClient(supabaseUrl, supabaseKey);
+  function getStudentLoggedName() {
+    const keys = ['userName', 'nombre', 'usuario', 'name', 'fullName', 'user'];
+    for (const k of keys) {
+      const val = localStorage.getItem(k) || sessionStorage.getItem(k);
+      if (val && val.trim() !== '') {
+        try {
+          const parsed = JSON.parse(val);
+          if (typeof parsed === 'object' && parsed !== null) {
+            return parsed.nombre || parsed.name || parsed.userName || parsed.usuario || 'Estudiante';
+          }
+        } catch (e) {
+          return val.trim();
+        }
+      }
+    }
+    return 'Estudiante';
   }
 
   async function fetchStudentData() {
     const container = document.getElementById('student-slots-list');
     const myAppContainer = document.getElementById('my-appointments');
+    const currentStudent = getStudentLoggedName();
 
     try {
-      const supabase = await getSupabase();
-      const { data: slots } = await supabase.from('horarios').select('*');
-      const { data: bookings } = await supabase.from('citas').select('*');
+      const [resHorarios, resCitas] = await Promise.all([
+        fetch(`${API_URL}/horarios/`),
+        fetch(`${API_URL}/citas/`)
+      ]);
+      const slots = await resHorarios.json();
+      const bookings = await resCitas.json();
 
       if (container) {
-        container.innerHTML = (!slots || slots.length === 0)
-          ? '<p style="color: #64748b; font-size: 0.9rem;">La psicóloga aún no ha registrado horarios libres.</p>'
+        container.innerHTML = slots.length === 0
+          ? '<p style="color: #64748b; font-size: 0.9rem;">No hay horarios libres disponibles por el momento.</p>'
           : '';
-        (slots || []).forEach((s) => {
+        slots.forEach((s) => {
           const div = document.createElement('div');
           div.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 1rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; background: #f8fafc;";
           div.innerHTML = `
@@ -386,14 +401,14 @@
               <div style="font-size: 0.85rem; color: #4f46e5; font-weight: 600;">${s.hora}</div>
               <div style="font-size: 0.75rem; color: #64748b;">Modalidad: ${s.modalidad}</div>
             </div>
-            <button type="button" onclick="window.bookAppointment('${s.fecha}', '${s.hora}', '${s.modalidad}')" style="background: #10b981; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; font-size: 0.85rem;">Solicitar Cita</button>
+            <button type="button" onclick="window.bookAppointment(${s.id}, '${s.fecha}', '${s.hora}', '${s.modalidad}')" style="background: #10b981; color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; cursor: pointer; font-size: 0.85rem;">Solicitar Cita</button>
           `;
           container.appendChild(div);
         });
       }
 
       if (myAppContainer) {
-        const myBookings = (bookings || []).filter((b) => b.estudiante === studentName);
+        const myBookings = bookings.filter((b) => b.estudiante === currentStudent);
         myAppContainer.innerHTML = myBookings.length === 0
           ? '<p style="color: #64748b; font-size: 0.85rem;">Aún no has solicitado citas.</p>'
           : '';
@@ -410,24 +425,35 @@
         });
       }
     } catch (e) {
-      console.error(e);
+      console.error('Error conectando a Django:', e);
     }
   }
 
-  window.bookAppointment = async function(fecha, hora, modalidad) {
-    const supabase = await getSupabase();
-    const { error } = await supabase.from('citas').insert([{
-      estudiante: studentName,
-      fecha,
-      hora,
-      modalidad,
-      estado: 'En espera'
-    }]);
-    if (error) return alert('Error: ' + error.message);
+  window.bookAppointment = async function(slotId, fecha, hora, modalidad) {
+    const currentStudent = getStudentLoggedName();
+
+    const res = await fetch(`${API_URL}/citas/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        estudiante: currentStudent,
+        fecha,
+        hora,
+        modalidad,
+        estado: 'En espera'
+      })
+    });
+
+    if (!res.ok) return alert('Error al solicitar la cita.');
+
+    await fetch(`${API_URL}/horarios/${slotId}/`, {
+      method: 'DELETE'
+    });
+
     fetchStudentData();
     alert('¡Cita solicitada con éxito!');
   };
 
   setInterval(fetchStudentData, 3000);
-  fetchStudentData();}
+  fetchStudentData();
 </script>

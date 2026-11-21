@@ -162,13 +162,7 @@
 </html>
 
 <script is:inline>
-  const supabaseUrl = 'https://yhrtdtuhxdqtfbbvarqs.supabase.co';
-  const supabaseKey = 'sb_publishable_hb3zNgdhNA6FKjMFo-j5bA_CaXqwa9g';
-
-  async function getSupabase() {
-    const { createClient } = await import('https://esm.sh/@supabase/supabase-js@2');
-    return createClient(supabaseUrl, supabaseKey);
-  }
+  const API_URL = 'http://127.0.0.1:8000/api';
 
   async function renderPsychDashboard() {
     const list = document.getElementById('psych-appointments-list');
@@ -176,15 +170,18 @@
     const alertsBox = document.getElementById('psych-alerts-container');
 
     try {
-      const supabase = await getSupabase();
-      const { data: bookings } = await supabase.from('citas').select('*');
-      const { data: alerts } = await supabase.from('alertas').select('*');
+      const [resCitas, resAlertas] = await Promise.all([
+        fetch(`${API_URL}/citas/`),
+        fetch(`${API_URL}/alertas/`)
+      ]);
+      const bookings = await resCitas.json();
+      const alerts = await resAlertas.json();
 
       if (list) {
-        list.innerHTML = (!bookings || bookings.length === 0)
+        list.innerHTML = bookings.length === 0
           ? '<p style="color: #64748b; font-size: 0.9rem;">No hay solicitudes de citas pendientes.</p>'
           : '';
-        (bookings || []).forEach((b) => {
+        bookings.forEach((b) => {
           const isConfirmed = b.estado === 'Confirmada';
           const card = document.createElement('div');
           card.style.cssText = "display: flex; justify-content: space-between; align-items: center; padding: 1.25rem; border: 1px solid #e2e8f0; border-radius: 0.75rem; background: #f8fafc;";
@@ -202,10 +199,10 @@
 
       const renderAlerts = (container, bg, border, titleColor, textColor, badgeBg, badgeText) => {
         if (!container) return;
-        container.innerHTML = (!alerts || alerts.length === 0)
+        container.innerHTML = alerts.length === 0
           ? '<p style="color: #64748b; font-size: 0.9rem;">No hay registros aún.</p>'
           : '';
-        (alerts || []).forEach((a) => {
+        alerts.forEach((a) => {
           const card = document.createElement('div');
           card.style.cssText = `padding: 1.25rem; background: ${bg}; border: 1px solid ${border}; border-radius: 0.75rem; display: flex; justify-content: space-between; align-items: center;`;
           card.innerHTML = `
@@ -223,13 +220,16 @@
       renderAlerts(teacherReportsList, '#fff1f2', '#fecdd3', '#9f1239', '#881337', '#e11d48', 'Reporte Docente');
       renderAlerts(alertsBox, '#fef2f2', '#fca5a5', '#991b1b', '#7f1d1d', '#ef4444', 'Atención');
     } catch (e) {
-      console.error(e);
+      console.error('Error conectando a Django:', e);
     }
   }
 
   window.confirmAppointment = async function(id) {
-    const supabase = await getSupabase();
-    await supabase.from('citas').update({ estado: 'Confirmada' }).eq('id', id);
+    await fetch(`${API_URL}/citas/${id}/`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ estado: 'Confirmada' })
+    });
     renderPsychDashboard();
     alert('¡Cita aceptada y confirmada!');
   };
@@ -240,19 +240,22 @@
     const modeInput = document.getElementById('slot-mode');
     if (!dateInput.value || !timeInput.value || !modeInput.value) return alert('Completa todos los campos.');
 
-    const supabase = await getSupabase();
-    const { error } = await supabase.from('horarios').insert([{
-      fecha: dateInput.value,
-      hora: timeInput.value,
-      modalidad: modeInput.value
-    }]);
+    const res = await fetch(`${API_URL}/horarios/`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        fecha: dateInput.value,
+        hora: timeInput.value,
+        modalidad: modeInput.value
+      })
+    });
 
-    if (error) return alert('Error: ' + error.message);
+    if (!res.ok) return alert('Error al guardar el horario.');
     dateInput.value = ''; timeInput.value = ''; modeInput.value = '';
-    alert('¡Horario libre guardado en Supabase!');
+    alert('¡Horario libre guardado en db.sqlite3!');
     renderPsychDashboard();
   };
 
-  setInterval(renderPsychDashboard, 4000);
+  setInterval(renderPsychDashboard, 3000);
   renderPsychDashboard();
 </script>
