@@ -162,12 +162,37 @@
 </html>
 
 <script is:inline>
+  // 1. Navegación del menú lateral izquierdo
+  window.switchPsychTab = function(tab) {
+    document.querySelectorAll('.psych-section').forEach((sec) => {
+      sec.style.display = 'none';
+    });
+
+    document.querySelectorAll('aside nav button').forEach((btn) => {
+      btn.style.background = 'transparent';
+      btn.style.color = '#94a3b8';
+    });
+
+    const activeView = document.getElementById('p-view-' + tab);
+    if (activeView) {
+      activeView.style.display = 'flex';
+    }
+
+    const activeBtn = document.getElementById('p-nav-' + tab);
+    if (activeBtn) {
+      activeBtn.style.background = '#4f46e5';
+      activeBtn.style.color = 'white';
+    }
+  };
+
+  // 2. Conexión con Django (db.sqlite3)
   const API_URL = 'http://127.0.0.1:8000/api';
 
   async function renderPsychDashboard() {
     const list = document.getElementById('psych-appointments-list');
     const teacherReportsList = document.getElementById('psych-teachers-reports-list');
     const alertsBox = document.getElementById('psych-alerts-container');
+    const alertsCounter = document.getElementById('alerts-counter');
 
     try {
       const [resCitas, resAlertas] = await Promise.all([
@@ -176,6 +201,10 @@
       ]);
       const bookings = await resCitas.json();
       const alerts = await resAlertas.json();
+
+      if (alertsCounter) {
+        alertsCounter.textContent = alerts.length;
+      }
 
       if (list) {
         list.innerHTML = bookings.length === 0
