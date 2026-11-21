@@ -208,7 +208,17 @@
 </html>
 
 <script is:inline>
+  const API_URL = 'http://127.0.0.1:8000/api';
   const studentName = sessionStorage.getItem('student_user') || 'Estudiante';
+
+  // Registrar ingreso de estudiante único para las estadísticas de la psicóloga
+  if (studentName !== 'Estudiante') {
+    const visited = JSON.parse(localStorage.getItem('siap_registered_students') || '[]');
+    if (!visited.includes(studentName)) {
+      visited.push(studentName);
+      localStorage.setItem('siap_registered_students', JSON.stringify(visited));
+    }
+  }
   
   const greetingEl = document.getElementById('user-greeting');
   if (greetingEl) greetingEl.textContent = `Hola, ${studentName} 👋`;
@@ -315,13 +325,42 @@
     });
   }
 
-  window.nextQuestion = function() {
+  window.nextQuestion = async function() {
     if (currentIndex < questionsList.length - 1) {
       currentIndex++;
       loadQuizQuestion();
     } else {
-      alert('¡Cuestionario completado con éxito!');
-      window.switchTab('reportes');
+      // Evaluar internamente sin mostrar diagnóstico al estudiante
+      const riskWords = ['Frecuentemente', 'Siempre', 'Mala', 'Muy mala', 'Rara vez', 'Nunca', 'Constantemente', 'Poco', 'Casi nadie', 'Nadie', 'Poca energía', 'Sin energía', 'Bastante', 'Extremadamente', 'Con dificultad', 'No la manejo'];
+      let riskScore = 0;
+      userResponses.forEach((ans) => {
+        if (riskWords.includes(ans)) riskScore++;
+      });
+
+      const isCritical = riskScore >= 4;
+      const mensajePsicologa = isCritical
+        ? `⚠️ Cuestionario de bienestar: ${studentName} presenta indicadores emocionales de riesgo (${riskScore}/10 respuestas de alerta). Se siente mal y requiere atención.`
+        : `✅ Cuestionario de bienestar completado por ${studentName} (Estado emocional estable - ${riskScore}/10 indicadores).`;
+
+      try {
+        await fetch(`${API_URL}/alertas/`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            estudiante: studentName,
+            motivo: mensajePsicologa,
+            fecha: new Date().toLocaleDateString()
+          })
+        });
+      } catch (e) {
+        console.error('Error enviando cuestionario a Django:', e);
+      }
+
+      // Mensaje neutro para el estudiante (sin revelarle el resultado)
+      alert('¡Gracias por responder! Tus respuestas han sido enviadas de forma confidencial al Departamento de Psicología.');
+      currentIndex = 0;
+      loadQuizQuestion();
+      window.switchTab('inicio');
     }
   };
 
@@ -355,30 +394,9 @@
     }, 600);
   };
 
- const API_URL = 'http://127.0.0.1:8000/api';
-
-  function getStudentLoggedName() {
-    const keys = ['userName', 'nombre', 'usuario', 'name', 'fullName', 'user'];
-    for (const k of keys) {
-      const val = localStorage.getItem(k) || sessionStorage.getItem(k);
-      if (val && val.trim() !== '') {
-        try {
-          const parsed = JSON.parse(val);
-          if (typeof parsed === 'object' && parsed !== null) {
-            return parsed.nombre || parsed.name || parsed.userName || parsed.usuario || 'Estudiante';
-          }
-        } catch (e) {
-          return val.trim();
-        }
-      }
-    }
-    return 'Estudiante';
-  }
-
   async function fetchStudentData() {
     const container = document.getElementById('student-slots-list');
     const myAppContainer = document.getElementById('my-appointments');
-    const currentStudent = getStudentLoggedName();
 
     try {
       const [resHorarios, resCitas] = await Promise.all([
@@ -408,7 +426,7 @@
       }
 
       if (myAppContainer) {
-        const myBookings = bookings.filter((b) => b.estudiante === currentStudent);
+        const myBookings = bookings.filter((b) => b.estudiante === studentName);
         myAppContainer.innerHTML = myBookings.length === 0
           ? '<p style="color: #64748b; font-size: 0.85rem;">Aún no has solicitado citas.</p>'
           : '';
@@ -430,13 +448,11 @@
   }
 
   window.bookAppointment = async function(slotId, fecha, hora, modalidad) {
-    const currentStudent = getStudentLoggedName();
-
     const res = await fetch(`${API_URL}/citas/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        estudiante: currentStudent,
+        estudiante: studentName,
         fecha,
         hora,
         modalidad,

@@ -78,28 +78,25 @@
 </html>
 
 <script is:inline>
-  function getLoggedUserName(fallback) {
-    // Busca en todo localStorage y sessionStorage cualquier nombre guardado al iniciar sesión
-    const keys = ['userName', 'nombre', 'usuario', 'name', 'fullName', 'user'];
-    for (const k of keys) {
-      const val = localStorage.getItem(k) || sessionStorage.getItem(k);
-      if (val && val.trim() !== '') {
-        try {
-          const parsed = JSON.parse(val);
-          if (typeof parsed === 'object' && parsed !== null) {
-            return parsed.nombre || parsed.name || parsed.userName || parsed.usuario || fallback;
-          }
-        } catch (e) {
-          return val.trim();
-        }
-      }
-    }
-    return fallback;
-  }
+  const licName =
+    sessionStorage.getItem('licenciado_user') ||
+    sessionStorage.getItem('teacher_user') ||
+    sessionStorage.getItem('student_user') ||
+    localStorage.getItem('licenciado_user') ||
+    'Licenciado Institucional';
 
-  const licName = getLoggedUserName('Licenciado Institucional');
+  // Actualizar nombre e iniciales en la barra superior del panel del Licenciado
   const nameBadge = document.getElementById('lic-name-badge');
   if (nameBadge) nameBadge.textContent = licName;
+
+  document.querySelectorAll('div, span').forEach((el) => {
+    if (el.children.length === 0 && el.textContent.trim() === 'Docente') {
+      el.textContent = licName;
+    }
+    if (el.children.length === 0 && el.textContent.trim() === 'LC' && licName !== 'Licenciado Institucional') {
+      el.textContent = licName.substring(0, 2).toUpperCase();
+    }
+  });
 
   window.sendReport = async function() {
     const studentInput = document.getElementById('report-student');
@@ -110,15 +107,13 @@
       return;
     }
 
-    const currentLicName = getLoggedUserName('Licenciado Institucional');
-
     try {
       const res = await fetch('http://127.0.0.1:8000/api/alertas/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           estudiante: studentInput.value.trim(),
-          motivo: `${commentInput.value.trim()} (Reportado por: ${currentLicName})`,
+          motivo: `${commentInput.value.trim()} (Reportado por: ${licName})`,
           fecha: new Date().toLocaleDateString()
         })
       });

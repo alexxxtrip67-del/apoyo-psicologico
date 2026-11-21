@@ -162,7 +162,6 @@
 </html>
 
 <script is:inline>
-  // 1. Navegación del menú lateral izquierdo
   window.switchPsychTab = function(tab) {
     document.querySelectorAll('.psych-section').forEach((sec) => {
       sec.style.display = 'none';
@@ -185,14 +184,25 @@
     }
   };
 
-  // 2. Conexión con Django (db.sqlite3)
   const API_URL = 'http://127.0.0.1:8000/api';
+
+  function updateMetricCards(totalEstudiantes, cuestionariosCount, casosCount, alertasCount) {
+    document.querySelectorAll('#p-view-inicio div').forEach((box) => {
+      const label = box.children[0]?.textContent?.trim();
+      const numEl = box.children[1];
+      if (!label || !numEl) return;
+
+      if (label === 'Total de estudiantes') numEl.textContent = totalEstudiantes;
+      if (label === 'Cuestionarios completados') numEl.textContent = cuestionariosCount;
+      if (label === 'Casos en seguimiento') numEl.textContent = casosCount;
+      if (label === 'Alertas activas') numEl.textContent = alertasCount;
+    });
+  }
 
   async function renderPsychDashboard() {
     const list = document.getElementById('psych-appointments-list');
     const teacherReportsList = document.getElementById('psych-teachers-reports-list');
     const alertsBox = document.getElementById('psych-alerts-container');
-    const alertsCounter = document.getElementById('alerts-counter');
 
     try {
       const [resCitas, resAlertas] = await Promise.all([
@@ -202,9 +212,18 @@
       const bookings = await resCitas.json();
       const alerts = await resAlertas.json();
 
-      if (alertsCounter) {
-        alertsCounter.textContent = alerts.length;
-      }
+      // Calcular estadísticas dinámicas reales
+      const registeredStudents = JSON.parse(localStorage.getItem('siap_registered_students') || '[]');
+      const uniqueNames = new Set([
+        ...registeredStudents,
+        ...bookings.map(b => b.estudiante),
+        ...alerts.map(a => a.estudiante)
+      ]);
+      const cuestionariosCompletados = alerts.filter(a => a.motivo.includes('Cuestionario de bienestar')).length;
+      const casosEnSeguimiento = bookings.length;
+      const alertasActivas = alerts.length;
+
+      updateMetricCards(uniqueNames.size, cuestionariosCompletados, casosEnSeguimiento, alertasActivas);
 
       if (list) {
         list.innerHTML = bookings.length === 0
@@ -226,12 +245,20 @@
         });
       }
 
-      const renderAlerts = (container, bg, border, titleColor, textColor, badgeBg, badgeText) => {
+      const renderAlerts = (container, items, isAlertTab) => {
         if (!container) return;
-        container.innerHTML = alerts.length === 0
+        container.innerHTML = items.length === 0
           ? '<p style="color: #64748b; font-size: 0.9rem;">No hay registros aún.</p>'
           : '';
-        alerts.forEach((a) => {
+        items.forEach((a) => {
+          const isQuiz = a.motivo.includes('Cuestionario de bienestar');
+          const bg = isQuiz ? '#fef3c7' : (isAlertTab ? '#fef2f2' : '#fff1f2');
+          const border = isQuiz ? '#f59e0b' : (isAlertTab ? '#fca5a5' : '#fecdd3');
+          const titleColor = isQuiz ? '#92400e' : '#9f1239';
+          const textColor = isQuiz ? '#78350f' : '#881337';
+          const badgeBg = isQuiz ? '#d97706' : '#e11d48';
+          const badgeText = isQuiz ? 'Cuestionario' : 'Reporte Docente';
+
           const card = document.createElement('div');
           card.style.cssText = `padding: 1.25rem; background: ${bg}; border: 1px solid ${border}; border-radius: 0.75rem; display: flex; justify-content: space-between; align-items: center;`;
           card.innerHTML = `
@@ -246,8 +273,9 @@
         });
       };
 
-      renderAlerts(teacherReportsList, '#fff1f2', '#fecdd3', '#9f1239', '#881337', '#e11d48', 'Reporte Docente');
-      renderAlerts(alertsBox, '#fef2f2', '#fca5a5', '#991b1b', '#7f1d1d', '#ef4444', 'Atención');
+      const docenteReports = alerts.filter(a => !a.motivo.includes('Cuestionario de bienestar'));
+      renderAlerts(teacherReportsList, docenteReports, false);
+      renderAlerts(alertsBox, alerts, true);
     } catch (e) {
       console.error('Error conectando a Django:', e);
     }
